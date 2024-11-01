@@ -38,15 +38,17 @@ export class Database {
                 username: config.DB.USER, // Username for the database
                 password: config.DB.PASSWORD, // Password for the database
             });
-
-            console.log(config.DB.TYPE);
           
             try {
-                await tempDataSource.initialize(); // Iniciar la conexión
-                // Paso 2: Crear la base de datos si no existe
+                await tempDataSource.initialize();
                 await tempDataSource.query(`CREATE DATABASE IF NOT EXISTS \`${config.DB.NAME}\``);
-            } catch (error) {} finally {
-                await tempDataSource.destroy(); // Cerrar la conexión temporal
+                debuggingMessage(ConstMessages.CREATE_DATABASE);
+            } catch (error) {
+                debuggingMessage(error);
+            } finally {
+                if(tempDataSource.isInitialized){
+                    await tempDataSource.destroy();
+                }
             }
         }
 

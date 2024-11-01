@@ -62,6 +62,7 @@ export class ConstMessages {
     public static readonly INIT_MIDDLEWARE: string = "Initialize Middleware: ";
     public static readonly INIT_JWT: string = "Initialize JWT Service";
     public static readonly INIT_DATASOURCE: string = "Data Source has been initialized!";
+    public static readonly CREATE_DATABASE: string = "Create Database!";
 
     //general errors
     public static readonly ERROR_ROLE_FILE: string = "Error reading roles from file: ";
