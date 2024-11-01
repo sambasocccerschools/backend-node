@@ -15,6 +15,8 @@ export class Database {
 
     private constructor() {}
 
+    
+
     /**
      * Retrieves the singleton instance of the DataSource.
      * If it doesn't exist, it creates a new instance and initializes it.
@@ -22,18 +24,42 @@ export class Database {
      * @param {Array<Function | string | EntitySchema>} [entities] - Optional array of entities to be used by the DataSource.
      * @return {DataSource} The singleton instance of the DataSource.
      */
-    public static getInstance(entities?: Array<Function | string | EntitySchema>): DataSource {
-        const config = ConfigManager.getInstance().getConfig();
-        // If entities array is provided, add Log entity to it. Otherwise, create a new array with Log entity.
-        //entities = entities ? [...entities, Log, User] : [Log, User];
+    public static async getInstance(entities?: Array<Function | string | EntitySchema>): Promise<DataSource> {
 
-         if (entities) {
+        //get configuration file
+        const config = ConfigManager.getInstance().getConfig();
+
+        async function createDatabaseIfNotExists() {
+            // Step 1: Connect to MySQL without specifying a database
+            const tempDataSource = new DataSource({
+                type: config.DB.TYPE, // Type of the database
+                host: config.DB.HOST, // Host of the database
+                port: config.DB.PORT, // Port of the database
+                username: config.DB.USER, // Username for the database
+                password: config.DB.PASSWORD, // Password for the database
+            });
+
+            console.log(config.DB.TYPE);
+          
+            try {
+                await tempDataSource.initialize(); // Iniciar la conexión
+                // Paso 2: Crear la base de datos si no existe
+                await tempDataSource.query(`CREATE DATABASE IF NOT EXISTS \`${config.DB.NAME}\``);
+            } catch (error) {} finally {
+                await tempDataSource.destroy(); // Cerrar la conexión temporal
+            }
+        }
+
+        //validate entities
+        if (entities) {
             Database.initializedEntities = [...new Set([...Database.initializedEntities, ...entities, Log, User])];
         } else if (Database.initializedEntities.length === 0) {
             Database.initializedEntities = [Log, User];
         }
 
         if (!Database.instance) {
+
+            await createDatabaseIfNotExists();
             // If instance doesn't exist, create a new instance
             Database.instance = new DataSource({
                 type: config.DB.TYPE, // Type of the database
@@ -50,7 +76,7 @@ export class Database {
             });
 
             // Initialize the DataSource
-            Database.instance.initialize()
+            await Database.instance.initialize()
                 .then(async () => {
                     const config = ConfigManager.getInstance().getConfig();
 
@@ -82,8 +108,6 @@ export class Database {
 
         return Database.instance; // Return the singleton instance
     }
-
-
 
     public static closeConnection() {
         // Close connection

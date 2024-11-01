@@ -15,9 +15,6 @@ import { Database } from "@TenshiJS/persistance/TypeORMConnection";
 import { User } from '@TenshiJS/entity/User';
 import { Document } from '@entity/Document';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
-//Init instance of database First time
-Database.getInstance([User, Document, UnitDynamicCentral]);
-
 
 
 
@@ -83,6 +80,9 @@ export let httpServer: ReturnType<typeof http.createServer>;
 //           Started FUNCTION
 //*************************************** */
 export const TenshiMain = async () => {
+
+    //Init instance of database First time
+    await Database.getInstance([User, Document, UnitDynamicCentral]);
 
     //Cors handler middle ware
     app.use(CorsHandlerMiddleware);

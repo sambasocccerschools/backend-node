@@ -31,9 +31,9 @@
     "DB": {
         "TYPE": "mariadb",
         "PORT": 3306,
-        "HOST": "https://dbsoccersamba.cxaoy46ei29l.us-east-2.rds.amazonaws.com/",
-        "USER": "admin",
-        "PASSWORD": "cdpjZGQ4-",
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": "",
         "NAME": "samba_soccer_school",
         "CONNECTION_LIMIT": 150
     },
