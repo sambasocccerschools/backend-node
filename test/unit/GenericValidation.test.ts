@@ -23,7 +23,7 @@ describe('GenericValidation', () => {
     let httpExec: HttpAction;
     let jwtData: JWTObject | null = null;
 
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZW5zaGl0ZXN0MUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MzAyNjQ5NDEsImV4cCI6MTczMDI5NDk0MX0.O3kksyTMNTXNuiLNQQqohLFuwEZ9isUb1-VKFK1LaVc';
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJhZDU5N2YwLWQxN2ItNDJkNi1hYzRkLWIzNDc4NzNjMjRjYyIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MzAzNDc4MjYsImV4cCI6MTczMDM3NzgyNn0.8mF43Q4blOYEkq9BBxBsAk3dWyHglE1ZB_45Z-21H5g';
     const roleValidate = 'TEST';
 
     beforeEach(async () => {
@@ -72,7 +72,7 @@ describe('GenericValidation', () => {
         it('Should SUCCESS Validate JWT', async () => {
             jwtData = await validation.validateRequireJWT();
             expect(jwtData).toEqual(expect.objectContaining({
-                id: expect.any(Number),
+                id: expect.any(String),
                 email: expect.any(String),
                 role: expect.any(String)
             }));

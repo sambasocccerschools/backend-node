@@ -15,6 +15,9 @@ export class User {
   last_name: string;
 
   @Column({ type: "varchar", length: 500, nullable: true, default: null })
+  position: string;
+
+  @Column({ type: "varchar", length: 500, nullable: true, default: null })
   bio: string;
 
   @Column({ type: "varchar", length: 250, unique: true })
@@ -44,7 +47,7 @@ export class User {
   @Column({ type: "varchar", length: 50, nullable: true, default: null })
   postal_code: string | null;
 
-  @Column({ type: "varchar", length: 35 })
+  @Column({ type: "varchar", length: 100 })
   role_code: string;
 
   @Column({ type: "tinyint", default: 0 })
@@ -82,15 +85,6 @@ export class User {
 
   @Column({ type: "varchar", length: 45, nullable: true, default: null })
   login_ip_address: string | null;
-
-  @Column({ type: "tinyint", default: 0 })
-  two_factor_enabled: boolean;
-
-  @Column({ type: "enum", enum: ["SMS", "EMAIL", "TOTP", null], nullable: true, default: null })
-  two_factor_type: "SMS" | "EMAIL" | "TOTP" | null;
-
-  @Column({ type: "varchar", length: 250, nullable: true, default: null })
-  two_factor_secret: string | null;
 
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
   created_at: Date;

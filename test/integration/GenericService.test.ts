@@ -6,13 +6,11 @@ configManager.getConfig();
 
 import { RequestHandler } from '@TenshiJS/generics/index';
 import HttpAction from '@TenshiJS/helpers/HttpAction';
-import {FindManyOptions } from "typeorm";
 import GenericValidation from '@TenshiJS/generics/Validation/GenericValidation';
 import RequestHandlerBuilder from '@TenshiJS/generics/RequestHandler/RequestHandlerBuilder';
 import { Request, Response } from 'express';
 import Validations from '@TenshiJS/helpers/Validations';
 import JWTObject from '@TenshiJS/objects/JWTObject';
-import { ConstFunctions, ConstGeneral } from '@TenshiJS/consts/Const';
 import { ConstRegex } from '@index/consts/Const';
 import GenericService from '@TenshiJS/generics/Services/GenericService';
 
@@ -25,7 +23,7 @@ describe('GenericValidation', () => {
     let jwtData: JWTObject | null = null;
     let service: GenericService;
 
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZW5zaGl0ZXN0MUBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MzAyNjQ5NDEsImV4cCI6MTczMDI5NDk0MX0.O3kksyTMNTXNuiLNQQqohLFuwEZ9isUb1-VKFK1LaVc';
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJhZDU5N2YwLWQxN2ItNDJkNi1hYzRkLWIzNDc4NzNjMjRjYyIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MzAzNDc4MjYsImV4cCI6MTczMDM3NzgyNn0.8mF43Q4blOYEkq9BBxBsAk3dWyHglE1ZB_45Z-21H5g';
     const roleValidate = 'TEST';
 
     beforeEach(async () => {

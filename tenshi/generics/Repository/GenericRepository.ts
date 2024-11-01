@@ -42,6 +42,10 @@ export default  class GenericRepository implements IGenericRepository{
     public getDataSource(): DataSource {
         return this.dataSource;
     }
+
+    public setDataSource(dataSource: DataSource) {
+         this.dataSource = dataSource;
+    }
     
     /**
      * Adds a new entity to the database.

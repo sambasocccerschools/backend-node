@@ -14,11 +14,11 @@ const config = configManager.getConfig();
 import { Database } from "@TenshiJS/persistance/TypeORMConnection";
 import { User } from '@TenshiJS/entity/User';
 import { Document } from '@entity/Document';
-import { Notification } from '@entity/Notification';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
-import { UserNotification } from '@entity/UserNotification';
 //Init instance of database First time
-Database.getInstance([User, Document, Notification, UnitDynamicCentral, UserNotification]);
+Database.getInstance([User, Document, UnitDynamicCentral]);
+
+
 
 
 //*************************************** */
@@ -38,8 +38,6 @@ import AuthRoutes from '@index/modules/auth/routers/AuthRoutes';
 import UserRoutes from '@modules/user/routers/UserRoutes';
 import RoleRoutes from '@modules/role/routers/RoleRoutes';
 import UdcRoutes from '@modules/udc/routers/UdcRoutes';
-import NotificationRoutes from '@modules/notification/routers/NotificationRoutes';
-import UserNotificationRoutes from '@modules/notification/routers/UserNotificationRoutes';
 import LogRoutes from '@modules/log/routers/LogRoutes';
 import EmailRoutes from '@modules/email/routers/EmailRoutes';
 import DocumentRoutes from '@modules/document/routers/DocumentRoutes';
@@ -53,6 +51,7 @@ import { ConstGeneral } from '@TenshiJS/consts/Const';
 import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddleware';
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
+import { GenericRepository } from './modules';
 
 
 //*************************************** */
@@ -83,7 +82,7 @@ export let httpServer: ReturnType<typeof http.createServer>;
 //*************************************** */
 //           Started FUNCTION
 //*************************************** */
-export const TenshiMain = () => {
+export const TenshiMain = async () => {
 
     //Cors handler middle ware
     app.use(CorsHandlerMiddleware);
@@ -111,8 +110,7 @@ export const TenshiMain = () => {
     app.use(StartMiddleware);
     //logging handler 
     app.use(LoggingHandlerMiddleware);
-
-
+    
 
     //*************************************** */
     //              ROUTES
@@ -122,8 +120,6 @@ export const TenshiMain = () => {
     app.use(new UserRoutes().getRouter());
     app.use(new RoleRoutes().getRouter());
     app.use(new UdcRoutes().getRouter());
-    app.use(new NotificationRoutes().getRouter());
-    app.use(new UserNotificationRoutes().getRouter());
     app.use(new LogRoutes().getRouter());
     app.use(new EmailRoutes().getRouter());
     app.use(new DocumentRoutes().getRouter());

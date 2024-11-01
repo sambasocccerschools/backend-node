@@ -2,22 +2,12 @@
   "roles": [
     {
       "id": 1,
-      "code": "ADMIN",
-      "name": "Administrator",
-      "description": "Administrator role with full access to all functionalities.",
+      "code": "9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a",
+      "name": "Super Admin",
+      "description": "Super Administrator role with full access to all functionalities.",
       "modules": [
         {
           "name": "DOCUMENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "NOTIFICATION",
           "function_list": [
             "CREATE",
             "UPDATE",
@@ -67,76 +57,39 @@
           "function_list": [
             "GET_ALL"
           ]
-        },
-        {
-          "name": "TEST",
-          "function_list": [ 
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
         }
       ],
-      "screens": [
-        {
-          "name": "CREATE_NEW_PROJECT",
-          "function_list": [
-            "CREATE",
-            "READ"
-          ]
-        },
-        {
-          "name": "PRODUCTS",
-          "function_list": []
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "code": "ANALYST",
-      "name": "Analyst",
-      "description": "Analyst role with access to analytical tools and reporting functionalities.",
-      "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        }
-      ],
-      "screens": [
-        {
-          "name": "PRODUCTS",
-          "function_list": []
-        }
-      ]
+      "screens": [ ]
     },
     {
       "id": 3,
-      "code": "CUSTOMER",
-      "name": "Customer",
-      "description": "Customer role with access to customer-specific functionalities.",
+      "code": "ab67f164-8950-453a-9ead-13697a29fed9",
+      "name": "Administrator",
+      "description": "Administrator role with full access.",
       "modules": [
         {
           "name": "DOCUMENT",
           "function_list": [
-            "GET_BY_ID",
-            "GET_ALL"
+            "GET_BY_ID"
           ]
         }
       ],
-      "screens": [
+      "screens": []
+    },
+    {
+      "id": 3,
+      "code": "c1891772-f4b1-4989-b0b5-1b78d129bb3d",
+      "name": "User",
+      "description": "A normal User for repositories",
+      "modules": [
         {
-          "name": "PRODUCTS",
-          "function_list": []
+          "name": "DOCUMENT",
+          "function_list": [
+            "GET_BY_ID"
+          ]
         }
-      ]
+      ],
+      "screens": []
     }
   ]
 }

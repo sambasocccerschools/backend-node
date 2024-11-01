@@ -15,7 +15,7 @@ export default  class DocumentDTO implements IAdapterFromBody{
     //POST
     entityFromPostBodyWithParams(body : any) : Document{
         const entity = new Document();
-        entity.title = body.name;
+        entity.title = body.title;
         entity.type = body.type;
         entity.action_type = body.action_type || "GENERAL";
         entity.description = body.description;
@@ -31,10 +31,11 @@ export default  class DocumentDTO implements IAdapterFromBody{
     
         return  {
             id : entity.id,
-            name: entity.title,
+            title: entity.title,
             code: entity.code,
             file_name: entity.file_name,
             type: entity.type,
+            action_type: entity.action_type,
             extension: entity.extension,
             description: entity.description,
             url: entity.url,

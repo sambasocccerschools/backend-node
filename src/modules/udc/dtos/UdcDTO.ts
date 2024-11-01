@@ -12,15 +12,13 @@ export default  class UdcDTO implements IAdapterFromBody{
     entityFromPostBody() : UnitDynamicCentral{
         const entity = new UnitDynamicCentral();
         entity.code = this.req.body.code;
-        entity.name = this.req.body.name;
         entity.type = this.req.body.type;
-        entity.description = this.req.body.description;
+        entity.title = this.req.body.title;
+        entity.title_es = this.req.body.title_es;
+        entity.slug = this.req.body.slug;
+        entity.father_code = this.req.body.father_code;
         entity.value1 = this.req.body.value1;
         entity.value2 = this.req.body.value2;
-        entity.value3 = this.req.body.value3;
-        entity.value4 = this.req.body.value4;
-        entity.value5 = this.req.body.value5;
-        entity.country_iso_code = this.req.body.country_iso_code;
         entity.created_date = new Date();
         return entity;
     }
@@ -30,17 +28,15 @@ export default  class UdcDTO implements IAdapterFromBody{
         return  {
             id : entity.id,
             code: entity.code,
-            name: entity.name,
             type: entity.type,
-            description: entity.description ,
+            title: entity.title,
+            title_es: entity.title_es,
+            slug: entity.slug,
+            father_code: entity.father_code,
             value1: entity.value1,
             value2: entity.value2,
-            value3: entity.value3,
-            value4: entity.value4,
-            value5: entity.value5,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
-            user_id: entity.user_id,
             user_updated_id: entity.user_updated_id
         };
     }
@@ -60,15 +56,13 @@ export default  class UdcDTO implements IAdapterFromBody{
     //PUT
     entityFromPutBody() : UnitDynamicCentral{
         const entity = new UnitDynamicCentral();
-        entity.name = this.req.body.name;
         entity.type = this.req.body.type;
-        entity.description = this.req.body.description;
+        entity.title = this.req.body.title;
+        entity.title_es = this.req.body.title_es;
+        entity.slug = this.req.body.slug;
+        entity.father_code = this.req.body.father_code;
         entity.value1 = this.req.body.value1;
         entity.value2 = this.req.body.value2;
-        entity.value3 = this.req.body.value3;
-        entity.value4 = this.req.body.value4;
-        entity.value5 = this.req.body.value5;
-        entity.country_iso_code = this.req.body.country_iso_code;
         entity.updated_date = new Date();
         entity.user_updated_id = this.req.body.user_updated_id;
         return entity;

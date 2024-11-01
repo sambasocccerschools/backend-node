@@ -11,6 +11,8 @@ import { hashPassword } from "@TenshiJS/utils/encryptionUtils";
 export class Database {
 
     private static instance: DataSource;
+    private static initializedEntities: Array<Function | string | EntitySchema> = [];
+
     private constructor() {}
 
     /**
@@ -23,9 +25,14 @@ export class Database {
     public static getInstance(entities?: Array<Function | string | EntitySchema>): DataSource {
         const config = ConfigManager.getInstance().getConfig();
         // If entities array is provided, add Log entity to it. Otherwise, create a new array with Log entity.
-        entities = entities ? [...entities, Log, User] : [Log, User];
+        //entities = entities ? [...entities, Log, User] : [Log, User];
 
-        
+         if (entities) {
+            Database.initializedEntities = [...new Set([...Database.initializedEntities, ...entities, Log, User])];
+        } else if (Database.initializedEntities.length === 0) {
+            Database.initializedEntities = [Log, User];
+        }
+
         if (!Database.instance) {
             // If instance doesn't exist, create a new instance
             Database.instance = new DataSource({
@@ -35,7 +42,7 @@ export class Database {
                 username: config.DB.USER, // Username for the database
                 password: config.DB.PASSWORD, // Password for the database
                 database: config.DB.NAME, // Name of the database
-                entities: entities, // Array of entities to be used
+                entities: Database.initializedEntities, // Array of entities to be used
                 synchronize: true, // Synchronize the schema with the database
                 extra: {
                     connectionLimit: 150, 
@@ -59,7 +66,7 @@ export class Database {
                         adminUser.first_name = config.SUPER_ADMIN.FIRST_NAME;
                         adminUser.last_name = config.SUPER_ADMIN.LAST_NAME;
                         adminUser.user_name = config.SUPER_ADMIN.USERNAME;
-                        adminUser.role_code = ConstRoles.ADMIN; 
+                        adminUser.role_code = ConstRoles.SUPER_ADMIN; 
                         adminUser.is_active_from_email = true;
                         adminUser.account_status = "active";
 

@@ -20,7 +20,7 @@ export class ConstHTTPRequest {
 }
 
 export class ConstRoles {
-    public static readonly ADMIN: string = "ADMIN";
+    public static readonly SUPER_ADMIN: string = "9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a";
 }
 
 export class ConstStatusJson {

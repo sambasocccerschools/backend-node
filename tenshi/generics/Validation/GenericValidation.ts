@@ -137,7 +137,7 @@ export default  class GenericValidation{
         // Check if the request handler object requires validation of the where clause by user ID
         if (reqHandler.getRequireValidWhereByUserId()) {
             // Check if the role of the JWT is not admin
-            if (jwtData.role != ConstRoles.ADMIN) {
+            if (jwtData.role != ConstRoles.SUPER_ADMIN) {
                 userId = jwtData.id; // Set the user ID with the ID of the JWT
             }
 

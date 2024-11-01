@@ -34,6 +34,7 @@ export default  class UserDTO implements IAdapterFromBody{
         entity.profile_picture_url = this.req.body.profile_picture_url;
         entity.is_active_from_email = this.req.body.is_active_from_email;
         entity.account_status = this.req.body.account_status || "pending";
+        entity.position = this.req.body.position;
     
         return entity;
     }
@@ -50,6 +51,7 @@ export default  class UserDTO implements IAdapterFromBody{
             email: user.email,
             phone_number: user.phone_number,
             bio: user.bio,
+            position: user.position,
             country_iso_code: user.country_iso_code,
             city_name: user.city_name,
             postal_code: user.postal_code,
@@ -98,6 +100,7 @@ export default  class UserDTO implements IAdapterFromBody{
         entity.profile_picture_url = this.req.body.profile_picture_url;
         entity.is_active_from_email = this.req.body.is_active_from_email;
         entity.account_status = this.req.body.account_status;
+        entity.position = this.req.body.position;
         return entity;
     }
 

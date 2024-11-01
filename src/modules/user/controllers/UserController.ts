@@ -16,7 +16,7 @@ export default class UserController extends GenericController{
         return this.getService().updateService(reqHandler, async (jwtData, httpExec, id) => {
 
             let validateId: number | string | null = null;
-            if(jwtData.role == ConstRoles.ADMIN){
+            if(jwtData.role == ConstRoles.SUPER_ADMIN){
                 try {
                     // Initialize the ID variable to null
                     // Check if the ID is present in the query string
