@@ -42,7 +42,6 @@ export class Database {
             try {
                 await tempDataSource.initialize();
                 await tempDataSource.query(`CREATE DATABASE IF NOT EXISTS \`${config.DB.NAME}\``);
-                debuggingMessage(ConstMessages.CREATE_DATABASE);
             } catch (error) {
                 debuggingMessage(error);
             } finally {
