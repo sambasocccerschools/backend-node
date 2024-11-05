@@ -22,7 +22,7 @@ export class Document {
   extension: string;
 
   @Column({ type: "enum", 
-            enum: ["PROFILE_PICTURE", "GENERAL_GALLERY", "PERSONAL_DOCUMENT"], 
+            enum: ["PROFILE_PICTURE", "GENERAL_GALLERY", "PERSONAL_DOCUMENT", "UNIFORM_PICTURE"], 
             default: "GENERAL_GALLERY" })
   action_type: string; 
 
@@ -38,7 +38,9 @@ export class Document {
   @Column({ type: "int", unsigned: true })
   id_for_table: number;
 
-  @Column({ type: "varchar", length: 100, default: "GENERAL" })
+  @Column({ type: "enum", 
+            enum: ["USER", "UNIFORMS", "GENERAL"], 
+            default: "GENERAL" })
   table: string;
 
   @Column({ type: "tinyint", default: 0 })

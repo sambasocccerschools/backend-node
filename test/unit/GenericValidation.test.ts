@@ -23,8 +23,8 @@ describe('GenericValidation', () => {
     let httpExec: HttpAction;
     let jwtData: JWTObject | null = null;
 
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJhZDU5N2YwLWQxN2ItNDJkNi1hYzRkLWIzNDc4NzNjMjRjYyIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MzAzNDc4MjYsImV4cCI6MTczMDM3NzgyNn0.8mF43Q4blOYEkq9BBxBsAk3dWyHglE1ZB_45Z-21H5g';
-    const roleValidate = 'TEST';
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjNDczY2Q2LWI4NDktNDAxZC1iNDZmLWU5MTAzMGQ1NzJlYSIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMwNDk3MzgxLCJleHAiOjE3MzA1MjczODF9.w-uRtBMc8Um7CmK2jFhrtIbf35biGiusbWML9_47Q3M';
+    const roleValidate = 'UNIT_DYNAMIC_CENTRAL';
 
     beforeEach(async () => {
         req = {

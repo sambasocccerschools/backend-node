@@ -3,6 +3,8 @@ export class ConstRegex {
     public static readonly DESCRIPTION_REGEX: string = "DESCRIPTION_REGEX";
     public static readonly PASSWORD_REQUIRED_REGEX: string = "PASSWORD_REQUIRED_REGEX";
     public static readonly LANGUAGE_MAX_LENGHT_REGEX: string = "LANGUAGE_MAX_LENGHT_REGEX";
+    public static readonly POSTAL_CODE_REGEX: string = "POSTAL_CODE_REGEX";
+    public static readonly PRICE_REGEX: string = "PRICE_REGEX";
 }
 
 

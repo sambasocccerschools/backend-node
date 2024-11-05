@@ -15,7 +15,7 @@ import { Database } from "@TenshiJS/persistance/TypeORMConnection";
 import { User } from '@TenshiJS/entity/User';
 import { Document } from '@entity/Document';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
-
+import { Uniform } from '@entity/Uniform';
 
 
 //*************************************** */
@@ -31,13 +31,14 @@ import { default as cors } from 'cors';
 import { default as bodyParser } from 'body-parser';
 
 //Import Routes
-import AuthRoutes from '@index/modules/auth/routers/AuthRoutes';
-import UserRoutes from '@modules/user/routers/UserRoutes';
-import RoleRoutes from '@modules/role/routers/RoleRoutes';
-import UdcRoutes from '@modules/udc/routers/UdcRoutes';
-import LogRoutes from '@modules/log/routers/LogRoutes';
-import EmailRoutes from '@modules/email/routers/EmailRoutes';
-import DocumentRoutes from '@modules/document/routers/DocumentRoutes';
+import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
+import UserRoutes from '@index/modules/01_General/user/routers/UserRoutes';
+import RoleRoutes from '@index/modules/01_General/role/routers/RoleRoutes';
+import UdcRoutes from '@index/modules/01_General/udc/routers/UdcRoutes';
+import LogRoutes from '@index/modules/01_General/log/routers/LogRoutes';
+import EmailRoutes from '@index/modules/01_General/email/routers/EmailRoutes';
+import DocumentRoutes from '@index/modules/01_General/document/routers/DocumentRoutes';
+import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes';
 
 //Import internal classes and functions
 import StartMiddleware from '@TenshiJS/middlewares/StartMiddleware';
@@ -48,7 +49,9 @@ import { ConstGeneral } from '@TenshiJS/consts/Const';
 import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddleware';
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
-import { GenericRepository } from './modules';
+import ValidJsonBodyMiddleware from '@TenshiJS/middlewares/ValidJsonBodyMiddleware';
+
+
 
 
 //*************************************** */
@@ -82,7 +85,11 @@ export let httpServer: ReturnType<typeof http.createServer>;
 export const TenshiMain = async () => {
 
     //Init instance of database First time
-    await Database.getInstance([User, Document, UnitDynamicCentral]);
+    await Database.getInstance([
+      User, 
+      Document, 
+      UnitDynamicCentral,
+      Uniform]);
 
     //Cors handler middle ware
     app.use(CorsHandlerMiddleware);
@@ -115,7 +122,7 @@ export const TenshiMain = async () => {
     //*************************************** */
     //              ROUTES
     //*************************************** */
-    //Add Routers
+    //General Routes
     app.use(new AuthRoutes().getRouter());
     app.use(new UserRoutes().getRouter());
     app.use(new RoleRoutes().getRouter());
@@ -124,11 +131,15 @@ export const TenshiMain = async () => {
     app.use(new EmailRoutes().getRouter());
     app.use(new DocumentRoutes().getRouter());
 
+    //Synco Routes
+    app.use(new UniformRoutes().getRouter());
+
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE
     //*************************************** */
     app.use(RouteNotFoundMiddleware);
-
+    app.use(ValidJsonBodyMiddleware);
+    
 
     //*************************************** */
     //              LISTENER

@@ -117,6 +117,7 @@ export default  class GenericValidation{
     }
 
     /**
+     * This is a function that need to have user_id in the table, to valid just the current user linked and the admin can be modify it.
      * Validates the user ID by ID or code entity.
      * This function checks if the request handler object requires validation of the where clause by user ID.
      * If it does, it checks the role of the JWT and sets the user ID accordingly.

@@ -30,9 +30,20 @@ export default class RequestHandlerBuilder implements IRequestHandlerBuilder {
     //the filters for the gets
     private filters: FindManyOptions;
 
-    constructor(res: Response, req: Request) {
+    constructor(res: Response | null = null, req: Request | null = null) {
+        if(res != null) {
+            this.res = res;
+        }
+
+        if(req != null){
+            this.req = req;
+        }
+    }
+
+    setReqAndRes(res: Response, req: Request): IRequestHandlerBuilder {
         this.res = res;
         this.req = req;
+        return this;
     }
 
     setRequiredFiles(requiredFieldsList: Array<string>): IRequestHandlerBuilder {

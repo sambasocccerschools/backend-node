@@ -12,10 +12,7 @@ export class Database {
 
     private static instance: DataSource;
     private static initializedEntities: Array<Function | string | EntitySchema> = [];
-
     private constructor() {}
-
-    
 
     /**
      * Retrieves the singleton instance of the DataSource.
