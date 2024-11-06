@@ -22,12 +22,14 @@ export default  class VenueDTO implements IAdapterFromBody{
         entity.has_parking = this.req.body.has_parking;
         entity.has_congestion = this.req.body.has_congestion;
         entity.price = this.req.body.price;
+        entity.region_code = this.req.body.region_code;
+        //entity.franchise_id = this.req.body.franchise_id;
         entity.created_date = new Date();
         return entity;
     }
 
     entityToResponse(entity: Venue) : any{
-    
+
         return  {
             id : entity.id,
             area: entity.area,
@@ -40,12 +42,22 @@ export default  class VenueDTO implements IAdapterFromBody{
             has_parking: entity.has_parking,
             has_congestion: entity.has_congestion,
             price: entity.price,
+            region: entity.region_code ? entity.region_code : null,
+            //franchise_id: entity.franchise_id,
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };
     }
 
-    entitiesToResponse(entities: Venue[] | null): any {
+
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Converts an array of Venue entities into an array of response objects.
+ * 
+ * @param entities - An array of Venue entities or null.
+ * @returns An array of transformed response objects. If the input is null, returns an empty array.
+ */
+/******  ec88a7a7-675f-43f1-a857-73ec4312ed74  *******/    entitiesToResponse(entities: Venue[] | null): any {
         const response: any[] = [];
     
         if(entities != null){
@@ -70,6 +82,8 @@ export default  class VenueDTO implements IAdapterFromBody{
         entity.has_parking = this.req.body.has_parking;
         entity.has_congestion = this.req.body.has_congestion;
         entity.price = this.req.body.price;
+        entity.region_code = this.req.body.region_code;
+        //entity.franchise_id = this.req.body.franchise_id;
         entity.updated_date = new Date();
         return entity;
     }

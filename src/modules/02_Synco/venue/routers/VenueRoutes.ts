@@ -1,6 +1,7 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes} from "@modules/index";
+         GenericController, GenericRoutes,
+         FindManyOptions} from "@modules/index";
 import { Venue } from "@index/entity/Venue";
 import VenueDTO from "@modules/02_Synco/venue/dtos/VenueDTO";
 import { ConstRegex } from "@index/consts/Const";
@@ -9,7 +10,7 @@ import { ConstRegex } from "@index/consts/Const";
 class VenueRoutes extends GenericRoutes{
     
     constructor() {
-        super(new GenericController(Venue), "/uniform");
+        super(new GenericController(Venue), "/venue");
     }
 
     protected initializeRoutes() {
@@ -27,12 +28,16 @@ class VenueRoutes extends GenericRoutes{
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters: FindManyOptions = {};
+            filters.relations = ["region_code"];
+            
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
                                     .setAdapter(new VenueDTO(req))
                                     .setMethod("getVenues")
                                     .isValidateRole("VENUE")
                                     .isLogicalDelete()
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -41,12 +46,9 @@ class VenueRoutes extends GenericRoutes{
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
-                req.body.title, 
-                req.body.price
-            ];
-
-            const regexValidationList: [string, string][] = [
-                [ConstRegex.PRICE_REGEX, req.body.price as string]
+                req.body.name, 
+                req.body.latitude,
+                req.body.longitude
             ];
 
             const requestHandler : RequestHandler = 
@@ -54,7 +56,6 @@ class VenueRoutes extends GenericRoutes{
                                     .setAdapter(new VenueDTO(req))
                                     .setMethod("insertVenue")
                                     .setRequiredFiles(requiredBodyList)
-                                    .setRegexValidation(regexValidationList)
                                     .isValidateRole("VENUE")
                                     .build();
         

@@ -16,6 +16,7 @@ import { User } from '@TenshiJS/entity/User';
 import { Document } from '@entity/Document';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
 import { Uniform } from '@entity/Uniform';
+import { Venue } from '@entity/Venue';
 
 
 //*************************************** */
@@ -39,6 +40,7 @@ import LogRoutes from '@index/modules/01_General/log/routers/LogRoutes';
 import EmailRoutes from '@index/modules/01_General/email/routers/EmailRoutes';
 import DocumentRoutes from '@index/modules/01_General/document/routers/DocumentRoutes';
 import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes';
+import VenueRoutes from '@index/modules/02_Synco/venue/routers/VenueRoutes';
 
 //Import internal classes and functions
 import StartMiddleware from '@TenshiJS/middlewares/StartMiddleware';
@@ -89,7 +91,9 @@ export const TenshiMain = async () => {
       User, 
       Document, 
       UnitDynamicCentral,
-      Uniform]);
+      Uniform,
+      Venue,
+    ]);
 
     //Cors handler middle ware
     app.use(CorsHandlerMiddleware);
@@ -130,6 +134,8 @@ export const TenshiMain = async () => {
     app.use(new LogRoutes().getRouter());
     app.use(new EmailRoutes().getRouter());
     app.use(new DocumentRoutes().getRouter());
+    app.use(new VenueRoutes().getRouter());
+
 
     //Synco Routes
     app.use(new UniformRoutes().getRouter());

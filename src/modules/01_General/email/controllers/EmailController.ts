@@ -80,9 +80,6 @@ export default  class EmailController extends GenericController{
             const validation : Validations = reqHandler.getResponse().locals.validation;
             const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
 
-            // Check if filters are provided
-            if(this.validateHaveFilters(reqHandler, httpExec) !== true){ return; }
-
             // Validate role
             if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
                 return; 
@@ -101,8 +98,7 @@ export default  class EmailController extends GenericController{
 
             try{
                 // Get users based on filters
-                const users : User[] = await (this.getRepository() as UserRepository).findByFilters(reqHandler.getFilters()!,
-                                                                reqHandler.getLogicalDelete());
+                const users : User[] | null = await (this.getRepository() as UserRepository).findAll(reqHandler.getLogicalDelete(),  reqHandler.getFilters()!);
 
                 if(users != undefined && users != null){
                     // Iterate over each user and send email

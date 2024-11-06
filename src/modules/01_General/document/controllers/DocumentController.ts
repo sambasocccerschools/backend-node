@@ -34,8 +34,6 @@ export default  class DocumentController extends GenericController{
                 return httpExec.successAction(reqHandler.getAdapter().entityToResponse(document), ConstHTTPRequest.INSERT_SUCESS);
 
             } catch (error : any) {
-
-                console.log(error);
                 // Return a database error response
                 return await httpExec.databaseError(error, jwtData!.id.toString(),
                 reqHandler.getMethod(), this.getControllerName());
