@@ -2,27 +2,28 @@ import { Request, Response,
          RequestHandler, RequestHandlerBuilder, 
          GenericController, GenericRoutes,
          FindManyOptions} from "@modules/index";
-import { Venue } from "@index/entity/Venue";
-import VenueDTO from "@modules/02_Synco/venue/dtos/VenueDTO";
+import { AbilityGroup } from "@index/entity/AbilityGroup";
+import AbilityGroupDTO from "@modules/02_Synco/abilityGroup/dtos/AbilityGroupDTO";
 import { ConstRegex } from "@index/consts/Const";
 
 
-class VenueRoutes extends GenericRoutes{
+class AbilityGroupRoutes extends GenericRoutes{
     
     constructor() {
-        super(new GenericController(Venue), "/venue");
+        super(new GenericController(AbilityGroup), "/abilityGroups");
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
+
             const filters: FindManyOptions = {};
-            filters.relations = ["region_code"];
-            
+            filters.relations = ["service_code", "service_package_code"];
+
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
-                                    .setAdapter(new VenueDTO(req))
-                                    .setMethod("getVenueById")
-                                    .isValidateRole("VENUE")
+                                    .setAdapter(new AbilityGroupDTO(req))
+                                    .setMethod("getAbilityGroupById")
+                                    .isValidateRole("ABILITY_GROUP")
                                     .isLogicalDelete()
                                     .setFilters(filters)
                                     .build();
@@ -33,13 +34,13 @@ class VenueRoutes extends GenericRoutes{
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
             const filters: FindManyOptions = {};
-            filters.relations = ["region_code"];
+            filters.relations = ["service_code", "service_package_code"];
             
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
-                                    .setAdapter(new VenueDTO(req))
-                                    .setMethod("getVenues")
-                                    .isValidateRole("VENUE")
+                                    .setAdapter(new AbilityGroupDTO(req))
+                                    .setMethod("getAbilityGroups")
+                                    .isValidateRole("ABILITY_GROUP")
                                     .isLogicalDelete()
                                     .setFilters(filters)
                                     .build();
@@ -51,16 +52,16 @@ class VenueRoutes extends GenericRoutes{
 
             const requiredBodyList: Array<string> = [
                 req.body.name, 
-                req.body.latitude,
-                req.body.longitude
+                req.body.min_age,
+                req.body.max_age
             ];
 
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
-                                    .setAdapter(new VenueDTO(req))
-                                    .setMethod("insertVenue")
+                                    .setAdapter(new AbilityGroupDTO(req))
+                                    .setMethod("insertAbilityGroup")
                                     .setRequiredFiles(requiredBodyList)
-                                    .isValidateRole("VENUE")
+                                    .isValidateRole("ABILITY_GROUP")
                                     .build();
         
             this.getController().insert(requestHandler);
@@ -69,9 +70,9 @@ class VenueRoutes extends GenericRoutes{
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
-                                    .setAdapter(new VenueDTO(req))
-                                    .setMethod("updateVenue")
-                                    .isValidateRole("VENUE")
+                                    .setAdapter(new AbilityGroupDTO(req))
+                                    .setMethod("updateAbilityGroup")
+                                    .isValidateRole("ABILITY_GROUP")
                                     .build();
         
             this.getController().update(requestHandler);
@@ -80,9 +81,9 @@ class VenueRoutes extends GenericRoutes{
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
-                                    .setAdapter(new VenueDTO(req))
-                                    .setMethod("deleteVenue")
-                                    .isValidateRole("VENUE")
+                                    .setAdapter(new AbilityGroupDTO(req))
+                                    .setMethod("deleteAbilityGroup")
+                                    .isValidateRole("ABILITY_GROUP")
                                     .isLogicalDelete()
                                     .build();
         
@@ -90,4 +91,4 @@ class VenueRoutes extends GenericRoutes{
         });
     }
 }
-export default VenueRoutes;
+export default AbilityGroupRoutes;

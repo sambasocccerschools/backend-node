@@ -17,6 +17,19 @@ import { Document } from '@entity/Document';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
 import { Uniform } from '@entity/Uniform';
 import { Venue } from '@entity/Venue';
+import { AbilityGroup } from '@entity/AbilityGroup';
+
+//Import Routes
+import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
+import UserRoutes from '@index/modules/01_General/user/routers/UserRoutes';
+import RoleRoutes from '@index/modules/01_General/role/routers/RoleRoutes';
+import UdcRoutes from '@index/modules/01_General/udc/routers/UdcRoutes';
+import LogRoutes from '@index/modules/01_General/log/routers/LogRoutes';
+import EmailRoutes from '@index/modules/01_General/email/routers/EmailRoutes';
+import DocumentRoutes from '@index/modules/01_General/document/routers/DocumentRoutes';
+import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes';
+import VenueRoutes from '@index/modules/02_Synco/venue/routers/VenueRoutes';
+import AbilityGroupRoutes from '@index/modules/02_Synco/abilityGroup/routers/AbilityGroupRoutes';
 
 
 //*************************************** */
@@ -30,17 +43,6 @@ import { default as express } from 'express';
 import { Router, Request, Response, NextFunction } from 'express';
 import { default as cors } from 'cors';
 import { default as bodyParser } from 'body-parser';
-
-//Import Routes
-import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
-import UserRoutes from '@index/modules/01_General/user/routers/UserRoutes';
-import RoleRoutes from '@index/modules/01_General/role/routers/RoleRoutes';
-import UdcRoutes from '@index/modules/01_General/udc/routers/UdcRoutes';
-import LogRoutes from '@index/modules/01_General/log/routers/LogRoutes';
-import EmailRoutes from '@index/modules/01_General/email/routers/EmailRoutes';
-import DocumentRoutes from '@index/modules/01_General/document/routers/DocumentRoutes';
-import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes';
-import VenueRoutes from '@index/modules/02_Synco/venue/routers/VenueRoutes';
 
 //Import internal classes and functions
 import StartMiddleware from '@TenshiJS/middlewares/StartMiddleware';
@@ -93,6 +95,7 @@ export const TenshiMain = async () => {
       UnitDynamicCentral,
       Uniform,
       Venue,
+      AbilityGroup,
     ]);
 
     //Cors handler middle ware
@@ -134,11 +137,11 @@ export const TenshiMain = async () => {
     app.use(new LogRoutes().getRouter());
     app.use(new EmailRoutes().getRouter());
     app.use(new DocumentRoutes().getRouter());
-    app.use(new VenueRoutes().getRouter());
-
-
+    
     //Synco Routes
     app.use(new UniformRoutes().getRouter());
+    app.use(new VenueRoutes().getRouter());
+    app.use(new AbilityGroupRoutes().getRouter());
 
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE
