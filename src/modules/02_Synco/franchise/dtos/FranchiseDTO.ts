@@ -27,7 +27,11 @@ export default  class FranchiseDTO implements IAdapterFromBody{
         entity.location = this.req.body.location;
         entity.liquid_capacity = this.req.body.liquid_capacity;
         entity.referral_source_code = this.req.body.referral_source_code;
-        entity.added_by = { id: this.userId } as User;
+
+        //insert user 
+        const user = new User(); 
+        user.id = this.userId;
+        entity.added_by =  user;
 
         if(isCreating){
             entity.created_date = new Date();
@@ -64,7 +68,8 @@ export default  class FranchiseDTO implements IAdapterFromBody{
             liquid_capacity: entity.liquid_capacity,
             referral_source: entity.referral_source_code,
             //i DONT WANT TO SHOW ALL INFORMATION
-            added_by: entity.added_by,
+            //added_by: entity.added_by,
+            added_by: entity.added_by.id,
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };
