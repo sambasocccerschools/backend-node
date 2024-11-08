@@ -1,11 +1,12 @@
 // src/entity/UnitDynamicCentral.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { UnitDynamicCentral } from "./UnitDynamicCentral";
+import { Franchise } from "./Franchise";
 
 @Entity("venues")
 export class Venue {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+    id: number;
     
     @Column({ type: "varchar", length: 255, nullable: true, default: null })
     area: string;
@@ -46,9 +47,9 @@ export class Venue {
     @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
     updated_date: Date | null;
 
-    /*@ManyToOne(() => Franchise, (franchise) => franchise.code)
-    @JoinColumn({ name: "franchise_id" })
-    franchise_id: Franchise;*/
+    @ManyToOne(() => Franchise)
+    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
+    franchise_id: Franchise;
 
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "region_code", referencedColumnName: "code" })

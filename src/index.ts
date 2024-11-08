@@ -15,6 +15,7 @@ import { Database } from "@TenshiJS/persistance/TypeORMConnection";
 import { User } from '@TenshiJS/entity/User';
 import { Document } from '@entity/Document';
 import { UnitDynamicCentral } from '@entity/UnitDynamicCentral';
+import { Franchise } from '@entity/Franchise';
 import { Uniform } from '@entity/Uniform';
 import { Venue } from '@entity/Venue';
 import { AbilityGroup } from '@entity/AbilityGroup';
@@ -30,7 +31,7 @@ import DocumentRoutes from '@index/modules/01_General/document/routers/DocumentR
 import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes';
 import VenueRoutes from '@index/modules/02_Synco/venue/routers/VenueRoutes';
 import AbilityGroupRoutes from '@index/modules/02_Synco/abilityGroup/routers/AbilityGroupRoutes';
-
+import FranchiseRoutes from '@index/modules/02_Synco/franchise/routers/FranchiseRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -93,6 +94,7 @@ export const TenshiMain = async () => {
       User, 
       Document, 
       UnitDynamicCentral,
+      Franchise,
       Uniform,
       Venue,
       AbilityGroup,
@@ -142,6 +144,7 @@ export const TenshiMain = async () => {
     app.use(new UniformRoutes().getRouter());
     app.use(new VenueRoutes().getRouter());
     app.use(new AbilityGroupRoutes().getRouter());
+    app.use(new FranchiseRoutes().getRouter());
 
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE

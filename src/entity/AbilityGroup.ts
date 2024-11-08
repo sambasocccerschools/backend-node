@@ -1,6 +1,7 @@
 // src/entity/UnitDynamicCentral.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { UnitDynamicCentral } from "./UnitDynamicCentral";
+import { Franchise } from "./Franchise";
 
 @Entity("ability_group")
 export class AbilityGroup {
@@ -26,9 +27,9 @@ export class AbilityGroup {
     @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
     updated_date: Date | null;
 
-    /*@ManyToOne(() => Franchise, (franchise) => franchise.code)
-    @JoinColumn({ name: "franchise_id" })
-    franchise_id: Franchise;*/
+    @ManyToOne(() => Franchise)
+    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
+    franchise_id: Franchise;
 
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })

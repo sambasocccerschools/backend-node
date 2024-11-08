@@ -87,9 +87,19 @@
             "GET_BY_ID",
             "GET_ALL"
           ]
+        },
+        {
+          "name": "FRANCHISE",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
         }
       ],
-      "screens": [ ]
+      "screens": []
     },
     {
       "id": 3,

@@ -9,17 +9,26 @@ export default  class AbilityGroupDTO implements IAdapterFromBody{
         this.req = req;
     }
 
-    //POST
-    entityFromPostBody() : AbilityGroup{
+    private getEntity (isCreating: Boolean): AbilityGroup{
         const entity = new AbilityGroup();
         entity.name = this.req.body.name;
         entity.min_age = this.req.body.min_age;
         entity.max_age = this.req.body.max_age;
         entity.service_code = this.req.body.service_code;
         entity.service_package_code = this.req.body.service_package_code;
-        //entity.franchise_id = this.req.body.franchise_id;
-        entity.created_date = new Date();
+        entity.franchise_id = this.req.body.franchise_id;
+
+        if(isCreating){
+            entity.created_date = new Date();
+        }else{
+            entity.updated_date = new Date();
+        }
         return entity;
+    }
+
+    //POST
+    entityFromPostBody() : AbilityGroup{
+        return this.getEntity(true);
     }
 
     entityToResponse(entity: AbilityGroup) : any{
@@ -31,7 +40,7 @@ export default  class AbilityGroupDTO implements IAdapterFromBody{
             max_age: entity.max_age,
             service: entity.service_code ? entity.service_code : null,
             service_package: entity.service_package_code ? entity.service_package_code : null,
-            //franchise_id: entity.franchise_id,
+            franchise: entity.franchise_id ? entity.franchise_id : null, 
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };
@@ -51,6 +60,6 @@ export default  class AbilityGroupDTO implements IAdapterFromBody{
     
     //PUT
     entityFromPutBody() : AbilityGroup{
-        return this.entityFromPostBody();
+        return this.getEntity(false);;
     }
 }
