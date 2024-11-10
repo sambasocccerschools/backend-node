@@ -66,7 +66,7 @@ export default  class FranchiseDTO implements IAdapterFromBody{
             message: entity.message,
             location: entity.location,
             liquid_capacity: entity.liquid_capacity,
-            referral_source: entity.referral_source_code,
+            referral_source_code: entity.referral_source_code,
             //i DONT WANT TO SHOW ALL INFORMATION
             //added_by: entity.added_by,
             added_by: entity.added_by.id,
