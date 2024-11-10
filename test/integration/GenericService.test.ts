@@ -2,15 +2,17 @@ import path from 'path';
 import ConfigManager from '@TenshiJS/config/ConfigManager';
 const configPath = path.resolve(__dirname, '../../tenshi-config.json');
 const configManager = ConfigManager.getInstance(configPath);
-configManager.getConfig();
+const config = configManager.getConfig();
 
 import { RequestHandler } from '@TenshiJS/generics/index';
 import HttpAction from '@TenshiJS/helpers/HttpAction';
+import {FindManyOptions } from "typeorm";
 import GenericValidation from '@TenshiJS/generics/Validation/GenericValidation';
 import RequestHandlerBuilder from '@TenshiJS/generics/RequestHandler/RequestHandlerBuilder';
 import { Request, Response } from 'express';
 import Validations from '@TenshiJS/helpers/Validations';
 import JWTObject from '@TenshiJS/objects/JWTObject';
+import { ConstFunctions, ConstGeneral } from '@TenshiJS/consts/Const';
 import { ConstRegex } from '@index/consts/Const';
 import GenericService from '@TenshiJS/generics/Services/GenericService';
 
@@ -23,8 +25,8 @@ describe('GenericValidation', () => {
     let jwtData: JWTObject | null = null;
     let service: GenericService;
 
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjNDczY2Q2LWI4NDktNDAxZC1iNDZmLWU5MTAzMGQ1NzJlYSIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMwNDk3MzgxLCJleHAiOjE3MzA1MjczODF9.w-uRtBMc8Um7CmK2jFhrtIbf35biGiusbWML9_47Q3M';
-    const roleValidate = 'TEST';
+    const jwt = config.TEST.JWT_TEST;
+    const roleValidate = config.TEST.ROLE_TESt;
 
     beforeEach(async () => {
         req = {

@@ -105,6 +105,12 @@ interface SuperAdminConfig {
 }
 
 
+interface TestConfig {
+    JWT_TEST: string;
+    ROLE_TESt: string;
+}
+
+
 interface AppConfig {
     COMPANY: CompanyConfig;
     SERVER: ServerConfig;
@@ -116,7 +122,9 @@ interface AppConfig {
     EMAIL: EmailConfig;
     URL_FILES: UrlFilesConfig;
     SUPER_ADMIN: SuperAdminConfig;
+    TEST: TestConfig;
 }
+
 
 class ConfigManager {
     private static instance: ConfigManager;

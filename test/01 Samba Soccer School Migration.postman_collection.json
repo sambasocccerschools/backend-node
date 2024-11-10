@@ -1,0 +1,1934 @@
+{
+	"info": {
+		"_postman_id": "6c2c896a-feb9-4689-bc93-8a42f3dc8469",
+		"name": "01 Samba Soccer School Migration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "619775"
+	},
+	"item": [
+		{
+			"name": "GENERAL",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register && Login",
+							"item": [
+								{
+									"name": "Login User Admin",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											},
+											{
+												"key": "device-info",
+												"value": "{\"userAgent\":\"Mozilla/5.0 (Linux; Android 10; SM-G973F Build/QP1A.190711.020; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.152 Mobile Safari/537.36\",\"platform\":\"Android\",\"environment\":\"Mobile\",\"language\":\"en-US\",\"screenResolution\":\"1080x2280\"}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"sambasoccer24@gmail.com\",\r\n  \"user_name\": null,\r\n  \"password\": \"SambaSoccer24*\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/auth/login",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Logout",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/auth/logout",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"auth",
+												"logout"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Login User - Customer",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"fabianr7593@gmail.com\",\r\n  \"password\": \"Fabianr7593@gmail.com\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/auth/login",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"auth",
+												"login"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"tenshitest3@gmail.com\",\r\n  \"password\": \"Tenshitest3@gmail.com\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"language\":\"es\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/auth/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"auth",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Recover User By Email",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/auth/recover_user",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"auth",
+												"recover_user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Confirmation Register",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"limelandcompanycr@gmail.com\",\r\n  \"password\": \"limelandcompanycr\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/confirmation_register/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"confirmation_register",
+												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Confirmation Register",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"limelandcompanycr@gmail.com\",\r\n  \"password\": \"limelandcompanycr\"\r\n}\r\n\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{host}}/confirmation_register/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA",
+													"host": [
+														"{{host}}"
+													],
+													"path": [
+														"confirmation_register",
+														"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA"
+													]
+												}
+											},
+											"_postman_previewlanguage": null,
+											"header": null,
+											"cookie": [],
+											"body": null
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Tokens",
+							"item": [
+								{
+									"name": "Refresh Token",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"limelandcompanycr@gmail.com\",\r\n  \"password\": \"limelandcompanycr\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/refresh_token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNDAwNjMyMiwiZXhwIjoxNzI0MDkyNzIyfQ._NbrttJ6KZCm02ak6QSFcRPrk8E1RKI27hlTW3H98d4",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"refresh_token",
+												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNDAwNjMyMiwiZXhwIjoxNzI0MDkyNzIyfQ._NbrttJ6KZCm02ak6QSFcRPrk8E1RKI27hlTW3H98d4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Forgot Password",
+							"item": [
+								{
+									"name": "Forgot Password",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/forgot_password",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"forgot_password"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reset Password",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"password\": \"Tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/reset_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlbnNoaXRlc3QzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzY4MjQ0NiwiZXhwIjoxNzI3NjgzMzQ2fQ.TFQyQIMBmYOpX3QS7EPymjsd67uPkpNZGbsY3BKi8_M",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"reset_password",
+												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlbnNoaXRlc3QzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzY4MjQ0NiwiZXhwIjoxNzI3NjgzMzQ2fQ.TFQyQIMBmYOpX3QS7EPymjsd67uPkpNZGbsY3BKi8_M"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Verify Token Forgot Password",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"tenshitest1@gmail.com\",\r\n  \"password\": \"tenshitest1@gmail.com\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/verify_forgot_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTNAZ21haWwuY29tIiwiaWF0IjoxNzIxOTU3NDg5LCJleHAiOjE3MjE5NTgzODl9.qBh4l0pXJqun0fji8dYNVs4j8sIZdCJ58pQOamkcWAs",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"verify_forgot_password",
+												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTNAZ21haWwuY29tIiwiaWF0IjoxNzIxOTU3NDg5LCJleHAiOjE3MjE5NTgzODl9.qBh4l0pXJqun0fji8dYNVs4j8sIZdCJ58pQOamkcWAs"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "CRUD Users",
+							"item": [
+								{
+									"name": "Insert User",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Dixie\",\r\n  \"last_name\": \"Castro\",\r\n  \"email\": \"fabian7593@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\",\r\n  \"position\":\"job position\",\r\n  \"bio\":\"my bio\",\r\n  \"phone_number\":\"+100 65432 - 3123\",\r\n  \"birth_date\": \"1990-05-20\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"city_name\":\"California\",\r\n  \"postal_code\":\"10301\",\r\n  \"latitude\": 37.774929,\r\n  \"longitude\": -122.419418,\r\n  \"language\":\"en\",\r\n  \"profile_picture_url\":null,\r\n  \"role_code\": \"ab67f164-8950-453a-9ead-13697a29fed9\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/user/add",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"add"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update User",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"card_id\": 7777,\r\n  \"first_name\": \"Test new user\",\r\n  \"position\":\"job position\",\r\n  \"bio\":\"my bio\",\r\n  \"phone_number\":\"+100 65432 - 3123\",\r\n  \"birth_date\": \"1990-05-20\"\r\n}\r\n\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/user/edit?id=3",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"edit"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get User By Id",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/user/get?id=2",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"get"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Users",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/user/get_all",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"get_all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete User",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/user/delete?id=2",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Udcs",
+					"item": [
+						{
+							"name": "Insert UDC",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"CLUSTER7777\",\r\n  \"type\": \"PROJECT_TYPE\",\r\n  \"title\": \"Cluster\",\r\n  \"title_es\": \"Cluster\",\r\n  \"slug\": \"Cluster\",\r\n  \"father_code\": \"Cluster\",\r\n  \"value1\": \"valor_del_value1\",\r\n  \"value2\": \"valor_del_value2\",\r\n  \"country_iso_code\": \"CRC\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/udc/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update UDC",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"PROJECT_TYPE\",\r\n    \"title\": \"Cluster\",\r\n    \"title_es\": \"Cluster\",\r\n    \"slug\": \"Cluster\",\r\n    \"father_code\": \"Cluster\",\r\n    \"value1\": \"valor_del_value1\",\r\n    \"value2\": \"valor_del_value2\",\r\n    \"country_iso_code\": \"CRC\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/udc/edit?id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get UDC By Code",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/udc/get_by_code?code=EASTER_CAMP",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"get_by_code"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "EASTER_CAMP"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete UDC",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{host}}/udc/delete?id=122",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "122"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All UDC",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/udc/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Documents",
+					"item": [
+						{
+							"name": "Insert Document",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/johan/OneDrive/Desktop/Ari/Captura.PNG"
+										},
+										{
+											"key": "fields",
+											"value": "{\"title\":\"name test\",\"type\": \"DOC\", \"description\": \"Descripción del documento\", \"id_for_table\": 2, \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":0}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/document/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Document by Code",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/document/get_by_code?code=NAME_TEST__DOC__31102024225235",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"get_by_code"
+									],
+									"query": [
+										{
+											"key": "code",
+											"value": "NAME_TEST__DOC__31102024225235"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Documents",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"card_id\": 7777,\r\n  \"email\": \"limelandcompanycr1@gmail.com\",\r\n  \"password\": \"limelandcompanycr1\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/document/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Documents By Some Params",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/document/get_by_filters?table=users&user_id=5",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"get_by_filters"
+									],
+									"query": [
+										{
+											"key": "table",
+											"value": "users"
+										},
+										{
+											"key": "user_id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Document",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/document/delete?id=7",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Document",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/johan/OneDrive/Desktop/CURSO ANDROID.txt"
+										},
+										{
+											"key": "fields",
+											"value": "{\"title\":\"name test\",\"type\": \"DOC\", \"description\": \"Descripción del documento\", \"id_for_table\": 2, \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":0}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/document/edit?id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Emails",
+					"item": [
+						{
+							"name": "Send Email By User Email",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"This is an email test\",\r\n  \"body_message\": \"Body message, remember this use the emails template\",\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Email All Users",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_all_users",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_all_users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Logs",
+					"item": [
+						{
+							"name": "Insert Logs",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"method\": \"login\",\r\n    \"class\": \"UserController\",\r\n    \"type\": \"Error\", \r\n    \"action\": \"Log Error\", \r\n    \"https\": 400,\r\n    \"message\": \"Error DB: Duplicate entry\",\r\n    \"description\": \"Desc\",\r\n    \"environment\": \"backend\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/log/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"log",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Logs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/log/get_by_filters",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"log",
+										"get_by_filters"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "Get All Roles",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/role/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"role",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "SYNCO",
+			"item": [
+				{
+					"name": "Uniforms",
+					"item": [
+						{
+							"name": "Insert Uniform",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Uniform specific 2\",\r\n  \"description\": \"Description uniform\",\r\n  \"price\": \" ty\",\r\n  \"url\": \"http://testurl.com\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/uniform/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"uniform",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Uniform",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Uniform specific 2\",\r\n  \"description\": \"Description uniform\",\r\n  \"price\": 7.3,\r\n  \"url\": \"http://testurl.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/uniform/edit?id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"uniform",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Uniform by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/uniform/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"uniform",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Uniform",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/uniform/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"uniform",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Uniform",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/uniform/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"uniform",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Franchise",
+					"item": [
+						{
+							"name": "Insert Franchise",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"phone_number\": \"+123456789\",\r\n    \"email\": \"johndoe@example.com\",\r\n    \"dob\": \"1990-01-01\",\r\n    \"age\": 34,\r\n    \"postal_code\": \"12345\",\r\n    \"message\": \"Interested in your services\",\r\n    \"location\": \"New York\",\r\n    \"liquid_capacity\": 500,\r\n    \"referral_source_code\": \"FACEBOOK\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/franchise/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"franchise",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Franchise",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"first_name\": \"John\",\r\n  \"last_name\": \"Doe\",\r\n  \"phone_number\": \"+1234567890\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"dob\": \"1990-01-01\",\r\n  \"age\": 34,\r\n  \"postal_code\": \"12345\",\r\n  \"message\": \"Interested in franchise opportunities.\",\r\n  \"location\": \"New York, USA\",\r\n  \"liquid_capacity\": \"5000\",\r\n  \"referral_source_code\": \"FRANCH2024\",\r\n  \"added_by\": \"admin_user\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/franchise/edit?id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"franchise",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Franchise by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/franchise/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"franchise",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Franchise",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/franchise/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"franchise",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Franchise",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/franchise/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"franchise",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Venue",
+					"item": [
+						{
+							"name": "Insert Venue",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"area\": \"Downtown\",\r\n    \"name\": \"Main Event Venue 2\",\r\n    \"facility_enter_guide\": \"Enter through the main doors on 5th Avenue\",\r\n    \"parking_note\": \"Parking available in the nearby lot with limited spaces\",\r\n    \"address\": \"123 Main St, Cityville\",\r\n    \"latitude\": 40.712776,\r\n    \"longitude\": -74.005974,\r\n    \"has_parking\": true,\r\n    \"has_congestion\": false,\r\n    \"price\": 1500.00,\r\n    \"region_code\": \"NORTH\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/venue/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"venue",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Venue",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Uniform specific 2\",\r\n  \"description\": \"Description uniform\",\r\n  \"price\": 7.3,\r\n  \"url\": \"http://testurl.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/venue/edit?id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"venue",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Venue by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/venue/get?id=8638f8c2-4a13-4eb2-8d6f-40de059433a2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"venue",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "8638f8c2-4a13-4eb2-8d6f-40de059433a2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Venue",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/venue/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"venue",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Venue",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/venue/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"venue",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ability Groups",
+					"item": [
+						{
+							"name": "Insert Ability Groups",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Ability Groups\",\r\n  \"min_age\": 8,\r\n  \"max_age\": 15,\r\n  \"service_code\": \"ONE_TO_ONE\",\r\n  \"service_package_code\": \"GOLD\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/abilityGroups/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"abilityGroups",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Ability Groups",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Uniform specific 2\",\r\n  \"description\": \"Description uniform\",\r\n  \"price\": 7.3,\r\n  \"url\": \"http://testurl.com\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/abilityGroups/edit?id=3",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"abilityGroups",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Ability Groups by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/abilityGroups/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"abilityGroups",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Ability Groups",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/abilityGroups/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"abilityGroups",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Ability Groups",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/abilityGroups/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"abilityGroups",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PARENT_CONNECT",
+			"item": []
+		},
+		{
+			"name": "COACH_PRO",
+			"item": []
+		},
+		{
+			"name": "WEBSITE",
+			"item": []
+		}
+	]
+}

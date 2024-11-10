@@ -50,8 +50,8 @@ class UdcRoutes extends GenericRoutes{
 
             const requiredBodyList: Array<string> = [
                 req.body.code, 
-                req.body.name, 
-                req.body.value1
+                req.body.type, 
+                req.body.title
             ];
 
             const requestHandler : RequestHandler = 
@@ -83,7 +83,6 @@ class UdcRoutes extends GenericRoutes{
                                     .setMethod("deleteUdc")
                                     .isValidateRole("UNIT_DYNAMIC_CENTRAL")
                                     .isLogicalDelete()
-                                    .isValidateWhereByUserId()
                                     .build();
         
             this.getController().delete(requestHandler);

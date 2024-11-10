@@ -2,7 +2,7 @@ import path from 'path';
 import ConfigManager from '@TenshiJS/config/ConfigManager';
 const configPath = path.resolve(__dirname, '../../tenshi-config.json');
 const configManager = ConfigManager.getInstance(configPath);
-configManager.getConfig();
+const config = configManager.getConfig();
 
 import { RequestHandler } from '@TenshiJS/generics/index';
 import HttpAction from '@TenshiJS/helpers/HttpAction';
@@ -23,8 +23,8 @@ describe('GenericValidation', () => {
     let httpExec: HttpAction;
     let jwtData: JWTObject | null = null;
 
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNjNDczY2Q2LWI4NDktNDAxZC1iNDZmLWU5MTAzMGQ1NzJlYSIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMwNDk3MzgxLCJleHAiOjE3MzA1MjczODF9.w-uRtBMc8Um7CmK2jFhrtIbf35biGiusbWML9_47Q3M';
-    const roleValidate = 'UNIT_DYNAMIC_CENTRAL';
+    const jwt = config.TEST.JWT_TEST;
+    const roleValidate = config.TEST.ROLE_TESt;
 
     beforeEach(async () => {
         req = {
@@ -74,7 +74,9 @@ describe('GenericValidation', () => {
             expect(jwtData).toEqual(expect.objectContaining({
                 id: expect.any(String),
                 email: expect.any(String),
-                role: expect.any(String)
+                role: expect.any(String),
+                exp: expect.any(Number),
+                iat: expect.any(Number),
             }));
         });
 
@@ -105,10 +107,6 @@ describe('GenericValidation', () => {
         //************************************************ */
         it('Should SUCCESS Validate Role', async () => {
 
-           /* req.body = { 'exampleField': 'exampleValue' };
-            req.params = {};
-            req.query = {};
-*/
             const requestHandler: RequestHandler =
                 new RequestHandlerBuilder(res, req)
                     .isValidateRole(roleValidate)
