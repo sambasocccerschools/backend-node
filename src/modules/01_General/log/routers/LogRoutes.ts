@@ -9,7 +9,7 @@ class LogRoutes extends GenericRoutes {
     }
 
     protected initializeRoutes() {
-        this.router.get(`${this.getRouterName()}/get_by_filters`, async (req: Request, res: Response) => {
+        this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
 
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)

@@ -1,6 +1,7 @@
 import JWTObject from "tenshi/objects/JWTObject";
 import RequestHandler from "../RequestHandler/RequestHandler";
 import HttpAction from "tenshi/helpers/HttpAction";
+import IGenericRepository from "../Repository/IGenericRepository";
 
 interface IGenericService {
     
@@ -11,6 +12,7 @@ interface IGenericService {
     getByCodeService(reqHandler: RequestHandler, executeGetByCodeFunction: (jwtData : JWTObject, httpExec: HttpAction, code: string) => void): Promise<any>;
     getAllService(reqHandler: RequestHandler, executeGetAllFunction: (jwtData : JWTObject, httpExec: HttpAction, page: number, size: number) => void): Promise<any>;
     setControllerName(controllerName: string):void;
+    setRepositoryServiceValidation(repository: IGenericRepository): void;
 }
 
 export default IGenericService;

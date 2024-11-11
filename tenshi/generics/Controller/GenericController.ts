@@ -48,6 +48,7 @@ export default  class GenericController extends GenericValidation implements IGe
         // Create the controller object using the entity type.
         this.service = service;
         this.service.setControllerName(this.controllerName);
+       
 
         // Check if the repository class is passed.
         // If not, create a new instance of GenericRepository using the entity type.
@@ -57,6 +58,8 @@ export default  class GenericController extends GenericValidation implements IGe
         }else{
             this.setRepository(repositoryClass);
         }
+
+        this.service.setRepositoryServiceValidation(this.getRepository());
     }
    
     public getRepository(): IGenericRepository {
@@ -230,6 +233,7 @@ export default  class GenericController extends GenericValidation implements IGe
 
         return this.service.getAllService(reqHandler, async (jwtData : JWTObject, httpExec: HttpAction, page: number, size: number) => {
             try {
+               
                
                 // Execute the get all action in the database
                 const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);

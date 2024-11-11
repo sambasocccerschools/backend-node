@@ -71,7 +71,7 @@
             "SECRET_KEY": "44e7d167-f31e-41f4-9e48-e6218fbf0a41"
         },
         "FORGOT_PASS_TOKEN" :{
-            "EXPIRE": "900s",
+            "EXPIRE": "120s",
             "SECRET_KEY": "f749b45a-45y5-77ty-12we-630184b443f6"
         },
         "REGISTER_TOKEN" :{

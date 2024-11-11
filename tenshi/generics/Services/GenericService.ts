@@ -6,11 +6,21 @@ import GenericValidation from 'tenshi/generics/Validation/GenericValidation';
 import ConfigManager from 'tenshi/config/ConfigManager';
 import { ConstFunctions } from 'tenshi/consts/Const';
 import IGenericService from './IGenericService';
+import IGenericRepository from '../Repository/IGenericRepository';
 
 export default  class GenericService extends GenericValidation implements IGenericService {
    
 
     private controllerName : string = "";
+
+    constructor(){  
+        super();
+    }
+
+
+    setRepositoryServiceValidation(repository: IGenericRepository){
+        this.setRepository(repository);
+    }
 
      /**
      * Sets the name of the controller associated with this service.
@@ -31,6 +41,7 @@ export default  class GenericService extends GenericValidation implements IGener
     protected getControllerName():string{ 
         return this.controllerName;
     }
+
 
     /**
      * This function is used to insert a new entity into the database.

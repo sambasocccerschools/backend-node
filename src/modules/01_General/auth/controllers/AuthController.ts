@@ -201,9 +201,9 @@ async refreshToken(reqHandler: RequestHandler){
         const jwtObj : JWTObject = {
             id: verify!.id,
             email: verify!.email,
-            role: verify!.role_code
+            role: verify!.role
         }
-    
+
         const accessToken = JWTService.generateToken(jwtObj);   
         return httpExec.successAction((reqHandler.getAdapter() as UserDTO).refreshToResponse(accessToken), ConstHTTPRequest.REFRESH_TOKEN_SUCCESS);
     } catch(error : any){
