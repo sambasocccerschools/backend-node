@@ -2,7 +2,7 @@
     "COMPANY": {
         "NAME" : "Samba Soccer School",
         "LOGO" : "https://raw.githubusercontent.com/fabian7593/Tenshi/main/00_external_information/imgs/tenshi_background_2.png",
-        "BACKEND_HOST": "http://localhost:3000/",
+        "BACKEND_HOST": "http://18.117.147.235:3000/",
         "FRONT_END_HOST": "http://localhost:3000/",
         "LOGIN_URL": "http://localhost:3000/",
         "RESET_PASSWORD_URL" : "password_reset/",
@@ -32,9 +32,9 @@
     "DB": {
         "TYPE": "mariadb",
         "PORT": 3306,
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "",
+        "HOST": "dbsoccersamba.cxaoy46ei29l.us-east-2.rds.amazonaws.com",
+        "USER": "admin",
+        "PASSWORD": "cdpjZGQ4-",
         "NAME": "samba_soccer_school",
         "CONNECTION_LIMIT": 150
     },
@@ -100,7 +100,7 @@
         "EMAIL_FROM": "tenshitest1@gmail.com"
     },
     "TEST" : {
-        "JWT_TEST": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjljMzUwNGZjLTI1NmUtNDQyZC1iNzMzLTk1MmQ4NGJhMDQzNSIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxNTY0NzI3LCJleHAiOjE3MzE1OTQ3Mjd9.d79p3m5eUM15H8iYvgowYn30OJqzgXWiR4UUK19UMXk",
+        "JWT_TEST": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGI3MjY4LTkzODQtNDc0Yy1hYzI2LTU5Y2IwMmZhOGIyNiIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxMjY4ODQ0LCJleHAiOjE3MzEyOTg4NDR9.gBs2ryB1bYl2FHFn9xmvVQavIuZ6lFEKep4p5A89Fug",
         "ROLE_TEST": "TEST"
     }
 }
