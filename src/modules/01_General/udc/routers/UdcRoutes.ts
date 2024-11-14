@@ -1,7 +1,9 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes} from "@modules/index";
+         GenericController, GenericRoutes,
+         FindManyOptions} from "@modules/index";
 import { UnitDynamicCentral, UdcDTO } from '@index/modules/01_General/udc';
+import { getUrlParam } from "@TenshiJS/utils/generalUtils";
 
 class UdcRoutes extends GenericRoutes{
     constructor() {
@@ -35,12 +37,19 @@ class UdcRoutes extends GenericRoutes{
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const type : string | null = getUrlParam("type", req) || null;
+            const options: FindManyOptions = {};
+            if(type != null){
+                options.where = { ...options.where, type: type};
+            }
+
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
                                     .setAdapter(new UdcDTO(req))
                                     .setMethod("getUdcs")
                                     .isValidateRole("UNIT_DYNAMIC_CENTRAL")
                                     .isLogicalDelete()
+                                    .setFilters(options)
                                     .build();
         
             this.getController().getAll(requestHandler);

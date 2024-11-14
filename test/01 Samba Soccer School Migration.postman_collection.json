@@ -16,7 +16,7 @@
 							"name": "Register && Login",
 							"item": [
 								{
-									"name": "Login User Admin",
+									"name": "Login User - Super Admin",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -83,7 +83,7 @@
 									"response": []
 								},
 								{
-									"name": "Login User - Customer",
+									"name": "Login User - Admin",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -95,7 +95,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"fabianr7593@gmail.com\",\r\n  \"password\": \"Fabianr7593@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"email\": \"fabian7593@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -116,7 +116,7 @@
 									"response": []
 								},
 								{
-									"name": "Register",
+									"name": "Register - Admin",
 									"request": {
 										"method": "POST",
 										"header": [
@@ -128,7 +128,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"tenshitest3@gmail.com\",\r\n  \"password\": \"Tenshitest3@gmail.com\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"language\":\"es\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"fabian7593+test3@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"language\":\"en\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -161,7 +161,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"email\": \"fabian7593@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -183,21 +183,9 @@
 								},
 								{
 									"name": "Confirmation Register",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
 									"request": {
 										"method": "GET",
 										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"limelandcompanycr@gmail.com\",\r\n  \"password\": \"limelandcompanycr\"\r\n}\r\n\r\n",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
 										"url": {
 											"raw": "{{host}}/confirmation_register/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA",
 											"host": [
@@ -209,38 +197,7 @@
 											]
 										}
 									},
-									"response": [
-										{
-											"name": "Confirmation Register",
-											"originalRequest": {
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "raw",
-													"raw": "{\r\n  \"email\": \"limelandcompanycr@gmail.com\",\r\n  \"password\": \"limelandcompanycr\"\r\n}\r\n\r\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{host}}/confirmation_register/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA",
-													"host": [
-														"{{host}}"
-													],
-													"path": [
-														"confirmation_register",
-														"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA"
-													]
-												}
-											},
-											"_postman_previewlanguage": null,
-											"header": null,
-											"cookie": [],
-											"body": null
-										}
-									]
+									"response": []
 								}
 							]
 						},
@@ -271,13 +228,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/refresh_token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNDAwNjMyMiwiZXhwIjoxNzI0MDkyNzIyfQ._NbrttJ6KZCm02ak6QSFcRPrk8E1RKI27hlTW3H98d4",
+											"raw": "{{host}}/refresh_token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5YTZjMGM0LTg1MGMtNDBmZS04NzlkLTQwYTc4MmM5MjlhZCIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxMzA5NTAwLCJleHAiOjE3MzEzOTU5MDB9.XwR1YaeU_kocb3wnQ7yfDTbUu5EEQiu0KwLEohpfm9I",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"refresh_token",
-												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcyNDAwNjMyMiwiZXhwIjoxNzI0MDkyNzIyfQ._NbrttJ6KZCm02ak6QSFcRPrk8E1RKI27hlTW3H98d4"
+												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5YTZjMGM0LTg1MGMtNDBmZS04NzlkLTQwYTc4MmM5MjlhZCIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxMzA5NTAwLCJleHAiOjE3MzEzOTU5MDB9.XwR1YaeU_kocb3wnQ7yfDTbUu5EEQiu0KwLEohpfm9I"
 											]
 										}
 									},
@@ -301,7 +258,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"email\": \"fabian7593@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -355,9 +312,6 @@
 								},
 								{
 									"name": "Verify Token Forgot Password",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
 									"request": {
 										"method": "GET",
 										"header": [
@@ -367,15 +321,6 @@
 												"type": "text"
 											}
 										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"tenshitest1@gmail.com\",\r\n  \"password\": \"tenshitest1@gmail.com\"\r\n}\r\n\r\n",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
 										"url": {
 											"raw": "{{host}}/verify_forgot_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTNAZ21haWwuY29tIiwiaWF0IjoxNzIxOTU3NDg5LCJleHAiOjE3MjE5NTgzODl9.qBh4l0pXJqun0fji8dYNVs4j8sIZdCJ58pQOamkcWAs",
 											"host": [
@@ -417,7 +362,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Dixie\",\r\n  \"last_name\": \"Castro\",\r\n  \"email\": \"fabian7593@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\",\r\n  \"position\":\"job position\",\r\n  \"bio\":\"my bio\",\r\n  \"phone_number\":\"+100 65432 - 3123\",\r\n  \"birth_date\": \"1990-05-20\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"city_name\":\"California\",\r\n  \"postal_code\":\"10301\",\r\n  \"latitude\": 37.774929,\r\n  \"longitude\": -122.419418,\r\n  \"language\":\"en\",\r\n  \"profile_picture_url\":null,\r\n  \"role_code\": \"ab67f164-8950-453a-9ead-13697a29fed9\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"fabianr7593@gmail.com\",\r\n  \"password\": \"Fabianr7593@gmail.com\",\r\n  \"position\":\"Senior Software Developer\",\r\n  \"bio\":\"My personal Bio\",\r\n  \"phone_number\":\"+506 83461166\",\r\n  \"birth_date\": \"1993-05--7\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"city_name\":\"San Jose\",\r\n  \"postal_code\":\"10301\",\r\n  \"latitude\": 37.774929,\r\n  \"longitude\": -122.419418,\r\n  \"language\":\"es\",\r\n  \"profile_picture_url\":null,\r\n  \"role_code\": \"ab67f164-8950-453a-9ead-13697a29fed9\",\r\n  \"is_active_from_email\" : true,\r\n  \"account_status\":\"active\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -455,7 +400,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"card_id\": 7777,\r\n  \"first_name\": \"Test new user\",\r\n  \"position\":\"job position\",\r\n  \"bio\":\"my bio\",\r\n  \"phone_number\":\"+100 65432 - 3123\",\r\n  \"birth_date\": \"1990-05-20\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"card_id\": 7777,\r\n  \"first_name\": \"Test new user\",\r\n  \"position\":\"job position\",\r\n  \"bio\":\"my bio\",\r\n  \"phone_number\":\"+100 65432 - 3123\",\r\n  \"birth_date\": \"1990-05-20\",\r\n  \"profile_picture_url\":\"https://bucket-name-777.s3.us-east-2.amazonaws.com/PublicFiles//Front_end_SSS__DOC__1111202413314.jfif\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -463,7 +408,7 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/user/edit?id=3",
+											"raw": "{{host}}/user/edit?id=90b4c713-bf6e-48a3-97f0-3a41bcd9c69d",
 											"host": [
 												"{{host}}"
 											],
@@ -474,7 +419,7 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "3"
+													"value": "90b4c713-bf6e-48a3-97f0-3a41bcd9c69d"
 												}
 											]
 										}
@@ -498,7 +443,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{host}}/user/get?id=2",
+											"raw": "{{host}}/user/get?id=90b4c713-bf6e-48a3-97f0-3a41bcd9c69d",
 											"host": [
 												"{{host}}"
 											],
@@ -509,7 +454,7 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "2"
+													"value": "90b4c713-bf6e-48a3-97f0-3a41bcd9c69d"
 												}
 											]
 										}
@@ -562,7 +507,7 @@
 											}
 										],
 										"url": {
-											"raw": "{{host}}/user/delete?id=2",
+											"raw": "{{host}}/user/delete?id=309aaa56-98ce-49b5-88b5-590409515681",
 											"host": [
 												"{{host}}"
 											],
@@ -573,7 +518,7 @@
 											"query": [
 												{
 													"key": "id",
-													"value": "2"
+													"value": "309aaa56-98ce-49b5-88b5-590409515681"
 												}
 											]
 										}
@@ -768,6 +713,49 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get All UDC With Filters",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/udc/get_all?type=CAMP_TYPES&page=1&size=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"udc",
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "CAMP_TYPES"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -796,11 +784,11 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/johan/OneDrive/Desktop/Ari/Captura.PNG"
+											"src": "/C:/Users/johan/Downloads/name_test__DOC__1882024132554.jfif"
 										},
 										{
 											"key": "fields",
-											"value": "{\"title\":\"name test\",\"type\": \"DOC\", \"description\": \"Descripción del documento\", \"id_for_table\": 2, \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":0}",
+											"value": "{\"title\":\"Front end SSS\",\"type\": \"DOC\", \"description\": \"Descripción del documento\", \"id_for_table\": \"309aaa56-98ce-49b5-88b5-590409515681\", \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":1}",
 											"type": "text"
 										}
 									]
@@ -835,7 +823,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/document/get_by_code?code=NAME_TEST__DOC__31102024225235",
+									"raw": "{{host}}/document/get_by_code?code=FRONT_END_SSS__DOC__13112024235312",
 									"host": [
 										"{{host}}"
 									],
@@ -846,7 +834,7 @@
 									"query": [
 										{
 											"key": "code",
-											"value": "NAME_TEST__DOC__31102024225235"
+											"value": "FRONT_END_SSS__DOC__13112024235312"
 										}
 									]
 								}
@@ -855,9 +843,6 @@
 						},
 						{
 							"name": "Get Documents",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [
@@ -872,15 +857,6 @@
 										"type": "text"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"card_id\": 7777,\r\n  \"email\": \"limelandcompanycr1@gmail.com\",\r\n  \"password\": \"limelandcompanycr1\"\r\n}\r\n\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{host}}/document/get_all",
 									"host": [
@@ -911,7 +887,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/document/get_by_filters?table=users&user_id=5",
+									"raw": "{{host}}/document/get_by_filters?table=USER&user_id=5",
 									"host": [
 										"{{host}}"
 									],
@@ -922,7 +898,7 @@
 									"query": [
 										{
 											"key": "table",
-											"value": "users"
+											"value": "USER"
 										},
 										{
 											"key": "user_id",
@@ -950,7 +926,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/document/delete?id=7",
+									"raw": "{{host}}/document/delete?id=3",
 									"host": [
 										"{{host}}"
 									],
@@ -961,7 +937,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "7"
+											"value": "3"
 										}
 									]
 								}
@@ -990,7 +966,7 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/johan/OneDrive/Desktop/CURSO ANDROID.txt"
+											"src": "/C:/Users/johan/Downloads/Firma Correo AC (4).png"
 										},
 										{
 											"key": "fields",
@@ -1000,7 +976,7 @@
 									]
 								},
 								"url": {
-									"raw": "{{host}}/document/edit?id=3",
+									"raw": "{{host}}/document/edit?id=2",
 									"host": [
 										"{{host}}"
 									],
@@ -1011,7 +987,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "3"
+											"value": "2"
 										}
 									]
 								}
@@ -1041,7 +1017,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"subject\": \"This is an email test\",\r\n  \"body_message\": \"Body message, remember this use the emails template\",\r\n  \"email\": \"tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+									"raw": "{\r\n  \"subject\": \"This is an email test\",\r\n  \"body_message\": \"Body message, remember this use the emails template\",\r\n  \"email\": \"fabian7593@gmail.com\"\r\n}\r\n\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1122,7 +1098,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"method\": \"login\",\r\n    \"class\": \"UserController\",\r\n    \"type\": \"Error\", \r\n    \"action\": \"Log Error\", \r\n    \"https\": 400,\r\n    \"message\": \"Error DB: Duplicate entry\",\r\n    \"description\": \"Desc\",\r\n    \"environment\": \"backend\"\r\n}\r\n",
+									"raw": "{\r\n    \"method\": \"login\",\r\n    \"class\": \"UserController\",\r\n    \"type\": \"Error\", \r\n    \"action\": \"Log Error\", \r\n    \"https\": 400,\r\n    \"message\": \"Specific error\",\r\n    \"description\": \"Desc\",\r\n    \"environment\": \"FrontEnd\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1159,13 +1135,23 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/log/get_by_filters",
+									"raw": "{{host}}/log/get_all?size=2&page=5",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"log",
-										"get_by_filters"
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "5"
+										}
 									]
 								}
 							},
@@ -1915,7 +1901,189 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "SubscriptionPlan",
+					"item": [
+					  {
+						"name": "Create SubscriptionPlan",
+						"request": {
+						  "method": "POST",
+						  "header": [
+							{
+							  "key": "authorization",
+							  "value": "{{auth_jwt}}",
+							  "type": "text"
+							},
+							{
+							  "key": "x-api-key",
+							  "value": "{{secret_api_key}}",
+							  "type": "text"
+							}
+						  ],
+						  "body": {
+							"mode": "raw",
+							"raw": "{\n  \"service\": \"\\\"test_service\\\"\",\n  \"venue\": \"\\\"test_venue\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"duration\": 100,\n  \"franchise\": \"\\\"test_franchise\\\"\"\n}",
+							"options": {
+							  "raw": {
+								"language": "json"
+							  }
+							}
+						  },
+						  "url": {
+							"raw": "{{host}}/${entityName.toLowerCase()}/add",
+							"host": [
+							  "{{host}}"
+							],
+							"path": [
+							  "subscriptionplan",
+							  "add"
+							]
+						  }
+						}
+					  },
+					  {
+						"name": "Update SubscriptionPlan",
+						"request": {
+						  "method": "PUT",
+						  "header": [
+							{
+							  "key": "authorization",
+							  "value": "{{auth_jwt}}",
+							  "type": "text"
+							},
+							{
+							  "key": "x-api-key",
+							  "value": "{{secret_api_key}}",
+							  "type": "text"
+							}
+						  ],
+						  "body": {
+							"mode": "raw",
+							"raw": "{\n  \"service\": \"\\\"test_service\\\"\",\n  \"venue\": \"\\\"test_venue\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"duration\": 100,\n  \"franchise\": \"\\\"test_franchise\\\"\"\n}",
+							"options": {
+							  "raw": {
+								"language": "json"
+							  }
+							}
+						  },
+						  "url": {
+							"raw": "{{host}}/${entityName.toLowerCase()}/edit?id={{id}}",
+							"host": [
+							  "{{host}}"
+							],
+							"path": [
+							  "subscriptionplan",
+							  "edit"
+							],
+							"query": [
+							  {
+								"key": "id",
+								"value": "{{id}}"
+							  }
+							]
+						  }
+						}
+					  },
+					  {
+						"name": "Get SubscriptionPlan by ID",
+						"request": {
+						  "method": "GET",
+						  "header": [
+							{
+							  "key": "authorization",
+							  "value": "{{auth_jwt}}",
+							  "type": "text"
+							},
+							{
+							  "key": "x-api-key",
+							  "value": "{{secret_api_key}}",
+							  "type": "text"
+							}
+						  ],
+						  "url": {
+							"raw": "{{host}}/${entityName.toLowerCase()}/get?id={{id}}",
+							"host": [
+							  "{{host}}"
+							],
+							"path": [
+							  "subscriptionplan",
+							  "get"
+							],
+							"query": [
+							  {
+								"key": "id",
+								"value": "{{id}}"
+							  }
+							]
+						  }
+						}
+					  },
+					  {
+						"name": "Get All SubscriptionPlan",
+						"request": {
+						  "method": "GET",
+						  "header": [
+							{
+							  "key": "authorization",
+							  "value": "{{auth_jwt}}",
+							  "type": "text"
+							},
+							{
+							  "key": "x-api-key",
+							  "value": "{{secret_api_key}}",
+							  "type": "text"
+							}
+						  ],
+						  "url": {
+							"raw": "{{host}}/${entityName.toLowerCase()}/get_all",
+							"host": [
+							  "{{host}}"
+							],
+							"path": [
+							  "subscriptionplan",
+							  "get_all"
+							]
+						  }
+						}
+					  },
+					  {
+						"name": "Delete SubscriptionPlan",
+						"request": {
+						  "method": "DELETE",
+						  "header": [
+							{
+							  "key": "authorization",
+							  "value": "{{auth_jwt}}",
+							  "type": "text"
+							},
+							{
+							  "key": "x-api-key",
+							  "value": "{{secret_api_key}}",
+							  "type": "text"
+							}
+						  ],
+						  "url": {
+							"raw": "{{host}}/${entityName.toLowerCase()}/delete?id={{id}}",
+							"host": [
+							  "{{host}}"
+							],
+							"path": [
+							  "subscriptionplan",
+							  "delete"
+							],
+							"query": [
+							  {
+								"key": "id",
+								"value": "{{id}}"
+							  }
+							]
+						  }
+						}
+					  }
+					]
 				}
+
 			]
 		},
 		{

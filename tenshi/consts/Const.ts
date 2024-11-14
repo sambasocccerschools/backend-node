@@ -19,9 +19,6 @@ export class ConstHTTPRequest {
     public static readonly SEND_MAIL_SUCCESS: string = "SEND_MAIL_SUCCESS";
 }
 
-export class ConstRoles {
-    public static readonly SUPER_ADMIN: string = "9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a";
-}
 
 export class ConstStatusJson {
     public static readonly NOT_FOUND: string =  "NOT_FOUND";

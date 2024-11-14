@@ -1,0 +1,183 @@
+{
+  "info": {
+    "name": "SubscriptionPlan",
+    "item": [
+      {
+        "name": "Create SubscriptionPlan",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"service\": \"\\\"test_service\\\"\",\n  \"venue\": \"\\\"test_venue\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"duration\": 100,\n  \"franchise\": \"\\\"test_franchise\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/add",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "subscriptionplan",
+              "add"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update SubscriptionPlan",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"service\": \"\\\"test_service\\\"\",\n  \"venue\": \"\\\"test_venue\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"duration\": 100,\n  \"franchise\": \"\\\"test_franchise\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/edit?id={{id}}",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "subscriptionplan",
+              "edit"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "{{id}}"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get SubscriptionPlan by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get?id={{id}}",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "subscriptionplan",
+              "get"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "{{id}}"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get All SubscriptionPlan",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get_all",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "subscriptionplan",
+              "get_all"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete SubscriptionPlan",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/delete?id={{id}}",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "subscriptionplan",
+              "delete"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "{{id}}"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

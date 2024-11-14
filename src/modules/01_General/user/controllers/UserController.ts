@@ -2,8 +2,10 @@ import { GenericController, RequestHandler} from "@modules/index";
 
 import { UserRepository, hashPassword, User} from "@index/modules/01_General/user";
         
-import { ConstGeneral, ConstHTTPRequest, ConstRoles } from "@TenshiJS/consts/Const";
-const jwt = require('jsonwebtoken');
+import { ConstGeneral, ConstHTTPRequest } from "@TenshiJS/consts/Const";
+
+import ConfigManager  from "tenshi/config/ConfigManager";
+const config = ConfigManager.getInstance().getConfig();
 
 export default class UserController extends GenericController{
     
@@ -16,7 +18,7 @@ export default class UserController extends GenericController{
         return this.getService().updateService(reqHandler, async (jwtData, httpExec, id) => {
 
             let validateId: number | string | null = null;
-            if(jwtData.role == ConstRoles.SUPER_ADMIN){
+            if(jwtData.role == config.SUPER_ADMIN.ROLE_CODE){
                 try {
                     // Initialize the ID variable to null
                     // Check if the ID is present in the query string
