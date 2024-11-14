@@ -46,7 +46,7 @@ export default class AuthController extends GenericController{
         userBody.active_register_token = registerToken;
 
         //set the language
-        userBody.language = userBody.language == null ? reqHandler.getRequest().headers[ConstGeneral.HEADER_LANGUAGE] : config.SERVER.DEFAULT_LANGUAGE;
+        userBody.language = userBody.language == null ? config.SERVER.DEFAULT_LANGUAGE :  userBody.language;
     
         try{
             //Execute Action DB
@@ -235,15 +235,22 @@ async activeRegisterUser(reqHandler: RequestHandler){
             user.verified_at = new Date();
             await (this.getRepository() as UserRepository).update(user.id, user, reqHandler.getLogicalDelete());
 
+            //IS DEBUGGING send the confiramtion to mail from backend
+            if(config.SERVER.IS_DEBUGGING){
+                const variables = {
+                    userName: user.first_name + " " + user.last_name,
+                    loginUrl: config.COMPANY.LOGIN_URL
+                };
 
-            const variables = {
-                userName: user.first_name + " " + user.last_name,
-                loginUrl: config.COMPANY.LOGIN_URL
+                console.log(user.language);
+                const htmlBody = await getEmailTemplate(ConstTemplate.ACTIVE_ACCOUNT_PAGE, user.language, variables);
+                return httpExec.getHtml(htmlBody);
+            }else{
+                //if is prod, send register confirmation from body json
+                return httpExec.successAction(null, ConstMessagesJson.REGISTER_CONFIRMATION_SUCCESSFUL);
+            }
 
-            };
-            const htmlBody = await getEmailTemplate(ConstTemplate.ACTIVE_ACCOUNT_PAGE, user.language, variables);
-            
-            return httpExec.getHtml(htmlBody);
+           
         }else{
             return httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.EMAIL_NOT_EXISTS_ERROR);
         }
