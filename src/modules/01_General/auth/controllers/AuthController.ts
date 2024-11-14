@@ -242,7 +242,7 @@ async activeRegisterUser(reqHandler: RequestHandler){
                     loginUrl: config.COMPANY.LOGIN_URL
                 };
 
-                console.log(user.language);
+               
                 const htmlBody = await getEmailTemplate(ConstTemplate.ACTIVE_ACCOUNT_PAGE, user.language, variables);
                 return httpExec.getHtml(htmlBody);
             }else{

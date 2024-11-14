@@ -2,7 +2,7 @@
     "COMPANY": {
         "NAME" : "Samba Soccer School",
         "LOGO" : "https://raw.githubusercontent.com/fabian7593/Tenshi/main/00_external_information/imgs/tenshi_background_2.png",
-        "BACKEND_HOST": "http://localhost:3000/",
+        "BACKEND_HOST": "http://18.117.147.235:3000/",
         "FRONT_END_HOST": "http://localhost:3000/",
         "LOGIN_URL": "http://localhost:3000/",
         "RESET_PASSWORD_URL" : "password_reset/",
