@@ -278,7 +278,7 @@ class ${entityName}Routes extends GenericRoutes {
     }
 }
 
-export default new ${entityName}Routes();
+export default ${entityName}Routes;
 `;
 
 const routerFilePath = path.join(routerPath, `${entityName}Routes.ts`);

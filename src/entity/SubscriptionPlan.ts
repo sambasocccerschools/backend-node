@@ -11,11 +11,11 @@ export class SubscriptionPlan {
 
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })
-    service: UnitDynamicCentral;
+    service_code: UnitDynamicCentral;
 
     @ManyToOne(() => Venue)
     @JoinColumn({ name: "venue_id", referencedColumnName: "id" })
-    venue: Venue;
+    venue_id: Venue;
 
     @Column({ type: "varchar", length: 255 })
     name: string;

@@ -1,7 +1,6 @@
 
 import { SubscriptionPlan } from "@index/entity/SubscriptionPlan";
 import { Request, IAdapterFromBody } from "@modules/index";
-import { User } from "@TenshiJS/entity/User";
 
 export default class SubscriptionPlanDTO implements IAdapterFromBody {
     req: Request;
@@ -12,8 +11,8 @@ export default class SubscriptionPlanDTO implements IAdapterFromBody {
 
     private getEntity(isCreating: boolean): SubscriptionPlan {
         const entity = new SubscriptionPlan();
-                entity.service = this.req.body.service;
-        entity.venue = this.req.body.venue;
+        entity.service_code = this.req.body.service_code;
+        entity.venue_id = this.req.body.venue_id;
         entity.name = this.req.body.name;
         entity.duration = this.req.body.duration;
         entity.franchise = this.req.body.franchise;
@@ -40,9 +39,9 @@ export default class SubscriptionPlanDTO implements IAdapterFromBody {
     // GET
     entityToResponse(entity: SubscriptionPlan): any {
         return {
-                        id: entity.id,
-            service: entity.service,
-            venue: entity.venue,
+            id: entity.id,
+            service: entity.service_code,
+            venue: entity.venue_id,
             name: entity.name,
             duration: entity.duration,
             created_date: entity.created_date,

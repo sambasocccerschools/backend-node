@@ -19,6 +19,7 @@ import { Franchise } from '@entity/Franchise';
 import { Uniform } from '@entity/Uniform';
 import { Venue } from '@entity/Venue';
 import { AbilityGroup } from '@entity/AbilityGroup';
+import { SubscriptionPlan } from '@entity/SubscriptionPlan';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -32,6 +33,7 @@ import UniformRoutes from '@index/modules/02_Synco/uniform/routers/UniformRoutes
 import VenueRoutes from '@index/modules/02_Synco/venue/routers/VenueRoutes';
 import AbilityGroupRoutes from '@index/modules/02_Synco/abilityGroup/routers/AbilityGroupRoutes';
 import FranchiseRoutes from '@index/modules/02_Synco/franchise/routers/FranchiseRoutes';
+import SubscriptionPlanRoutes from '@index/modules/02_Synco/subscriptionplan/routers/SubscriptionPlanRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -55,8 +57,6 @@ import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddlewa
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
 import ValidJsonBodyMiddleware from '@TenshiJS/middlewares/ValidJsonBodyMiddleware';
-
-
 
 
 //*************************************** */
@@ -98,6 +98,7 @@ export const TenshiMain = async () => {
       Uniform,
       Venue,
       AbilityGroup,
+      SubscriptionPlan,
     ]);
 
     //Cors handler middle ware
@@ -145,6 +146,8 @@ export const TenshiMain = async () => {
     app.use(new VenueRoutes().getRouter());
     app.use(new AbilityGroupRoutes().getRouter());
     app.use(new FranchiseRoutes().getRouter());
+    app.use(new SubscriptionPlanRoutes().getRouter());
+    
 
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE

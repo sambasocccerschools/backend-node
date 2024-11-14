@@ -4,8 +4,6 @@ import { Request, Response,
          FindManyOptions} from "@modules/index";
 import { AbilityGroup } from "@index/entity/AbilityGroup";
 import AbilityGroupDTO from "@modules/02_Synco/abilityGroup/dtos/AbilityGroupDTO";
-import { ConstRegex } from "@index/consts/Const";
-
 
 class AbilityGroupRoutes extends GenericRoutes{
     

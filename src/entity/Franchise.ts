@@ -51,7 +51,7 @@ export class Franchise {
     @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
     referral_source_code: UnitDynamicCentral;
 
-    @ManyToOne(() => User)
-    @JoinColumn({ name: "added_by", referencedColumnName: "id" })
-    added_by: User;
+    @ManyToOne(() => User, { nullable: true })
+    @JoinColumn({ name: "added_by", referencedColumnName: "id", })
+    added_by: User | null = null;
 }

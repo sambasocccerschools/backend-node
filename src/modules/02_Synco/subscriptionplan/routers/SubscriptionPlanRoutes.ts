@@ -20,8 +20,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("getSubscriptionPlanById")
-                                    .isValidateRole("SUBSCRIPTIONPLAN")
-                                    .isLogicalDelete()
+                                    .isValidateRole("SUBSCRIPTION_PLAN")
                                     .setFilters(this.filters)
                                     .build();
         
@@ -34,8 +33,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("getSubscriptionPlans")
-                                    .isValidateRole("SUBSCRIPTIONPLAN")
-                                    .isLogicalDelete()
+                                    .isValidateRole("SUBSCRIPTION_PLAN")
                                     .setFilters(this.filters)
                                     .build();
         
@@ -48,8 +46,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                 req.body.service,
                 req.body.venue,
                 req.body.name,
-                req.body.duration,
-                req.body.franchise
+                req.body.duration
             ];
             
             const requestHandler: RequestHandler = 
@@ -57,7 +54,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("insertSubscriptionPlan")
                                     .setRequiredFiles(requiredBodyList)
-                                    .isValidateRole("SUBSCRIPTIONPLAN")
+                                    .isValidateRole("SUBSCRIPTION_PLAN")
                                     .build();
         
             this.getController().insert(requestHandler);
@@ -68,7 +65,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("updateSubscriptionPlan")
-                                    .isValidateRole("SUBSCRIPTIONPLAN")
+                                    .isValidateRole("SUBSCRIPTION_PLAN")
                                     .build();
         
             this.getController().update(requestHandler);
@@ -79,8 +76,7 @@ class SubscriptionPlanRoutes extends GenericRoutes {
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("deleteSubscriptionPlan")
-                                    .isValidateRole("SUBSCRIPTIONPLAN")
-                                    .isLogicalDelete()
+                                    .isValidateRole("SUBSCRIPTION_PLAN")
                                     .build();
         
             this.getController().delete(requestHandler);
@@ -88,4 +84,4 @@ class SubscriptionPlanRoutes extends GenericRoutes {
     }
 }
 
-export default new SubscriptionPlanRoutes();
+export default SubscriptionPlanRoutes;
