@@ -99,7 +99,8 @@ export default  class GenericService extends GenericValidation implements IGener
      * @param {Function} executeUpdateFunction - The function to be executed after validating the role and fields of the entity.
      * @return {Promise<any>} A promise that resolves to the success response if the insertion is successful.
      */
-    async updateService(reqHandler: RequestHandler, executeUpdateFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number) => void): Promise<any> {
+    async updateService(reqHandler: RequestHandler, 
+        executeUpdateFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number | string) => void): Promise<any> {
         // Execute the returns structure
         const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
 
@@ -121,7 +122,7 @@ export default  class GenericService extends GenericValidation implements IGener
             // Get the id from the URL params
             const validateId = this.getIdFromQuery(validation, httpExec);
             if(validateId === null){ return; }
-            const id = validateId as number; 
+            const id = validateId; 
 
             // If you need to validate if the user id of the table 
             // should be the user id of the user request (JWT)
@@ -151,7 +152,8 @@ export default  class GenericService extends GenericValidation implements IGener
      * @param {Function} executeDeleteFunction - The function to be executed after validating the role and fields of the entity.
      * @return {Promise<any>} A promise that resolves to the success response if the insertion is successful.
      */
-    async deleteService(reqHandler: RequestHandler, executeDeleteFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number) => void): Promise<any> {
+    async deleteService(reqHandler: RequestHandler, 
+        executeDeleteFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number | string) => void): Promise<any> {
 
         // Get the HTTP action object from the response
         const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
@@ -164,7 +166,7 @@ export default  class GenericService extends GenericValidation implements IGener
             // Get the id from URL params
             const validateId = this.getIdFromQuery(validation, httpExec);
             if(validateId === null){ return; }
-            const id = validateId as number; 
+            const id = validateId; 
 
             if(jwtData != null){
                 // Validate the role of the user
@@ -180,7 +182,8 @@ export default  class GenericService extends GenericValidation implements IGener
         }
     }
 
-    async getByIdService(reqHandler: RequestHandler, executeGetByIdFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number) => void): Promise<any> {
+    async getByIdService(reqHandler: RequestHandler, 
+        executeGetByIdFunction: (jwtData : JWTObject, httpExec: HttpAction, id: number | string) => void): Promise<any> {
         // Get the HTTP action object from the response
         const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
 
@@ -191,8 +194,11 @@ export default  class GenericService extends GenericValidation implements IGener
              const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
              // Get the id from URL params
              const validateId = this.getIdFromQuery(validation, httpExec);
+
+             //validate params is not null
              if(validateId === null){ return; }
-             const id = validateId as number; 
+
+             const id = validateId; 
 
              if(jwtData != null){
                 // Validate the role of the user

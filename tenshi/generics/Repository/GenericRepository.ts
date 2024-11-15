@@ -206,8 +206,6 @@ export default  class GenericRepository implements IGenericRepository{
                 };
             }
 
-            console.log(finalOptions);
-
             // Find the entity by ID
             const entity = await this.entityManager.findOne(this.entityTarget, finalOptions); 
 

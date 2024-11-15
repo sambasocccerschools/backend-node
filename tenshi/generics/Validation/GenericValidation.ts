@@ -195,7 +195,7 @@ export default  class GenericValidation{
      * @param {HttpAction} httpExec - The HTTP action object.
      * @return {number | null} - The ID from the query parameters or null if validation fails.
      */
-    public getIdFromQuery(validation: Validations, httpExec: HttpAction): number | null {
+    public getIdFromQuery(validation: Validations, httpExec: HttpAction): number | string | null {
         // Validate the ID from the query parameters
         const id = validation.validateIdFromQuery();
 
