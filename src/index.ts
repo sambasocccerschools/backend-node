@@ -22,6 +22,7 @@ import { AbilityGroup } from '@entity/AbilityGroup';
 import { SubscriptionPlan } from '@entity/SubscriptionPlan';
 import { SubscriptionPlanPrice } from '@entity/SubscriptionPlanPrice';
 import { SessionPlan } from '@entity/SessionPlan';
+import { HolidayCampDate } from '@entity/HolidayCampDate';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -38,6 +39,7 @@ import FranchiseRoutes from '@index/modules/02_Synco/franchise/routers/Franchise
 import SubscriptionPlanRoutes from '@index/modules/02_Synco/subscriptionplan/routers/SubscriptionPlanRoutes';
 import SubscriptionPlanPriceRoutes from '@index/modules/02_Synco/subscriptionplanprice/routers/SubscriptionPlanPriceRoutes';
 import SessionPlanRoutes from '@index/modules/02_Synco/sessionplan/routers/SessionPlanRoutes';
+import HolidayCampDateRoutes from '@index/modules/02_Synco/holidaycampdate/routers/HolidayCampDateRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -104,7 +106,8 @@ export const TenshiMain = async () => {
       AbilityGroup,
       SubscriptionPlan,
       SubscriptionPlanPrice,
-      SessionPlan
+      SessionPlan,
+      HolidayCampDate,
     ]);
 
     //Cors handler middle ware
@@ -155,8 +158,7 @@ export const TenshiMain = async () => {
     app.use(new SubscriptionPlanRoutes().getRouter());
     app.use(new SubscriptionPlanPriceRoutes().getRouter());
     app.use(new SessionPlanRoutes().getRouter());
-    
-
+    app.use(new HolidayCampDateRoutes().getRouter());
     
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE

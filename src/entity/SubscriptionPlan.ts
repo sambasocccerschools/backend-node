@@ -9,6 +9,7 @@ export class SubscriptionPlan {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
+    //SERVICE
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })
     service_code: UnitDynamicCentral;
