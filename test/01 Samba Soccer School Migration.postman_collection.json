@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "28206f03-5bb3-4a49-8404-0ba0d6f2b9d8",
+		"_postman_id": "d6aa5058-2925-404a-afde-03fc4eec256e",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -2277,184 +2277,189 @@
 				{
 					"name": "SessionPlan",
 					"item": [
-					  {
-						"name": "Create SessionPlan",
-						"request": {
-						  "method": "POST",
-						  "header": [
-							{
-							  "key": "authorization",
-							  "value": "{{auth_jwt}}",
-							  "type": "text"
+						{
+							"name": "Create SessionPlan",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 1,\n  \"franchise_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sessionPlans/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sessionPlans",
+										"add"
+									]
+								}
 							},
-							{
-							  "key": "x-api-key",
-							  "value": "{{secret_api_key}}",
-							  "type": "text"
-							}
-						  ],
-						  "body": {
-							"mode": "raw",
-							"raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
-							"options": {
-							  "raw": {
-								"language": "json"
-							  }
-							}
-						  },
-						  "url": {
-							"raw": "{{host}}/${entityName.toLowerCase()}/add",
-							"host": [
-							  "{{host}}"
-							],
-							"path": [
-							  "sessionplan",
-							  "add"
-							]
-						  }
-						}
-					  },
-					  {
-						"name": "Update SessionPlan",
-						"request": {
-						  "method": "PUT",
-						  "header": [
-							{
-							  "key": "authorization",
-							  "value": "{{auth_jwt}}",
-							  "type": "text"
+							"response": []
+						},
+						{
+							"name": "Update SessionPlan",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"just session plan\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/sessionPlans/edit?id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sessionPlans",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
 							},
-							{
-							  "key": "x-api-key",
-							  "value": "{{secret_api_key}}",
-							  "type": "text"
-							}
-						  ],
-						  "body": {
-							"mode": "raw",
-							"raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
-							"options": {
-							  "raw": {
-								"language": "json"
-							  }
-							}
-						  },
-						  "url": {
-							"raw": "{{host}}/${entityName.toLowerCase()}/edit?id=1",
-							"host": [
-							  "{{host}}"
-							],
-							"path": [
-							  "sessionplan",
-							  "edit"
-							],
-							"query": [
-							  {
-								"key": "id",
-								"value": "1"
-							  }
-							]
-						  }
-						}
-					  },
-					  {
-						"name": "Get SessionPlan by ID",
-						"request": {
-						  "method": "GET",
-						  "header": [
-							{
-							  "key": "authorization",
-							  "value": "{{auth_jwt}}",
-							  "type": "text"
+							"response": []
+						},
+						{
+							"name": "Get SessionPlan by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/sessionPlans/get?id=2",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sessionPlans",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
 							},
-							{
-							  "key": "x-api-key",
-							  "value": "{{secret_api_key}}",
-							  "type": "text"
-							}
-						  ],
-						  "url": {
-							"raw": "{{host}}/${entityName.toLowerCase()}/get?id=1",
-							"host": [
-							  "{{host}}"
-							],
-							"path": [
-							  "sessionplan",
-							  "get"
-							],
-							"query": [
-							  {
-								"key": "id",
-								"value": "1"
-							  }
-							]
-						  }
-						}
-					  },
-					  {
-						"name": "Get All SessionPlan",
-						"request": {
-						  "method": "GET",
-						  "header": [
-							{
-							  "key": "authorization",
-							  "value": "{{auth_jwt}}",
-							  "type": "text"
+							"response": []
+						},
+						{
+							"name": "Get All SessionPlan",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/sessionPlans/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sessionPlans",
+										"get_all"
+									]
+								}
 							},
-							{
-							  "key": "x-api-key",
-							  "value": "{{secret_api_key}}",
-							  "type": "text"
-							}
-						  ],
-						  "url": {
-							"raw": "{{host}}/${entityName.toLowerCase()}/get_all",
-							"host": [
-							  "{{host}}"
-							],
-							"path": [
-							  "sessionplan",
-							  "get_all"
-							]
-						  }
-						}
-					  },
-					  {
-						"name": "Delete SessionPlan",
-						"request": {
-						  "method": "DELETE",
-						  "header": [
-							{
-							  "key": "authorization",
-							  "value": "{{auth_jwt}}",
-							  "type": "text"
+							"response": []
+						},
+						{
+							"name": "Delete SessionPlan",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/sessionPlans/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"sessionPlans",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
 							},
-							{
-							  "key": "x-api-key",
-							  "value": "{{secret_api_key}}",
-							  "type": "text"
-							}
-						  ],
-						  "url": {
-							"raw": "{{host}}/${entityName.toLowerCase()}/delete?id=1",
-							"host": [
-							  "{{host}}"
-							],
-							"path": [
-							  "sessionplan",
-							  "delete"
-							],
-							"query": [
-							  {
-								"key": "id",
-								"value": "1"
-							  }
-							]
-						  }
+							"response": []
 						}
-					  }
 					]
-				  }
+				}
 			]
 		},
 		{
