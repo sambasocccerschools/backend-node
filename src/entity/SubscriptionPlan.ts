@@ -31,5 +31,5 @@ export class SubscriptionPlan {
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise: Franchise | null;
+    franchise_id: Franchise | null;
 }

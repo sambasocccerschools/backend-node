@@ -47,6 +47,7 @@ export class Franchise {
     @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
     updated_date: Date | null;
 
+    //REFERRAL_SOURCES
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
     referral_source_code: UnitDynamicCentral;

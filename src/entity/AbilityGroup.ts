@@ -31,10 +31,12 @@ export class AbilityGroup {
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise;
 
+    //SERVICES
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })
     service_code: UnitDynamicCentral;
 
+    //SERVICE_PACKAGES
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_package_code", referencedColumnName: "code" })
     service_package_code: UnitDynamicCentral;

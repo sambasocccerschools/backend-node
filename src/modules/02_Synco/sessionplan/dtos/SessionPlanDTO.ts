@@ -1,20 +1,19 @@
 
-import { SubscriptionPlan } from "@index/entity/SubscriptionPlan";
+import { SessionPlan } from "@index/entity/SessionPlan";
 import { Request, IAdapterFromBody } from "@modules/index";
 
-export default class SubscriptionPlanDTO implements IAdapterFromBody {
+export default class SessionPlanDTO implements IAdapterFromBody {
     req: Request;
 
     constructor(req: Request) {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): SubscriptionPlan {
-        const entity = new SubscriptionPlan();
-        entity.service_code = this.req.body.service_code;
-        entity.venue_id = this.req.body.venue_id;
-        entity.name = this.req.body.name;
-        entity.duration = this.req.body.duration;
+    private getEntity(isCreating: boolean): SessionPlan {
+        const entity = new SessionPlan();
+        entity.title = this.req.body.title;
+        entity.description = this.req.body.description;
+        entity.ability_group_id = this.req.body.ability_group_id;
         entity.franchise_id = this.req.body.franchise_id;
      
         if (isCreating) {
@@ -27,30 +26,29 @@ export default class SubscriptionPlanDTO implements IAdapterFromBody {
     }
 
     // POST
-    entityFromPostBody(): SubscriptionPlan {
+    entityFromPostBody(): SessionPlan {
         return this.getEntity(true);
     }
 
     // PUT
-    entityFromPutBody(): SubscriptionPlan {
+    entityFromPutBody(): SessionPlan {
         return this.getEntity(false);
     }
 
     // GET
-    entityToResponse(entity: SubscriptionPlan): any {
+    entityToResponse(entity: SessionPlan): any {
         return {
             id: entity.id,
-            service: entity.service_code,
-            venue: entity.venue_id,
-            name: entity.name,
-            duration: entity.duration,
+            title: entity.title,
+            description: entity.description,
+            ability_group: entity.ability_group_id,
             franchise: entity.franchise_id,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: SubscriptionPlan[] | null): any {
+    entitiesToResponse(entities: SessionPlan[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

@@ -1,0 +1,183 @@
+{
+  "info": {
+    "name": "SessionPlan",
+    "item": [
+      {
+        "name": "Create SessionPlan",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/add",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "sessionplan",
+              "add"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update SessionPlan",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/edit?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "sessionplan",
+              "edit"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get SessionPlan by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "sessionplan",
+              "get"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get All SessionPlan",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get_all",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "sessionplan",
+              "get_all"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete SessionPlan",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/delete?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "sessionplan",
+              "delete"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

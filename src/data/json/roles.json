@@ -107,6 +107,26 @@
             "GET_BY_ID",
             "GET_ALL"
           ]
+        }, 
+        {
+          "name": "SUBSCRIPTION_PLAN_PRICE",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "SESSION_PLAN",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
         },
         {
           "name": "TEST",
