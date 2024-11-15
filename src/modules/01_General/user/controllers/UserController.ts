@@ -24,7 +24,7 @@ export default class UserController extends GenericController{
                     // Check if the ID is present in the query string
                     if (reqHandler.getRequest().query[ConstGeneral.ID] != undefined) {
                         // Try to parse the ID from the query string as a number
-                        validateId = parseInt(reqHandler.getRequest().query[ConstGeneral.ID] as string, 10);
+                        validateId = reqHandler.getRequest().query[ConstGeneral.ID] as string;
                     }
                 } catch (error: any) {} 
             }else{
