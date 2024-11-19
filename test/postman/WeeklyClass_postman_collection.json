@@ -1,9 +1,9 @@
 {
   "info": {
-    "name": "SessionPlan",
+    "name": "WeeklyClass",
     "item": [
       {
-        "name": "Create SessionPlan",
+        "name": "Create WeeklyClass",
         "request": {
           "method": "POST",
           "header": [
@@ -20,7 +20,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"venue_id\": \"\\\"test_venue_id\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"capacity\": 100,\n  \"days\": \"\\\"test_days\\\"\",\n  \"start_time\": \"\\\"test_start_time\\\"\",\n  \"end_time\": \"\\\"test_end_time\\\"\",\n  \"autumn_term_id\": \"\\\"test_autumn_term_id\\\"\",\n  \"is_autumn_indoor\": true,\n  \"spring_term_id\": \"\\\"test_spring_term_id\\\"\",\n  \"is_spring_indoor\": true,\n  \"summer_term_id\": \"\\\"test_summer_term_id\\\"\",\n  \"is_summer_indoor\": true,\n  \"is_free_trail_dates\": true,\n  \"free_trial_dates\": \"\\\"test_free_trial_dates\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -33,14 +33,14 @@
               "{{host}}"
             ],
             "path": [
-              "sessionplan",
+              "weeklyclass",
               "add"
             ]
           }
         }
       },
       {
-        "name": "Update SessionPlan",
+        "name": "Update WeeklyClass",
         "request": {
           "method": "PUT",
           "header": [
@@ -57,7 +57,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"title\": \"\\\"test_title\\\"\",\n  \"description\": \"\\\"test_description\\\"\",\n  \"ability_group_id\": \"\\\"test_ability_group_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"venue_id\": \"\\\"test_venue_id\\\"\",\n  \"name\": \"\\\"test_name\\\"\",\n  \"capacity\": 100,\n  \"days\": \"\\\"test_days\\\"\",\n  \"start_time\": \"\\\"test_start_time\\\"\",\n  \"end_time\": \"\\\"test_end_time\\\"\",\n  \"autumn_term_id\": \"\\\"test_autumn_term_id\\\"\",\n  \"is_autumn_indoor\": true,\n  \"spring_term_id\": \"\\\"test_spring_term_id\\\"\",\n  \"is_spring_indoor\": true,\n  \"summer_term_id\": \"\\\"test_summer_term_id\\\"\",\n  \"is_summer_indoor\": true,\n  \"is_free_trail_dates\": true,\n  \"free_trial_dates\": \"\\\"test_free_trial_dates\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -70,7 +70,7 @@
               "{{host}}"
             ],
             "path": [
-              "sessionplan",
+              "weeklyclass",
               "edit"
             ],
             "query": [
@@ -83,7 +83,7 @@
         }
       },
       {
-        "name": "Get SessionPlan by ID",
+        "name": "Get WeeklyClass by ID",
         "request": {
           "method": "GET",
           "header": [
@@ -104,7 +104,7 @@
               "{{host}}"
             ],
             "path": [
-              "sessionplan",
+              "weeklyclass",
               "get"
             ],
             "query": [
@@ -117,7 +117,7 @@
         }
       },
       {
-        "name": "Get All SessionPlan",
+        "name": "Get All WeeklyClass",
         "request": {
           "method": "GET",
           "header": [
@@ -138,14 +138,14 @@
               "{{host}}"
             ],
             "path": [
-              "sessionplan",
+              "weeklyclass",
               "get_all"
             ]
           }
         }
       },
       {
-        "name": "Delete SessionPlan",
+        "name": "Delete WeeklyClass",
         "request": {
           "method": "DELETE",
           "header": [
@@ -166,7 +166,7 @@
               "{{host}}"
             ],
             "path": [
-              "sessionplan",
+              "weeklyclass",
               "delete"
             ],
             "query": [

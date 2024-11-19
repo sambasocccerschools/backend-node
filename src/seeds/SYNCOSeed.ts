@@ -21,6 +21,7 @@ import { SessionPlan } from '@index/entity/SessionPlan';
 import { SubscriptionPlan } from '@index/entity/SubscriptionPlan';
 import { SubscriptionPlanPrice } from '@index/entity/SubscriptionPlanPrice';
 import { Term } from '@index/entity/Term';
+import { WeeklyClass } from '@index/entity/WeeklyClass';
 
 
 async function createDatabaseIfNotExists() {
@@ -64,7 +65,8 @@ async function runSeed() {
                     SessionPlan,
                     SubscriptionPlan,
                     SubscriptionPlanPrice,
-                    Term], // Array of entities to be used
+                    Term,
+                    WeeklyClass], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -453,9 +455,18 @@ async function runSeed() {
           Term
   *****************************************/
   const termRepository = dataSource.getRepository(Term);
-  const seasonTerm = await dataSource
+  const seasonSummerTerm = await dataSource
           .getRepository(UnitDynamicCentral)
           .findOneBy({ code: "SUMMER" });
+
+  const seasonSpringTerm = await dataSource
+          .getRepository(UnitDynamicCentral)
+          .findOneBy({ code: "SPRING" });
+
+  const seasonAutumTerm = await dataSource
+          .getRepository(UnitDynamicCentral)
+          .findOneBy({ code: "AUTUMN" });
+
   const terms: Partial<Term>[] = [
     {
         id: 278,
@@ -463,7 +474,7 @@ async function runSeed() {
         start_date: new Date('2024-07-01'),
         end_date: new Date('2024-09-30'),
         half_term_date: new Date('2024-08-15'),
-        season_code: seasonTerm as UnitDynamicCentral,  
+        season_code: seasonSummerTerm as UnitDynamicCentral,  
         franchise_id: franchise,  
         is_deleted: false,
     },
@@ -473,7 +484,7 @@ async function runSeed() {
       start_date: new Date('2024-03-01'),
       end_date: new Date('2024-06-30'),
       half_term_date: new Date('2024-04-15'),
-      season_code: seasonTerm as UnitDynamicCentral,  
+      season_code: seasonSpringTerm as UnitDynamicCentral,  
       franchise_id: null,  
       is_deleted: false,
     },
@@ -483,12 +494,87 @@ async function runSeed() {
       start_date: new Date('2024-10-01'),
       end_date: new Date('2024-12-20'),
       half_term_date: new Date('2024-11-10'),
-      season_code: seasonTerm as UnitDynamicCentral,  
+      season_code: seasonAutumTerm as UnitDynamicCentral,  
       franchise_id: franchise,  
       is_deleted: false,
     }
   ];
   await termRepository.upsert(terms as any, ["id"]);
+
+
+
+
+  /****************************************
+              Weekly Classes
+  *****************************************/
+    const weeklyClassRepository = dataSource.getRepository(WeeklyClass);
+    const venueWeeklyClass = await venueRepository.findOneBy({ id: 345});
+    const venueWeeklyClass2 = await venueRepository.findOneBy({ id: 347});
+    const autumnTerm = await termRepository.findOneBy({ id: 280 });
+    const springTerm = await termRepository.findOneBy({ id: 279 });
+    const summerTerm = await termRepository.findOneBy({ id: 278 });
+    
+    const weeklyClasses: Partial<WeeklyClass>[] = [
+      {
+        id: 1,
+        venue_id: venueWeeklyClass as Venue,
+        name: "Monday Yoga Class",
+        capacity: 20,
+        days: "Monday",
+        start_time: "08:00:00",
+        end_time: "09:00:00",
+        autumn_term_id: autumnTerm as Term,
+        is_autumn_indoor: true,
+        spring_term_id: springTerm as Term,
+        is_spring_indoor: true,
+        summer_term_id: summerTerm as Term,
+        is_summer_indoor: false,
+        is_free_trail_dates: true,
+        free_trial_dates: [{ start: "2024-01-15", end: "2024-01-20" }],
+        franchise_id: franchise,
+        is_deleted: false,
+      },
+      {
+        id: 2,
+        venue_id: venueWeeklyClass as Venue,
+        name: "Tuesday Dance Class",
+        capacity: 25,
+        days: "Tuesday",
+        start_time: "10:00:00",
+        end_time: "11:30:00",
+        autumn_term_id: autumnTerm as Term,
+        is_autumn_indoor: false,
+        spring_term_id: springTerm as Term,
+        is_spring_indoor: true,
+        summer_term_id: summerTerm as Term,
+        is_summer_indoor: true,
+        is_free_trail_dates: false,
+        free_trial_dates: null,
+        franchise_id: null,
+        is_deleted: false,
+      },
+      {
+        id: 3,
+        venue_id: venueWeeklyClass2 as Venue,
+        name: "Wednesday Art Class",
+        capacity: 15,
+        days: "Wednesday",
+        start_time: "14:00:00",
+        end_time: "15:30:00",
+        autumn_term_id: autumnTerm as Term,
+        is_autumn_indoor: true,
+        spring_term_id: springTerm as Term,
+        is_spring_indoor: false,
+        summer_term_id: summerTerm as Term,
+        is_summer_indoor: true,
+        is_free_trail_dates: true,
+        free_trial_dates: [{ start: "2024-02-10", end: "2024-02-15" }],
+        franchise_id: franchise,
+        is_deleted: false,
+      },
+    ];
+    
+    await weeklyClassRepository.upsert(weeklyClasses as any, ["id"]);
 
   console.log("STG seed done!");
 }

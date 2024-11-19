@@ -24,6 +24,7 @@ import { SubscriptionPlanPrice } from '@entity/SubscriptionPlanPrice';
 import { SessionPlan } from '@entity/SessionPlan';
 import { HolidayCampDate } from '@entity/HolidayCampDate';
 import { Term } from '@entity/Term';
+import { WeeklyClass } from '@entity/WeeklyClass';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -42,6 +43,7 @@ import SubscriptionPlanPriceRoutes from '@index/modules/02_Synco/subscriptionpla
 import SessionPlanRoutes from '@index/modules/02_Synco/sessionplan/routers/SessionPlanRoutes';
 import HolidayCampDateRoutes from '@index/modules/02_Synco/holidaycampdate/routers/HolidayCampDateRoutes';
 import TermRoutes from '@index/modules/02_Synco/term/routers/TermRoutes';
+import WeeklyClassRoutes from '@index/modules/02_Synco/weeklyclass/routers/WeeklyClassRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -111,6 +113,7 @@ export const TenshiMain = async () => {
       SessionPlan,
       HolidayCampDate,
       Term,
+      WeeklyClass,
     ]);
 
     //Cors handler middle ware
@@ -163,6 +166,8 @@ export const TenshiMain = async () => {
     app.use(new SessionPlanRoutes().getRouter());
     app.use(new HolidayCampDateRoutes().getRouter());
     app.use(new TermRoutes().getRouter());
+    app.use(new WeeklyClassRoutes().getRouter());
+
     
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE

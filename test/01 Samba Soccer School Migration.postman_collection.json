@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e407eb4f-f937-4b0a-9964-f37e95153618",
+		"_postman_id": "d94c2e3b-9f74-4450-8e0f-9d4dbe4af909",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -731,7 +731,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/udc/get_all?type=CAMP_TYPES&page=1&size=10",
+									"raw": "{{host}}/udc/get_all?type=REGIONS&page=1&size=10",
 									"host": [
 										"{{host}}"
 									],
@@ -742,7 +742,7 @@
 									"query": [
 										{
 											"key": "type",
-											"value": "CAMP_TYPES"
+											"value": "REGIONS"
 										},
 										{
 											"key": "page",
@@ -1439,7 +1439,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"phone_number\": \"+123456789\",\r\n    \"email\": \"johndoe@example.com\",\r\n    \"dob\": \"1990-01-01\",\r\n    \"age\": 34,\r\n    \"postal_code\": \"12345\",\r\n    \"message\": \"Interested in your services\",\r\n    \"location\": \"New York\",\r\n    \"liquid_capacity\": 500,\r\n    \"referral_source_code\": \"FACEBOOK\"\r\n}\r\n",
+									"raw": "{\r\n    \"first_name\": \"John\",\r\n    \"last_name\": \"Doe\",\r\n    \"phone_number\": \"+123456789\",\r\n    \"email\": \"johndoe@example.com\",\r\n    //\"dob\": \"1990-01-01\",\r\n    //\"age\": 34,\r\n    //\"postal_code\": \"12345\",\r\n    //\"message\": \"Interested in your services\",\r\n    \"location\": \"New York\",\r\n    //\"liquid_capacity\": 500,\r\n    //\"added_by\": user_id,\r\n    \"referral_source_code\": \"FACEBOOK\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1615,7 +1615,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"area\": \"Downtown\",\r\n    \"name\": \"Main Event Venue 2\",\r\n    \"facility_enter_guide\": \"Enter through the main doors on 5th Avenue\",\r\n    \"parking_note\": \"Parking available in the nearby lot with limited spaces\",\r\n    \"address\": \"123 Main St, Cityville\",\r\n    \"latitude\": 40.712776,\r\n    \"longitude\": -74.005974,\r\n    \"has_parking\": true,\r\n    \"has_congestion\": false,\r\n    \"price\": 1500.00,\r\n    \"region_code\": \"NORTH\"\r\n}\r\n",
+									"raw": "{\r\n    //\"area\": \"Downtown\",\r\n    \"name\": \"Main Event Venue 2\",\r\n    //\"facility_enter_guide\": \"Enter through the main doors on 5th Avenue\",\r\n    //\"parking_note\": \"Parking available in the nearby lot with limited spaces\",\r\n    //\"address\": \"123 Main St, Cityville\",\r\n    \"latitude\": 40.712776,\r\n    \"longitude\": -74.005974,\r\n    //\"has_parking\": true,\r\n    //\"has_congestion\": false,\r\n    //\"price\": 1500.00,\r\n    //\"franchise_id\" : franchise_id,\r\n    \"region_code\": \"NORTH\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1791,7 +1791,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Ability Groups\",\r\n  \"min_age\": 8,\r\n  \"max_age\": 15,\r\n  \"service_code\": \"ONE_TO_ONE\",\r\n  \"service_package_code\": \"GOLD\"\r\n}\r\n",
+									"raw": "{\r\n  \"name\": \"Ability Groups\",\r\n  \"min_age\": 8,\r\n  \"max_age\": 15,\r\n  //\"franchise_id\" : franchise_id,\r\n  \"service_code\": \"ONE_TO_ONE\",\r\n  \"service_package_code\": \"GOLD\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1967,7 +1967,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"service_code\": \"WEEKLY_CLASSES\",\n  \"venue_id\": 1,\n  \"name\": \"test_name\",\n  \"duration\": 100\n}",
+									"raw": "{\n  \"service_code\": \"WEEKLY_CLASSES\",\n  \"venue_id\": 1,\n  \"name\": \"test_name\",\n  \"duration\": 100\n  //\"description\" : \"desc\",\n  //\"franchise_id\" : franchise_id,\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2153,7 +2153,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"subscription_plan_id\": 2,\n  \"payment_type_code\": \"ACCESS_PAYSUITE\",\n  \"student_coverage_code\": \"TWO_STUDENTS\",\n  \"monthly_subscription_fee\": 1.35,\n  \"price_per_class_per_child\": 12.56,\n  \"one_off_joining_fee\": 20\n  //\"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"subscription_plan_id\": 2,\n  \"payment_type_code\": \"ACCESS_PAYSUITE\",\n  \"student_coverage_code\": \"TWO_STUDENTS\"\n  //\"monthly_subscription_fee\": 1.35,\n  //\"price_per_class_per_child\": 12.56,\n  //\"one_off_joining_fee\": 20\n  //\"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2339,7 +2339,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 1,\n  \"franchise_id\": 1\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 1\n  //\"franchise_id\": 1\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2862,6 +2862,232 @@
 									],
 									"path": [
 										"terms",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClass",
+					"item": [
+						{
+							"name": "Create WeeklyClass",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"venue_id\": 345,\n  \"name\": \"test name\",\n  \"capacity\": 100,\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\",\n  \"autumn_term_id\": 280,\n  //\"is_autumn_indoor\": true,\n  \"spring_term_id\": 279,\n  //\"is_spring_indoor\": true,\n  \"summer_term_id\": 278\n  //\"is_summer_indoor\": true,\n  //\"is_free_trail_dates\": true,\n  //\"free_trial_dates\": \"{}\",\n  //\"franchise_id\": \"franchise_id\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClasses/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClasses",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClass",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"test Name Updated\",\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClasses/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClasses",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClass by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClasses/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClasses",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClass",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClasses/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClasses",
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "Main Hall",
+											"disabled": true
+										},
+										{
+											"key": "postcode",
+											"value": "12345",
+											"disabled": true
+										},
+										{
+											"key": "venue_id",
+											"value": "347",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "days",
+											"value": "Monday,Wednesday",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "class_name",
+											"value": "test name",
+											"description": "Separate by comma",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClass",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClasses/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClasses",
 										"delete"
 									],
 									"query": [

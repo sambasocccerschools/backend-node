@@ -51,7 +51,6 @@ class FranchiseRoutes extends GenericRoutes{
                 req.body.phone_number,
                 req.body.email,
                 req.body.location,
-                req.body.liquid_capacity,
                 req.body.referral_source_code,
             ];
             
