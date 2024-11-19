@@ -85,10 +85,10 @@
             "MAX_FILE_SIZE" : 50
         },
         "AWS": {
-            "BUCKET_NAME": "bucket-name-777",
+            "BUCKET_NAME": "soccer-samba-dev-pictures",
             "REGION": "us-east-2",
-            "ACCESS_KEY": "AKIAZQ3DRSPRNUX52EUI",
-            "SECRET_ACCESS_KEY": "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",
+            "ACCESS_KEY": "AKIA4DMVQ52XU7G4E35W",
+            "SECRET_ACCESS_KEY": "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",
             "MINUTES_LIMIT_PRIVATE_FILE": 120,
             "PUBLIC_FOLDER" : "/PublicFiles/"
         }

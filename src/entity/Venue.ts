@@ -38,6 +38,15 @@ export class Venue {
     @Column('decimal', { precision: 10, scale: 2, nullable: true, default: null  })
     price: number;
 
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
+    franchise_id: Franchise | null;
+
+    //REGIONS
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "region_code", referencedColumnName: "code" })
+    region_code: UnitDynamicCentral;
+
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;
 
@@ -46,12 +55,4 @@ export class Venue {
 
     @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
     updated_date: Date | null;
-
-    @ManyToOne(() => Franchise)
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise;
-
-    @ManyToOne(() => UnitDynamicCentral)
-    @JoinColumn({ name: "region_code", referencedColumnName: "code" })
-    region_code: UnitDynamicCentral;
 }

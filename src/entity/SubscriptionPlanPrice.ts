@@ -12,6 +12,15 @@ export class SubscriptionPlanPrice {
     @Column({ type: "varchar", length: 255 })
     name: string;
 
+    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
+    monthly_subscription_fee: number;
+
+    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
+    price_per_class_per_child: number;
+
+    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
+    one_off_joining_fee: number;
+
     @ManyToOne(() => SubscriptionPlan)
     @JoinColumn({ name: "subscription_plan_id", referencedColumnName: "id" })
     subscription_plan_id: SubscriptionPlan;
@@ -25,15 +34,6 @@ export class SubscriptionPlanPrice {
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "student_coverage_code", referencedColumnName: "code" })
     student_coverage_code: UnitDynamicCentral;
-
-    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
-    monthly_subscription_fee: number;
-
-    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
-    price_per_class_per_child: number;
-
-    @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
-    one_off_joining_fee: number;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })

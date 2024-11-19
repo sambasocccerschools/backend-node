@@ -18,18 +18,9 @@ export class AbilityGroup {
     @Column({ type: "int", unsigned: true })
     max_age: number;
 
-    @Column({ type: "tinyint", default: 0 })
-    is_deleted: boolean;
-
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    created_date: Date;
-
-    @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
-    updated_date: Date | null;
-
-    @ManyToOne(() => Franchise)
+    @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise;
+    franchise_id: Franchise | null;
 
     //SERVICES
     @ManyToOne(() => UnitDynamicCentral)
@@ -40,4 +31,13 @@ export class AbilityGroup {
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "service_package_code", referencedColumnName: "code" })
     service_package_code: UnitDynamicCentral;
+
+    @Column({ type: "tinyint", default: 0 })
+    is_deleted: boolean;
+
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
+    created_date: Date;
+
+    @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
+    updated_date: Date | null;
 }

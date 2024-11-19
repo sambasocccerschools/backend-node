@@ -1,0 +1,183 @@
+{
+  "info": {
+    "name": "Term",
+    "item": [
+      {
+        "name": "Create Term",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"\\\"test_name\\\"\",\n  \"start_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"end_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"half_term_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"season_code\": \"\\\"test_season_code\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/add",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "term",
+              "add"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update Term",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"\\\"test_name\\\"\",\n  \"start_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"end_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"half_term_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"season_code\": \"\\\"test_season_code\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/edit?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "term",
+              "edit"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get Term by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "term",
+              "get"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get All Term",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get_all",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "term",
+              "get_all"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete Term",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/delete?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "term",
+              "delete"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 // src/entity/UnitDynamicCentral.ts
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 
 @Entity("units_dynamic_central")
 export class UnitDynamicCentral {
@@ -67,5 +67,4 @@ export class UnitDynamicCentral {
 
   @Column({ type: "varchar",  nullable: true, default: null })
   user_updated_id: string | null;
-
 }

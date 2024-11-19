@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "dc4bfa0d-aaeb-4275-a1b2-c5a13bf39213",
+		"_postman_id": "e407eb4f-f937-4b0a-9964-f37e95153618",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -784,11 +784,55 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/C:/Users/johan/Downloads/name_test__DOC__1882024132554.jfif"
+											"src": "/J:/03 Descargas/Firma Correo AC (1).png"
 										},
 										{
 											"key": "fields",
-											"value": "{\"title\":\"Front end SSS\",\"type\": \"DOC\", \"description\": \"Descripción del documento\", \"id_for_table\": \"309aaa56-98ce-49b5-88b5-590409515681\", \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":1}",
+											"value": "{\"title\":\"Front end SSS\",\"type\": \"IMG\", \"description\": \"Descripción del documento\", \"id_for_table\": \"309aaa56-98ce-49b5-88b5-590409515681\", \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":1}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{host}}/document/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"document",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insert Document Uniform",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/J:/03 Descargas/Logo.png"
+										},
+										{
+											"key": "fields",
+											"value": "{\"title\":\"Front end SSS\",\"type\": \"IMG\", \"description\": \"Descripción del documento\", \"id_for_table\": \"1\", \"table\": \"UNIFORMS\",  \"action_type\":  \"UNIFORM_PICTURE\", \"user_id\": 5, \"is_public\":1}",
 											"type": "text"
 										}
 									]
@@ -823,7 +867,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/document/get_by_code?code=FRONT_END_SSS__DOC__13112024235312",
+									"raw": "{{host}}/document/get_by_code?code=FRONT_END_SSS__DOC__18112024165220",
 									"host": [
 										"{{host}}"
 									],
@@ -834,7 +878,7 @@
 									"query": [
 										{
 											"key": "code",
-											"value": "FRONT_END_SSS__DOC__13112024235312"
+											"value": "FRONT_END_SSS__DOC__18112024165220"
 										}
 									]
 								}
@@ -2632,6 +2676,192 @@
 									],
 									"path": [
 										"holidayCampDates",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Term",
+					"item": [
+						{
+							"name": "Create Term",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\"\n  //\"franchise_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/terms/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Term",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"\\\"test_name\\\"\",\n  \"start_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"end_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"half_term_date\": \"\\\"2024-11-18T18:25:28.185Z\\\"\",\n  \"season_code\": \"\\\"test_season_code\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/terms/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Term by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/terms/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Term",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/terms/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Term",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/terms/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
 										"delete"
 									],
 									"query": [

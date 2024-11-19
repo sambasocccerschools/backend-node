@@ -38,15 +38,6 @@ export class Franchise {
     @Column({ type: "varchar", length: 500, nullable: true, default: null  })
     message: string;
 
-    @Column({ type: "tinyint", default: 0 })
-    is_deleted: boolean;
-
-    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
-    created_date: Date;
-
-    @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
-    updated_date: Date | null;
-
     //REFERRAL_SOURCES
     @ManyToOne(() => UnitDynamicCentral)
     @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
@@ -55,4 +46,13 @@ export class Franchise {
     @ManyToOne(() => User, { nullable: true })
     @JoinColumn({ name: "added_by", referencedColumnName: "id", })
     added_by: User | null = null;
+
+    @Column({ type: "tinyint", default: 0 })
+    is_deleted: boolean;
+
+    @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
+    created_date: Date;
+
+    @Column({ type: "datetime", default: null, onUpdate: "CURRENT_TIMESTAMP" })
+    updated_date: Date | null;
 }
