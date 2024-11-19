@@ -22,6 +22,8 @@ import { SubscriptionPlan } from '@index/entity/SubscriptionPlan';
 import { SubscriptionPlanPrice } from '@index/entity/SubscriptionPlanPrice';
 import { Term } from '@index/entity/Term';
 import { WeeklyClass } from '@index/entity/WeeklyClass';
+import { Family } from '@index/entity/Family';
+import { Student } from '@index/entity/Student';
 
 
 async function createDatabaseIfNotExists() {
@@ -66,7 +68,9 @@ async function runSeed() {
                     SubscriptionPlan,
                     SubscriptionPlanPrice,
                     Term,
-                    WeeklyClass], // Array of entities to be used
+                    WeeklyClass,
+                    Family,
+                    Student], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -575,6 +579,89 @@ async function runSeed() {
     ];
     
     await weeklyClassRepository.upsert(weeklyClasses as any, ["id"]);
+
+
+
+
+
+    /****************************************
+              Family
+    *****************************************/
+    const familyRepository = dataSource.getRepository(Family);
+    const families: Partial<Family>[] = [
+      {
+        id: 1,
+        loyalty_points: 500,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 2,
+        loyalty_points: 200,
+        franchise_id: null, 
+        is_deleted: false,
+      },
+      {
+        id: 3,
+        loyalty_points: 350,
+        franchise_id: franchise as Franchise, 
+        is_deleted: false,
+      },
+    ];
+
+    await familyRepository.upsert(families as any, ["id"]);
+
+
+
+    /****************************************
+              Student
+    *****************************************/
+    const studentRepository = dataSource.getRepository(Student);
+
+    // Supongamos que ya tienes instancias de `Family` y `Franchise` o las obtienes como se muestra
+    const familyOne = await dataSource.getRepository(Family).findOneBy({ id: 1 });
+    const familyTwo = await dataSource.getRepository(Family).findOneBy({ id: 2 });
+    
+    const students: Partial<Student>[] = [
+      {
+        id: 57,
+        first_name: "John",
+        last_name: "Doe",
+        dob: new Date("2000-05-15"),
+        age: 17,
+        medical_information: "No known conditions",
+        gender: "Male",
+        family_id: familyOne as Family, 
+        franchise_id: franchise as Franchise, 
+        is_deleted: false,
+      },
+      {
+        id: 58,
+        first_name: "Jane",
+        last_name: "Smith",
+        dob: new Date("1998-11-30"),
+        age: 26,
+        medical_information: null, 
+        gender: "Female",
+        family_id: familyTwo as Family, 
+        franchise_id: null, 
+        is_deleted: false,
+      },
+      {
+        id: 59,
+        first_name: "Emily",
+        last_name: "Johnson",
+        dob: new Date("2002-02-10"),
+        age: 14,
+        medical_information: "Asthma",
+        gender: "Female",
+        family_id: null, 
+        franchise_id: franchise as Franchise, 
+        is_deleted: false,
+      },
+    ];
+    
+    await studentRepository.upsert(students as any, ["id"]);
 
   console.log("STG seed done!");
 }

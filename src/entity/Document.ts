@@ -22,12 +22,22 @@ export class Document {
   extension: string;
 
   @Column({ type: "enum", 
-            enum: ["PROFILE_PICTURE", "GENERAL_GALLERY", "PERSONAL_DOCUMENT", "UNIFORM_PICTURE"], 
+            enum: [
+              "PROFILE_PICTURE", 
+              "GENERAL_GALLERY", 
+              "PERSONAL_DOCUMENT", 
+              "UNIFORM_PICTURE", 
+              "REPORT"], 
             default: "GENERAL_GALLERY" })
   action_type: string; 
 
-  @Column({ type: "enum", enum: ["DOC", "IMG", "OTHER"], default: "IMG" })
-  type: "DOC" | "IMG" | "OTHER";
+  @Column({ type: "enum", enum: [
+                          "DOC", 
+                          "IMG", 
+                          "EXCEL", 
+                          "OTHER"], 
+                          default: "IMG" })
+  type: "DOC" | "IMG" | "EXCEL" | "OTHER";
 
   @Column({ type: "varchar", length: 400, nullable: true, default: null })
   description: string | null;
@@ -39,7 +49,10 @@ export class Document {
   id_for_table: number;
 
   @Column({ type: "enum", 
-            enum: ["USER", "UNIFORMS", "GENERAL"], 
+            enum: ["USER", 
+                  "UNIFORMS", 
+                  "GENERAL", 
+                  "WEEKLY_CLASSES_MEMBERS"], 
             default: "GENERAL" })
   table: string;
 
