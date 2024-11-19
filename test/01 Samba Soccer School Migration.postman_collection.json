@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1320c813-001a-443a-a97a-38c19370a85e",
+		"_postman_id": "88d48c41-7afa-4079-a26c-883a450c8e31",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -2505,7 +2505,7 @@
 					]
 				},
 				{
-					"name": "HolidayCampDate",
+					"name": "HolidayCamps (Date)",
 					"item": [
 						{
 							"name": "Create HolidayCampDate",
@@ -2691,7 +2691,7 @@
 					]
 				},
 				{
-					"name": "Term",
+					"name": "WeeklyClasses (Terms)",
 					"item": [
 						{
 							"name": "Create Term",
@@ -2877,7 +2877,7 @@
 					]
 				},
 				{
-					"name": "WeeklyClass",
+					"name": "WeeklyClasses (Class)",
 					"item": [
 						{
 							"name": "Create WeeklyClass",
@@ -3088,6 +3088,216 @@
 									],
 									"path": [
 										"weeklyClasses",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClasses (Members)",
+					"item": [
+						{
+							"name": "Create WeeklyClassMember",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_id\": 1,\n  \"subscription_plan_price_id\": 753,\n  \"member_status_code\": \"FROZEN_MS\",\n  \"student_id\": 58,\n  //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n  //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n  \"start_date\": \"2024-11-18\",\n  \"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClassMember",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"member_status_code\": \"FROZEN_MS\",\n  \"agent_id\": \"a40364a8-0ca8-4757-a90a-df7c6b5325ca\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/edit?id=4",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClassMember by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClassMember",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "member_status_code",
+											"value": "ACTIVE_MS, FROZEN_MS",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": "58",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-10-29",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2024-10-29",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClassMember",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
 										"delete"
 									],
 									"query": [

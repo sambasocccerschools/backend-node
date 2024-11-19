@@ -31,7 +31,8 @@ class WeeklyClassRoutes extends GenericRoutes {
         });
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
-        
+            this.filters.where = { };
+            
             const venue: string | null = getUrlParam("venue", req) || null;
             const postcode: string | null = getUrlParam("postcode", req) || null;
 

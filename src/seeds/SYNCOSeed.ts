@@ -24,6 +24,7 @@ import { Term } from '@index/entity/Term';
 import { WeeklyClass } from '@index/entity/WeeklyClass';
 import { Family } from '@index/entity/Family';
 import { Student } from '@index/entity/Student';
+import { WeeklyClassMember } from '@index/entity/WeeklyClassMember';
 
 
 async function createDatabaseIfNotExists() {
@@ -70,7 +71,8 @@ async function runSeed() {
                     Term,
                     WeeklyClass,
                     Family,
-                    Student], // Array of entities to be used
+                    Student,
+                    WeeklyClassMember], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -613,6 +615,8 @@ async function runSeed() {
 
 
 
+
+     
     /****************************************
               Student
     *****************************************/
@@ -662,6 +666,70 @@ async function runSeed() {
     ];
     
     await studentRepository.upsert(students as any, ["id"]);
+
+
+
+
+
+    /****************************************
+            Weekly Classes Member
+    *****************************************/
+    const weeklyClassMemberRepository = dataSource.getRepository(WeeklyClassMember);
+
+    const weeklyClassOne = await dataSource.getRepository(WeeklyClass).findOneBy({ id: 1 });
+    const subscriptionPlanPrice1 = await dataSource.getRepository(SubscriptionPlanPrice).findOneBy({ id: 752 });
+    const subscriptionPlanPrice2 = await dataSource.getRepository(SubscriptionPlanPrice).findOneBy({ id: 753 });
+    const memberStatus1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ACTIVE_MS" });
+    const memberStatus2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "PAY_PENDING_MS" });
+    const student1 = await dataSource.getRepository(Student).findOneBy({ id: 57 });
+    const student2= await dataSource.getRepository(Student).findOneBy({ id: 58 });
+
+    const weeklyClassMembers: Partial<WeeklyClassMember>[] = [
+      {
+        id: 1,
+        weekly_class_id: weeklyClassOne as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice1 as SubscriptionPlanPrice,
+        member_status_code: memberStatus1 as UnitDynamicCentral,
+        student_id: student1 as Student,
+        agent_id: null,
+        booked_by: null,
+        start_date: new Date("2024-11-01"),
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+        created_date: new Date(),
+        updated_date: null,
+      },
+      {
+        id: 2,
+        weekly_class_id: weeklyClassOne as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
+        member_status_code: memberStatus2 as UnitDynamicCentral,
+        student_id: student2 as Student,
+        agent_id: null,
+        booked_by: null,
+        start_date: new Date("2024-11-02"),
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+        created_date: new Date(),
+        updated_date: null,
+      },
+      {
+        id: 3,
+        weekly_class_id: weeklyClassOne as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
+        member_status_code: memberStatus1 as UnitDynamicCentral,
+        student_id: student1 as Student,
+        agent_id: null,
+        booked_by: null,
+        start_date: new Date("2024-11-03"),
+        franchise_id: null,
+        is_deleted: false,
+        created_date: new Date(),
+        updated_date: null,
+      },
+    ];
+
+    await weeklyClassMemberRepository.upsert(weeklyClassMembers as any, ["id"]);
 
   console.log("STG seed done!");
 }

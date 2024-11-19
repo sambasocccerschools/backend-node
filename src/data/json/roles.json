@@ -179,6 +179,16 @@
           ]
         },
         {
+          "name": "WEEKLY_CLASS_MEMBER",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
           "name": "TEST",
           "function_list": [ 
             "CREATE",

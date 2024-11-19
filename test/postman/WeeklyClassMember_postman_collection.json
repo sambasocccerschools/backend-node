@@ -1,9 +1,9 @@
 {
   "info": {
-    "name": "Student",
+    "name": "WeeklyClassMember",
     "item": [
       {
-        "name": "Create Student",
+        "name": "Create WeeklyClassMember",
         "request": {
           "method": "POST",
           "header": [
@@ -20,7 +20,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"first_name\": \"\\\"test_first_name\\\"\",\n  \"last_name\": \"\\\"test_last_name\\\"\",\n  \"dob\": \"\\\"test_dob\\\"\",\n  \"age\": 100,\n  \"medical_information\": \"\\\"test_medical_information\\\"\",\n  \"gender\": \"\\\"test_gender\\\"\",\n  \"family_id\": \"\\\"test_family_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"subscription_plan_price_id\": \"\\\"test_subscription_plan_price_id\\\"\",\n  \"member_status_code\": \"\\\"test_member_status_code\\\"\",\n  \"student_id\": \"\\\"test_student_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"start_date\": \"\\\"test_start_date\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -33,14 +33,14 @@
               "{{host}}"
             ],
             "path": [
-              "student",
+              "weeklyclassmember",
               "add"
             ]
           }
         }
       },
       {
-        "name": "Update Student",
+        "name": "Update WeeklyClassMember",
         "request": {
           "method": "PUT",
           "header": [
@@ -57,7 +57,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"first_name\": \"\\\"test_first_name\\\"\",\n  \"last_name\": \"\\\"test_last_name\\\"\",\n  \"dob\": \"\\\"test_dob\\\"\",\n  \"age\": 100,\n  \"medical_information\": \"\\\"test_medical_information\\\"\",\n  \"gender\": \"\\\"test_gender\\\"\",\n  \"family_id\": \"\\\"test_family_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"subscription_plan_price_id\": \"\\\"test_subscription_plan_price_id\\\"\",\n  \"member_status_code\": \"\\\"test_member_status_code\\\"\",\n  \"student_id\": \"\\\"test_student_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"start_date\": \"\\\"test_start_date\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -70,7 +70,7 @@
               "{{host}}"
             ],
             "path": [
-              "student",
+              "weeklyclassmember",
               "edit"
             ],
             "query": [
@@ -83,7 +83,7 @@
         }
       },
       {
-        "name": "Get Student by ID",
+        "name": "Get WeeklyClassMember by ID",
         "request": {
           "method": "GET",
           "header": [
@@ -104,7 +104,7 @@
               "{{host}}"
             ],
             "path": [
-              "student",
+              "weeklyclassmember",
               "get"
             ],
             "query": [
@@ -117,7 +117,7 @@
         }
       },
       {
-        "name": "Get All Student",
+        "name": "Get All WeeklyClassMember",
         "request": {
           "method": "GET",
           "header": [
@@ -138,14 +138,14 @@
               "{{host}}"
             ],
             "path": [
-              "student",
+              "weeklyclassmember",
               "get_all"
             ]
           }
         }
       },
       {
-        "name": "Delete Student",
+        "name": "Delete WeeklyClassMember",
         "request": {
           "method": "DELETE",
           "header": [
@@ -166,7 +166,7 @@
               "{{host}}"
             ],
             "path": [
-              "student",
+              "weeklyclassmember",
               "delete"
             ],
             "query": [

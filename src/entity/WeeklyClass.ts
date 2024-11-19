@@ -20,7 +20,15 @@ export class WeeklyClass {
     capacity: number;
 
     @Column({ type: "enum", 
-              enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]})
+              enum: [
+                "Monday", 
+                "Tuesday", 
+                "Wednesday", 
+                "Thursday", 
+                "Friday", 
+                "Saturday", 
+                "Sunday"]
+            })
     days: string; 
 
     // 'HH:mm:ss'
