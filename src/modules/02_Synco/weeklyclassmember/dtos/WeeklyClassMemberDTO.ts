@@ -47,6 +47,8 @@ export default class WeeklyClassMemberDTO implements IAdapterFromBody {
             subscription_plan_price: entity.subscription_plan_price_id,
             member_status: entity.member_status_code,
             student: entity.student_id,
+            //agent: entity.agent_id,
+            //booked_by: entity.booked_by,
             agent: entity.agent_id != null ? entity.agent_id.id : null,
             booked_by: entity.booked_by != null ? entity.booked_by.id : null,
             start_date: entity.start_date,

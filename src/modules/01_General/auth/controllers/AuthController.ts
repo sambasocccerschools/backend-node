@@ -11,6 +11,7 @@ import HttpAction from "@TenshiJS/helpers/HttpAction";
 import Validations from "@TenshiJS/helpers/Validations";
 import JWTObject from "@TenshiJS/objects/JWTObject";
 import EmailService from "@TenshiJS/services/EmailServices/EmailService";
+import { getUrlParam } from "@TenshiJS/utils/generalUtils";
 import { getEmailTemplate, getMessageEmail } from "@TenshiJS/utils/htmlTemplateUtils";
 import { getIpAddress } from "@TenshiJS/utils/httpUtils";
 import { insertLogTracking } from "@TenshiJS/utils/logsUtils";
@@ -57,7 +58,7 @@ export default class AuthController extends GenericController{
 
             const variables = {
                 userName: user.first_name + " " + user.last_name,
-                confirmationLink: config.COMPANY.BACKEND_HOST + ConstUrls.CONFIRMATION_REGISTER + registerToken
+                confirmationLink: config.COMPANY.BACKEND_HOST + ConstUrls.CONFIRMATION_REGISTER + "?token=" + registerToken
             };
             const htmlBody = await getEmailTemplate(ConstTemplate.REGISTER_EMAIL, user.language, variables);
             
@@ -189,7 +190,7 @@ async refreshToken(reqHandler: RequestHandler){
     const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
 
     try{
-        const refreshToken = reqHandler.getRequest().params.refreshToken;
+        const refreshToken: string | null = getUrlParam("token", reqHandler.getRequest()) || null;
 
         let verify = null;
         try {
@@ -217,7 +218,7 @@ async activeRegisterUser(reqHandler: RequestHandler){
 
     try{
         
-        const registerToken = reqHandler.getRequest().params.registerToken;
+        const registerToken: string | null = getUrlParam("token", reqHandler.getRequest()) || null;
         let verify = null;
         try {
             verify =  jwt.verify(registerToken, config.JWT.REGISTER_TOKEN.SECRET_KEY);
@@ -327,7 +328,7 @@ async forgotPassword(reqHandler: RequestHandler){
 
             const variables = {
                 userName: user.first_name + " " + user.last_name,
-                resetLink: config.COMPANY.FRONT_END_HOST + ConstUrls.FORGOT_PASSWORD_VERIFICATION + forgotUserPasswordToken
+                resetLink: config.COMPANY.FRONT_END_HOST + ConstUrls.FORGOT_PASSWORD_VERIFICATION + "?token=" + forgotUserPasswordToken
             };
             const htmlBody = await getEmailTemplate(ConstTemplate.FORGOT_PASSWORD_EMAIL, user.language, variables);
             const subject = getMessageEmail(ConstTemplate.FORGOT_PASSWORD_EMAIL, user.language!);
@@ -375,7 +376,7 @@ async resetPassword(reqHandler: RequestHandler){
     const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
 
     try{
-        const forgotPassToken = reqHandler.getRequest().params.forgotPassToken;
+        const forgotPassToken: string | null = getUrlParam("token", reqHandler.getRequest()) || null;
         const password = reqHandler.getRequest().body.password;
 
         let verify = null;

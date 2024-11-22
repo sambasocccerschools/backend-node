@@ -26,10 +26,11 @@ export default class WeeklyClassDTO implements IAdapterFromBody {
         entity.is_free_trail_dates = this.req.body.is_free_trail_dates;
         entity.free_trial_dates = this.req.body.free_trial_dates;
         entity.franchise_id = this.req.body.franchise_id;
-     
+        
         if (isCreating) {
             entity.created_date = new Date();
         } else {
+            entity.is_deleted = this.req.body.is_deleted;
             entity.updated_date = new Date();
         }
 

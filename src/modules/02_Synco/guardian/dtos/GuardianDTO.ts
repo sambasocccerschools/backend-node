@@ -1,20 +1,20 @@
 
-import { HolidayCampDate } from "@index/entity/HolidayCampDate";
+import { Guardian } from "@index/entity/Guardian";
 import { Request, IAdapterFromBody } from "@modules/index";
 
-export default class HolidayCampDateDTO implements IAdapterFromBody {
+export default class GuardianDTO implements IAdapterFromBody {
     req: Request;
 
     constructor(req: Request) {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): HolidayCampDate {
-        const entity = new HolidayCampDate();
-        entity.name = this.req.body.name;
-        entity.start_date = this.req.body.start_date;
-        entity.end_date = this.req.body.end_date;
-        entity.camp_type_code = this.req.body.camp_type_code;
+    private getEntity(isCreating: boolean): Guardian {
+        const entity = new Guardian();
+        entity.other_relationship = this.req.body.other_relationship;
+        entity.relationship_code = this.req.body.relationship_code;
+        entity.referral_source_code = this.req.body.referral_source_code;
+        entity.family_id = this.req.body.family_id;
         entity.franchise_id = this.req.body.franchise_id;
      
         if (isCreating) {
@@ -28,30 +28,30 @@ export default class HolidayCampDateDTO implements IAdapterFromBody {
     }
 
     // POST
-    entityFromPostBody(): HolidayCampDate {
+    entityFromPostBody(): Guardian {
         return this.getEntity(true);
     }
 
     // PUT
-    entityFromPutBody(): HolidayCampDate {
+    entityFromPutBody(): Guardian {
         return this.getEntity(false);
     }
 
     // GET
-    entityToResponse(entity: HolidayCampDate): any {
+    entityToResponse(entity: Guardian): any {
         return {
             id: entity.id,
-            name: entity.name,
-            start_date: entity.start_date,
-            end_date: entity.end_date,
-            camp_type: entity.camp_type_code,
+            other_relationship: entity.other_relationship,
+            relationship: entity.relationship_code,
+            referral_source: entity.referral_source_code,
+            family: entity.family_id,
             franchise: entity.franchise_id,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: HolidayCampDate[] | null): any {
+    entitiesToResponse(entities: Guardian[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

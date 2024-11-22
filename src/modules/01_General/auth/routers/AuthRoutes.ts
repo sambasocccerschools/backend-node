@@ -1,6 +1,7 @@
 import { Request, Response, 
     RequestHandler, RequestHandlerBuilder, 
-     GenericRoutes } from "@modules/index";
+     GenericRoutes, 
+     getUrlParam} from "@modules/index";
 import {  UserDTO, AuthController, 
      regexValidationList, requiredBodyList, 
      regexValidationRecoverUserAndPassList, requiredBodyRecoverUserAndPassList
@@ -73,7 +74,7 @@ protected initializeRoutes() {
    });
 
 
-   this.router.get(`/active_user/:registerToken`, async (req: Request, res: Response) => {
+   this.router.get(`/active_user`, async (req: Request, res: Response) => {
        const requestHandler: RequestHandler = 
        new RequestHandlerBuilder(res, req)
            .setAdapter(new UserDTO(req))
@@ -87,7 +88,7 @@ protected initializeRoutes() {
    /*
        Correct Functionality Login
    */
-   this.router.get(`/refresh_token/:refreshToken`, async (req: Request, res: Response) => {
+   this.router.get(`/refresh_token`, async (req: Request, res: Response) => {
        const requestHandler: RequestHandler = 
        new RequestHandlerBuilder(res, req)
            .setAdapter(new UserDTO(req))
@@ -97,7 +98,7 @@ protected initializeRoutes() {
        (this.getController() as AuthController).refreshToken(requestHandler);
    });
 
-   this.router.get(`/confirmation_register/:registerToken`, async (req: Request, res: Response) => {
+   this.router.get(`/confirmation_register`, async (req: Request, res: Response) => {
        const requestHandler: RequestHandler = 
        new RequestHandlerBuilder(res, req)
            .setAdapter(new UserDTO(req))
@@ -122,19 +123,10 @@ protected initializeRoutes() {
        (this.getController() as AuthController).forgotPassword(requestHandler);
    });
 
-   // Verify the forgot password token and redirect to reset password URL front end
-   this.router.get(`/verify_forgot_password/:forgotPassToken`, async (req: Request, res: Response) => {
-       const requestHandler: RequestHandler = 
-       new RequestHandlerBuilder(res, req)
-           .setAdapter(new UserDTO(req))
-           .setMethod("VerifyForgotPassword")
-           .build();
-
-       (this.getController() as AuthController).verifyForgotPassToken(requestHandler);
-   });
 
    // Reset the password with the pass on the body
-   this.router.post(`/reset_password/:forgotPassToken`, async (req: Request, res: Response) => {
+   this.router.post(`/reset_password`, async (req: Request, res: Response) => {
+
        const requestHandler: RequestHandler = 
        new RequestHandlerBuilder(res, req)
            .setAdapter(new UserDTO(req))

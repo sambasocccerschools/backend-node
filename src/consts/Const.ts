@@ -9,9 +9,9 @@ export class ConstRegex {
 
 
 export class ConstUrls{
-    public static readonly ACTIVE_USER: string = "active_user/";
-    public static readonly CONFIRMATION_REGISTER: string = "confirmation_register/";
-    public static readonly FORGOT_PASSWORD_VERIFICATION: string = "verify_forgot_password/";
+    public static readonly ACTIVE_USER: string = "active_user";
+    public static readonly CONFIRMATION_REGISTER: string = "confirmation_register";
+    public static readonly FORGOT_PASSWORD_VERIFICATION: string = "verify_forgot_password";
 }
 
 export class ConstTemplate{

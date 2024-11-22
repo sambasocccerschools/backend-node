@@ -27,7 +27,7 @@
         "FIRST_NAME":"Samba",
         "LAST_NAME":"SambaSoccer",
         "USERNAME":"sambasoccer",
-        "ROLE_CODE":"9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a"
+        "ROLE_CODE":"SUPER_ADMIN"
     },
     "DB": {
         "TYPE": "mariadb",

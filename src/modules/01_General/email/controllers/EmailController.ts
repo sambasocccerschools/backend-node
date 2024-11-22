@@ -1,10 +1,12 @@
 import { HttpAction, Validations } from "@index/index";
-import { GenericController, RequestHandler, JWTObject } from "@modules/index";
+import { GenericController, RequestHandler, JWTObject, getUrlParam, GenericRepository, FindManyOptions } from "@modules/index";
 import { User, UserRepository } from '@index/modules/01_General/email/index';
 import { getEmailTemplate } from "@TenshiJS/utils/htmlTemplateUtils";
 import {  ConstHTTPRequest, ConstStatusJson,  ConstMessagesJson, ConstFunctions } from "@TenshiJS/consts/Const";
 import EmailService from "@TenshiJS/services/EmailServices/EmailService";
 import { ConstTemplate } from "@index/consts/Const";
+import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
+import { In } from "typeorm";
 
 export default  class EmailController extends GenericController{
 
@@ -84,11 +86,6 @@ export default  class EmailController extends GenericController{
             if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
                 return; 
             }
-
-            // Validate required fields
-            if(!this.validateRequiredFields(reqHandler, validation)){ 
-                return; 
-            }
          
             // Prepare email structure
             const emailStructure  = {
@@ -123,6 +120,113 @@ export default  class EmailController extends GenericController{
                     // Return error response if no users found
                     return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
                 }
+
+                // Return success response
+                return httpExec.successAction(null, ConstHTTPRequest.SEND_MAIL_SUCCESS);
+
+            }catch(error : any){
+                // Return general error response if any exception occurs
+                return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+            }
+        }catch(error : any){
+            // Return general error response if any exception occurs
+            return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+        }
+    }
+
+
+
+
+
+
+
+
+     /**
+     * Sends an email to users based on specified filters.
+     * 
+     * @param {RequestHandler} reqHandler - The request handler object.
+     * @return {Promise<any>} - A promise that resolves to the response object.
+     */
+     async sendMailByWeeklyMembers(reqHandler: RequestHandler): Promise<any> {
+        const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
+
+        try{
+            const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
+
+            // Validate role
+            if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
+                return; 
+            }
+
+             // Get the filter parameters from the URL
+             const weekly_members_ids: string | null = 
+                                            getUrlParam("weekly_members_ids", 
+                                            reqHandler.getRequest()) || null;
+
+             if (!weekly_members_ids) {
+                 return httpExec.paramsError();
+             }
+         
+             // list ids
+             const ids = (weekly_members_ids as string).split(',').map(id => id.trim());
+             const validIds = ids.map(id => Number(id));
+
+            // Prepare email structure
+            const emailStructure  = {
+                subject: reqHandler.getRequest().body.subject,
+                body: reqHandler.getRequest().body.body_message
+            }
+
+            const options: FindManyOptions = {};
+            if (validIds.length > 0) {
+                options.where = { 
+                    ...options.where, 
+                    id: In(validIds) 
+                };
+            }
+
+            options.relations = ["agent_id"];
+            const weeklyClassMemberRepository : GenericRepository = 
+                                                await new GenericRepository(WeeklyClassMember);
+            const members = await weeklyClassMemberRepository
+                            .findAll(reqHandler.getLogicalDelete(), options);
+            try{
+
+                members?.forEach(async (member) =>{
+
+                    if(member.agent_id != null){
+                        // Get users based on filters
+                        const user : User | null = 
+                        await (this.getRepository() as UserRepository).findById(
+                            member.agent_id.id as string, 
+                            reqHandler.getLogicalDelete());
+
+                        if(user != undefined && user != null){
+                            // Iterate over each user and send email
+                                const variables = {
+                                    userName: user.first_name + " " + user.last_name,
+                                    emailSubject: emailStructure.subject,
+                                    emailContent: emailStructure.body
+                                };
+
+                                try{
+                                    const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, user.language, variables);
+                                    const emailService = EmailService.getInstance();
+                                    await emailService.sendEmail({
+                                        toMail: user.email,
+                                        subject: emailStructure.subject,
+                                        message: htmlBody,
+                                        attachments: [] 
+                                    });
+                                }catch(error : any){}
+
+                        }else{
+                            // Return error response if no users found
+                            return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                        }
+                    }
+                    
+                });
 
                 // Return success response
                 return httpExec.successAction(null, ConstHTTPRequest.SEND_MAIL_SUCCESS);

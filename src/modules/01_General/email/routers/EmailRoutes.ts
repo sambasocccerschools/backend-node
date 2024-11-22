@@ -80,6 +80,24 @@ class EmailRoutes extends GenericRoutes {
             // Execute the sendMailByFilters method of the EmailController with the request handler object
             (this.getController() as EmailController).sendMailByFilters(requestHandler);
         });
+
+
+
+
+
+         // Route for sending an email to multiple users based on specified filters
+         this.router.post(`${this.getRouterName()}/send_email_by_weekly_members`, async (req: Request, res: Response) => {
+          
+            // Create a request handler object with the necessary data
+            const requestHandler: RequestHandler = new RequestHandlerBuilder(res, req)
+                .setMethod("send_email_by_weekly_members") // Set the method to be executed
+                .isValidateRole("SEND_MAIL") // Validate the role of the user
+                .isLogicalDelete() // Set the logical delete flag
+                .build(); // Build the request handler object
+
+            // Execute the sendMailByFilters method of the EmailController with the request handler object
+            (this.getController() as EmailController).sendMailByWeeklyMembers(requestHandler);
+        });
     }
 }
 export default EmailRoutes;

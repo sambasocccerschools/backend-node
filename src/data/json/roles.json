@@ -2,7 +2,7 @@
   "roles": [
     {
       "id": 1,
-      "code": "9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a",
+      "code": "SUPER_ADMIN",
       "name": "Super Admin",
       "description": "Super Administrator role with full access to all functionalities.",
       "modules": [
@@ -189,6 +189,16 @@
           ]
         },
         {
+          "name": "GUARDIAN",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
           "name": "TEST",
           "function_list": [ 
             "CREATE",
@@ -201,9 +211,19 @@
       ],
       "screens": []
     },
+
+
+
+
+
+
+
+    
+
+
     {
-      "id": 3,
-      "code": "ab67f164-8950-453a-9ead-13697a29fed9",
+      "id": 2,
+      "code": "ADMIN",
       "name": "Administrator",
       "description": "Administrator role with full access.",
       "modules": [
@@ -216,11 +236,95 @@
       ],
       "screens": []
     },
+
+
+
+
+
+
+
+
+
+
     {
       "id": 3,
-      "code": "c1891772-f4b1-4989-b0b5-1b78d129bb3d",
+      "code": "USER",
       "name": "User",
       "description": "A normal User for repositories",
+      "modules": [
+        {
+          "name": "DOCUMENT",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "USER",
+          "function_list": [
+            "UPDATE",
+            "GET_BY_ID"
+          ]
+        },
+        {
+          "name": "UNIT_DYNAMIC_CENTRAL",
+          "function_list": [
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "LOG",
+          "function_list": [
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        }
+      ],
+      "screens": []
+    },
+
+
+
+
+
+
+
+
+
+
+    {
+      "id": 4,
+      "code": "GUARDIAN",
+      "name": "Guardian",
+      "description": "A guardians of the users of the app",
+      "modules": [
+        {
+          "name": "DOCUMENT",
+          "function_list": [
+            "GET_BY_ID"
+          ]
+        }
+      ],
+      "screens": []
+    },
+
+
+
+
+
+
+
+
+
+
+    {
+      "id": 5,
+      "code": "COACH",
+      "name": "Coach",
+      "description": "The coach of the app",
       "modules": [
         {
           "name": "DOCUMENT",

@@ -31,7 +31,7 @@ export class User {
   phone_number: string | null;
 
   @Exclude()
-  @Column({ type: "varchar", length: 250 })
+  @Column({ type: "varchar", length: 250 /*, select: false*/ })
   password: string;
 
   @Column({ type: "enum", enum: ["M", "F", "O"], nullable: true })

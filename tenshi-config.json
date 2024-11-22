@@ -17,7 +17,7 @@
         "MAX_REQUEST_PER_SECOND": 6,
         "IS_DEBUGGING": true,
         "FAIL_LOGIN_MAX_NUMBER": 3,
-        "DEFAULT_LANGUAGE" : "en",
+        "DEFAULT_LANGUAGE" : "en", 
         "FORMAT_DATE" : "es-ES",
         "CUSTOMER_REGULAR_ROLE" : "ab67f164-8950-453a-9ead-13697a29fed9"
     },
@@ -27,7 +27,7 @@
         "FIRST_NAME":"Samba",
         "LAST_NAME":"SambaSoccer",
         "USERNAME":"sambasoccer",
-        "ROLE_CODE":"9b1e6c4a-4cb6-4ff3-9a44-2de8d245104a"
+        "ROLE_CODE":"SUPER_ADMIN"
     },
     "DB": {
         "TYPE": "mariadb",

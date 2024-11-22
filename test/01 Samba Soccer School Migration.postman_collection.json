@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "88d48c41-7afa-4079-a26c-883a450c8e31",
+		"_postman_id": "e0851bb4-575f-4ff6-874e-cce0ddca12b9",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -95,7 +95,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"fabian7593@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"email\": \"fabian7593+test2@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -128,7 +128,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"fabian7593+test3@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"language\":\"en\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"card_id\": 11111111,\r\n  \"first_name\": \"Fabian\",\r\n  \"last_name\": \"Rosales\",\r\n  \"email\": \"fabian7593+test2@gmail.com\",\r\n  \"password\": \"Fabian7593@gmail.com\",\r\n  \"gender\": \"M\",\r\n  \"country_iso_code\": \"CRC\",\r\n  \"language\":\"en\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -187,13 +187,18 @@
 										"method": "GET",
 										"header": [],
 										"url": {
-											"raw": "{{host}}/confirmation_register/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA",
+											"raw": "{{host}}/confirmation_register?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzK3Rlc3QzQGdtYWlsLmNvbSIsInJvbGUiOiJhYjY3ZjE2NC04OTUwLTQ1M2EtOWVhZC0xMzY5N2EyOWZlZDkiLCJpYXQiOjE3MzIxMzcxMjJ9.5bc4YIsxjHJDyIc5R39V1Dg4S-fAcaYKB0IVCw1ybrM",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"confirmation_register",
-												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDYzMTgwOX0.YO7pkH6x0dLm_xp5i9E2x8tWir-gYeh1t09sKrD-kNA"
+												"confirmation_register"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MCwiZW1haWwiOiJmYWJpYW43NTkzK3Rlc3QzQGdtYWlsLmNvbSIsInJvbGUiOiJhYjY3ZjE2NC04OTUwLTQ1M2EtOWVhZC0xMzY5N2EyOWZlZDkiLCJpYXQiOjE3MzIxMzcxMjJ9.5bc4YIsxjHJDyIc5R39V1Dg4S-fAcaYKB0IVCw1ybrM"
+												}
 											]
 										}
 									},
@@ -228,13 +233,18 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/refresh_token/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5YTZjMGM0LTg1MGMtNDBmZS04NzlkLTQwYTc4MmM5MjlhZCIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxMzA5NTAwLCJleHAiOjE3MzEzOTU5MDB9.XwR1YaeU_kocb3wnQ7yfDTbUu5EEQiu0KwLEohpfm9I",
+											"raw": "{{host}}/refresh_token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1NWE2NWRmLTI3MjEtNGE1NC05ZThiLTQ3MmNkMjAzYWE2YyIsImVtYWlsIjoiZmFiaWFuNzU5Myt0ZXN0MkBnbWFpbC5jb20iLCJyb2xlIjoiYWI2N2YxNjQtODk1MC00NTNhLTllYWQtMTM2OTdhMjlmZWQ5IiwiaWF0IjoxNzMyMjMwNzYyLCJleHAiOjE3MzIzMTcxNjJ9.hOwANjB-bzUwQVZ6ghia1GCJ2zg6ZcQCzXMKrpoC7z0",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"refresh_token",
-												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5YTZjMGM0LTg1MGMtNDBmZS04NzlkLTQwYTc4MmM5MjlhZCIsImVtYWlsIjoic2FtYmFzb2NjZXIyNEBnbWFpbC5jb20iLCJyb2xlIjoiOWIxZTZjNGEtNGNiNi00ZmYzLTlhNDQtMmRlOGQyNDUxMDRhIiwiaWF0IjoxNzMxMzA5NTAwLCJleHAiOjE3MzEzOTU5MDB9.XwR1YaeU_kocb3wnQ7yfDTbUu5EEQiu0KwLEohpfm9I"
+												"refresh_token"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE1NWE2NWRmLTI3MjEtNGE1NC05ZThiLTQ3MmNkMjAzYWE2YyIsImVtYWlsIjoiZmFiaWFuNzU5Myt0ZXN0MkBnbWFpbC5jb20iLCJyb2xlIjoiYWI2N2YxNjQtODk1MC00NTNhLTllYWQtMTM2OTdhMjlmZWQ5IiwiaWF0IjoxNzMyMjMwNzYyLCJleHAiOjE3MzIzMTcxNjJ9.hOwANjB-bzUwQVZ6ghia1GCJ2zg6ZcQCzXMKrpoC7z0"
+												}
 											]
 										}
 									},
@@ -258,7 +268,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"email\": \"fabian7593@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"email\": \"fabian7593+test2@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -290,7 +300,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n  \"password\": \"Tenshitest3@gmail.com\"\r\n}\r\n\r\n",
+											"raw": "{\r\n  \"password\": \"Fabian7593@gmail.com\"\r\n}\r\n\r\n",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -298,37 +308,18 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/reset_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlbnNoaXRlc3QzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzY4MjQ0NiwiZXhwIjoxNzI3NjgzMzQ2fQ.TFQyQIMBmYOpX3QS7EPymjsd67uPkpNZGbsY3BKi8_M",
+											"raw": "{{host}}/reset_password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTMrdGVzdDJAZ21haWwuY29tIiwiaWF0IjoxNzMyMjMwODEzLCJleHAiOjE3MzIyMzE3MTN9.pCGUoqAlVNCtqMSahXzfrvEvGHhzaP30eDD7LMaMrIc",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"reset_password",
-												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlbnNoaXRlc3QzQGdtYWlsLmNvbSIsImlhdCI6MTcyNzY4MjQ0NiwiZXhwIjoxNzI3NjgzMzQ2fQ.TFQyQIMBmYOpX3QS7EPymjsd67uPkpNZGbsY3BKi8_M"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Verify Token Forgot Password",
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "x-api-key",
-												"value": "{{secret_api_key}}",
-												"type": "text"
-											}
-										],
-										"url": {
-											"raw": "{{host}}/verify_forgot_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTNAZ21haWwuY29tIiwiaWF0IjoxNzIxOTU3NDg5LCJleHAiOjE3MjE5NTgzODl9.qBh4l0pXJqun0fji8dYNVs4j8sIZdCJ58pQOamkcWAs",
-											"host": [
-												"{{host}}"
+												"reset_password"
 											],
-											"path": [
-												"verify_forgot_password",
-												"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTNAZ21haWwuY29tIiwiaWF0IjoxNzIxOTU3NDg5LCJleHAiOjE3MjE5NTgzODl9.qBh4l0pXJqun0fji8dYNVs4j8sIZdCJ58pQOamkcWAs"
+											"query": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZhYmlhbjc1OTMrdGVzdDJAZ21haWwuY29tIiwiaWF0IjoxNzMyMjMwODEzLCJleHAiOjE3MzIyMzE3MTN9.pCGUoqAlVNCtqMSahXzfrvEvGHhzaP30eDD7LMaMrIc"
+												}
 											]
 										}
 									},
@@ -3670,6 +3661,192 @@
 									],
 									"path": [
 										"student",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Guardian",
+					"item": [
+						{
+							"name": "Create Guardian",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"other_relationship\": \"Any String\",\n  \"relationship_code\": \"FATHER\",\n  \"referral_source_code\": \"INSTAGRAM\",\n  \"family_id\": 1,\n  \"franchise_id\": 224\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/guardian/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"guardian",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Guardian",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"franchise_id\": 223\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/guardian/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"guardian",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Guardian by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/guardian/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"guardian",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Guardian",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/guardian/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"guardian",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Guardian",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/guardian/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"guardian",
 										"delete"
 									],
 									"query": [
