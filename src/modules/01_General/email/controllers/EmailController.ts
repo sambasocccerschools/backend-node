@@ -7,6 +7,7 @@ import EmailService from "@TenshiJS/services/EmailServices/EmailService";
 import { ConstTemplate } from "@index/consts/Const";
 import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { In } from "typeorm";
+import { WeeklyClassSale } from "@index/entity/WeeklyClassSale";
 
 export default  class EmailController extends GenericController{
 
@@ -79,7 +80,6 @@ export default  class EmailController extends GenericController{
         const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
 
         try{
-            const validation : Validations = reqHandler.getResponse().locals.validation;
             const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
 
             // Validate role
@@ -142,10 +142,7 @@ export default  class EmailController extends GenericController{
 
 
      /**
-     * Sends an email to users based on specified filters.
-     * 
-     * @param {RequestHandler} reqHandler - The request handler object.
-     * @return {Promise<any>} - A promise that resolves to the response object.
+     *              WEEKLY MEMBERS
      */
      async sendMailByWeeklyMembers(reqHandler: RequestHandler): Promise<any> {
         const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
@@ -240,5 +237,113 @@ export default  class EmailController extends GenericController{
             return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
         }
     }
+
+
+
+
+
+
+
+
+
+    /**
+     *              WEEKLY SALES
+     */
+     async sendMailByWeeklySales(reqHandler: RequestHandler): Promise<any> {
+        const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
+
+        try{
+            const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
+
+            // Validate role
+            if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
+                return; 
+            }
+
+             // Get the filter parameters from the URL
+             const weekly_classes_sale_ids: string | null = 
+                                            getUrlParam("weekly_classes_sale_id", 
+                                            reqHandler.getRequest()) || null;
+
+             if (!weekly_classes_sale_ids) {
+                 return httpExec.paramsError();
+             }
+         
+             // list ids
+             const ids = (weekly_classes_sale_ids as string).split(',').map(id => id.trim());
+             const validIds = ids.map(id => Number(id));
+
+            // Prepare email structure
+            const emailStructure  = {
+                subject: reqHandler.getRequest().body.subject,
+                body: reqHandler.getRequest().body.body_message
+            }
+
+            const options: FindManyOptions = {};
+            if (validIds.length > 0) {
+                options.where = { 
+                    ...options.where, 
+                    id: In(validIds) 
+                };
+            }
+
+            options.relations = ["agent_id"];
+            const weeklyClassSaleRepository : GenericRepository = 
+                                                await new GenericRepository(WeeklyClassSale);
+            const sales = await weeklyClassSaleRepository
+                            .findAll(reqHandler.getLogicalDelete(), options);
+            try{
+
+                sales?.forEach(async (sale) =>{
+
+                    if(sale.agent_id != null){
+                        // Get users based on filters
+                        const user : User | null = 
+                        await (this.getRepository() as UserRepository).findById(
+                            sale.agent_id.id as string, 
+                            reqHandler.getLogicalDelete());
+
+                        if(user != undefined && user != null){
+                            // Iterate over each user and send email
+                                const variables = {
+                                    userName: user.first_name + " " + user.last_name,
+                                    emailSubject: emailStructure.subject,
+                                    emailContent: emailStructure.body
+                                };
+
+                                try{
+                                    const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, user.language, variables);
+                                    const emailService = EmailService.getInstance();
+                                    await emailService.sendEmail({
+                                        toMail: user.email,
+                                        subject: emailStructure.subject,
+                                        message: htmlBody,
+                                        attachments: [] 
+                                    });
+                                }catch(error : any){}
+
+                        }else{
+                            // Return error response if no users found
+                            return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                        }
+                    }
+                    
+                });
+
+                // Return success response
+                return httpExec.successAction(null, ConstHTTPRequest.SEND_MAIL_SUCCESS);
+
+            }catch(error : any){
+                // Return general error response if any exception occurs
+                return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+            }
+        }catch(error : any){
+            // Return general error response if any exception occurs
+            return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+        }
+    }
+
+
+
 }
 

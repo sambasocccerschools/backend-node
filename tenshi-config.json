@@ -2,7 +2,7 @@
     "COMPANY": {
         "NAME" : "Samba Soccer School",
         "LOGO" : "https://raw.githubusercontent.com/fabian7593/Tenshi/main/00_external_information/imgs/tenshi_background_2.png",
-        "BACKEND_HOST": "http://localhost:3000/",
+        "BACKEND_HOST": "http://18.117.147.235:3000/",
         "FRONT_END_HOST": "http://localhost:3000/",
         "LOGIN_URL": "http://localhost:3000/",
         "RESET_PASSWORD_URL" : "password_reset/",
@@ -17,7 +17,7 @@
         "MAX_REQUEST_PER_SECOND": 6,
         "IS_DEBUGGING": true,
         "FAIL_LOGIN_MAX_NUMBER": 3,
-        "DEFAULT_LANGUAGE" : "en", 
+        "DEFAULT_LANGUAGE" : "en",
         "FORMAT_DATE" : "es-ES",
         "CUSTOMER_REGULAR_ROLE" : "ab67f164-8950-453a-9ead-13697a29fed9"
     },
@@ -32,9 +32,9 @@
     "DB": {
         "TYPE": "mariadb",
         "PORT": 3306,
-        "HOST": "localhost",
-        "USER": "root",
-        "PASSWORD": "",
+        "HOST": "dbsoccersamba.cxaoy46ei29l.us-east-2.rds.amazonaws.com",
+        "USER": "admin",
+        "PASSWORD": "cdpjZGQ4-",
         "NAME": "samba_soccer_school",
         "CONNECTION_LIMIT": 150
     },

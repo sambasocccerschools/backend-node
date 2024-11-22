@@ -25,6 +25,8 @@ import { WeeklyClass } from '@index/entity/WeeklyClass';
 import { Family } from '@index/entity/Family';
 import { Student } from '@index/entity/Student';
 import { WeeklyClassMember } from '@index/entity/WeeklyClassMember';
+import { Guardian } from '@index/entity/Guardian';
+import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 
 
 async function createDatabaseIfNotExists() {
@@ -72,7 +74,9 @@ async function runSeed() {
                     WeeklyClass,
                     Family,
                     Student,
-                    WeeklyClassMember], // Array of entities to be used
+                    WeeklyClassMember,
+                    Guardian,
+                    WeeklyClassSale], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -622,7 +626,6 @@ async function runSeed() {
     *****************************************/
     const studentRepository = dataSource.getRepository(Student);
 
-    // Supongamos que ya tienes instancias de `Family` y `Franchise` o las obtienes como se muestra
     const familyOne = await dataSource.getRepository(Family).findOneBy({ id: 1 });
     const familyTwo = await dataSource.getRepository(Family).findOneBy({ id: 2 });
     
@@ -677,12 +680,13 @@ async function runSeed() {
     const weeklyClassMemberRepository = dataSource.getRepository(WeeklyClassMember);
 
     const weeklyClassOne = await dataSource.getRepository(WeeklyClass).findOneBy({ id: 1 });
+    const weeklyClassTwo = await dataSource.getRepository(WeeklyClass).findOneBy({ id: 2 });
     const subscriptionPlanPrice1 = await dataSource.getRepository(SubscriptionPlanPrice).findOneBy({ id: 752 });
     const subscriptionPlanPrice2 = await dataSource.getRepository(SubscriptionPlanPrice).findOneBy({ id: 753 });
     const memberStatus1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ACTIVE_MS" });
     const memberStatus2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "PAY_PENDING_MS" });
     const student1 = await dataSource.getRepository(Student).findOneBy({ id: 57 });
-    const student2= await dataSource.getRepository(Student).findOneBy({ id: 58 });
+    const student2 = await dataSource.getRepository(Student).findOneBy({ id: 58 });
 
     const weeklyClassMembers: Partial<WeeklyClassMember>[] = [
       {
@@ -730,6 +734,111 @@ async function runSeed() {
     ];
 
     await weeklyClassMemberRepository.upsert(weeklyClassMembers as any, ["id"]);
+
+
+
+
+
+    /****************************************
+                    Guardian
+    *****************************************/
+    const guardianRepository = dataSource.getRepository(Guardian);
+    const relationshipCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "GRANDPARENT" });
+    const relationshipCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "GUARDIAN" });
+    const referralSourceCode = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "INSTAGRAM" })
+
+    const guardians: Partial<Guardian>[] = [
+      {
+        id: 123,
+        other_relationship: null,
+        relationship_code: relationshipCode1 as UnitDynamicCentral,
+        referral_source_code: referralSourceCode as UnitDynamicCentral,
+        family_id: familyOne as Family,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 124,
+        other_relationship: "Uncle",
+        relationship_code: relationshipCode2 as UnitDynamicCentral,
+        referral_source_code: null,
+        family_id: familyTwo as Family,
+        franchise_id: null,
+        is_deleted: false,
+      },
+      {
+        id: 125,
+        other_relationship: null,
+        relationship_code: null,
+        referral_source_code: referralSourceCode as UnitDynamicCentral,
+        family_id: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+    ];
+
+    await guardianRepository.upsert(guardians as any, ["id"]);
+
+
+
+
+
+
+
+    /****************************************
+                Weekly Class Sale
+    *****************************************/
+    const weeklyClassMemberOne = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 123 });
+    const weeklyClassMemberTwo = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 125 });
+    const saleStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ACTIVE_SS" })
+    const saleStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "INACTIVE_SS" })
+
+    const weeklyClassSaleRepository = dataSource.getRepository(WeeklyClassSale);
+    const weeklyClassSales: Partial<WeeklyClassSale>[] = [
+      {
+        id: 256,
+        start_date: '2024-06-18',
+        weekly_class_member_id: weeklyClassMemberOne as WeeklyClassMember,
+        weekly_class_id: weeklyClassOne as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice1 as SubscriptionPlanPrice,
+        sale_status_code: saleStatusCode2 as UnitDynamicCentral,
+        student_id: student1 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 257,
+        start_date: '2024-05-19',
+        weekly_class_member_id: weeklyClassMemberOne as WeeklyClassMember,
+        weekly_class_id: weeklyClassTwo as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
+        sale_status_code: saleStatusCode1 as UnitDynamicCentral,
+        student_id: student2 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 258,
+        start_date: '2024-10-20',
+        weekly_class_member_id: weeklyClassMemberTwo as WeeklyClassMember,
+        weekly_class_id: weeklyClassTwo as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
+        sale_status_code: saleStatusCode1 as UnitDynamicCentral,
+        student_id: student1 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: null,
+        is_deleted: false,
+      },
+    ];
+
+    await weeklyClassSaleRepository.upsert(weeklyClassSales as any, ["id"]);
+
+
 
   console.log("STG seed done!");
 }

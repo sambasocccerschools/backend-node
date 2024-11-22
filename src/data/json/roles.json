@@ -149,16 +149,6 @@
           ]
         },
         {
-          "name": "WEEKLY_CLASS",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
           "name": "FAMILY",
           "function_list": [
             "CREATE",
@@ -179,6 +169,16 @@
           ]
         },
         {
+          "name": "GUARDIAN",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
           "name": "WEEKLY_CLASS_MEMBER",
           "function_list": [
             "CREATE",
@@ -189,7 +189,17 @@
           ]
         },
         {
-          "name": "GUARDIAN",
+          "name": "WEEKLY_CLASS",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "WEEKLY_CLASS_SALE",
           "function_list": [
             "CREATE",
             "UPDATE",
@@ -278,6 +288,36 @@
         {
           "name": "LOG",
           "function_list": [
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "WEEKLY_CLASS_MEMBER",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "WEEKLY_CLASS",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
+          "name": "WEEKLY_CLASS_SALE",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
             "GET_BY_ID",
             "GET_ALL"
           ]

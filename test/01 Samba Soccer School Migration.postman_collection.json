@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e0851bb4-575f-4ff6-874e-cce0ddca12b9",
+		"_postman_id": "c0dcca94-5357-49b8-9606-96b9995a5524",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -3242,6 +3242,59 @@
 										{
 											"key": "member_status_code",
 											"value": "ACTIVE_MS, FROZEN_MS",
+											"description": "UDC Type = MEMBER_STATUS - comma separate",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": "58",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-10-29",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2024-10-29",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reporting WeeklyClassMember",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/reporting",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"reporting"
+									],
+									"query": [
+										{
+											"key": "member_status_code",
+											"value": "ACTIVE_MS, FROZEN_MS",
 											"description": "Separate by comma",
 											"disabled": true
 										},
@@ -3295,6 +3348,305 @@
 										{
 											"key": "id",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Email Weekly classes member",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_by_weekly_members?weekly_members_ids=4,1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_by_weekly_members"
+									],
+									"query": [
+										{
+											"key": "weekly_members_ids",
+											"value": "4,1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClasses (Sale)",
+					"item": [
+						{
+							"name": "Create WeeklyClassSale",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  //\"start_date\": \"2023-07-22\",\n  \"weekly_class_member_id\": 2,\n  \"weekly_class_id\": 1,\n  \"subscription_plan_price_id\": 751,\n  \"sale_status_code\": \"ACTIVE_SS\",\n  \"student_id\": 57\n  //\"agent_id\": null,\n  //\"booked_by\": \"a40364a8-0ca8-4757-a90a-df7c6b5325ca\",\n  //\"franchise_id\": 222\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClassSale",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_id\": 2,\n  \"sale_status_code\": \"INACTIVE_SS\",\n  \"agent_id\": \"a40364a8-0ca8-4757-a90a-df7c6b5325ca\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/edit?id=259",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "259"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClassSale by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/get?id=259",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "259"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClassSale",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "sale_status_code",
+											"value": "ACTIVE_SS, INACTIVE_SS",
+											"description": "UDC TYPE = SALE_STATUS - comma separate",
+											"disabled": true
+										},
+										{
+											"key": "venue_id",
+											"value": "345",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": "58",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-10-29",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClassSale",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Email Weekly classes sales",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_by_weekly_sales?weekly_classes_sale_id=259",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_by_weekly_sales"
+									],
+									"query": [
+										{
+											"key": "weekly_classes_sale_id",
+											"value": "259"
 										}
 									]
 								}
