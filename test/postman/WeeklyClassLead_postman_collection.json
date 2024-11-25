@@ -1,0 +1,183 @@
+{
+  "info": {
+    "name": "WeeklyClassLead",
+    "item": [
+      {
+        "name": "Create WeeklyClassLead",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"lead_status_code\": \"\\\"test_lead_status_code\\\"\",\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"guardian_id\": \"\\\"test_guardian_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/add",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "weeklyclasslead",
+              "add"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update WeeklyClassLead",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"lead_status_code\": \"\\\"test_lead_status_code\\\"\",\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"guardian_id\": \"\\\"test_guardian_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          },
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/edit?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "weeklyclasslead",
+              "edit"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get WeeklyClassLead by ID",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "weeklyclasslead",
+              "get"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get All WeeklyClassLead",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/get_all",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "weeklyclasslead",
+              "get_all"
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete WeeklyClassLead",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "authorization",
+              "value": "{{auth_jwt}}",
+              "type": "text"
+            },
+            {
+              "key": "x-api-key",
+              "value": "{{secret_api_key}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "{{host}}/${entityName.toLowerCase()}/delete?id=1",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "weeklyclasslead",
+              "delete"
+            ],
+            "query": [
+              {
+                "key": "id",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

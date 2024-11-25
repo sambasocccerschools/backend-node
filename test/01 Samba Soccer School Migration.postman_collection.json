@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "21d1f443-7dfa-44c5-843d-029e4b84243a",
+		"_postman_id": "e97f37ad-9990-46fd-99cb-55105a24b561",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -3684,12 +3684,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/weeklyclasswaitinglist/add",
+									"raw": "{{host}}/weeklyClassesWaitingLists/add",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"weeklyclasswaitinglist",
+										"weeklyClassesWaitingLists",
 										"add"
 									]
 								}
@@ -3722,12 +3722,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/weeklyclasswaitinglist/edit?id=1",
+									"raw": "{{host}}/weeklyClassesWaitingLists/edit?id=1",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"weeklyclasswaitinglist",
+										"weeklyClassesWaitingLists",
 										"edit"
 									],
 									"query": [
@@ -3757,12 +3757,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/weeklyclasswaitinglist/get?id=65",
+									"raw": "{{host}}/weeklyClassesWaitingLists/get?id=65",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"weeklyclasswaitinglist",
+										"weeklyClassesWaitingLists",
 										"get"
 									],
 									"query": [
@@ -3792,13 +3792,42 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/weeklyclasswaitinglist/get_all",
+									"raw": "{{host}}/weeklyClassesWaitingLists/get_all?waiting_list_status_code=BOOKED_TRIAL, BOOKED_MEMBERSHIP",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"weeklyclasswaitinglist",
+										"weeklyClassesWaitingLists",
 										"get_all"
+									],
+									"query": [
+										{
+											"key": "waiting_list_status_code",
+											"value": "BOOKED_TRIAL, BOOKED_MEMBERSHIP",
+											"description": "separate by comma, PENDING, BOOKED_TRIAL, BOOKED_MEMBERSHIP, CANCELLED"
+										},
+										{
+											"key": "venue_id",
+											"value": "1,2",
+											"description": "separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student",
+											"value": "John",
+											"description": "student name",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-01-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2024-01-01",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -3821,12 +3850,198 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/weeklyclasswaitinglist/delete?id=1",
+									"raw": "{{host}}/weeklyClassesWaitingLists/delete?id=1",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"weeklyclasswaitinglist",
+										"weeklyClassesWaitingLists",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClasses (Lead)",
+					"item": [
+						{
+							"name": "Create WeeklyClassLead",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"lead_status_code\": \"CALL_PENDING_LS\",\n  \"weekly_class_id\": 1,\n  \"guardian_id\": 1\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClassLead",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"lead_status_code\": \"CALL_PENDING_LS\",\n  \"weekly_class_id\": 1,\n  \"guardian_id\": 1\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClassLead by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClassLead",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClassLead",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
 										"delete"
 									],
 									"query": [

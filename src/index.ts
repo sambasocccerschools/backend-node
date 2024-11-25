@@ -31,6 +31,7 @@ import { WeeklyClassMember } from '@entity/WeeklyClassMember';
 import { Guardian } from '@entity/Guardian';
 import { WeeklyClassSale } from '@entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
+import { WeeklyClassLead } from '@entity/WeeklyClassLead';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -56,6 +57,8 @@ import StudentRoutes from '@index/modules/02_Synco/student/routers/StudentRoutes
 import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/routers/WeeklyClassMemberRoutes';
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
 import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
+import WeeklyClassLeadRoutes from '@index/modules/02_Synco/weeklyclasslead/routers/WeeklyClassLeadRoutes';
+
 
 //*************************************** */
 //              IMPORTS
@@ -79,6 +82,7 @@ import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddlewa
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
 import ValidJsonBodyMiddleware from '@TenshiJS/middlewares/ValidJsonBodyMiddleware';
+
 
 
 
@@ -132,7 +136,8 @@ export const TenshiMain = async () => {
       WeeklyClassMember,
       Guardian,
       WeeklyClassSale,
-      WeeklyClassWaitingList
+      WeeklyClassWaitingList,
+      WeeklyClassLead
     ]);
 
     //Cors handler middle ware
@@ -190,6 +195,7 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassMemberRoutes().getRouter());
     app.use(new WeeklyClassSaleRoutes().getRouter());
     app.use(new WeeklyClassWaitingListRoutes().getRouter());
+    app.use(new WeeklyClassLeadRoutes().getRouter());
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

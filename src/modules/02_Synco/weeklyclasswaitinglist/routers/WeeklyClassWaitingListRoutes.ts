@@ -11,7 +11,7 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(WeeklyClassWaitingList), "/weeklyclasswaitinglist");
+        super(new GenericController(WeeklyClassWaitingList), "/weeklyClassesWaitingLists");
         this.filters.relations = [
             "weekly_class_id",
             "subscription_plan_price_id",

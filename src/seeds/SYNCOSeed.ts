@@ -28,6 +28,7 @@ import { WeeklyClassMember } from '@index/entity/WeeklyClassMember';
 import { Guardian } from '@index/entity/Guardian';
 import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@index/entity/WeeklyClassWaitingList';
+import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
 
 
 async function createDatabaseIfNotExists() {
@@ -78,7 +79,8 @@ async function runSeed() {
                     WeeklyClassMember,
                     Guardian,
                     WeeklyClassSale,
-                    WeeklyClassWaitingList], // Array of entities to be used
+                    WeeklyClassWaitingList,
+                    WeeklyClassLead], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -790,8 +792,8 @@ async function runSeed() {
     /****************************************
                 Weekly Class Sale
     *****************************************/
-    const weeklyClassMemberOne = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 123 });
-    const weeklyClassMemberTwo = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 125 });
+    const weeklyClassMember1 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 123 });
+    const weeklyClassMember2 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 125 });
     const saleStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ACTIVE_SS" })
     const saleStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "INACTIVE_SS" })
 
@@ -800,7 +802,7 @@ async function runSeed() {
       {
         id: 256,
         start_date: '2024-06-18',
-        weekly_class_member_id: weeklyClassMemberOne as WeeklyClassMember,
+        weekly_class_member_id: weeklyClassMember1 as WeeklyClassMember,
         weekly_class_id: weeklyClass1 as WeeklyClass,
         subscription_plan_price_id: subscriptionPlanPrice1 as SubscriptionPlanPrice,
         sale_status_code: saleStatusCode2 as UnitDynamicCentral,
@@ -813,7 +815,7 @@ async function runSeed() {
       {
         id: 257,
         start_date: '2024-05-19',
-        weekly_class_member_id: weeklyClassMemberOne as WeeklyClassMember,
+        weekly_class_member_id: weeklyClassMember1 as WeeklyClassMember,
         weekly_class_id: weeklyClass2 as WeeklyClass,
         subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
         sale_status_code: saleStatusCode1 as UnitDynamicCentral,
@@ -826,7 +828,7 @@ async function runSeed() {
       {
         id: 258,
         start_date: '2024-10-20',
-        weekly_class_member_id: weeklyClassMemberTwo as WeeklyClassMember,
+        weekly_class_member_id: weeklyClassMember2 as WeeklyClassMember,
         weekly_class_id: weeklyClass2 as WeeklyClass,
         subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
         sale_status_code: saleStatusCode1 as UnitDynamicCentral,
@@ -841,48 +843,99 @@ async function runSeed() {
     await weeklyClassSaleRepository.upsert(weeklyClassSales as any, ["id"]);
 
 
-  const waitingListStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_MEMBERSHIP" })
-  const waitingListStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_TRIAL" })
-  const weeklyClassWaitingListRepository = dataSource.getRepository(WeeklyClassWaitingList);
-  const weeklyClassWaitingLists: Partial<WeeklyClassWaitingList>[] = [
-  {
-    id: 65,
-    weekly_class_id: weeklyClass1 as WeeklyClass,
-    subscription_plan_price_id: subscriptionPlanPrice1 as SubscriptionPlanPrice,
-    waiting_list_status_code: waitingListStatusCode1 as UnitDynamicCentral,
-    student_id: student1 as Student,
-    agent_id: null,
-    booked_by: null,
-    franchise_id: null,
-    is_deleted: false,
-  },
-  {
-    id: 66,
-    weekly_class_id: weeklyClass2 as WeeklyClass,
-    subscription_plan_price_id: null,
-    waiting_list_status_code: waitingListStatusCode2 as UnitDynamicCentral,
-    student_id: student2 as Student,
-    agent_id: null,
-    booked_by: null,
-    franchise_id: null,
-    is_deleted: false,
-  },
-  {
-    id: 67,
-    weekly_class_id: weeklyClass1 as WeeklyClass,
-    subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
-    waiting_list_status_code: waitingListStatusCode1 as UnitDynamicCentral,
-    student_id: student2 as Student,
-    agent_id: null,
-    booked_by: null,
-    franchise_id: franchise as Franchise,
-    is_deleted: true,
-  },
-];
-
-await weeklyClassWaitingListRepository.upsert(weeklyClassWaitingLists as any, ["id"]);
 
 
+
+    /****************************************
+            Weekly Class Waiting List
+    *****************************************/
+    const waitingListStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_MEMBERSHIP" })
+    const waitingListStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_TRIAL" })
+    const weeklyClassWaitingListRepository = dataSource.getRepository(WeeklyClassWaitingList);
+    const weeklyClassWaitingLists: Partial<WeeklyClassWaitingList>[] = [
+      {
+        id: 65,
+        weekly_class_id: weeklyClass1 as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice1 as SubscriptionPlanPrice,
+        waiting_list_status_code: waitingListStatusCode1 as UnitDynamicCentral,
+        student_id: student1 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: null,
+        is_deleted: false,
+      },
+      {
+        id: 66,
+        weekly_class_id: weeklyClass2 as WeeklyClass,
+        subscription_plan_price_id: null,
+        waiting_list_status_code: waitingListStatusCode2 as UnitDynamicCentral,
+        student_id: student2 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: null,
+        is_deleted: false,
+      },
+      {
+        id: 67,
+        weekly_class_id: weeklyClass1 as WeeklyClass,
+        subscription_plan_price_id: subscriptionPlanPrice2 as SubscriptionPlanPrice,
+        waiting_list_status_code: waitingListStatusCode1 as UnitDynamicCentral,
+        student_id: student2 as Student,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: true,
+      },
+    ];
+    await weeklyClassWaitingListRepository.upsert(weeklyClassWaitingLists as any, ["id"]);
+
+
+
+
+
+    /****************************************
+            Weekly Class Leads
+    *****************************************/
+    const leadStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_MEMBERSHIP" });
+    const leadStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "BOOKED_TRIAL" });
+    const guardian1 = await dataSource.getRepository(Guardian).findOneBy({ id: 123 });
+    const guardian2 = await dataSource.getRepository(Guardian).findOneBy({ id: 125 });
+    const weeklyClassLeadRepository = dataSource.getRepository(WeeklyClassLead);
+    const weeklyClassLeads: Partial<WeeklyClassLead>[] = [
+      {
+        id: 53,
+        lead_status_code: leadStatusCode1 as UnitDynamicCentral,
+        weekly_class_id: weeklyClass1 as WeeklyClass,
+        guardian_id: guardian1 as Guardian,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 54,
+        lead_status_code: leadStatusCode2 as UnitDynamicCentral,
+        weekly_class_id: null,
+        guardian_id: guardian2 as Guardian,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 55,
+        lead_status_code: leadStatusCode1 as UnitDynamicCentral,
+        weekly_class_id: weeklyClass2 as WeeklyClass,
+        guardian_id: guardian1 as Guardian,
+        agent_id: null,
+        booked_by: null,
+        franchise_id: null,
+        is_deleted: true,
+      },
+    ];
+    
+    await weeklyClassLeadRepository.upsert(weeklyClassLeads as any, ["id"]);
+            
 
   console.log("STG seed done!");
 }
