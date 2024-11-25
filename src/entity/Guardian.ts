@@ -11,7 +11,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("guardians")
 export class Guardian {
-    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255, nullable: true })

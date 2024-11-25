@@ -126,7 +126,7 @@ export default  class GenericService extends GenericValidation implements IGener
 
             // If you need to validate if the user id of the table 
             // should be the user id of the user request (JWT)
-            if(await this.validateUserIdEntityFindByCodeOrId(reqHandler, httpExec, jwtData, id) !== true){ return; }
+            if(await this.validateWhereByUserId(reqHandler, httpExec, jwtData, id) !== true){ return; }
 
             executeUpdateFunction(jwtData, httpExec, id);
 
@@ -172,7 +172,7 @@ export default  class GenericService extends GenericValidation implements IGener
                 // Validate the role of the user
                 if(await this.validateRole(reqHandler, jwtData.role, ConstFunctions.DELETE, httpExec) !== true){ return; }
                 // Validate the user id
-                if(await this.validateUserIdEntityFindByCodeOrId(reqHandler, httpExec, jwtData, id) !== true){ return; }
+                if(await this.validateWhereByUserId(reqHandler, httpExec, jwtData, id) !== true){ return; }
             }
             // Execute the delete action in the database
             executeDeleteFunction(jwtData, httpExec, id);
@@ -204,7 +204,7 @@ export default  class GenericService extends GenericValidation implements IGener
                 // Validate the role of the user
                 if(await this.validateRole(reqHandler, jwtData.role, ConstFunctions.GET_BY_ID, httpExec) !== true){ return; }
                 // Validate the user id
-                if(await this.validateUserIdEntityFindByCodeOrId(reqHandler, httpExec, jwtData, id) !== true){ return; }
+                if(await this.validateWhereByUserId(reqHandler, httpExec, jwtData, id) !== true){ return; }
              }
 
              // Execute the get by id action in the database
@@ -250,7 +250,7 @@ export default  class GenericService extends GenericValidation implements IGener
                 // Validate the role of the user
                 if(await this.validateRole(reqHandler, jwtData.role, ConstFunctions.GET_BY_ID, httpExec) !== true){ return; }
                 // Validate the user id
-                if(await this.validateUserIdEntityFindByCodeOrId(reqHandler, httpExec, jwtData, code) !== true){ return; }
+                if(await this.validateWhereByUserId(reqHandler, httpExec, jwtData, code) !== true){ return; }
               }
 
               executeGetByCodeFunction(jwtData, httpExec, code);

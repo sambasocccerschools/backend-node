@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("uniforms")
 export class Uniform {
-  @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+  @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
   id: number;
 
   @Column({ type: "varchar", length: 200, unique: true })

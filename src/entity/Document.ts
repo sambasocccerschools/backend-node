@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("documents")
 export class Document {
-  @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+  @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
   id: number;
 
   //the title or the document, this cannot will be change

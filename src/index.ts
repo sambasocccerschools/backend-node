@@ -30,6 +30,7 @@ import { Student } from '@entity/Student';
 import { WeeklyClassMember } from '@entity/WeeklyClassMember';
 import { Guardian } from '@entity/Guardian';
 import { WeeklyClassSale } from '@entity/WeeklyClassSale';
+import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -54,6 +55,7 @@ import GuardianRoutes from '@index/modules/02_Synco/guardian/routers/GuardianRou
 import StudentRoutes from '@index/modules/02_Synco/student/routers/StudentRoutes';
 import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/routers/WeeklyClassMemberRoutes';
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
+import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -129,7 +131,8 @@ export const TenshiMain = async () => {
       Student,
       WeeklyClassMember,
       Guardian,
-      WeeklyClassSale
+      WeeklyClassSale,
+      WeeklyClassWaitingList
     ]);
 
     //Cors handler middle ware
@@ -186,6 +189,7 @@ export const TenshiMain = async () => {
     app.use(new StudentRoutes().getRouter());
     app.use(new WeeklyClassMemberRoutes().getRouter());
     app.use(new WeeklyClassSaleRoutes().getRouter());
+    app.use(new WeeklyClassWaitingListRoutes().getRouter());
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

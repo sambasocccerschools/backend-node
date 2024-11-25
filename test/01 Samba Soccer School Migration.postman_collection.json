@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c0dcca94-5357-49b8-9606-96b9995a5524",
+		"_postman_id": "21d1f443-7dfa-44c5-843d-029e4b84243a",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -3647,6 +3647,192 @@
 										{
 											"key": "weekly_classes_sale_id",
 											"value": "259"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClasses (Waiting List)",
+					"item": [
+						{
+							"name": "Create WeeklyClassWaitingList",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_id\": 1,\n  //\"subscription_plan_price_id\": 752,\n  \"waiting_list_status_code\": \"PENDING\",\n  \"student_id\": 4\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyclasswaitinglist/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyclasswaitinglist",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClassWaitingList",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"waiting_list_status_code\": \"CANCELLED\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyclasswaitinglist/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyclasswaitinglist",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClassWaitingList by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyclasswaitinglist/get?id=65",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyclasswaitinglist",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "65"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClassWaitingList",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyclasswaitinglist/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyclasswaitinglist",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClassWaitingList",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyclasswaitinglist/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyclasswaitinglist",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
 										}
 									]
 								}

@@ -1,8 +1,5 @@
 import { IDatabaseAdapter } from "tenshi/persistance/DataBaseHelper/IDatabaseAdapter";
 import { MariaDbAdapter } from "./Adapters/MariaDBAdapter";
-import { MySQLAdapter } from "./Adapters/MySQLAdapter";
-import { PostgresAdapter } from "./Adapters/PostgresAdapter";
-import { SqlServerAdapter } from "./Adapters/SQLServerAdapter";
 
 export class DBPersistanceFactory {
     /**
@@ -18,12 +15,6 @@ export class DBPersistanceFactory {
         switch (type) {
             case "mariadb" :
                 return MariaDbAdapter.getInstance();
-            case "mysql" :
-                return MySQLAdapter.getInstance();
-            case "postgres" :
-                return PostgresAdapter.getInstance();
-            case "mssql" :
-                return SqlServerAdapter.getInstance();
             default:
                 // If not null or supported, throw an error
                 throw new Error(`Factory: Adapter type ${type} is not supported.`);

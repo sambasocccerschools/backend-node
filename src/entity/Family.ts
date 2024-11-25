@@ -3,7 +3,7 @@ import { Franchise } from "./Franchise";
 
 @Entity("families")
 export class Family {
-    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
     
     @Column({ type: "int",  default: 0  })

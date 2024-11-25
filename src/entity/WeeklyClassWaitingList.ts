@@ -5,38 +5,30 @@ import {
     ManyToOne, 
     JoinColumn 
 } from "typeorm";
-import { WeeklyClassMember } from "./WeeklyClassMember";
 import { WeeklyClass } from "./WeeklyClass";
 import { SubscriptionPlanPrice } from "./SubscriptionPlanPrice";
+import { UnitDynamicCentral } from "./UnitDynamicCentral";
 import { Student } from "./Student";
 import { Franchise } from "./Franchise";
 import { User } from "@TenshiJS/entity/User";
-import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
-@Entity("weekly_classes_sales")
-export class WeeklyClassSale {
+@Entity("weekly_classes_waiting_lists")
+export class WeeklyClassWaitingList {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
-
-    @Column({ type: "date", nullable: true, default: null })
-    start_date: string | null;
-
-    @ManyToOne(() => WeeklyClassMember)
-    @JoinColumn({ name: "weekly_class_member_id", referencedColumnName: "id" })
-    weekly_class_member_id: WeeklyClassMember;
 
     @ManyToOne(() => WeeklyClass)
     @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
     weekly_class_id: WeeklyClass;
 
-    @ManyToOne(() => SubscriptionPlanPrice)
+    @ManyToOne(() => SubscriptionPlanPrice, { nullable: true })
     @JoinColumn({ name: "subscription_plan_price_id", referencedColumnName: "id" })
-    subscription_plan_price_id: SubscriptionPlanPrice;
+    subscription_plan_price_id: SubscriptionPlanPrice | null;
 
-    //Sale Status
+    //WAITING_LIST_STATUS
     @ManyToOne(() => UnitDynamicCentral)
-    @JoinColumn({ name: "sale_status_code", referencedColumnName: "code" })
-    sale_status_code: UnitDynamicCentral;
+    @JoinColumn({ name: "waiting_list_status_code", referencedColumnName: "code" })
+    waiting_list_status_code: UnitDynamicCentral;
 
     @ManyToOne(() => Student)
     @JoinColumn({ name: "student_id", referencedColumnName: "id" })

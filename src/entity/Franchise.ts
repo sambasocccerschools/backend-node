@@ -5,7 +5,7 @@ import { User } from "@TenshiJS/entity/User";
 
 @Entity("franchises")
 export class Franchise {
-    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
     
     @Column({ type: "varchar", length: 255 })
