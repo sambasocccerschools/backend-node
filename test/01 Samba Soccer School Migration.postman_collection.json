@@ -3252,6 +3252,12 @@
 											"disabled": true
 										},
 										{
+											"key": "student",
+											"value": null,
+											"description": "string name",
+											"disabled": true
+										},
+										{
 											"key": "start_date",
 											"value": "2024-10-29",
 											"disabled": true
@@ -3259,6 +3265,18 @@
 										{
 											"key": "end_date",
 											"value": "2024-10-29",
+											"disabled": true
+										},
+										{
+											"key": "venue_id",
+											"value": null,
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": null,
+											"description": "string name",
 											"disabled": true
 										}
 									]
@@ -3568,6 +3586,18 @@
 											"key": "start_date",
 											"value": "2024-10-29",
 											"disabled": true
+										},
+										{
+											"key": "student",
+											"value": null,
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": null,
+											"description": "string name",
+											"disabled": true
 										}
 									]
 								}
@@ -3792,7 +3822,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/weeklyClassesWaitingLists/get_all?waiting_list_status_code=BOOKED_TRIAL, BOOKED_MEMBERSHIP",
+									"raw": "{{host}}/weeklyClassesWaitingLists/get_all",
 									"host": [
 										"{{host}}"
 									],
@@ -3804,7 +3834,8 @@
 										{
 											"key": "waiting_list_status_code",
 											"value": "BOOKED_TRIAL, BOOKED_MEMBERSHIP",
-											"description": "separate by comma, PENDING, BOOKED_TRIAL, BOOKED_MEMBERSHIP, CANCELLED"
+											"description": "separate by comma, PENDING, BOOKED_TRIAL, BOOKED_MEMBERSHIP, CANCELLED",
+											"disabled": true
 										},
 										{
 											"key": "venue_id",
@@ -3826,6 +3857,18 @@
 										{
 											"key": "end_date",
 											"value": "2024-01-01",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": null,
+											"description": "separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": null,
+											"description": "string name",
 											"disabled": true
 										}
 									]
@@ -4014,6 +4057,44 @@
 									"path": [
 										"weeklyClassesLeads",
 										"get_all"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": null,
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": null,
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": null,
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student",
+											"value": null,
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "referral_source_code",
+											"value": "INSTAGRAM, FACEBOOK",
+											"description": "Separate by comma, UDC Type = REFERRAL_SOURCES",
+											"disabled": true
+										},
+										{
+											"key": "lead_status_code",
+											"value": "ACTIVE_LS, CALL_PENDING_LS",
+											"description": "Separate by comma, UDC TYPE = LEAD_STATUS",
+											"disabled": true
+										}
 									]
 								}
 							},
