@@ -17,15 +17,15 @@ export class WeeklyClassLead {
     id: number;
 
     //LEAD_STATUS
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "lead_status_code", referencedColumnName: "code" })
     lead_status_code: UnitDynamicCentral;
 
-    @ManyToOne(() => WeeklyClass, { nullable: true })
+    @ManyToOne(() => WeeklyClass, { eager: true, nullable: true })
     @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
     weekly_class_id: WeeklyClass | null;
 
-    @ManyToOne(() => Guardian)
+    @ManyToOne(() => Guardian, { eager: true })
     @JoinColumn({ name: "guardian_id", referencedColumnName: "id" })
     guardian_id: Guardian;
 
@@ -37,7 +37,7 @@ export class WeeklyClassLead {
     @JoinColumn({ name: "booked_by", referencedColumnName: "id" })
     booked_by: User | null;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

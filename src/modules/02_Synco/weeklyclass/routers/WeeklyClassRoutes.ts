@@ -5,7 +5,7 @@ import { Request, Response,
          getUrlParam} from "@modules/index";
 import { WeeklyClass } from "@index/entity/WeeklyClass";
 import WeeklyClassDTO from "@modules/02_Synco/weeklyclass/dtos/WeeklyClassDTO";
-import { In } from "typeorm";
+import { ILike, In } from "typeorm";
 
 class WeeklyClassRoutes extends GenericRoutes {
     
@@ -41,15 +41,6 @@ class WeeklyClassRoutes extends GenericRoutes {
             const days: string | null = getUrlParam("days", req) || null;
             const class_name: string | null = getUrlParam("class_name", req) || null;
 
-            if(venue != null){
-                this.filters.where = { 
-                    ...this.filters.where, 
-                    venue_id: {
-                        name: venue, 
-                    }
-                };
-            }
-
             if(postcode != null){
                 this.filters.where = { 
                     ...this.filters.where, 
@@ -72,6 +63,15 @@ class WeeklyClassRoutes extends GenericRoutes {
                         }
                     };
                 }
+            }
+
+            if (venue != null) {
+                this.filters.where = { 
+                    ...this.filters.where, 
+                    venue_id: { 
+                        name: ILike(`%${venue}%`)
+                    }
+                };
             }
 
             if(days != null){

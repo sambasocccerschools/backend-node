@@ -17,20 +17,20 @@ export class WeeklyClassWaitingList {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
-    @ManyToOne(() => WeeklyClass)
+    @ManyToOne(() => WeeklyClass, { eager: true })
     @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
     weekly_class_id: WeeklyClass;
 
-    @ManyToOne(() => SubscriptionPlanPrice, { nullable: true })
+    @ManyToOne(() => SubscriptionPlanPrice, { eager: true, nullable: true })
     @JoinColumn({ name: "subscription_plan_price_id", referencedColumnName: "id" })
     subscription_plan_price_id: SubscriptionPlanPrice | null;
 
     //WAITING_LIST_STATUS
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "waiting_list_status_code", referencedColumnName: "code" })
     waiting_list_status_code: UnitDynamicCentral;
 
-    @ManyToOne(() => Student)
+    @ManyToOne(() => Student, { eager: true })
     @JoinColumn({ name: "student_id", referencedColumnName: "id" })
     student_id: Student;
 
@@ -42,7 +42,7 @@ export class WeeklyClassWaitingList {
     @JoinColumn({ name: "booked_by", referencedColumnName: "id" })
     booked_by: User | null;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

@@ -16,11 +16,11 @@ export class SessionPlan {
     @Column({ type: "varchar", length: 500, nullable: true, default: null })
     description: string;
 
-    @ManyToOne(() => AbilityGroup)
+    @ManyToOne(() => AbilityGroup, { eager: true })
     @JoinColumn({ name: "ability_group_id", referencedColumnName: "id" })
     ability_group_id: AbilityGroup;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

@@ -39,7 +39,7 @@ export class Franchise {
     message: string;
 
     //REFERRAL_SOURCES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
     referral_source_code: UnitDynamicCentral;
 

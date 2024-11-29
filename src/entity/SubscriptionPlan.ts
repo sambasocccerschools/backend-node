@@ -10,11 +10,11 @@ export class SubscriptionPlan {
     id: number;
 
     //SERVICE
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })
     service_code: UnitDynamicCentral;
 
-    @ManyToOne(() => Venue)
+    @ManyToOne(() => Venue, { eager: true })
     @JoinColumn({ name: "venue_id", referencedColumnName: "id" })
     venue_id: Venue;
 
@@ -24,7 +24,7 @@ export class SubscriptionPlan {
     @Column({ type: "int", default: 0 })
     duration: number;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

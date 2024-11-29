@@ -9,7 +9,7 @@ export class Family {
     @Column({ type: "int",  default: 0  })
     loyalty_points: number;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
   

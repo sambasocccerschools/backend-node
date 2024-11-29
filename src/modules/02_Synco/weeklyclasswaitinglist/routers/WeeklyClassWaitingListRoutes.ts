@@ -5,7 +5,7 @@ import { Request, Response,
          getUrlParam} from "@modules/index";
 import { WeeklyClassWaitingList } from "@index/entity/WeeklyClassWaitingList";
 import WeeklyClassWaitingListDTO from "@modules/02_Synco/weeklyclasswaitinglist/dtos/WeeklyClassWaitingListDTO";
-import { In, LessThan, MoreThan } from "typeorm";
+import { ILike, In, LessThan, MoreThan } from "typeorm";
 
 class WeeklyClassWaitingListRoutes extends GenericRoutes {
     
@@ -107,6 +107,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         const waiting_list_status_code: string | null = getUrlParam("waiting_list_status_code", req) || null;
         const venue_id: string | null = getUrlParam("venue_id", req) || null;
         const student_id: string | null = getUrlParam("student_id", req) || null;
+        const venue: string | null = getUrlParam("venue", req) || null;
+        const student: string | null = getUrlParam("student", req) || null;
 
         if (start_date != null) {
             this.filters.where = { 
@@ -150,6 +152,17 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
             }
         }
 
+        if (venue != null) {
+            this.filters.where = { 
+                ...this.filters.where, 
+                weekly_class_id: {
+                    venue_id: {
+                        name: ILike(`%${venue}%`)
+                    }
+                }
+            };
+        }
+
         if(student_id != null){
             const studentIdsArray = student_id!!.split(",")
                                   .map(field => field.trim())
@@ -163,6 +176,15 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
                     }
                 };
             }
+        }
+
+        if (student != null) {
+            this.filters.where = { 
+                ...this.filters.where, 
+                student_id: {
+                    name: ILike(`%${student}%`)
+                }
+            };
         }
     }
 }

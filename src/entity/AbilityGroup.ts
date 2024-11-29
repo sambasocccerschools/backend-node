@@ -18,17 +18,17 @@ export class AbilityGroup {
     @Column({ type: "int", unsigned: true })
     max_age: number;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 
     //SERVICES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "service_code", referencedColumnName: "code" })
     service_code: UnitDynamicCentral;
 
     //SERVICE_PACKAGES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "service_package_code", referencedColumnName: "code" })
     service_package_code: UnitDynamicCentral;
 

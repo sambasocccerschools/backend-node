@@ -18,11 +18,11 @@ export class HolidayCampDate {
     end_date: Date;
 
     //CAMP_TYPES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "camp_type_code", referencedColumnName: "code" })
     camp_type_code: UnitDynamicCentral;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

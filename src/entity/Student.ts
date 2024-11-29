@@ -25,11 +25,11 @@ export class Student {
     @Column({ type: "varchar", length: 15, nullable: true, default: null  })
     gender: string;
 
-    @ManyToOne(() => Family, { nullable: true })
+    @ManyToOne(() => Family, {eager: true, nullable: true })
     @JoinColumn({ name: "family_id", referencedColumnName: "id" })
     family_id: Family | null;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
   

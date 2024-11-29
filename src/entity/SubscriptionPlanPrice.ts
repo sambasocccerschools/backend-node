@@ -21,21 +21,21 @@ export class SubscriptionPlanPrice {
     @Column('decimal', { precision: 8, scale: 2, default: 0.00 })
     one_off_joining_fee: number;
 
-    @ManyToOne(() => SubscriptionPlan)
+    @ManyToOne(() => SubscriptionPlan, { eager: true })
     @JoinColumn({ name: "subscription_plan_id", referencedColumnName: "id" })
     subscription_plan_id: SubscriptionPlan;
 
     //PAYMENT_TYPES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "payment_type_code", referencedColumnName: "code" })
     payment_type_code: UnitDynamicCentral;
 
     //STUDENT_COVERAGES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "student_coverage_code", referencedColumnName: "code" })
     student_coverage_code: UnitDynamicCentral;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

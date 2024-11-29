@@ -9,7 +9,7 @@ export class WeeklyClass {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
-    @ManyToOne(() => Venue)
+    @ManyToOne(() => Venue, { eager: true })
     @JoinColumn({ name: "venue_id", referencedColumnName: "id" })
     venue_id: Venue;
 
@@ -38,21 +38,21 @@ export class WeeklyClass {
     @Column({type: "time"})
     end_time: string;
 
-    @ManyToOne(() => Term)
+    @ManyToOne(() => Term, { eager: true })
     @JoinColumn({ name: "autumn_term_id", referencedColumnName: "id" })
     autumn_term_id: Term;
 
     @Column({ type: "tinyint", default: 1 })
     is_autumn_indoor: boolean;
 
-    @ManyToOne(() => Term)
+    @ManyToOne(() => Term, { eager: true })
     @JoinColumn({ name: "spring_term_id", referencedColumnName: "id" })
     spring_term_id: Term;
 
     @Column({ type: "tinyint", default: 1 })
     is_spring_indoor: boolean;
 
-    @ManyToOne(() => Term)
+    @ManyToOne(() => Term, { eager: true })
     @JoinColumn({ name: "summer_term_id", referencedColumnName: "id" })
     summer_term_id: Term;
 
@@ -65,7 +65,7 @@ export class WeeklyClass {
     @Column({ type: "json", nullable: true, default: null })
     free_trial_dates: any;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

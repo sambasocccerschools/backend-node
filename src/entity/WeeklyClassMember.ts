@@ -11,20 +11,20 @@ export class WeeklyClassMember {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
-    @ManyToOne(() => WeeklyClass)
+    @ManyToOne(() => WeeklyClass, { eager: true })
     @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
     weekly_class_id: WeeklyClass;
 
-    @ManyToOne(() => SubscriptionPlanPrice)
+    @ManyToOne(() => SubscriptionPlanPrice, { eager: true })
     @JoinColumn({ name: "subscription_plan_price_id", referencedColumnName: "id" })
     subscription_plan_price_id: SubscriptionPlanPrice;
 
     //Member Status
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "member_status_code", referencedColumnName: "code" })
     member_status_code: UnitDynamicCentral;
 
-    @ManyToOne(() => Student)
+    @ManyToOne(() => Student, { eager: true })
     @JoinColumn({ name: "student_id", referencedColumnName: "id" })
     student_id: Student;
 
@@ -39,7 +39,7 @@ export class WeeklyClassMember {
     @Column({ type: "date", nullable: true, default: null })
     start_date: Date | null;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null;
 

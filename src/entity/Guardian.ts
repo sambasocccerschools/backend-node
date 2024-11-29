@@ -18,20 +18,20 @@ export class Guardian {
     other_relationship: string | null = null;
 
     // RELATIONSHIPS
-    @ManyToOne(() => UnitDynamicCentral, { nullable: true})
+    @ManyToOne(() => UnitDynamicCentral, { eager: true, nullable: true})
     @JoinColumn({ name: "relationship_code", referencedColumnName: "code" })
     relationship_code: UnitDynamicCentral | null = null;
 
     // REFERRAL SOURCES
-    @ManyToOne(() => UnitDynamicCentral, { nullable: true })
+    @ManyToOne(() => UnitDynamicCentral, { eager: true, nullable: true })
     @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
     referral_source_code: UnitDynamicCentral | null = null;
 
-    @ManyToOne(() => Family, { nullable: true })
+    @ManyToOne(() => Family, { eager: true, nullable: true })
     @JoinColumn({ name: "family_id", referencedColumnName: "id" })
     family_id: Family | null = null;
 
-    @ManyToOne(() => Franchise, { nullable: true })
+    @ManyToOne(() => Franchise, { eager: true, nullable: true })
     @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
     franchise_id: Franchise | null = null;
 

@@ -5,7 +5,7 @@ import { Request, Response,
          getUrlParam} from "@modules/index";
 import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import WeeklyClassMemberDTO from "@modules/02_Synco/weeklyclassmember/dtos/WeeklyClassMemberDTO";
-import { In, LessThan, MoreThan } from "typeorm";
+import { ILike, In, LessThan, MoreThan } from "typeorm";
 import WeeklyClassMemberController from "../controllers/WeeklyClassMemberController";
 
 class WeeklyClassMemberRoutes extends GenericRoutes {
@@ -129,8 +129,10 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
 
         //this can join by comma
         const venue_id: string | null = getUrlParam("venue_id", req) || null;
+        const venue: string | null = getUrlParam("venue", req) || null;
         const member_status_code: string | null = getUrlParam("member_status_code", req) || null;
         const student_id: string | null = getUrlParam("student_id", req) || null;
+        const student: string | null = getUrlParam("student", req) || null;
 
         if (start_date != null) {
             this.filters.where = { 
@@ -174,6 +176,14 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             }
         }
 
+        if (venue != null) {
+            this.filters.where = { 
+                ...this.filters.where, 
+                venue_id: { 
+                    name: ILike(`%${venue}%`)
+                }
+            };
+        }
 
         if(student_id != null){
             const studentIdsArray = student_id!!.split(",")
@@ -188,6 +198,15 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
                     }
                 };
             }
+        }
+
+        if (student != null) {
+            this.filters.where = { 
+                ...this.filters.where, 
+                student_id: { 
+                    name: ILike(`%${student}%`)
+                }
+            };
         }
     }
 }
