@@ -2,18 +2,15 @@ import { Request, Response,
          RequestHandler, RequestHandlerBuilder, 
          GenericController, GenericRoutes,
          FindManyOptions} from "@modules/index";
-import { SubscriptionPlanPrice } from "@index/entity/SubscriptionPlanPrice";
-import SubscriptionPlanPriceDTO from "@modules/02_Synco/subscriptionplanprice/dtos/SubscriptionPlanPriceDTO";
+import { TermSession } from "@index/entity/TermSession";
+import TermSessionDTO from "@modules/02_Synco/termsession/dtos/TermSessionDTO";
 
-class SubscriptionPlanPriceRoutes extends GenericRoutes {
+class TermSessionRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(SubscriptionPlanPrice), "/subscriptionPlanPrices");
-        this.filters.relations = ["subscription_plan_id",
-                                    "payment_type_code",
-                                    "student_coverage_code",
-                                    "franchise_id"];
+        super(new GenericController(TermSession), "/termSessions");
+        this.filters.relations = ["term_id","franchise_id"];
     }
 
     protected initializeRoutes() {
@@ -21,9 +18,9 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
 
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanPriceDTO(req))
-                                    .setMethod("getSubscriptionPlanPriceById")
-                                    .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
+                                    .setAdapter(new TermSessionDTO(req))
+                                    .setMethod("getTermSessionById")
+                                    .isValidateRole("TERM_SESSION")
                                     .isLogicalDelete()
                                     .setFilters(this.filters)
                                     .build();
@@ -35,9 +32,9 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
         
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanPriceDTO(req))
-                                    .setMethod("getSubscriptionPlanPrices")
-                                    .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
+                                    .setAdapter(new TermSessionDTO(req))
+                                    .setMethod("getTermSessions")
+                                    .isValidateRole("TERM_SESSION")
                                     .isLogicalDelete()
                                     .setFilters(this.filters)
                                     .build();
@@ -48,18 +45,16 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
-                req.body.name,
-                req.body.subscription_plan_id,
-                req.body.payment_type_code,
-                req.body.student_coverage_code
+                req.body.term_id,
+                req.body.franchise_id
             ];
             
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanPriceDTO(req))
-                                    .setMethod("insertSubscriptionPlanPrice")
+                                    .setAdapter(new TermSessionDTO(req))
+                                    .setMethod("insertTermSession")
                                     .setRequiredFiles(requiredBodyList)
-                                    .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
+                                    .isValidateRole("TERM_SESSION")
                                     .build();
         
             this.getController().insert(requestHandler);
@@ -68,9 +63,9 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanPriceDTO(req))
-                                    .setMethod("updateSubscriptionPlanPrice")
-                                    .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
+                                    .setAdapter(new TermSessionDTO(req))
+                                    .setMethod("updateTermSession")
+                                    .isValidateRole("TERM_SESSION")
                                     .build();
         
             this.getController().update(requestHandler);
@@ -79,9 +74,9 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanPriceDTO(req))
-                                    .setMethod("deleteSubscriptionPlanPrice")
-                                    .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
+                                    .setAdapter(new TermSessionDTO(req))
+                                    .setMethod("deleteTermSession")
+                                    .isValidateRole("TERM_SESSION")
                                     .isLogicalDelete()
                                     .build();
         
@@ -90,4 +85,4 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
     }
 }
 
-export default SubscriptionPlanPriceRoutes;
+export default TermSessionRoutes;

@@ -29,6 +29,7 @@ import { Guardian } from '@index/entity/Guardian';
 import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@index/entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
+import { TermSession } from '@index/entity/TermSession';
 
 
 async function createDatabaseIfNotExists() {
@@ -73,6 +74,7 @@ async function runSeed() {
                     SubscriptionPlan,
                     SubscriptionPlanPrice,
                     Term,
+                    TermSession,
                     WeeklyClass,
                     Family,
                     Student,
@@ -514,6 +516,41 @@ async function runSeed() {
     }
   ];
   await termRepository.upsert(terms as any, ["id"]);
+
+
+
+
+
+  /****************************************
+          Term Sessions
+  *****************************************/
+  const termSessionRepository = dataSource.getRepository(TermSession);
+  const term1 = await termRepository.findOneBy({ id: 278});
+  const term2 = await termRepository.findOneBy({ id: 280});
+
+  const termSessions: Partial<TermSession>[] = [
+  {
+    id: 12,
+    term_id: term1 as Term,
+    franchise_id: franchise as Franchise,
+    is_deleted: false,
+  },
+  {
+    id: 13,
+    term_id: term2 as Term,
+    franchise_id: null,
+    is_deleted: false,
+  },
+  {
+    id: 14,
+    term_id: term2 as Term,
+    franchise_id: franchise as Franchise,
+    is_deleted: true,
+  },
+  ];
+
+  await termSessionRepository.upsert(termSessions as any, ["id"]);
+
 
 
 

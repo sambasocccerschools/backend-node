@@ -32,6 +32,7 @@ import { Guardian } from '@entity/Guardian';
 import { WeeklyClassSale } from '@entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@entity/WeeklyClassLead';
+import { TermSession } from '@entity/TermSession';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -58,6 +59,7 @@ import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/r
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
 import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
 import WeeklyClassLeadRoutes from '@index/modules/02_Synco/weeklyclasslead/routers/WeeklyClassLeadRoutes';
+import TermSessionRoutes from '@index/modules/02_Synco/termsession/routers/TermSessionRoutes';
 
 
 //*************************************** */
@@ -137,7 +139,8 @@ export const TenshiMain = async () => {
       Guardian,
       WeeklyClassSale,
       WeeklyClassWaitingList,
-      WeeklyClassLead
+      WeeklyClassLead,
+      TermSession
     ]);
 
     //Cors handler middle ware
@@ -196,6 +199,8 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassSaleRoutes().getRouter());
     app.use(new WeeklyClassWaitingListRoutes().getRouter());
     app.use(new WeeklyClassLeadRoutes().getRouter());
+    app.use(new TermSessionRoutes().getRouter());
+    
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

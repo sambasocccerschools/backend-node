@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e97f37ad-9990-46fd-99cb-55105a24b561",
+		"_postman_id": "7363c586-841a-433a-9058-6a25c9185d45",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -2152,12 +2152,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/subscriptionplanprice/add",
+									"raw": "{{host}}/subscriptionPlanPrices/add",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"subscriptionplanprice",
+										"subscriptionPlanPrices",
 										"add"
 									]
 								}
@@ -2190,12 +2190,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/subscriptionplanprice/edit?id=1",
+									"raw": "{{host}}/subscriptionPlanPrices/edit?id=1",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"subscriptionplanprice",
+										"subscriptionPlanPrices",
 										"edit"
 									],
 									"query": [
@@ -2225,12 +2225,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/subscriptionplanprice/get?id=1",
+									"raw": "{{host}}/subscriptionPlanPrices/get?id=1",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"subscriptionplanprice",
+										"subscriptionPlanPrices",
 										"get"
 									],
 									"query": [
@@ -2260,12 +2260,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/subscriptionplanprice/get_all",
+									"raw": "{{host}}/subscriptionPlanPrices/get_all",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"subscriptionplanprice",
+										"subscriptionPlanPrices",
 										"get_all"
 									]
 								}
@@ -2289,12 +2289,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/subscriptionplanprice/delete?id=1",
+									"raw": "{{host}}/subscriptionPlanPrices/delete?id=1",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
-										"subscriptionplanprice",
+										"subscriptionPlanPrices",
 										"delete"
 									],
 									"query": [
@@ -2702,7 +2702,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\"\n  //\"franchise_id\": 1\n}",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 1,\n  \"sessions\":[\n\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2853,6 +2853,192 @@
 									],
 									"path": [
 										"terms",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Weekly Classes (Term Sessions)",
+					"item": [
+						{
+							"name": "Create TermSession",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"term_id\": 279\n  //\"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/termSessions/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"termSessions",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update TermSession",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"term_id\": 279\n  //\"franchise_id\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/termSessions/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"termSessions",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get TermSession by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/termSessions/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"termSessions",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All TermSession",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/termSessions/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"termSessions",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete TermSession",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/termSessions/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"termSessions",
 										"delete"
 									],
 									"query": [

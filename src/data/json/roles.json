@@ -237,6 +237,16 @@
             "GET_BY_ID",
             "GET_ALL"
           ]
+        },
+        {
+          "name": "TERM_SESSION",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
         }
       ],
       "screens": []
@@ -361,10 +371,21 @@
             "GET_BY_ID",
             "GET_ALL"
           ]
+        },
+        {
+          "name": "TERM_SESSION",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
         }
       ],
       "screens": []
     },
+
 
 
 

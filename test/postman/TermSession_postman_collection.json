@@ -1,9 +1,9 @@
 {
   "info": {
-    "name": "WeeklyClassLead",
+    "name": "TermSession",
     "item": [
       {
-        "name": "Create WeeklyClassLead",
+        "name": "Create TermSession",
         "request": {
           "method": "POST",
           "header": [
@@ -20,7 +20,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"lead_status_code\": \"\\\"test_lead_status_code\\\"\",\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"guardian_id\": \"\\\"test_guardian_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"term_id\": \"\\\"test_term_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -33,14 +33,14 @@
               "{{host}}"
             ],
             "path": [
-              "weeklyclasslead",
+              "termsession",
               "add"
             ]
           }
         }
       },
       {
-        "name": "Update WeeklyClassLead",
+        "name": "Update TermSession",
         "request": {
           "method": "PUT",
           "header": [
@@ -57,7 +57,7 @@
           ],
           "body": {
             "mode": "raw",
-            "raw": "{\n  \"lead_status_code\": \"\\\"test_lead_status_code\\\"\",\n  \"weekly_class_id\": \"\\\"test_weekly_class_id\\\"\",\n  \"guardian_id\": \"\\\"test_guardian_id\\\"\",\n  \"agent_id\": \"\\\"test_agent_id\\\"\",\n  \"booked_by\": \"\\\"test_booked_by\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
+            "raw": "{\n  \"term_id\": \"\\\"test_term_id\\\"\",\n  \"franchise_id\": \"\\\"test_franchise_id\\\"\"\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -70,7 +70,7 @@
               "{{host}}"
             ],
             "path": [
-              "weeklyclasslead",
+              "termsession",
               "edit"
             ],
             "query": [
@@ -83,7 +83,7 @@
         }
       },
       {
-        "name": "Get WeeklyClassLead by ID",
+        "name": "Get TermSession by ID",
         "request": {
           "method": "GET",
           "header": [
@@ -104,7 +104,7 @@
               "{{host}}"
             ],
             "path": [
-              "weeklyclasslead",
+              "termsession",
               "get"
             ],
             "query": [
@@ -117,7 +117,7 @@
         }
       },
       {
-        "name": "Get All WeeklyClassLead",
+        "name": "Get All TermSession",
         "request": {
           "method": "GET",
           "header": [
@@ -138,14 +138,14 @@
               "{{host}}"
             ],
             "path": [
-              "weeklyclasslead",
+              "termsession",
               "get_all"
             ]
           }
         }
       },
       {
-        "name": "Delete WeeklyClassLead",
+        "name": "Delete TermSession",
         "request": {
           "method": "DELETE",
           "header": [
@@ -166,7 +166,7 @@
               "{{host}}"
             ],
             "path": [
-              "weeklyclasslead",
+              "termsession",
               "delete"
             ],
             "query": [
