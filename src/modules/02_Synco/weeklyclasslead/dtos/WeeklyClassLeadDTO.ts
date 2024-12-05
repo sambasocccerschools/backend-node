@@ -11,12 +11,12 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
 
     private getEntity(isCreating: boolean): WeeklyClassLead {
         const entity = new WeeklyClassLead();
-        entity.lead_status_code = this.req.body.lead_status_code;
-        entity.weekly_class_id = this.req.body.weekly_class_id;
-        entity.guardian_id = this.req.body.guardian_id;
-        entity.agent_id = this.req.body.agent_id;
+        entity.lead_status = this.req.body.lead_status_code;
+        entity.weekly_class = this.req.body.weekly_class_id;
+        entity.guardian = this.req.body.guardian_id;
+        entity.agent = this.req.body.agent_id;
         entity.booked_by = this.req.body.booked_by;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -41,12 +41,12 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
     entityToResponse(entity: WeeklyClassLead): any {
         return {
             id: entity.id,
-            lead_status_code: entity.lead_status_code,
-            weekly_class_id: entity.weekly_class_id,
-            guardian_id: entity.guardian_id,
-            agent_id: entity.agent_id,
+            lead_status: entity.lead_status,
+            weekly_class: entity.weekly_class,
+            guardian: entity.guardian,
+            agent: entity.agent,
             booked_by: entity.booked_by,
-            franchise_id: entity.franchise_id,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

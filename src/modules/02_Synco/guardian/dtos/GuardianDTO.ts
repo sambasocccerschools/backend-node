@@ -12,10 +12,10 @@ export default class GuardianDTO implements IAdapterFromBody {
     private getEntity(isCreating: boolean): Guardian {
         const entity = new Guardian();
         entity.other_relationship = this.req.body.other_relationship;
-        entity.relationship_code = this.req.body.relationship_code;
-        entity.referral_source_code = this.req.body.referral_source_code;
-        entity.family_id = this.req.body.family_id;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.relationship = this.req.body.relationship_code;
+        entity.referral_source = this.req.body.referral_source_code;
+        entity.family = this.req.body.family_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -42,10 +42,10 @@ export default class GuardianDTO implements IAdapterFromBody {
         return {
             id: entity.id,
             other_relationship: entity.other_relationship,
-            relationship: entity.relationship_code,
-            referral_source: entity.referral_source_code,
-            family: entity.family_id,
-            franchise: entity.franchise_id,
+            relationship: entity.relationship,
+            referral_source: entity.referral_source,
+            family: entity.family,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

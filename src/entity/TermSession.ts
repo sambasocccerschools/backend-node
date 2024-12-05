@@ -8,12 +8,12 @@ export class TermSession {
     id: number;
 
     @ManyToOne(() => Term, { eager: true })
-    @JoinColumn({ name: "term_id", referencedColumnName: "id" })
-    term_id: Term;
+    @JoinColumn({ name: "term", referencedColumnName: "id" })
+    term: Term;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, {  nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

@@ -1,5 +1,6 @@
 import { AbilityGroup } from "@index/entity/AbilityGroup";
 import { Request, IAdapterFromBody} from "@modules/index";
+import { Franchise } from '@entity/Franchise';
 
 
 export default  class AbilityGroupDTO implements IAdapterFromBody{
@@ -14,9 +15,9 @@ export default  class AbilityGroupDTO implements IAdapterFromBody{
         entity.name = this.req.body.name;
         entity.min_age = this.req.body.min_age;
         entity.max_age = this.req.body.max_age;
-        entity.service_code = this.req.body.service_code;
-        entity.service_package_code = this.req.body.service_package_code;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.service = this.req.body.service_code;
+        entity.service_package = this.req.body.service_package_code;
+        entity.franchise = this.req.body.franchise_id;
 
         if(isCreating){
             entity.created_date = new Date();
@@ -39,9 +40,9 @@ export default  class AbilityGroupDTO implements IAdapterFromBody{
             name: entity.name,
             min_age: entity.min_age,
             max_age: entity.max_age,
-            service: entity.service_code ? entity.service_code : null,
-            service_package: entity.service_package_code ? entity.service_package_code : null,
-            franchise: entity.franchise_id ? entity.franchise_id : null, 
+            service: entity.service ? entity.service : null,
+            service_package: entity.service_package ? entity.service_package : null,
+            franchise: entity.franchise ? entity.franchise : null, 
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };

@@ -10,7 +10,7 @@ class TermRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(Term), "/terms");
-        this.filters.relations = ["season_code","franchise_id"];
+        this.filters.relations = ["season","franchise"];
     }
 
     protected initializeRoutes() {

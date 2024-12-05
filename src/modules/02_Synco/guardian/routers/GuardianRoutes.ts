@@ -11,10 +11,10 @@ class GuardianRoutes extends GenericRoutes {
     constructor() {
         super(new GenericController(Guardian), "/guardian");
         this.filters.relations = [
-            "relationship_code",
-            "referral_source_code",
-            "family_id",
-            "franchise_id"];
+            "relationship",
+            "referral_source",
+            "family",
+            "franchise"];
     }
 
     protected initializeRoutes() {

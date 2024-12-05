@@ -31,10 +31,17 @@ private regexValidatorList: [string, string][];
 private requiredFieldsList: Array<string> 
 //the filters for the gets
 private filters: FindManyOptions;
+//If the update service need the id required into url, by default it is true
+private requireIdFromQueryParam: boolean = true;
 
 constructor(res: Response, req: Request) {
    this.res = res;
    this.req = req;
+}
+   
+isRequireIdFromQueryParams(isRequired : boolean): IRequestHandlerBuilder {
+   this.requireIdFromQueryParam = isRequired;
+   return this;
 }
 
 setRequiredFiles(requiredFieldsList: Array<string>): IRequestHandlerBuilder {
@@ -100,6 +107,7 @@ build(): RequestHandler {
                              this.regexValidatorList,
                              this.requiredFieldsList,
                              this.filters,
-                             this.codeMessageResponse);
+                             this.codeMessageResponse,
+                             this.requireIdFromQueryParam);
 }
 }

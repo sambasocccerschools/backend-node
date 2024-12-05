@@ -14,8 +14,8 @@ export default class HolidayCampDateDTO implements IAdapterFromBody {
         entity.name = this.req.body.name;
         entity.start_date = this.req.body.start_date;
         entity.end_date = this.req.body.end_date;
-        entity.camp_type_code = this.req.body.camp_type_code;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.camp_type = this.req.body.camp_type_code;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -44,8 +44,8 @@ export default class HolidayCampDateDTO implements IAdapterFromBody {
             name: entity.name,
             start_date: entity.start_date,
             end_date: entity.end_date,
-            camp_type: entity.camp_type_code,
-            franchise: entity.franchise_id,
+            camp_type: entity.camp_type,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

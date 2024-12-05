@@ -13,12 +13,12 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
     constructor() {
         super(new GenericController(WeeklyClassLead), "/weeklyClassesLeads");
         this.filters.relations = [
-            "lead_status_code",
-            "weekly_class_id",
-            "guardian_id",
-            "agent_id",
+            "lead_status",
+            "weekly_class",
+            "guardian",
+            "agent",
             "booked_by",
-            "franchise_id"
+            "franchise"
         ];
     }
 

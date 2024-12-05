@@ -20,8 +20,8 @@ export default  class VenueDTO implements IAdapterFromBody{
         entity.has_parking = this.req.body.has_parking;
         entity.has_congestion = this.req.body.has_congestion;
         entity.price = this.req.body.price;
-        entity.region_code = this.req.body.region_code;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.region = this.req.body.region_code;
+        entity.franchise = this.req.body.franchise_id;
 
         if(isCreating){
             entity.created_date = new Date();
@@ -56,8 +56,8 @@ export default  class VenueDTO implements IAdapterFromBody{
             has_parking: entity.has_parking,
             has_congestion: entity.has_congestion,
             price: entity.price,
-            region: entity.region_code ? entity.region_code : null,
-            franchise: entity.franchise_id ? entity.franchise_id : null, 
+            region: entity.region ? entity.region : null,
+            franchise: entity.franchise ? entity.franchise : null, 
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };

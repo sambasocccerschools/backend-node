@@ -11,12 +11,12 @@ export class SubscriptionPlan {
 
     //SERVICE
     @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "service_code", referencedColumnName: "code" })
-    service_code: UnitDynamicCentral;
+    @JoinColumn({ name: "service", referencedColumnName: "code" })
+    service: UnitDynamicCentral;
 
     @ManyToOne(() => Venue, { eager: true })
-    @JoinColumn({ name: "venue_id", referencedColumnName: "id" })
-    venue_id: Venue;
+    @JoinColumn({ name: "venue", referencedColumnName: "id" })
+    venue: Venue;
 
     @Column({ type: "varchar", length: 255 })
     name: string;
@@ -24,9 +24,9 @@ export class SubscriptionPlan {
     @Column({ type: "int", default: 0 })
     duration: number;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, {  nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

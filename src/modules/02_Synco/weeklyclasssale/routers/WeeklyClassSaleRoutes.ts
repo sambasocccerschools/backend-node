@@ -13,14 +13,14 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
     constructor() {
         super(new GenericController(WeeklyClassSale), "/weeklyClassesSales");
         this.filters.relations = [
-            "weekly_class_member_id",
-            "weekly_class_id",
-            "subscription_plan_price_id",
-            "sale_status_code",
-            "student_id",
-            "agent_id",
+            "weekly_class_member",
+            "weekly_class",
+            "subscription_plan_price",
+            "sale_status",
+            "student",
+            "agent",
             "booked_by",
-            "franchise_id"];
+            "franchise"];
     }
 
     protected initializeRoutes() {

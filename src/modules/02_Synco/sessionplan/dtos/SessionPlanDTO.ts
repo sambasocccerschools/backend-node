@@ -13,8 +13,8 @@ export default class SessionPlanDTO implements IAdapterFromBody {
         const entity = new SessionPlan();
         entity.title = this.req.body.title;
         entity.description = this.req.body.description;
-        entity.ability_group_id = this.req.body.ability_group_id;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.ability_group = this.req.body.ability_group_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -42,8 +42,8 @@ export default class SessionPlanDTO implements IAdapterFromBody {
             id: entity.id,
             title: entity.title,
             description: entity.description,
-            ability_group: entity.ability_group_id,
-            franchise: entity.franchise_id,
+            ability_group: entity.ability_group,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

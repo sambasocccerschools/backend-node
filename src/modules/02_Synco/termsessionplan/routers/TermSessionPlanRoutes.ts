@@ -2,15 +2,20 @@ import { Request, Response,
          RequestHandler, RequestHandlerBuilder, 
          GenericController, GenericRoutes,
          FindManyOptions} from "@modules/index";
-import { SubscriptionPlan } from "@index/entity/SubscriptionPlan";
-import SubscriptionPlanDTO from "@modules/02_Synco/subscriptionplan/dtos/SubscriptionPlanDTO";
+import { TermSessionPlan } from "@index/entity/TermSessionPlan";
+import TermSessionPlanDTO from "@modules/02_Synco/termsessionplan/dtos/TermSessionPlanDTO";
 
-class SubscriptionPlanRoutes extends GenericRoutes {
+class TermSessionPlanRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(SubscriptionPlan), "/subscriptionPlans");
-        this.filters.relations = ["service","venue","franchise"];
+        super(new GenericController(TermSessionPlan), "/termSessionPlan");
+        this.filters.relations = [
+            "term_session",
+            "ability_group",
+            "session_plan",
+            "franchise"
+        ];
     }
 
     protected initializeRoutes() {
@@ -18,11 +23,11 @@ class SubscriptionPlanRoutes extends GenericRoutes {
 
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanDTO(req))
-                                    .setMethod("getSubscriptionPlanById")
-                                    .isValidateRole("SUBSCRIPTION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setAdapter(new TermSessionPlanDTO(req))
+                                    .setMethod("getTermSessionPlanById")
+                                    .isValidateRole("TERM_SESSION_PLAN")
                                     .isLogicalDelete()
+                                    .setFilters(this.filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -32,11 +37,11 @@ class SubscriptionPlanRoutes extends GenericRoutes {
         
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanDTO(req))
-                                    .setMethod("getSubscriptionPlans")
-                                    .isValidateRole("SUBSCRIPTION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setAdapter(new TermSessionPlanDTO(req))
+                                    .setMethod("getTermSessionPlans")
+                                    .isValidateRole("TERM_SESSION_PLAN")
                                     .isLogicalDelete()
+                                    .setFilters(this.filters)
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -45,18 +50,17 @@ class SubscriptionPlanRoutes extends GenericRoutes {
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
-                req.body.service,
-                req.body.venue,
-                req.body.name,
-                req.body.duration
+                req.body.term_session_id,
+                req.body.ability_group_id,
+                req.body.session_plan_id
             ];
             
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanDTO(req))
-                                    .setMethod("insertSubscriptionPlan")
+                                    .setAdapter(new TermSessionPlanDTO(req))
+                                    .setMethod("insertTermSessionPlan")
                                     .setRequiredFiles(requiredBodyList)
-                                    .isValidateRole("SUBSCRIPTION_PLAN")
+                                    .isValidateRole("TERM_SESSION_PLAN")
                                     .build();
         
             this.getController().insert(requestHandler);
@@ -65,9 +69,9 @@ class SubscriptionPlanRoutes extends GenericRoutes {
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanDTO(req))
-                                    .setMethod("updateSubscriptionPlan")
-                                    .isValidateRole("SUBSCRIPTION_PLAN")
+                                    .setAdapter(new TermSessionPlanDTO(req))
+                                    .setMethod("updateTermSessionPlan")
+                                    .isValidateRole("TERM_SESSION_PLAN")
                                     .build();
         
             this.getController().update(requestHandler);
@@ -76,9 +80,9 @@ class SubscriptionPlanRoutes extends GenericRoutes {
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
-                                    .setAdapter(new SubscriptionPlanDTO(req))
-                                    .setMethod("deleteSubscriptionPlan")
-                                    .isValidateRole("SUBSCRIPTION_PLAN")
+                                    .setAdapter(new TermSessionPlanDTO(req))
+                                    .setMethod("deleteTermSessionPlan")
+                                    .isValidateRole("TERM_SESSION_PLAN")
                                     .isLogicalDelete()
                                     .build();
         
@@ -87,4 +91,4 @@ class SubscriptionPlanRoutes extends GenericRoutes {
     }
 }
 
-export default SubscriptionPlanRoutes;
+export default TermSessionPlanRoutes;

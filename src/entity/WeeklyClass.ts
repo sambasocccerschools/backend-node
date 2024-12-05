@@ -10,8 +10,8 @@ export class WeeklyClass {
     id: number;
 
     @ManyToOne(() => Venue, { eager: true })
-    @JoinColumn({ name: "venue_id", referencedColumnName: "id" })
-    venue_id: Venue;
+    @JoinColumn({ name: "venue", referencedColumnName: "id" })
+    venue: Venue;
 
     @Column({ type: "varchar", length: 255 })
     name: string;
@@ -39,22 +39,22 @@ export class WeeklyClass {
     end_time: string;
 
     @ManyToOne(() => Term, { eager: true })
-    @JoinColumn({ name: "autumn_term_id", referencedColumnName: "id" })
-    autumn_term_id: Term;
+    @JoinColumn({ name: "autumn_term", referencedColumnName: "id" })
+    autumn_term: Term;
 
     @Column({ type: "tinyint", default: 1 })
     is_autumn_indoor: boolean;
 
     @ManyToOne(() => Term, { eager: true })
-    @JoinColumn({ name: "spring_term_id", referencedColumnName: "id" })
-    spring_term_id: Term;
+    @JoinColumn({ name: "spring_term", referencedColumnName: "id" })
+    spring_term: Term;
 
     @Column({ type: "tinyint", default: 1 })
     is_spring_indoor: boolean;
 
     @ManyToOne(() => Term, { eager: true })
-    @JoinColumn({ name: "summer_term_id", referencedColumnName: "id" })
-    summer_term_id: Term;
+    @JoinColumn({ name: "summer_term", referencedColumnName: "id" })
+    summer_term: Term;
 
     @Column({ type: "tinyint", default: 1 })
     is_summer_indoor: boolean;
@@ -66,8 +66,8 @@ export class WeeklyClass {
     free_trial_dates: any;
 
     @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

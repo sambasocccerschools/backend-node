@@ -15,8 +15,8 @@ export default class TermDTO implements IAdapterFromBody {
         entity.start_date = this.req.body.start_date;
         entity.end_date = this.req.body.end_date;
         entity.half_term_date = this.req.body.half_term_date;
-        entity.season_code = this.req.body.season_code;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.season = this.req.body.season_code;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -46,8 +46,8 @@ export default class TermDTO implements IAdapterFromBody {
             start_date: entity.start_date,
             end_date: entity.end_date,
             half_term_date: entity.half_term_date,
-            season: entity.season_code,
-            franchise: entity.franchise_id,
+            season: entity.season,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

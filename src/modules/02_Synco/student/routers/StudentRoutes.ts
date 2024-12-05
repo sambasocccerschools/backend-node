@@ -10,7 +10,7 @@ class StudentRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(Student), "/student");
-        this.filters.relations = ["family_id","franchise_id"];
+        this.filters.relations = ["family","franchise"];
     }
 
     protected initializeRoutes() {

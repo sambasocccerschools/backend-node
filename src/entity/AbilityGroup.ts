@@ -18,19 +18,19 @@ export class AbilityGroup {
     @Column({ type: "int", unsigned: true })
     max_age: number;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     //SERVICES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "service_code", referencedColumnName: "code" })
-    service_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "service", referencedColumnName: "code" })
+    service: UnitDynamicCentral;
 
     //SERVICE_PACKAGES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "service_package_code", referencedColumnName: "code" })
-    service_package_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "service_package", referencedColumnName: "code" })
+    service_package: UnitDynamicCentral;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

@@ -130,7 +130,7 @@ export default  class GenericController extends GenericValidation implements IGe
 
             try {
                 // Execute the update action in the database
-                const updateEntity = await this.getRepository().update(id, body,
+                const updateEntity = await this.getRepository().update(id!!, body,
                                                              reqHandler.getLogicalDelete());
 
                 const codeResponse : string = 

@@ -4,12 +4,120 @@ import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import RequestHandler from "@TenshiJS/generics/RequestHandler/RequestHandler";
 import HttpAction from "@TenshiJS/helpers/HttpAction";
 import JWTObject from "@TenshiJS/objects/JWTObject";
+import WeeklyClassMemberDTO from "../dtos/WeeklyClassMemberDTO";
+import GenericRepository from '../../../../../tenshi/generics/Repository/GenericRepository';
+
+import { FindManyOptions } from 'tenshi/generics/index';
+import { ageOfRecord, getCreatedDate } from "@index/utils/DateUtils";
+import { Guardian } from "@index/entity/Guardian";
 
 export default  class WeeklyClassMemberController extends GenericController{
 
     constructor() {
         super(WeeklyClassMember);
     }
+
+    async changeStatus(reqHandler: RequestHandler) : Promise<any> {
+        return this.getService().updateService(reqHandler, async (jwtData, httpExec) => {
+          
+            try {
+
+                let isSuccess = true;
+                let errorMessage:any = "";
+
+                const weeklyClassesMemberBody =(reqHandler.getAdapter() as WeeklyClassMemberDTO).weeklyClassesMemberChangeStatusPostBody();
+                for (const id of weeklyClassesMemberBody.weekly_classes_member_id) {
+                    const body = {
+                        "member_status_code": weeklyClassesMemberBody.member_status_code,
+                    };
+                
+                    try {
+                        await this.getRepository().update(id!!, body, reqHandler.getLogicalDelete());
+                    } catch (error: any) {
+                        isSuccess = false;
+                        errorMessage += error.message;
+                    }
+                }
+
+                if (isSuccess) {
+                    return httpExec.successAction(
+                        reqHandler.getAdapter().entitiesToResponse(null),
+                        ConstHTTPRequest.UPDATE_ENTRIES_SUCCESS
+                    );
+                } else {
+                    return await httpExec.databaseError(
+                        errorMessage,
+                        jwtData!.id.toString(),
+                        reqHandler.getMethod(),
+                        this.getControllerName()
+                    );
+                }
+
+            } catch (error : any) {
+                // Return a database error response
+                return await httpExec.databaseError(error, jwtData!.id.toString(),
+                reqHandler.getMethod(), this.getControllerName());
+            }
+        });
+    }
+
+
+    async getAll(reqHandler: RequestHandler): Promise<any> {
+
+        return this.getService().getAllService(reqHandler, async (jwtData : JWTObject, httpExec: HttpAction, page: number, size: number) => {
+            try {
+               
+                // Execute the get all action in the database
+                const entities = await this.getRepository()
+                                .findAll(reqHandler.getLogicalDelete(), 
+                                reqHandler.getFilters(), page, size);
+
+                if(entities != null && entities != undefined){
+                    const codeResponse : string = 
+                        reqHandler.getCodeMessageResponse() != null ? 
+                        reqHandler.getCodeMessageResponse() as string :
+                        ConstHTTPRequest.GET_ALL_SUCCESS;
+
+                    const guardianRepository = await new GenericRepository(Guardian);
+
+                    for (const entity of entities) {
+
+                        if(entity.student.family != null && entity.student.family != undefined){
+                            const findManyOptions: FindManyOptions = {
+                                where: {
+                                    family: Number(entity.student.family.id),
+                                },
+                                order: {
+                                    id: 'ASC', 
+                                },
+                                take: 1, 
+                            };
+                            const guardian = await guardianRepository.findAll(reqHandler.getLogicalDelete(), findManyOptions);
+                            if (guardian && guardian.length > 0) {
+                                entity.life_cycle_membership = ageOfRecord(getCreatedDate(guardian[0]));
+                            } else {
+                                entity.life_cycle_membership = null; 
+                            }
+                        }
+                    }
+
+                    // Return the success response
+                    return httpExec.successAction(
+                        reqHandler.getAdapter().entitiesToResponse(entities), 
+                        codeResponse);
+
+                }else{
+                    return httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.DONT_EXISTS);
+                }
+
+            } catch (error: any) {
+                // Return the database error response
+                return await httpExec.databaseError(error, jwtData.id.toString(),
+                    reqHandler.getMethod(), this.getControllerName());
+            }
+        });
+    }
+
 
     private formatPercentage(value: number): string {
         return `${(value * 100).toFixed(2)}%`;

@@ -12,7 +12,7 @@ class WeeklyClassRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(WeeklyClass), "/weeklyClasses");
-        this.filters.relations = ["venue_id","autumn_term_id","spring_term_id","summer_term_id","franchise_id"];
+        this.filters.relations = ["venue","autumn_term","spring_term","summer_term","franchise"];
     }
 
     protected initializeRoutes() {

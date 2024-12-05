@@ -1,16 +1,19 @@
 
-import { TermSession } from "@index/entity/TermSession";
+import { TermSessionPlan } from "@index/entity/TermSessionPlan";
 import { Request, IAdapterFromBody } from "@modules/index";
-export default class TermSessionDTO implements IAdapterFromBody {
+
+export default class TermSessionPlanDTO implements IAdapterFromBody {
     req: Request;
 
     constructor(req: Request) {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): TermSession {
-        const entity = new TermSession();
-        entity.term = this.req.body.term_id;
+    private getEntity(isCreating: boolean): TermSessionPlan {
+        const entity = new TermSessionPlan();
+        entity.term_session = this.req.body.term_session_id;
+        entity.ability_group = this.req.body.ability_group_id;
+        entity.session_plan = this.req.body.session_plan_id;
         entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
@@ -24,27 +27,30 @@ export default class TermSessionDTO implements IAdapterFromBody {
     }
 
     // POST
-    entityFromPostBody(): TermSession {
+    entityFromPostBody(): TermSessionPlan {
         return this.getEntity(true);
     }
 
     // PUT
-    entityFromPutBody(): TermSession {
+    entityFromPutBody(): TermSessionPlan {
         return this.getEntity(false);
     }
 
     // GET
-    entityToResponse(entity: TermSession): any {
+    entityToResponse(entity: TermSessionPlan): any {
         return {
+            
             id: entity.id,
-            term: entity.term,
+            term_session: entity.term_session,
+            ability_group: entity.ability_group,
+            session_plan: entity.session_plan,
             franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: TermSession[] | null): any {
+    entitiesToResponse(entities: TermSessionPlan[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

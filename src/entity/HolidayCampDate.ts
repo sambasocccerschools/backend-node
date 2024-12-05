@@ -18,13 +18,13 @@ export class HolidayCampDate {
     end_date: Date;
 
     //CAMP_TYPES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "camp_type_code", referencedColumnName: "code" })
-    camp_type_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "camp_type", referencedColumnName: "code" })
+    camp_type: UnitDynamicCentral;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise)
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

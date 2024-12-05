@@ -10,7 +10,7 @@ class FamilyRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(Family), "/family");
-        this.filters.relations = ["franchise_id"];
+        this.filters.relations = ["franchise"];
     }
 
     protected initializeRoutes() {

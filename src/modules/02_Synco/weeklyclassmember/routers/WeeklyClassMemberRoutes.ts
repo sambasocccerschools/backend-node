@@ -14,13 +14,14 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
     constructor() {
         super(new WeeklyClassMemberController(), "/weeklyClassesMembers");
         this.filters.relations = [
-                                    "weekly_class_id",
-                                    "subscription_plan_price_id",
-                                    "member_status_code",
-                                    "student_id",
-                                    "agent_id",
+                                    "weekly_class",
+                                    "subscription_plan_price",
+                                    "member_status",
+                                    "student",
+                                    "agent",
                                     "booked_by",
-                                    "franchise_id"];
+                                    "franchise",
+                                    "student.family"];
     }
 
     protected initializeRoutes() {
@@ -96,6 +97,17 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             this.getController().delete(requestHandler);
         });
 
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassMemberDTO(req))
+                                    .setMethod("changeStatusWeeklyClassMember")
+                                    .isValidateRole("WEEKLY_CLASS_MEMBER")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
+        
+            (this.getController() as WeeklyClassMemberController).changeStatus(requestHandler);
+        });
 
 
 

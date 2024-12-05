@@ -21,13 +21,13 @@ export class Term {
     half_term_date: Date;
 
     //SEASON
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "season_code", referencedColumnName: "code" })
-    season_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "season", referencedColumnName: "code" })
+    season: UnitDynamicCentral;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

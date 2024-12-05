@@ -10,7 +10,7 @@ class SessionPlanRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(SessionPlan), "/sessionPlans");
-        this.filters.relations = ["ability_group_id","franchise_id"];
+        this.filters.relations = ["ability_group","franchise"];
     }
 
     protected initializeRoutes() {

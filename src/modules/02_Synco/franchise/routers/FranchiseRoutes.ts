@@ -11,7 +11,7 @@ class FranchiseRoutes extends GenericRoutes{
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(Franchise), "/franchise");
-        this.filters.relations = ["referral_source_code", "added_by"];
+        this.filters.relations = ["referral_source", "added_by"];
     }
 
     protected initializeRoutes() {

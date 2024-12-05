@@ -25,13 +25,13 @@ export class Student {
     @Column({ type: "varchar", length: 15, nullable: true, default: null  })
     gender: string;
 
-    @ManyToOne(() => Family, {eager: true, nullable: true })
-    @JoinColumn({ name: "family_id", referencedColumnName: "id" })
-    family_id: Family | null;
+    @ManyToOne(() => Family, { nullable: true })
+    @JoinColumn({ name: "family", referencedColumnName: "id" })
+    family: Family | null;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, {nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
   
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

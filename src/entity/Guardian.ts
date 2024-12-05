@@ -18,22 +18,22 @@ export class Guardian {
     other_relationship: string | null = null;
 
     // RELATIONSHIPS
-    @ManyToOne(() => UnitDynamicCentral, { eager: true, nullable: true})
-    @JoinColumn({ name: "relationship_code", referencedColumnName: "code" })
-    relationship_code: UnitDynamicCentral | null = null;
+    @ManyToOne(() => UnitDynamicCentral, { nullable: true})
+    @JoinColumn({ name: "relationship", referencedColumnName: "code" })
+    relationship: UnitDynamicCentral | null = null;
 
     // REFERRAL SOURCES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true, nullable: true })
-    @JoinColumn({ name: "referral_source_code", referencedColumnName: "code" })
-    referral_source_code: UnitDynamicCentral | null = null;
+    @ManyToOne(() => UnitDynamicCentral, { nullable: true })
+    @JoinColumn({ name: "referral_source", referencedColumnName: "code" })
+    referral_source: UnitDynamicCentral | null = null;
 
-    @ManyToOne(() => Family, { eager: true, nullable: true })
-    @JoinColumn({ name: "family_id", referencedColumnName: "id" })
-    family_id: Family | null = null;
+    @ManyToOne(() => Family, { nullable: true })
+    @JoinColumn({ name: "family", referencedColumnName: "id" })
+    family: Family | null = null;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null = null;
+    @ManyToOne(() => Franchise, {  nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null = null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

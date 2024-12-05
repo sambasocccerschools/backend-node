@@ -22,22 +22,22 @@ export class SubscriptionPlanPrice {
     one_off_joining_fee: number;
 
     @ManyToOne(() => SubscriptionPlan, { eager: true })
-    @JoinColumn({ name: "subscription_plan_id", referencedColumnName: "id" })
-    subscription_plan_id: SubscriptionPlan;
+    @JoinColumn({ name: "subscription_plan", referencedColumnName: "id" })
+    subscription_plan: SubscriptionPlan;
 
     //PAYMENT_TYPES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "payment_type_code", referencedColumnName: "code" })
-    payment_type_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "payment_type", referencedColumnName: "code" })
+    payment_type: UnitDynamicCentral;
 
     //STUDENT_COVERAGES
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "student_coverage_code", referencedColumnName: "code" })
-    student_coverage_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "student_coverage", referencedColumnName: "code" })
+    student_coverage: UnitDynamicCentral;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, {  nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

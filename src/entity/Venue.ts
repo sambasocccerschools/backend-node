@@ -38,14 +38,14 @@ export class Venue {
     @Column('decimal', { precision: 10, scale: 2, nullable: true, default: null  })
     price: number;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, {  nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     //REGIONS
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "region_code", referencedColumnName: "code" })
-    region_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "region", referencedColumnName: "code" })
+    region: UnitDynamicCentral;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

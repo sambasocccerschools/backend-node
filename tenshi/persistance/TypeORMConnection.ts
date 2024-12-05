@@ -67,6 +67,7 @@ export class Database {
                 password: config.DB.PASSWORD, // Password for the database
                 database: config.DB.NAME, // Name of the database
                 entities: Database.initializedEntities, // Array of entities to be used
+                //logging: config.SERVER.IS_DEBUGGING,
                 synchronize: true, // Synchronize the schema with the database
                 extra: {
                     connectionLimit: 150, 

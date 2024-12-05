@@ -1,7 +1,7 @@
 import { ConstMessages } from 'tenshi/consts/Const';
 import { EntityTarget, EntityManager, FindOneOptions, FindManyOptions, Database, Repository} from 'tenshi/generics/index';
 import IGenericRepository from "tenshi/generics/Repository/IGenericRepository";
-import { DataSource } from 'typeorm';
+import { DataSource, QueryFailedError } from 'typeorm';
 
 /*
     This class have the Connection to DB with ORM &&

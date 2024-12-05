@@ -17,29 +17,29 @@ export class WeeklyClassLead {
     id: number;
 
     //LEAD_STATUS
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "lead_status_code", referencedColumnName: "code" })
-    lead_status_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "lead_status", referencedColumnName: "code" })
+    lead_status: UnitDynamicCentral;
 
     @ManyToOne(() => WeeklyClass, { eager: true, nullable: true })
-    @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
-    weekly_class_id: WeeklyClass | null;
+    @JoinColumn({ name: "weekly_class", referencedColumnName: "id" })
+    weekly_class: WeeklyClass | null;
 
-    @ManyToOne(() => Guardian, { eager: true })
-    @JoinColumn({ name: "guardian_id", referencedColumnName: "id" })
-    guardian_id: Guardian;
+    @ManyToOne(() => Guardian)
+    @JoinColumn({ name: "guardian", referencedColumnName: "id" })
+    guardian: Guardian;
 
     @ManyToOne(() => User, { nullable: true })
-    @JoinColumn({ name: "agent_id", referencedColumnName: "id" })
-    agent_id: User | null;
+    @JoinColumn({ name: "agent", referencedColumnName: "id" })
+    agent: User | null;
 
     @ManyToOne(() => User, { nullable: true })
     @JoinColumn({ name: "booked_by", referencedColumnName: "id" })
     booked_by: User | null;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

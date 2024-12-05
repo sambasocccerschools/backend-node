@@ -12,25 +12,25 @@ export class WeeklyClassMember {
     id: number;
 
     @ManyToOne(() => WeeklyClass, { eager: true })
-    @JoinColumn({ name: "weekly_class_id", referencedColumnName: "id" })
-    weekly_class_id: WeeklyClass;
+    @JoinColumn({ name: "weekly_class", referencedColumnName: "id" })
+    weekly_class: WeeklyClass;
 
     @ManyToOne(() => SubscriptionPlanPrice, { eager: true })
-    @JoinColumn({ name: "subscription_plan_price_id", referencedColumnName: "id" })
-    subscription_plan_price_id: SubscriptionPlanPrice;
+    @JoinColumn({ name: "subscription_plan_price", referencedColumnName: "id" })
+    subscription_plan_price: SubscriptionPlanPrice;
 
     //Member Status
-    @ManyToOne(() => UnitDynamicCentral, { eager: true })
-    @JoinColumn({ name: "member_status_code", referencedColumnName: "code" })
-    member_status_code: UnitDynamicCentral;
+    @ManyToOne(() => UnitDynamicCentral)
+    @JoinColumn({ name: "member_status", referencedColumnName: "code" })
+    member_status: UnitDynamicCentral;
 
-    @ManyToOne(() => Student, { eager: true })
-    @JoinColumn({ name: "student_id", referencedColumnName: "id" })
-    student_id: Student;
+    @ManyToOne(() => Student)
+    @JoinColumn({ name: "student", referencedColumnName: "id" })
+    student: Student;
 
     @ManyToOne(() => User, { nullable: true })
-    @JoinColumn({ name: "agent_id", referencedColumnName: "id" })
-    agent_id: User | null;
+    @JoinColumn({ name: "agent", referencedColumnName: "id" })
+    agent: User | null;
 
     @ManyToOne(() => User, { nullable: true })
     @JoinColumn({ name: "booked_by", referencedColumnName: "id" })
@@ -39,9 +39,9 @@ export class WeeklyClassMember {
     @Column({ type: "date", nullable: true, default: null })
     start_date: Date | null;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

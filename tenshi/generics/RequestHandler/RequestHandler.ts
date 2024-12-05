@@ -18,6 +18,7 @@ private regexValidatorList: [string, string][] | null = null;
 private requiredFieldsList: Array<string> | null = null;
 private filters: FindManyOptions | null = null;
 private codeMessageResponse: string | null = null;
+private requireIdFromQueryParam: boolean = true;
 
 constructor(res: Response, req: Request, 
            method: string, 
@@ -29,7 +30,8 @@ constructor(res: Response, req: Request,
            regexValidatorList: [string, string][] | null,
            requiredFieldsList: Array<string> | null,
            filters: FindManyOptions,
-           codeMessageResponse: string | null) {
+           codeMessageResponse: string | null,
+           requireIdFromQueryParam: boolean) {
    this.res = res;
    this.req = req;
    this.method = method;
@@ -42,6 +44,7 @@ constructor(res: Response, req: Request,
    this.requiredFieldsList = requiredFieldsList;
    this.filters = filters;
    this.codeMessageResponse = codeMessageResponse;
+   this.requireIdFromQueryParam = requireIdFromQueryParam;
 }
 
     // Getters
@@ -91,6 +94,10 @@ constructor(res: Response, req: Request,
 
     getFilters(): FindManyOptions | null {
     return this.filters;
+    }
+
+    getRequiredIdFromQuery(): boolean {
+        return this.requireIdFromQueryParam;
     }
 }
    

@@ -10,7 +10,7 @@ class TermSessionRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(TermSession), "/termSessions");
-        this.filters.relations = ["term_id","franchise_id"];
+        this.filters.relations = ["term","franchise"];
     }
 
     protected initializeRoutes() {
@@ -45,8 +45,7 @@ class TermSessionRoutes extends GenericRoutes {
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
-                req.body.term_id,
-                req.body.franchise_id
+                req.body.term_id
             ];
             
             const requestHandler: RequestHandler = 

@@ -10,10 +10,10 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(SubscriptionPlanPrice), "/subscriptionPlanPrices");
-        this.filters.relations = ["subscription_plan_id",
-                                    "payment_type_code",
-                                    "student_coverage_code",
-                                    "franchise_id"];
+        this.filters.relations = ["subscription_plan",
+                                    "payment_type",
+                                    "student_coverage",
+                                    "franchise"];
     }
 
     protected initializeRoutes() {

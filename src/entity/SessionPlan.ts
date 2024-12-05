@@ -16,13 +16,13 @@ export class SessionPlan {
     @Column({ type: "varchar", length: 500, nullable: true, default: null })
     description: string;
 
-    @ManyToOne(() => AbilityGroup, { eager: true })
-    @JoinColumn({ name: "ability_group_id", referencedColumnName: "id" })
-    ability_group_id: AbilityGroup;
+    @ManyToOne(() => AbilityGroup)
+    @JoinColumn({ name: "ability_group", referencedColumnName: "id" })
+    ability_group: AbilityGroup;
 
-    @ManyToOne(() => Franchise, { eager: true, nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @ManyToOne(() => Franchise, { nullable: true })
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

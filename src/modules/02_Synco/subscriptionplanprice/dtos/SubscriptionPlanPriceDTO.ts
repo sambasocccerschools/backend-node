@@ -12,13 +12,13 @@ export default class SubscriptionPlanPriceDTO implements IAdapterFromBody {
     private getEntity(isCreating: boolean): SubscriptionPlanPrice {
         const entity = new SubscriptionPlanPrice();
         entity.name = this.req.body.name;
-        entity.subscription_plan_id = this.req.body.subscription_plan_id;
-        entity.payment_type_code = this.req.body.payment_type_code;
-        entity.student_coverage_code = this.req.body.student_coverage_code;
+        entity.subscription_plan = this.req.body.subscription_plan_id;
+        entity.payment_type = this.req.body.payment_type_code;
+        entity.student_coverage = this.req.body.student_coverage_code;
         entity.monthly_subscription_fee = this.req.body.monthly_subscription_fee;
         entity.price_per_class_per_child = this.req.body.price_per_class_per_child;
         entity.one_off_joining_fee = this.req.body.one_off_joining_fee;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -45,13 +45,13 @@ export default class SubscriptionPlanPriceDTO implements IAdapterFromBody {
         return {
             id: entity.id,
             name: entity.name,
-            subscription_plan: entity.subscription_plan_id,
-            payment_type: entity.payment_type_code,
-            student_coverage: entity.student_coverage_code,
+            subscription_plan: entity.subscription_plan,
+            payment_type: entity.payment_type,
+            student_coverage: entity.student_coverage,
             monthly_subscription_fee: entity.monthly_subscription_fee,
             price_per_class_per_child: entity.price_per_class_per_child,
             one_off_joining_fee: entity.one_off_joining_fee,
-            franchise: entity.franchise_id,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

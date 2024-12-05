@@ -10,7 +10,7 @@ class HolidayCampDateRoutes extends GenericRoutes {
     private filters: FindManyOptions = {};
     constructor() {
         super(new GenericController(HolidayCampDate), "/holidayCampDates");
-        this.filters.relations = ["camp_type_code","franchise_id"];
+        this.filters.relations = ["camp_type","franchise"];
     }
 
     protected initializeRoutes() {

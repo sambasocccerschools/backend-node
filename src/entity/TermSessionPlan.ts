@@ -16,20 +16,20 @@ export class TermSessionPlan {
     id: number;
 
     @ManyToOne(() => TermSession)
-    @JoinColumn({ name: "term_session_id", referencedColumnName: "id" })
-    term_session_id: TermSession;
+    @JoinColumn({ name: "term_session", referencedColumnName: "id" })
+    term_session: TermSession;
 
     @ManyToOne(() => AbilityGroup)
-    @JoinColumn({ name: "ability_group_id", referencedColumnName: "id" })
-    ability_group_id: AbilityGroup;
+    @JoinColumn({ name: "ability_group", referencedColumnName: "id" })
+    ability_group: AbilityGroup;
 
     @ManyToOne(() => SessionPlan)
-    @JoinColumn({ name: "session_plan_id", referencedColumnName: "id" })
-    session_plan_id: SessionPlan;
+    @JoinColumn({ name: "session_plan", referencedColumnName: "id" })
+    session_plan: SessionPlan;
 
     @ManyToOne(() => Franchise, { nullable: true })
-    @JoinColumn({ name: "franchise_id", referencedColumnName: "id" })
-    franchise_id: Franchise | null;
+    @JoinColumn({ name: "franchise", referencedColumnName: "id" })
+    franchise: Franchise | null;
 
     @Column({ type: "tinyint", default: 0 })
     is_deleted: boolean;

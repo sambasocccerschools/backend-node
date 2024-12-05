@@ -12,7 +12,7 @@ export default class FamilyDTO implements IAdapterFromBody {
     private getEntity(isCreating: boolean): Family {
         const entity = new Family();
         entity.loyalty_points = this.req.body.loyalty_points;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -39,7 +39,7 @@ export default class FamilyDTO implements IAdapterFromBody {
         return {
             id: entity.id,
             loyalty_points: entity.loyalty_points,
-            franchise: entity.franchise_id,
+            franchise: entity.franchise,
             is_deleted: entity.is_deleted,
             created_date: entity.created_date,
             updated_date: entity.updated_date,

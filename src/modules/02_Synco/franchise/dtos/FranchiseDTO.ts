@@ -26,7 +26,7 @@ export default  class FranchiseDTO implements IAdapterFromBody{
         entity.message = this.req.body.message;
         entity.location = this.req.body.location;
         entity.liquid_capacity = this.req.body.liquid_capacity;
-        entity.referral_source_code = this.req.body.referral_source_code;
+        entity.referral_source = this.req.body.referral_source_code;
 
         //insert user 
         const user = new User(); 
@@ -67,7 +67,7 @@ export default  class FranchiseDTO implements IAdapterFromBody{
             message: entity.message,
             location: entity.location,
             liquid_capacity: entity.liquid_capacity,
-            referral_source_code: entity.referral_source_code,
+            referral_source: entity.referral_source,
             //i DONT WANT TO SHOW ALL INFORMATION
             //added_by: entity.added_by,
             added_by: entity.added_by != null ? entity.added_by.id : null,

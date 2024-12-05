@@ -17,8 +17,8 @@ export default class StudentDTO implements IAdapterFromBody {
         entity.age = this.req.body.age;
         entity.medical_information = this.req.body.medical_information;
         entity.gender = this.req.body.gender;
-        entity.family_id = this.req.body.family_id;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.family = this.req.body.family_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -50,8 +50,8 @@ export default class StudentDTO implements IAdapterFromBody {
             age: entity.age,
             medical_information: entity.medical_information,
             gender: entity.gender,
-            family: entity.family_id,
-            franchise: entity.franchise_id,
+            family: entity.family,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

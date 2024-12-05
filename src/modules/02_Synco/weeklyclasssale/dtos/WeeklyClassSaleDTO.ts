@@ -12,14 +12,14 @@ export default class WeeklyClassSaleDTO implements IAdapterFromBody {
     private getEntity(isCreating: boolean): WeeklyClassSale {
         const entity = new WeeklyClassSale();
         entity.start_date = this.req.body.start_date;
-        entity.weekly_class_member_id = this.req.body.weekly_class_member_id;
-        entity.weekly_class_id = this.req.body.weekly_class_id;
-        entity.subscription_plan_price_id = this.req.body.subscription_plan_price_id;
-        entity.sale_status_code = this.req.body.sale_status_code;
-        entity.student_id = this.req.body.student_id;
-        entity.agent_id = this.req.body.agent_id;
+        entity.weekly_class_member = this.req.body.weekly_class_member_id;
+        entity.weekly_class = this.req.body.weekly_class_id;
+        entity.subscription_plan_price = this.req.body.subscription_plan_price_id;
+        entity.sale_status = this.req.body.sale_status_code;
+        entity.student = this.req.body.student_id;
+        entity.agent = this.req.body.agent_id;
         entity.booked_by = this.req.body.booked_by;
-        entity.franchise_id = this.req.body.franchise_id;
+        entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
@@ -46,14 +46,14 @@ export default class WeeklyClassSaleDTO implements IAdapterFromBody {
         return {
             id: entity.id,
             start_date: entity.start_date,
-            weekly_class_member: entity.weekly_class_member_id,
-            weekly_class: entity.weekly_class_id,
-            subscription_plan_price: entity.subscription_plan_price_id,
-            sale_status_code: entity.sale_status_code,
-            student: entity.student_id,
-            agent: entity.agent_id,
+            weekly_class_member: entity.weekly_class_member,
+            weekly_class: entity.weekly_class,
+            subscription_plan_price: entity.subscription_plan_price,
+            sale_status: entity.sale_status,
+            student: entity.student,
+            agent: entity.agent,
             booked_by: entity.booked_by,
-            franchise_id: entity.franchise_id,
+            franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };

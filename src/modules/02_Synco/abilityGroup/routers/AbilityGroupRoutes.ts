@@ -15,7 +15,7 @@ class AbilityGroupRoutes extends GenericRoutes{
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
             const filters: FindManyOptions = {};
-            filters.relations = ["service_code", "service_package_code"];
+            filters.relations = ["service", "service_package"];
 
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)

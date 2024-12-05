@@ -13,13 +13,13 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
     constructor() {
         super(new GenericController(WeeklyClassWaitingList), "/weeklyClassesWaitingLists");
         this.filters.relations = [
-            "weekly_class_id",
-            "subscription_plan_price_id",
-            "waiting_list_status_code",
-            "student_id",
-            "agent_id",
+            "weekly_class",
+            "subscription_plan_price",
+            "waiting_list_status",
+            "student",
+            "agent",
             "booked_by",
-            "franchise_id"
+            "franchise"
         ];
     }
 
