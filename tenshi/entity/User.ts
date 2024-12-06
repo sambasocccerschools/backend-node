@@ -55,19 +55,19 @@ export class User {
   @Column({ type: "tinyint", default: 0 })
   is_deleted: boolean;
 
-  @Column({ type: "tinyint", default: 0 })
+  @Column({ type: "tinyint", default: 0, select: false })
   is_active_from_email: boolean;
 
   @Column({ type: "enum", enum: ["active", "pending", "suspended", "closed"], default: "pending" })
   account_status: "active" | "pending" | "suspended" | "closed";
 
-  @Column({ type: "int", unsigned: true, default: 0 })
+  @Column({ type: "int", unsigned: true, default: 0, select: false })
   fail_login_number: number;
 
-  @Column({ type: "varchar", length: 400, nullable: true, default: null })
+  @Column({ type: "varchar", length: 400, nullable: true, default: null, select: false })
   forgot_password_token: string | null;
 
-  @Column({ type: "varchar", length: 400, nullable: true, default: null })
+  @Column({ type: "varchar", length: 400, nullable: true, default: null, select: false })
   active_register_token: string | null;
 
   @Column({ type: "decimal", precision: 11, scale: 8, nullable: true, default: null })
@@ -82,10 +82,10 @@ export class User {
   @Column({ type: "varchar", length: 500, nullable: true, default: null })
   profile_picture_url: string | null;
 
-  @Column({ type: "datetime", nullable: true, default: null })
+  @Column({ type: "datetime", nullable: true, default: null, select: false })
   last_login_at: Date | null;
 
-  @Column({ type: "varchar", length: 45, nullable: true, default: null })
+  @Column({ type: "varchar", length: 45, nullable: true, default: null, select: false })
   login_ip_address: string | null;
 
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
@@ -94,6 +94,6 @@ export class User {
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
   updated_at: Date;
 
-  @Column({ type: "datetime", nullable: true, default: null })
+  @Column({ type: "datetime", nullable: true, default: null, select: false })
   verified_at: Date | null;
 }

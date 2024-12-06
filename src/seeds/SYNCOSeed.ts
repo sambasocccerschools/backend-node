@@ -92,7 +92,12 @@ async function runSeed() {
     console.log("Start seeding");
     await dataSource.initialize();
 
-
+  /* **************************************
+                    USER
+    *****************************************/
+    const user = await dataSource
+                                .getRepository(User)
+                                .findOneBy({ email: "sambasoccer24@gmail.com" });
 
 
 
@@ -118,7 +123,7 @@ async function runSeed() {
           liquid_capacity: 500,
           message: "Looking to expand business opportunities.",
           referral_source: referralSourceFranchise as UnitDynamicCentral, 
-          added_by: null,
+          added_by: user,
           is_deleted: false,
       },
       {
@@ -545,7 +550,7 @@ async function runSeed() {
     id: 14,
     term: term2 as Term,
     franchise: franchise as Franchise,
-    is_deleted: true,
+    is_deleted: false,
   },
   ];
 
@@ -736,7 +741,7 @@ async function runSeed() {
         subscription_plan_price: subscriptionPlanPrice1 as SubscriptionPlanPrice,
         member_status: memberStatus1 as UnitDynamicCentral,
         student: student1 as Student,
-        agent: null,
+        agent: user,
         booked_by: null,
         start_date: new Date("2024-11-01"),
         franchise: franchise as Franchise,
@@ -751,7 +756,7 @@ async function runSeed() {
         member_status: memberStatus2 as UnitDynamicCentral,
         student: student2 as Student,
         agent: null,
-        booked_by: null,
+        booked_by: user,
         start_date: new Date("2024-11-02"),
         franchise: franchise as Franchise,
         is_deleted: false,
@@ -844,7 +849,7 @@ async function runSeed() {
         subscription_plan_price: subscriptionPlanPrice1 as SubscriptionPlanPrice,
         sale_status: saleStatusCode2 as UnitDynamicCentral,
         student: student1 as Student,
-        agent: null,
+        agent: user,
         booked_by: null,
         franchise: franchise as Franchise,
         is_deleted: false,
@@ -858,7 +863,7 @@ async function runSeed() {
         sale_status: saleStatusCode1 as UnitDynamicCentral,
         student: student2 as Student,
         agent: null,
-        booked_by: null,
+        booked_by: user,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
@@ -897,7 +902,7 @@ async function runSeed() {
         waiting_list_status: waitingListStatusCode1 as UnitDynamicCentral,
         student: student1 as Student,
         agent: null,
-        booked_by: null,
+        booked_by: user,
         franchise: null,
         is_deleted: false,
       },
@@ -907,7 +912,7 @@ async function runSeed() {
         subscription_plan_price: null,
         waiting_list_status: waitingListStatusCode2 as UnitDynamicCentral,
         student: student2 as Student,
-        agent: null,
+        agent: user,
         booked_by: null,
         franchise: null,
         is_deleted: false,
@@ -944,7 +949,7 @@ async function runSeed() {
         lead_status: leadStatusCode1 as UnitDynamicCentral,
         weekly_class: weeklyClass1 as WeeklyClass,
         guardian: guardian1 as Guardian,
-        agent: null,
+        agent: user,
         booked_by: null,
         franchise: franchise as Franchise,
         is_deleted: false,
@@ -955,7 +960,7 @@ async function runSeed() {
         weekly_class: null,
         guardian: guardian2 as Guardian,
         agent: null,
-        booked_by: null,
+        booked_by: user,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
