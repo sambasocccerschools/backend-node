@@ -1,6 +1,10 @@
 {
 	"info": {
+<<<<<<< HEAD
 		"_postman_id": "935295f9-09b8-4519-b3a2-2201b1d6fdc1",
+=======
+		"_postman_id": "c87e2992-ec45-40a0-8025-8910d87aedbe",
+>>>>>>> a664e83560228db5bda2405fd7893821a044faed
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -3545,6 +3549,44 @@
 											"key": "id",
 											"value": "4"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Status WeeklyClassMember",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_classes_member_id\": [1,2,3],\n  \"member_status_code\": \"FROZEN_MS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/changeStatus",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"changeStatus"
 									]
 								}
 							},
