@@ -33,7 +33,7 @@ class VenueRoutes extends GenericRoutes{
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
             const filters: FindManyOptions = {};
-            filters.relations = ["region_code"];
+            filters.relations = ["region"];
             
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
