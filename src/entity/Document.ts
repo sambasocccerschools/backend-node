@@ -27,7 +27,8 @@ export class Document {
               "GENERAL_GALLERY", 
               "PERSONAL_DOCUMENT", 
               "UNIFORM_PICTURE", 
-              "REPORT"], 
+              "SESSION_PLAN_BANNER",
+              "SESSION_PLAN_VIDEO"], 
             default: "GENERAL_GALLERY" })
   action_type: string; 
 

@@ -9,13 +9,16 @@ export default class SessionPlanDTO implements IAdapterFromBody {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): SessionPlan {
-        const entity = new SessionPlan();
-        entity.title = this.req.body.title;
-        entity.description = this.req.body.description;
-        entity.ability_group = this.req.body.ability_group_id;
-        entity.franchise = this.req.body.franchise_id;
-     
+    private getEntity(isCreating: boolean): any {
+
+        const entity: Record<string, any> = {
+            title : this.req.body.title,
+            description : this.req.body.description,
+            ability_group : this.req.body.ability_group_id,
+            franchise : this.req.body.franchise_id,
+            exercises : this.req.body.exercises,
+        };
+
         if (isCreating) {
             entity.created_date = new Date();
         } else {
@@ -27,29 +30,30 @@ export default class SessionPlanDTO implements IAdapterFromBody {
     }
 
     // POST
-    entityFromPostBody(): SessionPlan {
+    entityFromPostBody(): any {
         return this.getEntity(true);
     }
 
     // PUT
-    entityFromPutBody(): SessionPlan {
+    entityFromPutBody(): any {
         return this.getEntity(false);
     }
 
     // GET
-    entityToResponse(entity: SessionPlan): any {
+    entityToResponse(entity: any): any {
         return {
             id: entity.id,
             title: entity.title,
             description: entity.description,
             ability_group: entity.ability_group,
+            exercises : entity.exercises,
             franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: SessionPlan[] | null): any {
+    entitiesToResponse(entities: any[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

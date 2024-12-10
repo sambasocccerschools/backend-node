@@ -47,11 +47,10 @@ export default  class TermController extends GenericController{
                         } 
     
                         const plans = session.plans;
-                    
                         if (Array.isArray(plans) && plans.length > 0) {
                             for (const plan of plans) {
                                 try {
-                                    plan.term_session = termSession;
+                                    plan.term_session = termSession.id;
                                     plan.franchise = createTerm.franchise;
                                     await termSessionPlanRepository.add(plan);
                                 } catch (error: any) {
@@ -74,7 +73,6 @@ export default  class TermController extends GenericController{
                 }
 
             }catch(error : any){
-                console.log(error);
                 // Return the database error response
                 return await httpExec.databaseError(error, jwtData!.id.toString(), 
                 reqHandler.getMethod(), this.getControllerName());
@@ -148,7 +146,7 @@ export default  class TermController extends GenericController{
                     } else {
                         // Insert a new term session
                         termSession = new TermSession();
-                        termSession.term = updateTerm;
+                        termSession.term = updateTerm.id;
                         termSession.franchise = updateTerm.franchise;
                     
                         try {
@@ -165,7 +163,7 @@ export default  class TermController extends GenericController{
                     if (Array.isArray(session.plans) && session.plans.length > 0) {
                         for (const plan of session.plans) {
                             try {
-                                plan.term_session = termSession;
+                                plan.term_session = termSession.id;
                                 plan.franchise = updateTerm.franchise;
                                 await termSessionPlanRepository.add(plan);
                             } catch (error: any) {

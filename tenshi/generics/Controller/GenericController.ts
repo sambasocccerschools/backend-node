@@ -133,6 +133,10 @@ export default  class GenericController extends GenericValidation implements IGe
                 const updateEntity = await this.getRepository().update(id!!, body,
                                                              reqHandler.getLogicalDelete());
 
+                if(updateEntity == null){
+                    return httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.DONT_EXISTS);
+                }
+
                 const codeResponse : string = 
                 reqHandler.getCodeMessageResponse() != null ? 
                 reqHandler.getCodeMessageResponse() as string :

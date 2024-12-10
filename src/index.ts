@@ -22,6 +22,7 @@ import { AbilityGroup } from '@entity/AbilityGroup';
 import { SubscriptionPlan } from '@entity/SubscriptionPlan';
 import { SubscriptionPlanPrice } from '@entity/SubscriptionPlanPrice';
 import { SessionPlan } from '@entity/SessionPlan';
+import { SessionPlanExercise } from '@entity/SessionPlanExercise';
 import { HolidayCampDate } from '@entity/HolidayCampDate';
 import { Term } from '@entity/Term';
 import { WeeklyClass } from '@entity/WeeklyClass';
@@ -50,6 +51,7 @@ import FranchiseRoutes from '@index/modules/02_Synco/franchise/routers/Franchise
 import SubscriptionPlanRoutes from '@index/modules/02_Synco/subscriptionplan/routers/SubscriptionPlanRoutes';
 import SubscriptionPlanPriceRoutes from '@index/modules/02_Synco/subscriptionplanprice/routers/SubscriptionPlanPriceRoutes';
 import SessionPlanRoutes from '@index/modules/02_Synco/sessionplan/routers/SessionPlanRoutes';
+import SessionPlanExerciseRoutes from '@index/modules/02_Synco/sessionplanexercise/routers/SessionPlanExerciseRoutes';
 import HolidayCampDateRoutes from '@index/modules/02_Synco/holidaycampdate/routers/HolidayCampDateRoutes';
 import TermRoutes from '@index/modules/02_Synco/term/routers/TermRoutes';
 import TermSessionRoutes from '@index/modules/02_Synco/termsession/routers/TermSessionRoutes';
@@ -133,6 +135,7 @@ export const TenshiMain = async () => {
       SubscriptionPlan,
       SubscriptionPlanPrice,
       SessionPlan,
+      SessionPlanExercise,
       HolidayCampDate,
       Term,
       TermSession,
@@ -145,7 +148,6 @@ export const TenshiMain = async () => {
       WeeklyClassSale,
       WeeklyClassWaitingList,
       WeeklyClassLead,
-      
     ]);
 
     //Cors handler middle ware
@@ -196,6 +198,7 @@ export const TenshiMain = async () => {
     app.use(new SubscriptionPlanRoutes().getRouter());
     app.use(new SubscriptionPlanPriceRoutes().getRouter());
     app.use(new SessionPlanRoutes().getRouter());
+    app.use(new SessionPlanExerciseRoutes().getRouter());
     app.use(new HolidayCampDateRoutes().getRouter());
     app.use(new TermRoutes().getRouter());
     app.use(new WeeklyClassRoutes().getRouter());

@@ -31,6 +31,7 @@ import { Guardian } from '@index/entity/Guardian';
 import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@index/entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
+import { SessionPlanExercise } from '@index/entity/SessionPlanExercise';
 
 
 
@@ -73,6 +74,7 @@ async function runSeed() {
                     AbilityGroup,
                     HolidayCampDate,
                     SessionPlan,
+                    SessionPlanExercise,
                     SubscriptionPlan,
                     SubscriptionPlanPrice,
                     Term,
@@ -377,6 +379,11 @@ async function runSeed() {
 
 
 
+  
+
+
+
+
 
   /****************************************
               Subscription Plan
@@ -603,6 +610,47 @@ async function runSeed() {
 
   await termSessionPlanRepository.upsert(termSessionPlans as any, ["id"]);
 
+
+
+
+  /****************************************
+                SessionPlan Exercises
+  *****************************************/
+  const sessionPlanExerciseRepository = dataSource.getRepository(SessionPlanExercise);
+  const sessionPlanExercises: Partial<SessionPlanExercise>[] = [
+    {
+      id: 1,
+      session_plan: sessionPlan1 as SessionPlan,
+      title: "Warm-up",
+      subtitle: "Stretching exercises",
+      title_duration: "10 minutes",
+      description: "A series of stretches to prepare the body.",
+      franchise: franchise,
+      is_deleted: false,
+    },
+    {
+      id: 2,
+      session_plan: sessionPlan2 as SessionPlan,
+      title: "Cool-down",
+      subtitle: "Relaxation exercises",
+      title_duration: "5 minutes",
+      description: "Relaxation exercises to finish the session.",
+      franchise: null,
+      is_deleted: false,
+    },
+    {
+      id: 3,
+      session_plan: sessionPlan1 as SessionPlan,
+      title: "Core Strengthening",
+      subtitle: "Core exercises",
+      title_duration: "15 minutes",
+      description: "Strengthening exercises for the core muscles.",
+      franchise: franchise,
+      is_deleted: false,
+    },
+  ];
+  
+  await sessionPlanExerciseRepository.upsert(sessionPlanExercises as any, ["id"]);
 
 
   /****************************************

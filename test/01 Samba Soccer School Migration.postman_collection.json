@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "935295f9-09b8-4519-b3a2-2201b1d6fdc1",
+		"_postman_id": "b89f80d4-f926-4ed0-a6bf-90a34aadaeea",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -2313,6 +2313,192 @@
 					"name": "SessionPlan",
 					"item": [
 						{
+							"name": "SessionPlanExercise",
+							"item": [
+								{
+									"name": "Create SessionPlanExercise",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"session_plan\": 256,\n  \"title\": \"Test Title Exercise\",\n  \"subtitle\": \"Test Title Subtitle\",\n  \"title_duration\": \"Title Duration\"\n  //\"description\": \"Description\",\n  //\"franchise\": 222,\n  //\"banner_url\" : \"\",\n //\"video_url\" : \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/sessionPlanExercises/add",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"sessionPlanExercises",
+												"add"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update SessionPlanExercise",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"session_plan\": 256,\n  \"title\": \"Test Title Exercise\",\n  \"subtitle\": \"Test Title Subtitle\",\n  \"title_duration\": \"Title Duration\"\n  //\"description\": \"Description\",\n  //\"franchise\": 222,\n  //\"banner_url\" : \"\",\n  //\"video_url\" : \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/sessionPlanExercises/edit?id=1",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"sessionPlanExercises",
+												"edit"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get SessionPlanExercise by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/sessionPlanExercises/get?id=1",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"sessionPlanExercises",
+												"get"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get All SessionPlanExercise",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/sessionPlanExercises/get_all",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"sessionPlanExercises",
+												"get_all"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete SessionPlanExercise",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "{{auth_jwt}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{secret_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/sessionPlanExercises/delete?id=1",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"sessionPlanExercises",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
 							"name": "Create SessionPlan",
 							"request": {
 								"method": "POST",
@@ -2330,7 +2516,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 1\n  //\"franchise_id\": 1\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2368,7 +2554,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"just session plan\"\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2376,7 +2562,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/sessionPlans/edit?id=2",
+									"raw": "{{host}}/sessionPlans/edit?id=256",
 									"host": [
 										"{{host}}"
 									],
@@ -2387,7 +2573,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "256"
 										}
 									]
 								}
@@ -2411,7 +2597,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/sessionPlans/get?id=2",
+									"raw": "{{host}}/sessionPlans/get?id=267",
 									"host": [
 										"{{host}}"
 									],
@@ -2422,7 +2608,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "2"
+											"value": "267"
 										}
 									]
 								}
@@ -2899,12 +3085,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/termsessionplan/add",
+											"raw": "{{host}}/termSessionPlan/add",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"termsessionplan",
+												"termSessionPlan",
 												"add"
 											]
 										}
@@ -2937,12 +3123,12 @@
 											}
 										},
 										"url": {
-											"raw": "{{host}}/termsessionplan/edit?id=1",
+											"raw": "{{host}}/termSessionPlan/edit?id=1",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"termsessionplan",
+												"termSessionPlan",
 												"edit"
 											],
 											"query": [
@@ -2972,12 +3158,12 @@
 											}
 										],
 										"url": {
-											"raw": "{{host}}/termsessionplan/get?id=1",
+											"raw": "{{host}}/termSessionPlan/get?id=1",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"termsessionplan",
+												"termSessionPlan",
 												"get"
 											],
 											"query": [
@@ -3007,12 +3193,12 @@
 											}
 										],
 										"url": {
-											"raw": "{{host}}/termsessionplan/get_all",
+											"raw": "{{host}}/termSessionPlan/get_all",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"termsessionplan",
+												"termSessionPlan",
 												"get_all"
 											]
 										}
@@ -3036,12 +3222,12 @@
 											}
 										],
 										"url": {
-											"raw": "{{host}}/termsessionplan/delete?id=1",
+											"raw": "{{host}}/termSessionPlan/delete?id=1",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
-												"termsessionplan",
+												"termSessionPlan",
 												"delete"
 											],
 											"query": [
