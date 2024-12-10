@@ -19,7 +19,6 @@ export default class TermSessionPlanDTO implements IAdapterFromBody {
         if (isCreating) {
             entity.created_date = new Date();
         } else {
-            entity.is_deleted = this.req.body.is_deleted;
             entity.updated_date = new Date();
         }
 

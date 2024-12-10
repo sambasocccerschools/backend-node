@@ -35,9 +35,10 @@ export class Document {
                           "DOC", 
                           "IMG", 
                           "EXCEL", 
+                          "VIDEO",
                           "OTHER"], 
                           default: "IMG" })
-  type: "DOC" | "IMG" | "EXCEL" | "OTHER";
+  type: "DOC" | "IMG" | "EXCEL" | "VIDEO" | "OTHER";
 
   @Column({ type: "varchar", length: 400, nullable: true, default: null })
   description: string | null;
@@ -52,7 +53,8 @@ export class Document {
             enum: ["USER", 
                   "UNIFORMS", 
                   "GENERAL", 
-                  "WEEKLY_CLASSES_MEMBERS"], 
+                  "WEEKLY_CLASSES_MEMBERS",
+                  "SESSION_PLAN"], 
             default: "GENERAL" })
   table: string;
 

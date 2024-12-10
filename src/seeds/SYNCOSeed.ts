@@ -21,6 +21,8 @@ import { SessionPlan } from '@index/entity/SessionPlan';
 import { SubscriptionPlan } from '@index/entity/SubscriptionPlan';
 import { SubscriptionPlanPrice } from '@index/entity/SubscriptionPlanPrice';
 import { Term } from '@index/entity/Term';
+import { TermSession } from '@index/entity/TermSession';
+import { TermSessionPlan } from '@index/entity/TermSessionPlan';
 import { WeeklyClass } from '@index/entity/WeeklyClass';
 import { Family } from '@index/entity/Family';
 import { Student } from '@index/entity/Student';
@@ -29,7 +31,7 @@ import { Guardian } from '@index/entity/Guardian';
 import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@index/entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
-import { TermSession } from '@index/entity/TermSession';
+
 
 
 async function createDatabaseIfNotExists() {
@@ -75,6 +77,7 @@ async function runSeed() {
                     SubscriptionPlanPrice,
                     Term,
                     TermSession,
+                    TermSessionPlan,
                     WeeklyClass,
                     Family,
                     Student,
@@ -261,8 +264,8 @@ async function runSeed() {
     {
         id: 421,
         name: "Youth Training Group",
-        min_age: 6,
-        max_age: 12,
+        min_age: 12,
+        max_age: 17,
         franchise: franchise, 
         service: serviceAbilityGroup as UnitDynamicCentral,  
         service_package: servicePackageAbilityGroup as UnitDynamicCentral,  
@@ -277,7 +280,17 @@ async function runSeed() {
       service: serviceAbilityGroup as UnitDynamicCentral,  
         service_package: servicePackageAbilityGroup as UnitDynamicCentral,  
       is_deleted: false,
-  }
+  },
+  {
+    id: 423,
+    name: "Kids Soccer Group",
+    min_age: 6,
+    max_age: 12,
+    franchise: franchise,  
+    service: serviceAbilityGroup as UnitDynamicCentral,  
+      service_package: servicePackageAbilityGroup as UnitDynamicCentral,  
+    is_deleted: false,
+ }
   ];
   await abilityGroupsRepository.upsert(abilityGroups as any, ["id"]);
 
@@ -537,26 +550,58 @@ async function runSeed() {
   {
     id: 12,
     term: term1 as Term,
-    franchise: franchise as Franchise,
-    is_deleted: false,
+    franchise: franchise as Franchise
   },
   {
     id: 13,
     term: term2 as Term,
-    franchise: null,
-    is_deleted: false,
+    franchise: null
   },
   {
     id: 14,
     term: term2 as Term,
-    franchise: franchise as Franchise,
-    is_deleted: false,
+    franchise: franchise as Franchise
   },
   ];
 
   await termSessionRepository.upsert(termSessions as any, ["id"]);
 
 
+
+  /****************************************
+          Term Sessions Plan
+  *****************************************/
+  const termSessionPlanRepository = dataSource.getRepository(TermSessionPlan);
+  const termSession1 = await termSessionRepository.findOneBy({ id: 12});
+  const termSession2 = await termSessionRepository.findOneBy({ id: 13});
+  const sessionPlan1 = await sessionPlanRepository.findOneBy({ id: 256});
+  const sessionPlan2 = await sessionPlanRepository.findOneBy({ id: 257});
+
+  const termSessionPlans: Partial<TermSessionPlan>[] = [
+    {
+      id: 1,
+      term_session: termSession1 as TermSession,
+      ability_group: abilityGroupSessionPlan as AbilityGroup,
+      session_plan: sessionPlan1 as SessionPlan,
+      franchise: franchise as Franchise
+    },
+    {
+      id: 2,
+      term_session: termSession2 as TermSession,
+      ability_group: abilityGroupSessionPlan as AbilityGroup,
+      session_plan: sessionPlan2 as SessionPlan,
+      franchise: null
+    },
+    {
+      id: 3,
+      term_session: termSession2 as TermSession,
+      ability_group: abilityGroupSessionPlan as AbilityGroup,
+      session_plan: sessionPlan2 as SessionPlan,
+      franchise: franchise as Franchise
+    },
+  ];
+
+  await termSessionPlanRepository.upsert(termSessionPlans as any, ["id"]);
 
 
 

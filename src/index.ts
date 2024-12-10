@@ -33,6 +33,7 @@ import { WeeklyClassSale } from '@entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@entity/WeeklyClassLead';
 import { TermSession } from '@entity/TermSession';
+import { TermSessionPlan } from '@entity/TermSessionPlan';
 
 //Import Routes
 import AuthRoutes from '@index/modules/01_General/auth/routers/AuthRoutes';
@@ -51,6 +52,8 @@ import SubscriptionPlanPriceRoutes from '@index/modules/02_Synco/subscriptionpla
 import SessionPlanRoutes from '@index/modules/02_Synco/sessionplan/routers/SessionPlanRoutes';
 import HolidayCampDateRoutes from '@index/modules/02_Synco/holidaycampdate/routers/HolidayCampDateRoutes';
 import TermRoutes from '@index/modules/02_Synco/term/routers/TermRoutes';
+import TermSessionRoutes from '@index/modules/02_Synco/termsession/routers/TermSessionRoutes';
+import TermSessionPlanRoutes from '@index/modules/02_Synco/termsessionplan/routers/TermSessionPlanRoutes';
 import WeeklyClassRoutes from '@index/modules/02_Synco/weeklyclass/routers/WeeklyClassRoutes';
 import FamilyRoutes from '@index/modules/02_Synco/family/routers/FamilyRoutes';
 import GuardianRoutes from '@index/modules/02_Synco/guardian/routers/GuardianRoutes';
@@ -59,7 +62,7 @@ import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/r
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
 import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
 import WeeklyClassLeadRoutes from '@index/modules/02_Synco/weeklyclasslead/routers/WeeklyClassLeadRoutes';
-import TermSessionRoutes from '@index/modules/02_Synco/termsession/routers/TermSessionRoutes';
+
 
 
 //*************************************** */
@@ -132,6 +135,8 @@ export const TenshiMain = async () => {
       SessionPlan,
       HolidayCampDate,
       Term,
+      TermSession,
+      TermSessionPlan,
       WeeklyClass,
       Family,
       Student,
@@ -140,7 +145,7 @@ export const TenshiMain = async () => {
       WeeklyClassSale,
       WeeklyClassWaitingList,
       WeeklyClassLead,
-      TermSession
+      
     ]);
 
     //Cors handler middle ware
@@ -200,7 +205,7 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassWaitingListRoutes().getRouter());
     app.use(new WeeklyClassLeadRoutes().getRouter());
     app.use(new TermSessionRoutes().getRouter());
-    
+    app.use(new TermSessionPlanRoutes().getRouter());
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

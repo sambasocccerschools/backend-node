@@ -72,7 +72,11 @@ export default class HttpAction{
                         status.httpStatus, ConstMessagesJson.DATA_BASE_ERROR, id, 
                         getMessage(ConstMessagesJson.DATA_BASE_ERROR));
 
-        const errorJson =  getErrorDBbySqlState(messageError);
+        let errorJson =  getErrorDBbySqlState(messageError);
+        /*if(errorJson != null){
+            getErrorDBbyNo
+        }*/
+
         return this.res.status(status.httpStatus).json(
             responseStruct(status, errorJson || messageError, getMessage(ConstMessagesJson.DATA_BASE_ERROR))
         ); 

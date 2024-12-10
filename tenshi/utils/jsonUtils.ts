@@ -96,7 +96,17 @@ export function getErrorDBbySqlState(errorMessage: string): ErrorMessage | null 
         if (error) {
             return error;
         } else {
-            return null;
+            const erroForeignKey = errorMessage.match("foreign key constraint fails");
+            if(erroForeignKey){
+              const error = errors.find(error => error.errno === "1452");
+              if (error) {
+                  return error;
+              } else {
+                  return null;
+              }
+            }else{
+              return null;
+            }
         }
     }
 }

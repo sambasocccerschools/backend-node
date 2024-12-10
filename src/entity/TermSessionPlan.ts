@@ -19,20 +19,17 @@ export class TermSessionPlan {
     @JoinColumn({ name: "term_session", referencedColumnName: "id" })
     term_session: TermSession;
 
-    @ManyToOne(() => AbilityGroup)
+    @ManyToOne(() => AbilityGroup, {eager :  true})
     @JoinColumn({ name: "ability_group", referencedColumnName: "id" })
     ability_group: AbilityGroup;
 
-    @ManyToOne(() => SessionPlan)
+    @ManyToOne(() => SessionPlan, {eager :  true})
     @JoinColumn({ name: "session_plan", referencedColumnName: "id" })
     session_plan: SessionPlan;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })
     franchise: Franchise | null;
-
-    @Column({ type: "tinyint", default: 0 })
-    is_deleted: boolean;
 
     @Column({ type: "timestamp", nullable: true, default: () => "CURRENT_TIMESTAMP" })
     created_date: Date | null;

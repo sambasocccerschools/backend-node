@@ -9,27 +9,31 @@ export default class TermDTO implements IAdapterFromBody {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): Term {
-        const entity = new Term();
-        entity.name = this.req.body.name;
-        entity.start_date = this.req.body.start_date;
-        entity.end_date = this.req.body.end_date;
-        entity.half_term_date = this.req.body.half_term_date;
-        entity.season = this.req.body.season_code;
-        entity.franchise = this.req.body.franchise_id;
-     
+    private getEntity(isCreating: boolean): any {
+
+        const term: Record<string, any> = {
+            name : this.req.body.name,
+            start_date : this.req.body.start_date,
+            end_date : this.req.body.end_date,
+            half_term_date : this.req.body.half_term_date,
+            season : this.req.body.season_code,
+            franchise : this.req.body.franchise_id,
+            sessions: this.req.body.sessions
+        };
+
         if (isCreating) {
-            entity.created_date = new Date();
+            term.created_date = new Date();
         } else {
-            entity.is_deleted = this.req.body.is_deleted;
-            entity.updated_date = new Date();
+            term
+            term.is_deleted = this.req.body.is_deleted;
+            term.updated_date = new Date();
         }
 
-        return entity;
+        return term;
     }
 
     // POST
-    entityFromPostBody(): Term {
+    entityFromPostBody(): any {
         return this.getEntity(true);
     }
 
@@ -39,7 +43,7 @@ export default class TermDTO implements IAdapterFromBody {
     }
 
     // GET
-    entityToResponse(entity: Term): any {
+    entityToResponse(entity: any): any {
         return {
             id: entity.id as number,
             name: entity.name,
@@ -48,12 +52,13 @@ export default class TermDTO implements IAdapterFromBody {
             half_term_date: entity.half_term_date,
             season: entity.season,
             franchise: entity.franchise,
+            sessions: entity.sessions,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: Term[] | null): any {
+    entitiesToResponse(entities: any[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

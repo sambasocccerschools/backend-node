@@ -15,9 +15,6 @@ export class TermSession {
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })
     franchise: Franchise | null;
 
-    @Column({ type: "tinyint", default: 0 })
-    is_deleted: boolean;
-
     @Column({ type: "timestamp", nullable: true, default: () => "CURRENT_TIMESTAMP" })
     created_date: Date | null;
 

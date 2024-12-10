@@ -26,7 +26,6 @@ class TermSessionPlanRoutes extends GenericRoutes {
                                     .setAdapter(new TermSessionPlanDTO(req))
                                     .setMethod("getTermSessionPlanById")
                                     .isValidateRole("TERM_SESSION_PLAN")
-                                    .isLogicalDelete()
                                     .setFilters(this.filters)
                                     .build();
         
@@ -40,7 +39,6 @@ class TermSessionPlanRoutes extends GenericRoutes {
                                     .setAdapter(new TermSessionPlanDTO(req))
                                     .setMethod("getTermSessionPlans")
                                     .isValidateRole("TERM_SESSION_PLAN")
-                                    .isLogicalDelete()
                                     .setFilters(this.filters)
                                     .build();
         
@@ -83,7 +81,6 @@ class TermSessionPlanRoutes extends GenericRoutes {
                                     .setAdapter(new TermSessionPlanDTO(req))
                                     .setMethod("deleteTermSessionPlan")
                                     .isValidateRole("TERM_SESSION_PLAN")
-                                    .isLogicalDelete()
                                     .build();
         
             this.getController().delete(requestHandler);

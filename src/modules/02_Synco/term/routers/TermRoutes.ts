@@ -1,16 +1,19 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions} from "@modules/index";
-import { Term } from "@index/entity/Term";
 import TermDTO from "@modules/02_Synco/term/dtos/TermDTO";
+import TermController from "../controllers/TermController";
 
 class TermRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
+
     constructor() {
-        super(new GenericController(Term), "/terms");
-        this.filters.relations = ["season","franchise"];
+        super(new TermController(), "/terms");
+        this.filters.relations = [
+            "season",
+            "franchise",];
     }
 
     protected initializeRoutes() {
