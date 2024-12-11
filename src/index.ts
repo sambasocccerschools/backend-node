@@ -64,6 +64,7 @@ import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/r
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
 import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
 import WeeklyClassLeadRoutes from '@index/modules/02_Synco/weeklyclasslead/routers/WeeklyClassLeadRoutes';
+import WeeklyClassFindClassRoutes from '@index/modules/02_Synco/weeklyClassesFindClass/routers/WeeklyClassFindClassRoutes';
 
 
 
@@ -209,6 +210,7 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassLeadRoutes().getRouter());
     app.use(new TermSessionRoutes().getRouter());
     app.use(new TermSessionPlanRoutes().getRouter());
+    app.use(new WeeklyClassFindClassRoutes().getRouter());
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

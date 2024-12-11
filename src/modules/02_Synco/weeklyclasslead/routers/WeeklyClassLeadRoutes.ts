@@ -113,7 +113,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         if (start_date != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                weekly_class_id: {
+                weekly_class: {
                     start_date: MoreThan(start_date) 
                 }
             };
@@ -122,7 +122,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         if (end_date != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                weekly_class_id: {
+                weekly_class: {
                     end_date: MoreThan(end_date) 
                 } 
             };
@@ -136,7 +136,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
             if (referralSourceArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    guardian_id: {
+                    guardian: {
                         referral_source_code: In(referralSourceArray), 
                     }
                 };
@@ -164,8 +164,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
             if (venueIdsArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    weekly_class_id: {
-                        venue_id: In(venueIdsArray), 
+                    weekly_class: {
+                        venue: In(venueIdsArray), 
                     }
                 };
             }
@@ -174,7 +174,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         if (venue != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                venue_id: { 
+                venue: { 
                     name: ILike(`%${venue}%`)
                 }
             };
@@ -188,7 +188,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
             if (studentIdsArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    student_id: {
+                    student: {
                         id: In(studentIdsArray), 
                     }
                 };
@@ -198,7 +198,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         if (student != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                student_id: { 
+                student: { 
                     name: ILike(`%${student}%`)
                 }
             };

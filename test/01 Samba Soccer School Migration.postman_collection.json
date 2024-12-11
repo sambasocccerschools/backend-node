@@ -2868,6 +2868,80 @@
 					]
 				},
 				{
+					"name": "WeeklyClasses (Find A Class)",
+					"item": [
+						{
+							"name": "Get All Find a Class",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/allWeeklyClasses/find_a_class",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"allWeeklyClasses",
+										"find_a_class"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "Main Hall",
+											"disabled": true
+										},
+										{
+											"key": "postcode",
+											"value": "12345",
+											"disabled": true
+										},
+										{
+											"key": "venue_id",
+											"value": "347",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "days",
+											"value": "Monday,Wednesday",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "class_name",
+											"value": "test name",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "WeeklyClasses (Terms)",
 					"item": [
 						{

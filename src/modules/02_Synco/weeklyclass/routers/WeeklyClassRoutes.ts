@@ -44,7 +44,7 @@ class WeeklyClassRoutes extends GenericRoutes {
             if(postcode != null){
                 this.filters.where = { 
                     ...this.filters.where, 
-                    franchise_id: {
+                    franchise: {
                         postal_code: postcode, 
                     }
                 };
@@ -58,7 +58,7 @@ class WeeklyClassRoutes extends GenericRoutes {
                 if (venueIdsArray.length > 0) {
                     this.filters.where = { 
                         ...this.filters.where, 
-                        venue_id: {
+                        venue: {
                             id: In(venueIdsArray), 
                         }
                     };
@@ -68,7 +68,7 @@ class WeeklyClassRoutes extends GenericRoutes {
             if (venue != null) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    venue_id: { 
+                    venue: { 
                         name: ILike(`%${venue}%`)
                     }
                 };

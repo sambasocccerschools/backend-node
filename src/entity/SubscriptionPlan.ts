@@ -14,7 +14,7 @@ export class SubscriptionPlan {
     @JoinColumn({ name: "service", referencedColumnName: "code" })
     service: UnitDynamicCentral;
 
-    @ManyToOne(() => Venue, { eager: true })
+    @ManyToOne(() => Venue)
     @JoinColumn({ name: "venue", referencedColumnName: "id" })
     venue: Venue;
 

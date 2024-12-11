@@ -31,7 +31,7 @@ export class SubscriptionPlanPrice {
     payment_type: UnitDynamicCentral;
 
     //STUDENT_COVERAGES
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "student_coverage", referencedColumnName: "code" })
     student_coverage: UnitDynamicCentral;
 

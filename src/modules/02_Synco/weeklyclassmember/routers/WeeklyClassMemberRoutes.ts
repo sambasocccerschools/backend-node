@@ -181,8 +181,8 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             if (venueIdsArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    weekly_class_id: {
-                        venue_id: In(venueIdsArray), 
+                    weekly_class: {
+                        venue: In(venueIdsArray), 
                     }
                 };
             }
@@ -191,7 +191,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         if (venue != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                venue_id: { 
+                venue: { 
                     name: ILike(`%${venue}%`)
                 }
             };
@@ -205,7 +205,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             if (studentIdsArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    student_id: {
+                    student: {
                         id: In(studentIdsArray), 
                     }
                 };
@@ -215,7 +215,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         if (student != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                student_id: { 
+                student: { 
                     name: ILike(`%${student}%`)
                 }
             };
