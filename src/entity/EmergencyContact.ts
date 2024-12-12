@@ -23,6 +23,9 @@ export class EmergencyContact {
     @Column({ type: "varchar", length: 255 })
     phone_number: string;
 
+    @Column({ type: "varchar", length: 255, nullable: true })
+    email: string | null = null;
+
     // RELATIONSHIPS
     @ManyToOne(() => UnitDynamicCentral, { nullable: true})
     @JoinColumn({ name: "relationship", referencedColumnName: "code" })

@@ -14,7 +14,7 @@ export default  class TermController extends GenericController{
         super(Term);
     }
 
-    async insert(reqHandler: RequestHandler): Promise<any> {
+    async insertDynamic(reqHandler: RequestHandler): Promise<any> {
 
         return this.getService().insertService(reqHandler, async (jwtData, httpExec) => {
 
@@ -84,7 +84,7 @@ export default  class TermController extends GenericController{
 
 
 
-     async update(reqHandler: RequestHandler): Promise<any> {
+     async updateDynamic(reqHandler: RequestHandler): Promise<any> {
 
         return this.getService().updateService(reqHandler, async (jwtData, httpExec, id) => {
 

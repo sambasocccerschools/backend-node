@@ -43,9 +43,7 @@ class AccountInformationCommentRoutes extends GenericRoutes {
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
-                req.body.message,
-                req.body.user_id,
-                req.body.family_id
+                req.body.message
             ];
             
             const requestHandler: RequestHandler = 

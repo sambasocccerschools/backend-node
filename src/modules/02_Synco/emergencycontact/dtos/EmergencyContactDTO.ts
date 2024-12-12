@@ -15,6 +15,7 @@ export default class EmergencyContactDTO implements IAdapterFromBody {
         entity.first_name = this.req.body.first_name;
         entity.last_name = this.req.body.last_name;
         entity.phone_number = this.req.body.phone_number;
+        entity.email = this.req.body.email;
         entity.relationship = this.req.body.relationship_code;
         entity.family = this.req.body.family_id;
         entity.franchise = this.req.body.franchise_id;
@@ -46,6 +47,7 @@ export default class EmergencyContactDTO implements IAdapterFromBody {
             first_name: entity.first_name,
             last_name: entity.last_name,
             phone_number: entity.phone_number,
+            email: entity.email,
             relationship: entity.relationship,
             family: entity.family,
             franchise: entity.franchise,

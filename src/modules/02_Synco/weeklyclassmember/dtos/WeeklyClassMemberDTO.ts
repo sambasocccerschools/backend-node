@@ -9,25 +9,33 @@ export default class WeeklyClassMemberDTO implements IAdapterFromBody {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): WeeklyClassMember {
-        const entity = new WeeklyClassMember();
-        entity.weekly_class = this.req.body.weekly_class_id;
-        entity.subscription_plan_price = this.req.body.subscription_plan_price_id;
-        entity.member_status = this.req.body.member_status_code;
-        entity.student = this.req.body.student_id;
-        entity.agent = this.req.body.agent_id;
-        entity.booked_by = this.req.body.booked_by;
-        entity.start_date = this.req.body.start_date;
-        entity.franchise = this.req.body.franchise_id;
-     
+    private getEntity(isCreating: boolean): any {
+
+        const weeklyClassMember: Record<string, any> = {
+           weekly_class: this.req.body.weekly_class_id,
+           subscription_plan_price: this.req.body.subscription_plan_price_id,
+           member_status: this.req.body.member_status_code,
+           student: this.req.body.student_id,
+           agent: this.req.body.agent_id,
+           booked_by: this.req.body.booked_by,
+           start_date: this.req.body.start_date,
+           franchise: this.req.body.franchise_id,
+           students: this.req.body.students,
+           guardians: this.req.body.guardians,
+           emergency_contacts: this.req.body.emergency_contacts,
+           comments: this.req.body.comments,
+
+        };
+
         if (isCreating) {
-            entity.created_date = new Date();
+            weeklyClassMember.created_date = new Date();
         } else {
-            entity.is_deleted = this.req.body.is_deleted;
-            entity.updated_date = new Date();
+            weeklyClassMember.is_deleted = this.req.body.is_deleted;
+            weeklyClassMember.updated_date = new Date();
         }
 
-        return entity;
+        return weeklyClassMember;
+
     }
 
     // POST
@@ -48,10 +56,8 @@ export default class WeeklyClassMemberDTO implements IAdapterFromBody {
             subscription_plan_price: entity.subscription_plan_price,
             member_status: entity.member_status,
             student: entity.student,
-            //agent: entity.agent_id,
-            booked_by: entity.booked_by,
             agent: entity.agent != null ? entity.agent.id : null,
-            //booked_by: entity.booked_by != null ? entity.booked_by.id : null,
+            booked_by: entity.booked_by != null ? entity.booked_by.id : null,
             start_date: entity.start_date,
             life_cycle_membership: entity.life_cycle_membership,
             franchise: entity.franchise,

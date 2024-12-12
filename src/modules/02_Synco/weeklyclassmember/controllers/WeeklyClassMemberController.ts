@@ -10,12 +10,109 @@ import GenericRepository from '../../../../../tenshi/generics/Repository/Generic
 import { FindManyOptions } from 'tenshi/generics/index';
 import { ageOfRecord, getCreatedDate } from "@index/utils/DateUtils";
 import { Guardian } from "@index/entity/Guardian";
+import { Student } from "@index/entity/Student";
+import { Family } from "@index/entity/Family";
+import { EmergencyContact } from "@index/entity/EmergencyContact";
+import { AccountInformationComment } from "@index/entity/AccountInformationComment";
 
 export default  class WeeklyClassMemberController extends GenericController{
 
     constructor() {
         super(WeeklyClassMember);
     }
+
+
+    async insertDynamic(reqHandler: RequestHandler): Promise<any> {
+
+        return this.getService().insertService(reqHandler, async (jwtData, httpExec) => {
+
+            let body = reqHandler.getAdapter().entityFromPostBody();
+          
+            try{
+                const studentRepository = await new GenericRepository(Student);
+                const familyRepository = await new GenericRepository(Family);
+                const guardianRepository = await new GenericRepository(Guardian);
+                const emergencyContactRepository = await new GenericRepository(EmergencyContact);
+             
+                //Insert New Family
+                let family = new Family();
+                family.franchise = body.franchise;
+                family = await familyRepository.add(family);
+
+                let isSuccess = true;
+                let errorMessage:any = "";
+                const newStudents: Array<Student> = [];
+
+                if (Array.isArray(body.students) && body.students.length > 0) {
+                    for (const student of body.students) {
+                        student.franchise = body.franchise;
+                        student.family = family;
+    
+                        try {
+                            newStudents.push(await studentRepository.add(student));
+                        } catch (error: any) {
+                            isSuccess = false;
+                            errorMessage += error.message;
+                        } 
+                    }
+                }
+
+
+                if (Array.isArray(body.guardians) && body.guardians.length > 0) {
+                    for (const guardian of body.guardians) {
+                        guardian.franchise = body.franchise;
+                        guardian.family = family;
+    
+                        try {
+                            await guardianRepository.add(guardian);
+                        } catch (error: any) {
+                            isSuccess = false;
+                            errorMessage += error.message;
+                        } 
+                    }
+                }
+
+                if (Array.isArray(body.emergency_contacts) && body.emergency_contacts.length > 0) {
+                    for (const emergencyContact of body.emergency_contacts) {
+                        emergencyContact.franchise = body.franchise;
+                        emergencyContact.family = family;
+    
+                        try {
+                            await emergencyContactRepository.add(emergencyContact);
+                        } catch (error: any) {
+                            isSuccess = false;
+                            errorMessage += error.message;
+                        } 
+                    }
+                }
+
+          
+                let createdEntity = null;
+                for (const student of newStudents) {
+                    body.student = student.id;
+
+                    console.log(body.student);
+                    // Insert the entity into the database
+                    createdEntity = await this.getRepository().add(body);
+                }
+               
+                const codeResponse : string = 
+                reqHandler.getCodeMessageResponse() != null ? 
+                reqHandler.getCodeMessageResponse() as string :
+                ConstHTTPRequest.INSERT_SUCCESS;
+
+                // Return the success response
+                return httpExec.successAction(
+                    reqHandler.getAdapter().entityToResponse(createdEntity), 
+                    codeResponse);
+
+            }catch(error : any){
+                // Return the database error response
+                return await httpExec.databaseError(error, jwtData!.id.toString(), 
+                reqHandler.getMethod(), this.getControllerName());
+            }
+        });
+     }
 
     async changeStatus(reqHandler: RequestHandler) : Promise<any> {
         return this.getService().updateService(reqHandler, async (jwtData, httpExec) => {

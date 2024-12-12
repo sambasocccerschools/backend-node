@@ -73,6 +73,26 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         
             this.getController().insert(requestHandler);
         });
+
+        this.router.post(`${this.getRouterName()}/add_front`, async (req: Request, res: Response) => {
+
+            const requiredBodyList: Array<string> = [
+                req.body.weekly_class_id,
+                req.body.subscription_plan_price_id,
+                req.body.member_status_code,
+                req.body.students,
+            ];
+            
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassMemberDTO(req))
+                                    .setMethod("add_dynamicWeeklyClassMember")
+                                    .setRequiredFiles(requiredBodyList)
+                                    .isValidateRole("WEEKLY_CLASS_MEMBER")
+                                    .build();
+        
+            (this.getController() as WeeklyClassMemberController).insertDynamic(requestHandler);
+        });
         
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 

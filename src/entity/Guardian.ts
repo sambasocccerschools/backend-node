@@ -14,6 +14,18 @@ export class Guardian {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
+    @Column({ type: "varchar", length: 255 })
+    first_name: string;
+
+    @Column({ type: "varchar", length: 255 })
+    last_name: string;
+
+    @Column({ type: "varchar", length: 255 })
+    phone_number: string;
+
+    @Column({ type: "varchar", length: 255, nullable: true })
+    email: string | null = null;
+
     @Column({ type: "varchar", length: 255, nullable: true })
     other_relationship: string | null = null;
 

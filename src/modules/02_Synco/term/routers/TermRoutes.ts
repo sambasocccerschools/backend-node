@@ -65,6 +65,29 @@ class TermRoutes extends GenericRoutes {
         
             this.getController().insert(requestHandler);
         });
+
+
+        this.router.post(`${this.getRouterName()}/add_front`, async (req: Request, res: Response) => {
+
+            const requiredBodyList: Array<string> = [
+                req.body.name,
+                req.body.start_date,
+                req.body.end_date,
+                req.body.half_term_date,
+                req.body.season_code
+            ];
+            
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new TermDTO(req))
+                                    .setMethod("insertFromFrontTerm")
+                                    .setRequiredFiles(requiredBodyList)
+                                    .isValidateRole("TERM")
+                                    .build();
+        
+            (this.getController() as TermController).insertDynamic(requestHandler);
+        });
+
         
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
@@ -75,6 +98,17 @@ class TermRoutes extends GenericRoutes {
                                     .build();
         
             this.getController().update(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/edit_front`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new TermDTO(req))
+                                    .setMethod("updateTerm")
+                                    .isValidateRole("TERM")
+                                    .build();
+        
+            (this.getController() as TermController).updateDynamic(requestHandler);
         });
         
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {

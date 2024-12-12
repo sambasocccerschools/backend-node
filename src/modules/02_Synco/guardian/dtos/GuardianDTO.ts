@@ -11,6 +11,10 @@ export default class GuardianDTO implements IAdapterFromBody {
 
     private getEntity(isCreating: boolean): Guardian {
         const entity = new Guardian();
+        entity.first_name = this.req.body.first_name;
+        entity.last_name = this.req.body.last_name;
+        entity.phone_number = this.req.body.phone_number;
+        entity.email = this.req.body.email;
         entity.other_relationship = this.req.body.other_relationship;
         entity.relationship = this.req.body.relationship_code;
         entity.referral_source = this.req.body.referral_source_code;
@@ -41,6 +45,10 @@ export default class GuardianDTO implements IAdapterFromBody {
     entityToResponse(entity: Guardian): any {
         return {
             id: entity.id,
+            first_name: entity.first_name,
+            last_name: entity.last_name,
+            phone_number: entity.phone_number,
+            email: entity.email,
             other_relationship: entity.other_relationship,
             relationship: entity.relationship,
             referral_source: entity.referral_source,
