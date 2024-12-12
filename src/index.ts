@@ -30,6 +30,8 @@ import { Family } from '@entity/Family';
 import { Student } from '@entity/Student';
 import { WeeklyClassMember } from '@entity/WeeklyClassMember';
 import { Guardian } from '@entity/Guardian';
+import { EmergencyContact } from '@entity/EmergencyContact';
+import { AccountInformationComment } from '@entity/AccountInformationComment';
 import { WeeklyClassSale } from '@entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@entity/WeeklyClassLead';
@@ -60,6 +62,8 @@ import WeeklyClassRoutes from '@index/modules/02_Synco/weeklyclass/routers/Weekl
 import FamilyRoutes from '@index/modules/02_Synco/family/routers/FamilyRoutes';
 import GuardianRoutes from '@index/modules/02_Synco/guardian/routers/GuardianRoutes';
 import StudentRoutes from '@index/modules/02_Synco/student/routers/StudentRoutes';
+import EmergencyContactRoutes from '@index/modules/02_Synco/emergencycontact/routers/EmergencyContactRoutes';
+import AccountInformationCommentRoutes from '@index/modules/02_Synco/accountinformationcomment/routers/AccountInformationCommentRoutes';
 import WeeklyClassMemberRoutes from '@index/modules/02_Synco/weeklyclassmember/routers/WeeklyClassMemberRoutes';
 import WeeklyClassSaleRoutes from '@index/modules/02_Synco/weeklyclasssale/routers/WeeklyClassSaleRoutes';
 import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswaitinglist/routers/WeeklyClassWaitingListRoutes';
@@ -144,8 +148,10 @@ export const TenshiMain = async () => {
       WeeklyClass,
       Family,
       Student,
+      EmergencyContact,
       WeeklyClassMember,
       Guardian,
+      AccountInformationComment,
       WeeklyClassSale,
       WeeklyClassWaitingList,
       WeeklyClassLead,
@@ -215,6 +221,10 @@ export const TenshiMain = async () => {
     //Another routers
     app.use(new FamilyRoutes().getRouter());
     app.use(new GuardianRoutes().getRouter());
+    app.use(new EmergencyContactRoutes().getRouter());
+    app.use(new AccountInformationCommentRoutes().getRouter());
+    
+    
     
     //*************************************** */
     //       NOT FOUND ROUTE MIDDLEWARE

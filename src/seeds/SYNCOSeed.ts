@@ -32,6 +32,8 @@ import { WeeklyClassSale } from '@index/entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@index/entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
 import { SessionPlanExercise } from '@index/entity/SessionPlanExercise';
+import { EmergencyContact } from '@index/entity/EmergencyContact';
+import { AccountInformationComment } from '../entity/AccountInformationComment';
 
 
 
@@ -85,6 +87,8 @@ async function runSeed() {
                     Student,
                     WeeklyClassMember,
                     Guardian,
+                    EmergencyContact,
+                    AccountInformationComment,
                     WeeklyClassSale,
                     WeeklyClassWaitingList,
                     WeeklyClassLead], // Array of entities to be used
@@ -919,8 +923,80 @@ async function runSeed() {
     await guardianRepository.upsert(guardians as any, ["id"]);
 
 
+    /****************************************
+                    Emergency Contact
+    *****************************************/
+    const emergencyContactRepository = dataSource.getRepository(EmergencyContact);
+
+    const contact: Partial<EmergencyContact>[] = [
+      {
+        id: 234,
+        first_name: "Bal ",
+        last_name: "Smith",
+        phone_number: "88554422",
+        relationship: relationshipCode1 as UnitDynamicCentral,
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 235,
+        first_name: "Rold",
+        last_name: "Smith",
+        phone_number: "11111111",
+        relationship: relationshipCode1 as UnitDynamicCentral,
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        is_deleted: false,
+      },
+      {
+        id: 236,
+        first_name: "Mephis",
+        last_name: "Demetriou",
+        phone_number: "56756767",
+        relationship: relationshipCode1 as UnitDynamicCentral,
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        is_deleted: false,
+      },
+    ];
+
+    await emergencyContactRepository.upsert(contact as any, ["id"]);
+                
 
 
+
+    
+    /****************************************
+            Account information Comment
+    *****************************************/
+    const accountInformationCommentRepository = dataSource.getRepository(AccountInformationComment);
+
+    const accountInformationComment: Partial<AccountInformationComment>[] = [
+      {
+        id: 555,
+        message: "Bal ",
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        user: user as User
+      },
+      {
+        id: 556,
+        message: "Rold",
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        user: user as User
+      },
+      {
+        id: 557,
+        message: "Mephis",
+        family: familyOne as Family,
+        franchise: franchise as Franchise,
+        user: user as User
+      },
+    ];
+
+    await accountInformationCommentRepository.upsert(accountInformationComment as any, ["id"]);
 
 
 

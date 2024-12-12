@@ -1,23 +1,24 @@
 
-import { Family } from "@index/entity/Family";
+import { AccountInformationComment } from "@index/entity/AccountInformationComment";
 import { Request, IAdapterFromBody } from "@modules/index";
 
-export default class FamilyDTO implements IAdapterFromBody {
+export default class AccountInformationCommentDTO implements IAdapterFromBody {
     req: Request;
 
     constructor(req: Request) {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): Family {
-        const entity = new Family();
-        entity.loyalty_points = this.req.body.loyalty_points;
+    private getEntity(isCreating: boolean): AccountInformationComment {
+        const entity = new AccountInformationComment();
+        entity.message = this.req.body.message;
+        entity.user = this.req.body.user_id;
+        entity.family = this.req.body.family_id;
         entity.franchise = this.req.body.franchise_id;
      
         if (isCreating) {
             entity.created_date = new Date();
         } else {
-            entity.is_deleted = this.req.body.is_deleted;
             entity.updated_date = new Date();
         }
 
@@ -25,27 +26,29 @@ export default class FamilyDTO implements IAdapterFromBody {
     }
 
     // POST
-    entityFromPostBody(): Family {
+    entityFromPostBody(): AccountInformationComment {
         return this.getEntity(true);
     }
 
     // PUT
-    entityFromPutBody(): Family {
+    entityFromPutBody(): AccountInformationComment {
         return this.getEntity(false);
     }
 
     // GET
-    entityToResponse(entity: Family): any {
+    entityToResponse(entity: AccountInformationComment): any {
         return {
             id: entity.id,
-            loyalty_points: entity.loyalty_points,
+            message: entity.message,
+            user: entity.user,
+            family: entity.family,
             franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
         };
     }
 
-    entitiesToResponse(entities: Family[] | null): any {
+    entitiesToResponse(entities: AccountInformationComment[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {
