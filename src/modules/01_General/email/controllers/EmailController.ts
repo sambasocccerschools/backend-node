@@ -8,6 +8,8 @@ import { ConstTemplate } from "@index/consts/Const";
 import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { In } from "typeorm";
 import { WeeklyClassSale } from "@index/entity/WeeklyClassSale";
+import { Guardian } from "@index/entity/Guardian";
+import { WeeklyClassLead } from "@index/entity/WeeklyClassLead";
 
 export default  class EmailController extends GenericController{
 
@@ -182,44 +184,52 @@ export default  class EmailController extends GenericController{
                 };
             }
 
-            options.relations = ["agent_id"];
+            options.relations = ["student","student.family"];
             const weeklyClassMemberRepository : GenericRepository = 
                                                 await new GenericRepository(WeeklyClassMember);
             const members = await weeklyClassMemberRepository
                             .findAll(reqHandler.getLogicalDelete(), options);
-            try{
 
+            try{
                 members?.forEach(async (member) =>{
 
-                    if(member.agent_id != null){
-                        // Get users based on filters
-                        const user : User | null = 
-                        await (this.getRepository() as UserRepository).findById(
-                            member.agent_id.id as string, 
-                            reqHandler.getLogicalDelete());
+                    if(member.student != null){
+                        if(member.student.family != null){
+                            const guardianRepository = await new GenericRepository(Guardian);
+                            const guardians = await guardianRepository.findByOptions(true,true, {
+                                where:{
+                                    family:{
+                                        id: member.student.family.id
+                                    }
+                                }
+                            });
 
-                        if(user != undefined && user != null){
-                            // Iterate over each user and send email
-                                const variables = {
-                                    userName: user.first_name + " " + user.last_name,
-                                    emailSubject: emailStructure.subject,
-                                    emailContent: emailStructure.body
-                                };
-
-                                try{
-                                    const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, user.language, variables);
-                                    const emailService = EmailService.getInstance();
-                                    await emailService.sendEmail({
-                                        toMail: user.email,
-                                        subject: emailStructure.subject,
-                                        message: htmlBody,
-                                        attachments: [] 
-                                    });
-                                }catch(error : any){}
-
-                        }else{
-                            // Return error response if no users found
-                            return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                            guardians?.forEach(async (guardian: Guardian) =>{
+                                if(guardian != undefined && guardian != null){
+                                    // Iterate over each user and send email
+                                        const variables = {
+                                            userName: guardian.first_name + " " + guardian.last_name,
+                                            emailSubject: emailStructure.subject,
+                                            emailContent: emailStructure.body
+                                        };
+        
+                                        try{
+                                            if(guardian.email != null){
+                                                const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, "en", variables);
+                                                const emailService = EmailService.getInstance();
+                                                await emailService.sendEmail({
+                                                    toMail: guardian.email,
+                                                    subject: emailStructure.subject,
+                                                    message: htmlBody,
+                                                    attachments: [] 
+                                                });
+                                            }
+                                        }catch(error : any){}
+                                }else{
+                                    // Return error response if no users found
+                                    return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                                }
+                            });
                         }
                     }
                     
@@ -287,7 +297,7 @@ export default  class EmailController extends GenericController{
                 };
             }
 
-            options.relations = ["agent_id"];
+            options.relations = ["student","student.family"];
             const weeklyClassSaleRepository : GenericRepository = 
                                                 await new GenericRepository(WeeklyClassSale);
             const sales = await weeklyClassSaleRepository
@@ -296,35 +306,43 @@ export default  class EmailController extends GenericController{
 
                 sales?.forEach(async (sale) =>{
 
-                    if(sale.agent_id != null){
-                        // Get users based on filters
-                        const user : User | null = 
-                        await (this.getRepository() as UserRepository).findById(
-                            sale.agent_id.id as string, 
-                            reqHandler.getLogicalDelete());
+                    if(sale.student != null){
+                        if(sale.student.family != null){
+                            const guardianRepository = await new GenericRepository(Guardian);
+                            const guardians = await guardianRepository.findByOptions(true,true, {
+                                where:{
+                                    family:{
+                                        id: sale.student.family.id
+                                    }
+                                }
+                            });
 
-                        if(user != undefined && user != null){
-                            // Iterate over each user and send email
-                                const variables = {
-                                    userName: user.first_name + " " + user.last_name,
-                                    emailSubject: emailStructure.subject,
-                                    emailContent: emailStructure.body
-                                };
-
-                                try{
-                                    const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, user.language, variables);
-                                    const emailService = EmailService.getInstance();
-                                    await emailService.sendEmail({
-                                        toMail: user.email,
-                                        subject: emailStructure.subject,
-                                        message: htmlBody,
-                                        attachments: [] 
-                                    });
-                                }catch(error : any){}
-
-                        }else{
-                            // Return error response if no users found
-                            return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                            guardians?.forEach(async (guardian: Guardian) =>{
+                                if(guardian != undefined && guardian != null){
+                                    // Iterate over each user and send email
+                                        const variables = {
+                                            userName: guardian.first_name + " " + guardian.last_name,
+                                            emailSubject: emailStructure.subject,
+                                            emailContent: emailStructure.body
+                                        };
+        
+                                        try{
+                                            if(guardian.email != null){
+                                                const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, "en", variables);
+                                                const emailService = EmailService.getInstance();
+                                                await emailService.sendEmail({
+                                                    toMail: guardian.email,
+                                                    subject: emailStructure.subject,
+                                                    message: htmlBody,
+                                                    attachments: [] 
+                                                });
+                                            }
+                                        }catch(error : any){}
+                                }else{
+                                    // Return error response if no users found
+                                    return await httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.THERE_ARE_NOT_INFO);
+                                }
+                            });
                         }
                     }
                     
@@ -345,5 +363,87 @@ export default  class EmailController extends GenericController{
 
 
 
+
+    /**
+     *              WEEKLY Leads
+     */
+    async sendMailByWeeklyLeads(reqHandler: RequestHandler): Promise<any> {
+        const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
+
+        try{
+            const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
+
+            // Validate role
+            if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
+                return; 
+            }
+
+             // Get the filter parameters from the URL
+             const weekly_classes_lead_ids: string | null = 
+                                            getUrlParam("weekly_classes_lead_id", 
+                                            reqHandler.getRequest()) || null;
+
+             if (!weekly_classes_lead_ids) {
+                 return httpExec.paramsError();
+             }
+         
+             // list ids
+             const ids = (weekly_classes_lead_ids as string).split(',').map(id => id.trim());
+             const validIds = ids.map(id => Number(id));
+
+            // Prepare email structure
+            const emailStructure  = {
+                subject: reqHandler.getRequest().body.subject,
+                body: reqHandler.getRequest().body.body_message
+            }
+
+            const options: FindManyOptions = {};
+            if (validIds.length > 0) {
+                options.where = { 
+                    ...options.where, 
+                    id: In(validIds) 
+                };
+            }
+
+            options.relations = ["guardian"];
+            const weeklyClassLeadRepository : GenericRepository = 
+                                                await new GenericRepository(WeeklyClassLead);
+            const leads = await weeklyClassLeadRepository
+                            .findAll(reqHandler.getLogicalDelete(), options);
+            try{
+                leads?.forEach(async (lead) =>{
+                    if(lead.guardian != null){
+                        const guardian = lead.guardian;
+                        const variables = {
+                            userName: guardian.first_name + " " + guardian.last_name,
+                            emailSubject: emailStructure.subject,
+                            emailContent: emailStructure.body
+                        };
+
+                        try{
+                            const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, "en", variables);
+                            const emailService = EmailService.getInstance();
+                            await emailService.sendEmail({
+                                toMail: guardian.email,
+                                subject: emailStructure.subject,
+                                message: htmlBody,
+                                attachments: [] 
+                            });
+                        }catch(error : any){}
+                    }
+                });
+
+                // Return success response
+                return httpExec.successAction(null, ConstHTTPRequest.SEND_MAIL_SUCCESS);
+
+            }catch(error : any){
+                // Return general error response if any exception occurs
+                return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+            }
+        }catch(error : any){
+            // Return general error response if any exception occurs
+            return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+        }
+    }
 }
 

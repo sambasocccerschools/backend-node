@@ -4188,7 +4188,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/email/send_email_by_weekly_members?weekly_members_ids=4,1",
+									"raw": "{{host}}/email/send_email_by_weekly_members?weekly_members_ids=2",
 									"host": [
 										"{{host}}"
 									],
@@ -4199,7 +4199,7 @@
 									"query": [
 										{
 											"key": "weekly_members_ids",
-											"value": "4,1"
+											"value": "2"
 										}
 									]
 								}
@@ -4859,6 +4859,44 @@
 							"response": []
 						},
 						{
+							"name": "Create WeeklyClassLead From Front",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_class_id\": 1,\n    \"lead_status_code\": \"CALL_PENDING_LS\",\n    //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"franchise_id\": 222,\n    \"guardians\": [\n        {\n            \"first_name\": \"Guardian Lead 1\",\n            \"last_name\": \"Guardian Lead 1\",\n            \"email\": \"david888w322@gmail.com\",\n            \"phone_number\": \"+66282327234631235\",\n            \"relationship_code\": \"GRANDPARENT\",\n            \"referral_source_code\": \"INSTAGRAM\"\n        },\n        {\n            \"first_name\": \"Guardian Lead 2\",\n            \"last_name\": \"Guardian Lead 2\",\n            \"email\": \"david9392w29@gmail.com\",\n            \"phone_number\": \"+66283372224623236\",\n            \"relationship_code\": \"FATHER\",\n            \"referral_source_code\": \"FACEBOOK\"\n        }\n    ],\n    \"emergency_contacts\": [\n        {\n            \"first_name\": \"Emergency Lead\",\n            \"last_name\": \"Palavaccini\",\n            \"phone_number\": \"+66283746352\",\n            \"relationship_id\": 3\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/add_front",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"add_front"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Update WeeklyClassLead",
 							"request": {
 								"method": "PUT",
@@ -4897,6 +4935,82 @@
 											"key": "id",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Change",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_lead_id\": [55,58],\n    \"lead_status_code\": \"ACTIVE_LS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/changeStatus",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"changeStatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Assign Agent",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_lead_id\": [55,58],\n    \"agent_id\": \"0ccbe5fd-8c76-4050-8878-35388ef6a6aa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesLeads/assignAgent",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesLeads",
+										"assignAgent"
 									]
 								}
 							},
@@ -5033,6 +5147,50 @@
 										{
 											"key": "id",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Email Weekly classes Lead",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_by_weekly_lead?weekly_classes_lead_id=259",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_by_weekly_lead"
+									],
+									"query": [
+										{
+											"key": "weekly_classes_lead_id",
+											"value": "259"
 										}
 									]
 								}
@@ -5434,7 +5592,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\",\n  //\"email\": \"test@gmail.com\",\n  //\"other_relationship\": \"Any String\",\n  //\"relationship_code\": \"FATHER\",\n  //\"referral_source_code\": \"INSTAGRAM\",\n  //\"family_id\": 1,\n  //\"franchise_id\": 224\n}",
+									"raw": "{\n \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\"\n  //\"email\": \"test@gmail.com\",\n  //\"other_relationship\": \"Any String\",\n  //\"relationship_code\": \"FATHER\",\n  //\"referral_source_code\": \"INSTAGRAM\",\n  //\"family_id\": 1,\n  //\"franchise_id\": 224\n}",
 									"options": {
 										"raw": {
 											"language": "json"

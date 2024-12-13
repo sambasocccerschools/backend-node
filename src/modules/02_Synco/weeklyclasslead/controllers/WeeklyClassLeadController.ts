@@ -38,7 +38,7 @@ export default  class WeeklyClassLeadController extends GenericController{
 
                 let isSuccess = true;
                 let errorMessage:any = "";
-                const newStudents: Array<Student> = [];
+                let guardianInsert = null;
 
                 if (Array.isArray(body.guardians) && body.guardians.length > 0) {
                     for (const guardian of body.guardians) {
@@ -46,7 +46,7 @@ export default  class WeeklyClassLeadController extends GenericController{
                         guardian.family = family;
     
                         try {
-                            await guardianRepository.add(guardian);
+                            guardianInsert = await guardianRepository.add(guardian);
                         } catch (error: any) {
                             isSuccess = false;
                             errorMessage += error.message;
@@ -68,15 +68,11 @@ export default  class WeeklyClassLeadController extends GenericController{
                     }
                 }
 
-          
-                let createdEntity = null;
-                for (const student of newStudents) {
-                    body.student = student.id;
+                body.guardian = guardianInsert;
 
-                    // Insert the entity into the database
-                    createdEntity = await this.getRepository().add(body);
-                }
-               
+                // Insert the entity into the database
+                const createdEntity = await this.getRepository().add(body);
+                
                 const codeResponse : string = 
                 reqHandler.getCodeMessageResponse() != null ? 
                 reqHandler.getCodeMessageResponse() as string :
@@ -203,10 +199,20 @@ export default  class WeeklyClassLeadController extends GenericController{
                         ConstHTTPRequest.GET_ALL_SUCCESS;
 
                     const guardianRepository = await new GenericRepository(Guardian);
+                    const studentRepository = await new GenericRepository(Student);
 
                     for (const entity of entities) {
 
-                        
+                        if(entity.guardian.id != null ||
+                            entity.guardian.id != undefined
+                        ){
+                            const kidRange = await this.getKidRange(entity.guardian.id,
+                                             guardianRepository, studentRepository);
+                            
+                            entity.kid_range = kidRange;
+                        }else{
+                            entity.kid_range = null;
+                        }
                     }
 
                     // Return the success response
@@ -224,6 +230,37 @@ export default  class WeeklyClassLeadController extends GenericController{
                     reqHandler.getMethod(), this.getControllerName());
             }
         });
+    }
+
+    async getKidRange(guardianId: number, 
+        guardianRepository: GenericRepository,
+        studentRepository: GenericRepository): Promise<string | null> {
+
+        const guardian = await guardianRepository.findByOptions(true, false,
+            {
+                where: { id: guardianId },
+                relations: ["family"],
+            }
+        );
+    
+        if (!guardian?.family) {
+            return null; 
+        }
+    
+        const students = await studentRepository.findByOptions(true, true,
+            {
+            where: { family: { id: guardian.family.id } },
+        });
+    
+        if (students.length === 0) {
+            return null; 
+        } 
+
+        const ages = students.map((student: { age: any; }) => student.age);
+        const minAge = Math.min(...ages);
+        const maxAge = Math.max(...ages);
+    
+        return `${minAge} to ${maxAge}`;
     }
 }
     

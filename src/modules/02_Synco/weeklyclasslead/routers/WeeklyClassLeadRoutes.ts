@@ -55,6 +55,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         this.router.post(`${this.getRouterName()}/add`, async (req: Request, res: Response) => {
 
             const requiredBodyList: Array<string> = [
+                req.body.weekly_class_id,
                 req.body.lead_status_code,
                 req.body.guardian_id
             ];
@@ -69,6 +70,25 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         
             this.getController().insert(requestHandler);
         });
+
+        this.router.post(`${this.getRouterName()}/add_front`, async (req: Request, res: Response) => {
+
+            const requiredBodyList: Array<string> = [
+                req.body.weekly_class_id,
+                req.body.lead_status_code,
+                req.body.guardians,
+            ];
+            
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassLeadDTO(req))
+                                    .setMethod("add_frontWeeklyClassLead")
+                                    .setRequiredFiles(requiredBodyList)
+                                    .isValidateRole("WEEKLY_CLASS_LEAD")
+                                    .build();
+        
+            (this.getController() as WeeklyClassLeadController).insertDynamic(requestHandler);
+        });
         
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
@@ -79,6 +99,30 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                     .build();
         
             this.getController().update(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/assignAgent`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassLeadDTO(req))
+                                    .setMethod("assignAgentWeeklyClassLead")
+                                    .isValidateRole("WEEKLY_CLASS_LEAD")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
+            
+            (this.getController() as WeeklyClassLeadController).assignAgent(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassLeadDTO(req))
+                                    .setMethod("changeStatusWeeklyClassLead")
+                                    .isValidateRole("WEEKLY_CLASS_LEAD")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
+        
+            (this.getController() as WeeklyClassLeadController).changeStatus(requestHandler);
         });
         
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {

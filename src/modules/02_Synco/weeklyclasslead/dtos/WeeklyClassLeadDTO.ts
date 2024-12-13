@@ -13,7 +13,7 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
 
         const weeklyClassLead: Record<string, any> = {
             weekly_class: this.req.body.weekly_class_id,
-            lead_status: this.req.body.lead_status,
+            lead_status: this.req.body.lead_status_code,
             agent: this.req.body.agent_id,
             booked_by: this.req.body.booked_by,
             franchise: this.req.body.franchise_id,
@@ -49,6 +49,7 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
             lead_status: entity.lead_status,
             weekly_class: entity.weekly_class,
             guardian: entity.guardian,
+            kid_range: entity.kid_range,
             agent: entity.agent,
             booked_by: entity.booked_by,
             franchise: entity.franchise,
