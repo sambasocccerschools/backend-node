@@ -893,6 +893,10 @@ async function runSeed() {
     const guardians: Partial<Guardian>[] = [
       {
         id: 123,
+        first_name: "first",
+        last_name: "guardian",
+        phone_number: "+2323342344",
+        email: null,
         other_relationship: null,
         relationship: relationshipCode1 as UnitDynamicCentral,
         referral_source: referralSourceCode as UnitDynamicCentral,
@@ -902,6 +906,10 @@ async function runSeed() {
       },
       {
         id: 124,
+        first_name: "Second",
+        last_name: "guardian",
+        phone_number: "+2323342344",
+        email: "test@gmail.com",
         other_relationship: "Uncle",
         relationship: relationshipCode2 as UnitDynamicCentral,
         referral_source: null,
@@ -911,6 +919,10 @@ async function runSeed() {
       },
       {
         id: 125,
+        first_name: "Third",
+        last_name: "guardian",
+        phone_number: "+7777",
+        email: "test2@gmail.com",
         other_relationship: null,
         relationship: null,
         referral_source: referralSourceCode as UnitDynamicCentral,
