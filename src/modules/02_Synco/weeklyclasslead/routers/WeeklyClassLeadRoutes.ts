@@ -1,17 +1,17 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions,
          getUrlParam} from "@modules/index";
-import { WeeklyClassLead } from "@index/entity/WeeklyClassLead";
 import WeeklyClassLeadDTO from "@modules/02_Synco/weeklyclasslead/dtos/WeeklyClassLeadDTO";
-import { ILike, In, LessThan, MoreThan } from "typeorm";
+import { ILike, In, MoreThan } from "typeorm";
+import WeeklyClassLeadController from "../controllers/WeeklyClassLeadController";
 
 class WeeklyClassLeadRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(WeeklyClassLead), "/weeklyClassesLeads");
+        super(new WeeklyClassLeadController(), "/weeklyClassesLeads");
         this.filters.relations = [
             "lead_status",
             "weekly_class",

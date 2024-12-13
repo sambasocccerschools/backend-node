@@ -1,17 +1,17 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions,
          getUrlParam} from "@modules/index";
-import { WeeklyClassWaitingList } from "@index/entity/WeeklyClassWaitingList";
 import WeeklyClassWaitingListDTO from "@modules/02_Synco/weeklyclasswaitinglist/dtos/WeeklyClassWaitingListDTO";
 import { ILike, In, LessThan, MoreThan } from "typeorm";
+import WeeklyClassWaitingListController from "../controllers/WeeklyClassWaitingListController";
 
 class WeeklyClassWaitingListRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(WeeklyClassWaitingList), "/weeklyClassesWaitingLists");
+        super(new WeeklyClassWaitingListController(), "/weeklyClassesWaitingLists");
         this.filters.relations = [
             "weekly_class",
             "subscription_plan_price",
@@ -19,7 +19,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
             "student",
             "agent",
             "booked_by",
-            "franchise"
+            "franchise",
+            "student.family"
         ];
     }
 
@@ -71,6 +72,25 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         
             this.getController().insert(requestHandler);
         });
+
+        this.router.post(`${this.getRouterName()}/add_front`, async (req: Request, res: Response) => {
+
+            const requiredBodyList: Array<string> = [
+                req.body.weekly_class_id,
+                req.body.waiting_list_status_code,
+                req.body.students,
+            ];
+            
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassWaitingListDTO(req))
+                                    .setMethod("add_frontWeeklyClassWaitingList")
+                                    .setRequiredFiles(requiredBodyList)
+                                    .isValidateRole("WEEKLY_CLASS_WAITING_LIST")
+                                    .build();
+
+            (this.getController() as WeeklyClassWaitingListController).insertDynamic(requestHandler);
+        });
         
         this.router.put(`${this.getRouterName()}/edit`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
@@ -82,7 +102,31 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         
             this.getController().update(requestHandler);
         });
+
+        this.router.put(`${this.getRouterName()}/assignAgent`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassWaitingListDTO(req))
+                                    .setMethod("assignAgentWeeklyClassWaitingList")
+                                    .isValidateRole("WEEKLY_CLASS_WAITING_LIST")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
+            
+            (this.getController() as WeeklyClassWaitingListController).assignAgent(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassWaitingListDTO(req))
+                                    .setMethod("changeStatusWeeklyClassWaitingList")
+                                    .isValidateRole("WEEKLY_CLASS_WAITING_LIST")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
         
+            (this.getController() as WeeklyClassWaitingListController).changeStatus(requestHandler);
+        });
+
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
@@ -95,7 +139,6 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
             this.getController().delete(requestHandler);
         });
     }
-
 
     private getAllFilters(req: Request){
         this.filters.where = { };

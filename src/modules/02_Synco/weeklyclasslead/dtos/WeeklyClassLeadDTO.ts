@@ -9,22 +9,27 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
         this.req = req;
     }
 
-    private getEntity(isCreating: boolean): WeeklyClassLead {
-        const entity = new WeeklyClassLead();
-        entity.lead_status = this.req.body.lead_status_code;
-        entity.weekly_class = this.req.body.weekly_class_id;
-        entity.guardian = this.req.body.guardian_id;
-        entity.agent = this.req.body.agent_id;
-        entity.booked_by = this.req.body.booked_by;
-        entity.franchise = this.req.body.franchise_id;
-     
-        if (isCreating) {
-            entity.created_date = new Date();
-        } else {
-            entity.updated_date = new Date();
-        }
+    private getEntity(isCreating: boolean): any {
 
-        return entity;
+        const weeklyClassLead: Record<string, any> = {
+            weekly_class: this.req.body.weekly_class_id,
+            lead_status: this.req.body.lead_status,
+            agent: this.req.body.agent_id,
+            booked_by: this.req.body.booked_by,
+            franchise: this.req.body.franchise_id,
+            guardians: this.req.body.guardians,
+            emergency_contacts: this.req.body.emergency_contacts,
+            comments: this.req.body.comments,
+         };
+ 
+         if (isCreating) {
+            weeklyClassLead.created_date = new Date();
+         } else {
+            weeklyClassLead.is_deleted = this.req.body.is_deleted;
+            weeklyClassLead.updated_date = new Date();
+         }
+ 
+         return weeklyClassLead;
     }
 
     // POST
@@ -38,7 +43,7 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
     }
 
     // GET
-    entityToResponse(entity: WeeklyClassLead): any {
+    entityToResponse(entity: any): any {
         return {
             id: entity.id,
             lead_status: entity.lead_status,
@@ -52,7 +57,7 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
         };
     }
 
-    entitiesToResponse(entities: WeeklyClassLead[] | null): any {
+    entitiesToResponse(entities: any[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {
@@ -60,5 +65,23 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
             }
         }
         return response;
+    }
+
+    weeklyClassesLeadsChangeStatusPostBody(): any{
+        const weeklyClassesLeads = {
+            weekly_classes_lead_id:this.req.body.weekly_classes_lead_id,
+            lead_status_code:this.req.body.lead_status_code
+        };
+    
+        return weeklyClassesLeads;
+    }
+
+    weeklyClassesLeadsAssignAgentPostBody(): any{
+        const weeklyClassesLeads = {
+            weekly_classes_lead_id:this.req.body.weekly_classes_lead_id,
+            agent_id:this.req.body.agent_id
+        };
+    
+        return weeklyClassesLeads;
     }
 }

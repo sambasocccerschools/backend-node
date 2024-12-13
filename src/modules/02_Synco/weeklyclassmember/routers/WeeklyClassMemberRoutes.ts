@@ -86,7 +86,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassMemberDTO(req))
-                                    .setMethod("add_dynamicWeeklyClassMember")
+                                    .setMethod("add_frontWeeklyClassMember")
                                     .setRequiredFiles(requiredBodyList)
                                     .isValidateRole("WEEKLY_CLASS_MEMBER")
                                     .build();

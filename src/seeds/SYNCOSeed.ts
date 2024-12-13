@@ -1095,7 +1095,7 @@ async function runSeed() {
         agent: null,
         booked_by: null,
         franchise: franchise as Franchise,
-        is_deleted: true,
+        is_deleted: false,
       },
     ];
     await weeklyClassWaitingListRepository.upsert(weeklyClassWaitingLists as any, ["id"]);
@@ -1141,7 +1141,7 @@ async function runSeed() {
         agent: null,
         booked_by: null,
         franchise: null,
-        is_deleted: true,
+        is_deleted: false,
       },
     ];
     

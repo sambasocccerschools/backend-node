@@ -3317,7 +3317,7 @@
 							]
 						},
 						{
-							"name": "Create Term",
+							"name": "Create Term From front",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -3335,6 +3335,44 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  \"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/terms/add_front",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"add_front"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Term",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  \"franchise_id\": 222\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3372,7 +3410,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  \"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"id\": 36,\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\"\n  //\"franchise_id\": 222,\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3380,7 +3418,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/terms/edit?id=311",
+									"raw": "{{host}}/terms/edit?id=321",
 									"host": [
 										"{{host}}"
 									],
@@ -3391,7 +3429,51 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "311"
+											"value": "321"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Term From Front",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"id\": 52,\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/terms/edit_front?id=321",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"terms",
+										"edit_front"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "321"
 										}
 									]
 								}
@@ -3415,7 +3497,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/terms/get?id=313",
+									"raw": "{{host}}/terms/get?id=321",
 									"host": [
 										"{{host}}"
 									],
@@ -3426,7 +3508,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "313"
+											"value": "321"
 										}
 									]
 								}
@@ -3746,7 +3828,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"weekly_class_id\": 1,\n  \"subscription_plan_price_id\": 753,\n  \"member_status_code\": \"FROZEN_MS\",\n  \"student_id\": 58,\n  //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n  //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n  \"start_date\": \"2024-11-18\",\n  \"franchise_id\": null\n}",
+									"raw": "{\n    \"weekly_class_id\": 1,\n    \"subscription_plan_price_id\": 753,\n    \"member_status_code\": \"FROZEN_MS\",\n    \"student_id\": 58,\n    \"start_date\": \"2024-11-18\"\n    //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"franchise_id\": null,\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3761,6 +3843,44 @@
 									"path": [
 										"weeklyClassesMembers",
 										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create WeeklyClassMember From Front",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_class_id\": 1,\n    \"subscription_plan_price_id\": 753,\n    \"member_status_code\": \"ACTIVE_MS\",\n    \"start_date\": \"2024-11-18\",\n    //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"franchise_id\": 222,\n    \"students\": [\n        {\n            \"first_name\": \"Test\",\n            \"last_name\": \"Guetta\",\n            \"dob\": \"1967-09-20\",\n            \"age\": 56,\n            \"gender\": \"M\",\n            \"medical_information\": \"No known medical conditions\"\n        }\n    ],\n    \"guardians\": [\n        {\n            \"first_name\": \"David\",\n            \"last_name\": \"Guetta\",\n            \"email\": \"david888w322@gmail.com\",\n            \"phone_number\": \"+66282327234631235\",\n            \"relationship_code\": \"GRANDPARENT\",\n            \"referral_source_code\": \"INSTAGRAM\"\n        },\n        {\n            \"first_name\": \"David 2\",\n            \"last_name\": \"Guetta 2\",\n            \"email\": \"david9392w29@gmail.com\",\n            \"phone_number\": \"+66283372224623236\",\n            \"relationship_code\": \"FATHER\",\n            \"referral_source_code\": \"FACEBOOK\"\n        }\n    ],\n    \"emergency_contacts\": [\n        {\n            \"first_name\": \"Bernard\",\n            \"last_name\": \"Guetta\",\n            \"phone_number\": \"+66283746352\",\n            \"relationship_id\": 3\n        }\n    ],\n    \"comments\": [\n        \"Hi, this is a sample comment\",\n        \"Hi, this is another comment\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesMembers/add_front",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesMembers",
+										"add_front"
 									]
 								}
 							},
@@ -3865,7 +3985,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/weeklyClassesMembers/get?id=1",
+									"raw": "{{host}}/weeklyClassesMembers/get?id=14",
 									"host": [
 										"{{host}}"
 									],
@@ -3876,7 +3996,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "14"
 										}
 									]
 								}
@@ -4376,7 +4496,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"weekly_class_id\": 1,\n  //\"subscription_plan_price_id\": 752,\n  \"waiting_list_status_code\": \"PENDING\",\n  \"student_id\": 4\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
+									"raw": "{\n  \"weekly_class_id\": 1,\n  //\"subscription_plan_price_id\": 752,\n  \"waiting_list_status_code\": \"PENDING\",\n  \"student_id\": 57\n//\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n//\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n//\"franchise_id\": 222,\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4391,6 +4511,44 @@
 									"path": [
 										"weeklyClassesWaitingLists",
 										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create WeeklyClassWaitingList From Front",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_class_id\": 1,\n    \"subscription_plan_price_id\": 753,\n    \"waiting_list_status_code\": \"PENDING\",\n    //\"agent_id\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"booked_by\": \"1d06106b-1058-45a8-bbf7-0796e07f2ac8\",\n    //\"franchise_id\": 222,\n    \"students\": [\n        {\n            \"first_name\": \"Pura\",\n            \"last_name\": \"70 PRO\",\n            \"dob\": \"1967-09-20\",\n            \"age\": 56,\n            \"gender\": \"M\",\n            \"medical_information\": \"No known medical conditions\"\n        }\n    ],\n    \"guardians\": [\n        {\n            \"first_name\": \"Guardian 1\",\n            \"last_name\": \"Guardian 1\",\n            \"email\": \"david888w322@gmail.com\",\n            \"phone_number\": \"+66282327234631235\",\n            \"relationship_code\": \"GRANDPARENT\",\n            \"referral_source_code\": \"INSTAGRAM\"\n        },\n        {\n            \"first_name\": \"Guardian 2\",\n            \"last_name\": \"Guardian 2\",\n            \"email\": \"david9392w29@gmail.com\",\n            \"phone_number\": \"+66283372224623236\",\n            \"relationship_code\": \"FATHER\",\n            \"referral_source_code\": \"FACEBOOK\"\n        }\n    ],\n    \"emergency_contacts\": [\n        {\n            \"first_name\": \"Berntt\",\n            \"last_name\": \"Palavaccini\",\n            \"phone_number\": \"+66283746352\",\n            \"relationship_id\": 3\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesWaitingLists/add_front",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesWaitingLists",
+										"add_front"
 									]
 								}
 							},
@@ -4435,6 +4593,82 @@
 											"key": "id",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Change Status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_waiting_list_id\": [66,67],\n    \"waiting_list_status_code\": \"BOOKED_TRIAL\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesWaitingLists/changeStatus",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesWaitingLists",
+										"changeStatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Assign Agent",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_waiting_list_id\": [65,66],\n    \"agent_id\": \"0ccbe5fd-8c76-4050-8878-35388ef6a6aa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesWaitingLists/assignAgent",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesWaitingLists",
+										"assignAgent"
 									]
 								}
 							},
@@ -5200,7 +5434,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"other_relationship\": \"Any String\",\n  \"relationship_code\": \"FATHER\",\n  \"referral_source_code\": \"INSTAGRAM\",\n  \"family_id\": 1,\n  \"franchise_id\": 224\n}",
+									"raw": "{\n \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\",\n  //\"email\": \"test@gmail.com\",\n  //\"other_relationship\": \"Any String\",\n  //\"relationship_code\": \"FATHER\",\n  //\"referral_source_code\": \"INSTAGRAM\",\n  //\"family_id\": 1,\n  //\"franchise_id\": 224\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5386,7 +5620,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\"\n  //\"relationship_code\": \"FATHER\",\n  //\"family_id\": \"1\",\n  //\"franchise_id\": \"\\\"test_franchise\\\"\"\n}",
+									"raw": "{\n  \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\"\n  //\"email\": \"test@gmail.com\",\n  //\"relationship_code\": \"FATHER\",\n  //\"family_id\": \"1\",\n  //\"franchise_id\": \"\\\"test_franchise\\\"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -5424,7 +5658,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\"\n  //\"relationship_code\": \"FATHER\",\n  //\"family_id\": \"1\",\n  //\"franchise_id\": \"\\\"test_franchise\\\"\"\n}",
+									"raw": "{\n  \"first_name\": \"Fabian\",\n  \"last_name\": \"Rosales\",\n  \"phone_number\": \"83461166\"\n   //\"email\": \"test@gmail.com\",\n  //\"relationship_code\": \"FATHER\",\n  //\"family_id\": \"1\",\n  //\"franchise_id\": \"\\\"test_franchise\\\"\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"

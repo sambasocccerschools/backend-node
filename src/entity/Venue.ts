@@ -38,7 +38,7 @@ export class Venue {
     @Column('decimal', { precision: 10, scale: 2, nullable: true, default: null  })
     price: number;
 
-    @ManyToOne(() => Franchise, {  nullable: true })
+    @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })
     franchise: Franchise | null;
 

@@ -68,7 +68,7 @@ export default class WeeklyClassMemberDTO implements IAdapterFromBody {
     }
 
 
-    entitiesToResponse(entities: WeeklyClassMember[] | null): any {
+    entitiesToResponse(entities: any[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {
