@@ -10,6 +10,7 @@ import { In } from "typeorm";
 import { WeeklyClassSale } from "@index/entity/WeeklyClassSale";
 import { Guardian } from "@index/entity/Guardian";
 import { WeeklyClassLead } from "@index/entity/WeeklyClassLead";
+import { WeeklyClassFreeTrial } from "@index/entity/WeeklyClassFreeTrial";
 
 export default  class EmailController extends GenericController{
 
@@ -414,6 +415,92 @@ export default  class EmailController extends GenericController{
                 leads?.forEach(async (lead) =>{
                     if(lead.guardian != null){
                         const guardian = lead.guardian;
+                        const variables = {
+                            userName: guardian.first_name + " " + guardian.last_name,
+                            emailSubject: emailStructure.subject,
+                            emailContent: emailStructure.body
+                        };
+
+                        try{
+                            const htmlBody = await getEmailTemplate(ConstTemplate.GENERIC_TEMPLATE_EMAIL, "en", variables);
+                            const emailService = EmailService.getInstance();
+                            await emailService.sendEmail({
+                                toMail: guardian.email,
+                                subject: emailStructure.subject,
+                                message: htmlBody,
+                                attachments: [] 
+                            });
+                        }catch(error : any){}
+                    }
+                });
+
+                // Return success response
+                return httpExec.successAction(null, ConstHTTPRequest.SEND_MAIL_SUCCESS);
+
+            }catch(error : any){
+                // Return general error response if any exception occurs
+                return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+            }
+        }catch(error : any){
+            // Return general error response if any exception occurs
+            return await httpExec.generalError(error, reqHandler.getMethod(), this.getControllerName());
+        }
+    }
+
+
+
+
+
+
+     /**
+     *              WEEKLY Free Trial
+     */
+     async sendMailByWeeklyFreeTrial(reqHandler: RequestHandler): Promise<any> {
+        const httpExec : HttpAction = reqHandler.getResponse().locals.httpExec;
+
+        try{
+            const jwtData : JWTObject = reqHandler.getResponse().locals.jwtData;
+
+            // Validate role
+            if(await this.validateRole(reqHandler,  jwtData.role, ConstFunctions.CREATE, httpExec) !== true){ 
+                return; 
+            }
+
+             // Get the filter parameters from the URL
+             const weekly_classes_free_trial_ids: string | null = 
+                                            getUrlParam("weekly_classes_free_trial_id", 
+                                            reqHandler.getRequest()) || null;
+
+             if (!weekly_classes_free_trial_ids) {
+                 return httpExec.paramsError();
+             }
+         
+             // list ids
+             const ids = (weekly_classes_free_trial_ids as string).split(',').map(id => id.trim());
+             const validIds = ids.map(id => Number(id));
+
+            // Prepare email structure
+            const emailStructure  = {
+                subject: reqHandler.getRequest().body.subject,
+                body: reqHandler.getRequest().body.body_message
+            }
+
+            const options: FindManyOptions = {};
+            if (validIds.length > 0) {
+                options.where = { 
+                    ...options.where, 
+                    id: In(validIds) 
+                };
+            }
+
+            options.relations = ["guardian"];
+            const weeklyClassFreeTrialRepository = await new GenericRepository(WeeklyClassFreeTrial);
+            const freeTrials = await weeklyClassFreeTrialRepository
+                            .findAll(reqHandler.getLogicalDelete(), options);
+            try{
+                freeTrials?.forEach(async (freeTrial) =>{
+                    if(freeTrial.guardian != null){
+                        const guardian = freeTrial.guardian;
                         const variables = {
                             userName: guardian.first_name + " " + guardian.last_name,
                             emailSubject: emailStructure.subject,

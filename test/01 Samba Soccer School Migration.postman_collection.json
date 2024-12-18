@@ -5496,6 +5496,50 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Send Email Weekly classes Lead Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_by_weekly_free_trial?weekly_classes_free_trial_id=101,102",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_by_weekly_free_trial"
+									],
+									"query": [
+										{
+											"key": "weekly_classes_free_trial_id",
+											"value": "101,102"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -6244,7 +6288,7 @@
 					]
 				},
 				{
-					"name": "Account Information Comment",
+					"name": "Comments",
 					"item": [
 						{
 							"name": "Create AccountInformationComment",
