@@ -34,6 +34,7 @@ import { WeeklyClassLead } from '@index/entity/WeeklyClassLead';
 import { SessionPlanExercise } from '@index/entity/SessionPlanExercise';
 import { EmergencyContact } from '@index/entity/EmergencyContact';
 import { AccountInformationComment } from '../entity/AccountInformationComment';
+import { WeeklyClassFreeTrial } from '@index/entity/WeeklyClassFreeTrial';
 
 
 
@@ -91,7 +92,8 @@ async function runSeed() {
                     AccountInformationComment,
                     WeeklyClassSale,
                     WeeklyClassWaitingList,
-                    WeeklyClassLead], // Array of entities to be used
+                    WeeklyClassLead,
+                    WeeklyClassFreeTrial], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -1158,6 +1160,58 @@ async function runSeed() {
     ];
     
     await weeklyClassLeadRepository.upsert(weeklyClassLeads as any, ["id"]);
+
+
+
+
+/****************************************
+        Weekly Class Free Trials
+*****************************************/
+const freeTrialStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FREE_TRIAL_PENDING" });
+const freeTrialStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FREE_TRIAL_COMPLETED" });
+
+const weeklyClassFreeTrialRepository = dataSource.getRepository(WeeklyClassFreeTrial);
+const weeklyClassFreeTrials: Partial<WeeklyClassFreeTrial>[] = [
+  {
+    id: 101,
+    weekly_class: weeklyClass1 as WeeklyClass,
+    free_trial_status: freeTrialStatusCode1 as UnitDynamicCentral,
+    student: student1 as Student,
+    agent: user as User,
+    booked_by: user as User,
+    trial_date: new Date("2024-01-15"),
+    attempt: 1,
+    franchise: franchise as Franchise,
+    is_deleted: false,
+  },
+  {
+    id: 102,
+    weekly_class: weeklyClass2 as WeeklyClass,
+    free_trial_status: freeTrialStatusCode2 as UnitDynamicCentral,
+    student: student2 as Student,
+    agent: null,
+    booked_by: null,
+    trial_date: new Date("2024-02-01"),
+    attempt: 2,
+    franchise: null,
+    is_deleted: false,
+  },
+  {
+    id: 103,
+    weekly_class: weeklyClass2 as WeeklyClass,
+    free_trial_status: freeTrialStatusCode1 as UnitDynamicCentral,
+    student: student2 as Student,
+    agent: null,
+    booked_by: null,
+    trial_date: new Date("2024-03-10"),
+    attempt: 1,
+    franchise: franchise as Franchise,
+    is_deleted: false,
+  },
+];
+
+await weeklyClassFreeTrialRepository.upsert(weeklyClassFreeTrials as any, ["id"]);
+
             
 
   console.log("STG seed done!");

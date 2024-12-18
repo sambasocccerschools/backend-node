@@ -90,8 +90,6 @@ export default  class WeeklyClassMemberController extends GenericController{
                 let createdEntity = null;
                 for (const student of newStudents) {
                     body.student = student.id;
-
-                    console.log(body.student);
                     // Insert the entity into the database
                     createdEntity = await this.getRepository().add(body);
                 }
@@ -101,10 +99,19 @@ export default  class WeeklyClassMemberController extends GenericController{
                 reqHandler.getCodeMessageResponse() as string :
                 ConstHTTPRequest.INSERT_SUCCESS;
 
-                // Return the success response
-                return httpExec.successAction(
-                    reqHandler.getAdapter().entityToResponse(createdEntity), 
-                    codeResponse);
+                if (isSuccess) {
+                   // Return the success response
+                    return httpExec.successAction(
+                        reqHandler.getAdapter().entityToResponse(createdEntity), 
+                        codeResponse);
+                } else {
+                    return await httpExec.databaseError(
+                        errorMessage,
+                        jwtData!.id.toString(),
+                        reqHandler.getMethod(),
+                        this.getControllerName()
+                    );
+                }
 
             }catch(error : any){
                 // Return the database error response

@@ -279,6 +279,16 @@
           ]
         },
         {
+          "name": "WEEKLY_CLASS_FREE_TRIAL",
+          "function_list": [
+            "CREATE",
+            "UPDATE",
+            "DELETE",
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
           "name": "TEST",
           "function_list": [ 
             "CREATE",

@@ -1,8 +1,7 @@
 
-import { WeeklyClassLead } from "@index/entity/WeeklyClassLead";
 import { Request, IAdapterFromBody } from "@modules/index";
 
-export default class WeeklyClassLeadDTO implements IAdapterFromBody {
+export default class WeeklyClassFreeTrialDTO implements IAdapterFromBody {
     req: Request;
 
     constructor(req: Request) {
@@ -11,24 +10,27 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
 
     private getEntity(isCreating: boolean): any {
 
-        const weeklyClassLead: Record<string, any> = {
+        const weeklyClassFreeTrial: Record<string, any> = {
             weekly_class: this.req.body.weekly_class_id,
-            lead_status: this.req.body.lead_status_code,
+            free_trial_status: this.req.body.free_trial_status_code,
             agent: this.req.body.agent_id,
             booked_by: this.req.body.booked_by,
             franchise: this.req.body.franchise_id,
+            student: this.req.body.student_id,
+            students: this.req.body.students,
             guardians: this.req.body.guardians,
             emergency_contacts: this.req.body.emergency_contacts,
+            comments: this.req.body.comments,
          };
  
          if (isCreating) {
-            weeklyClassLead.created_date = new Date();
+            weeklyClassFreeTrial.created_date = new Date();
          } else {
-            weeklyClassLead.is_deleted = this.req.body.is_deleted;
-            weeklyClassLead.updated_date = new Date();
+            weeklyClassFreeTrial.is_deleted = this.req.body.is_deleted;
+            weeklyClassFreeTrial.updated_date = new Date();
          }
  
-         return weeklyClassLead;
+         return weeklyClassFreeTrial;
     }
 
     // POST
@@ -45,15 +47,17 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
     entityToResponse(entity: any): any {
         return {
             id: entity.id,
-            lead_status: entity.lead_status,
             weekly_class: entity.weekly_class,
-            guardian: entity.guardian,
-            kid_range: entity.kid_range,
+            free_trial_status: entity.free_trial_status,
+            student: entity.student,
             agent: entity.agent,
             booked_by: entity.booked_by,
+            trial_date: entity.trial_date,
+            attempt: entity.attempt,
             franchise: entity.franchise,
             created_date: entity.created_date,
             updated_date: entity.updated_date,
+            
         };
     }
 
@@ -67,21 +71,22 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
         return response;
     }
 
-    weeklyClassesLeadsChangeStatusPostBody(): any{
-        const weeklyClassesLeads = {
-            weekly_classes_lead_id:this.req.body.weekly_classes_lead_id,
-            lead_status_code:this.req.body.lead_status_code
+
+    weeklyClassesFreeTrialChangeStatusPostBody(): any{
+        const weeklyClassesFreeTrials = {
+            weekly_classes_free_trial_id:this.req.body.weekly_classes_free_trial_id,
+            free_trial_status_code:this.req.body.free_trial_status_code
         };
     
-        return weeklyClassesLeads;
+        return weeklyClassesFreeTrials;
     }
 
-    weeklyClassesLeadsAssignAgentPostBody(): any{
-        const weeklyClassesLeads = {
-            weekly_classes_lead_id:this.req.body.weekly_classes_lead_id,
+    weeklyClassesFreeTrialAssignAgentPostBody(): any{
+        const weeklyClassesFreeTrials = {
+            weekly_classes_free_trial_id:this.req.body.weekly_classes_free_trial_id,
             agent_id:this.req.body.agent_id
         };
     
-        return weeklyClassesLeads;
+        return weeklyClassesFreeTrials;
     }
 }
