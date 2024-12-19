@@ -19,6 +19,7 @@ export default class WeeklyClassLeadDTO implements IAdapterFromBody {
             franchise: this.req.body.franchise_id,
             guardians: this.req.body.guardians,
             emergency_contacts: this.req.body.emergency_contacts,
+            guardian: this.req.body.guardian_id,
          };
  
          if (isCreating) {

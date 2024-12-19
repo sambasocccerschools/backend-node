@@ -118,6 +118,7 @@ export default  class TermController extends GenericController{
                         // Retrieve the existing term session
                         try {
                             termSession = await termSessionRepository.findById(session.id, false);
+                          
                             if (!termSession) {
                                 isSuccess = false;
                                 errorMessage += `Term session with id ${session.id} not found. `;
@@ -144,6 +145,8 @@ export default  class TermController extends GenericController{
                         }
 
                     } else {
+
+                        console.log("insert term session");
                         // Insert a new term session
                         termSession = new TermSession();
                         termSession.term = updateTerm.id;

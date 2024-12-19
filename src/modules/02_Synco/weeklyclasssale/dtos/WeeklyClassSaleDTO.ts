@@ -68,4 +68,14 @@ export default class WeeklyClassSaleDTO implements IAdapterFromBody {
         }
         return response;
     }
+
+
+    weeklyClassesSaleChangeStatusPostBody(): any{
+        const weeklyClassesSales = {
+            weekly_classes_sale_id:this.req.body.weekly_classes_sale_id,
+            sale_status_code:this.req.body.sale_status_code
+        };
+    
+        return weeklyClassesSales;
+    }
 }

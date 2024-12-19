@@ -1,17 +1,17 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions,
          getUrlParam} from "@modules/index";
-import { WeeklyClassSale } from "@index/entity/WeeklyClassSale";
 import WeeklyClassSaleDTO from "@modules/02_Synco/weeklyclasssale/dtos/WeeklyClassSaleDTO";
 import { ILike, In, LessThan, MoreThan } from "typeorm";
+import WeeklyClassSaleController from "../controllers/WeeklyClassSaleController";
 
 class WeeklyClassSaleRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(WeeklyClassSale), "/weeklyClassesSales");
+        super(new WeeklyClassSaleController(), "/weeklyClassesSales");
         this.filters.relations = [
             "weekly_class_member",
             "weekly_class",
@@ -83,6 +83,18 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
                                     .build();
         
             this.getController().update(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                                    new RequestHandlerBuilder(res, req)
+                                    .setAdapter(new WeeklyClassSaleDTO(req))
+                                    .setMethod("changeStatusWeeklyClassSale")
+                                    .isValidateRole("WEEKLY_CLASS_SALE")
+                                    .isRequireIdFromQueryParams(false)
+                                    .build();
+        
+            (this.getController() as WeeklyClassSaleController).changeStatus(requestHandler);
         });
         
         this.router.delete(`${this.getRouterName()}/delete`, async (req: Request, res: Response) => {

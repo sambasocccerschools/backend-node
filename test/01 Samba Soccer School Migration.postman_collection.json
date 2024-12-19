@@ -722,7 +722,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/udc/get_all?type=FREE_TRIAL_STATUS&page=1&size=10",
+									"raw": "{{host}}/udc/get_all?type=LEAD_STATUS&page=1&size=10",
 									"host": [
 										"{{host}}"
 									],
@@ -733,7 +733,7 @@
 									"query": [
 										{
 											"key": "type",
-											"value": "FREE_TRIAL_STATUS"
+											"value": "LEAD_STATUS"
 										},
 										{
 											"key": "page",
@@ -1687,7 +1687,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/venue/get?id=8638f8c2-4a13-4eb2-8d6f-40de059433a2",
+									"raw": "{{host}}/venue/get?id=345",
 									"host": [
 										"{{host}}"
 									],
@@ -1698,7 +1698,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "8638f8c2-4a13-4eb2-8d6f-40de059433a2"
+											"value": "345"
 										}
 									]
 								}
@@ -3334,7 +3334,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  \"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3454,7 +3454,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"id\": 52,\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"id\": 222,\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3462,7 +3462,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/terms/edit_front?id=321",
+									"raw": "{{host}}/terms/edit_front?id=279",
 									"host": [
 										"{{host}}"
 									],
@@ -3473,7 +3473,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "321"
+											"value": "279"
 										}
 									]
 								}
@@ -3497,7 +3497,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/terms/get?id=321",
+									"raw": "{{host}}/terms/get?id=279",
 									"host": [
 										"{{host}}"
 									],
@@ -3508,7 +3508,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "321"
+											"value": "279"
 										}
 									]
 								}
@@ -3561,7 +3561,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/terms/delete?id=1",
+									"raw": "{{host}}/terms/delete?id=280",
 									"host": [
 										"{{host}}"
 									],
@@ -3572,7 +3572,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "1"
+											"value": "280"
 										}
 									]
 								}
@@ -4294,6 +4294,44 @@
 							"response": []
 						},
 						{
+							"name": "Update Change Status",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_sale_id\": [256,257],\n    \"sale_status_code\": \"INACTIVE_SS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesSales/changeStatus",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesSales",
+										"changeStatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get WeeklyClassSale by ID",
 							"request": {
 								"method": "GET",
@@ -4838,7 +4876,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"lead_status_code\": \"CALL_PENDING_LS\",\n  \"weekly_class_id\": 1,\n  \"guardian_id\": 1\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
+									"raw": "{\n  \"lead_status_code\": \"CALL_PENDING_LS\",\n  \"weekly_class_id\": 1,\n  \"guardian_id\": 124\n  //\"agent_id\": null,\n  //\"booked_by\": null,\n  //\"franchise_id\": null\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4958,7 +4996,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"weekly_classes_lead_id\": [55,58],\n    \"lead_status_code\": \"ACTIVE_LS\"\n}",
+									"raw": "{\n    \"weekly_classes_lead_id\": [53,54],\n    \"lead_status_code\": \"PURCHASED_LS\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4996,7 +5034,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"weekly_classes_lead_id\": [55,58],\n    \"agent_id\": \"0ccbe5fd-8c76-4050-8878-35388ef6a6aa\"\n}",
+									"raw": "{\n    \"weekly_classes_lead_id\": [55,53],\n    \"agent_id\": \"0ccbe5fd-8c76-4050-8878-35388ef6a6aa\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
