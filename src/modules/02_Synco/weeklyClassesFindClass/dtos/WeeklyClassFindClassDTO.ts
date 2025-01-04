@@ -41,6 +41,7 @@ export default class WeeklyClassFindClassDTO implements IAdapterFromBody {
             franchise: entity.franchise ? entity.franchise : null, 
             classes: entity.classes,
             subscriptionPlans: entity.subscriptionPlans,
+            terms: entity.terms,
             created_date: entity.created_date,
             updated_date: entity.updated_date
         };

@@ -1,5 +1,6 @@
 import { SessionPlan } from "@index/entity/SessionPlan";
 import { SessionPlanExercise } from "@index/entity/SessionPlanExercise";
+import { Term } from "@index/entity/Term";
 import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
 import { FindManyOptions, RequestHandler } from "@TenshiJS/generics";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
@@ -39,6 +40,7 @@ export default  class SessionPlanController extends GenericController{
                         sessionPlanExercise.subtitle = exercise.subtitle;
                         sessionPlanExercise.title_duration = exercise.title_duration;
                         sessionPlanExercise.description = exercise.description;
+                        sessionPlanExercise.json_urls = exercise.json_urls;
                         
                         try {
                             sessionPlanExercise = await sessionPlanExerciseRepository.add(sessionPlanExercise);
@@ -151,6 +153,8 @@ export default  class SessionPlanController extends GenericController{
             
         });
      }
+
+     
 
 
      async getById(reqHandler: RequestHandler): Promise<any> {

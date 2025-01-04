@@ -17,9 +17,8 @@ export default class SessionPlanExerciseDTO implements IAdapterFromBody {
         entity.title_duration = this.req.body.title_duration;
         entity.description = this.req.body.description;
         entity.franchise = this.req.body.franchise;
-        entity.banner_url = this.req.body.banner_url;
-        entity.video_url = this.req.body.video_url;
-     
+        entity.json_urls = this.req.body.json_urls;
+
         if (isCreating) {
             entity.created_date = new Date();
         } else {
@@ -48,8 +47,7 @@ export default class SessionPlanExerciseDTO implements IAdapterFromBody {
             subtitle: entity.subtitle,
             title_duration: entity.title_duration,
             description: entity.description,
-            banner_url: entity.banner_url,
-            video_url: entity.video_url,
+            json_urls: entity.json_urls,
             franchise: entity.franchise,
             is_deleted: entity.is_deleted,
             created_date: entity.created_date,

@@ -21,7 +21,7 @@ export class Term {
     half_term_date: Date;
 
     //SEASON
-    @ManyToOne(() => UnitDynamicCentral)
+    @ManyToOne(() => UnitDynamicCentral, { eager: true })
     @JoinColumn({ name: "season", referencedColumnName: "code" })
     season: UnitDynamicCentral;
 

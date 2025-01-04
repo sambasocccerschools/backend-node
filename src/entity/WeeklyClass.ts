@@ -19,6 +19,9 @@ export class WeeklyClass {
     @Column({ type: "int",  default: 0  })
     capacity: number;
 
+    @Column({ type: "int",  default: 0  })
+    capacity_used: number;
+
     @Column({ type: "enum", 
               enum: [
                 "Monday", 

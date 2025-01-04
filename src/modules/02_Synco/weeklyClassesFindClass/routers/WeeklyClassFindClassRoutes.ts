@@ -61,7 +61,7 @@ private filters: FindManyOptions = {};
                 }
             }
 
-           /* if(days != null){
+            if(days != null){
                 const daysArray = days!!.split(",")
                                  .map(field => field.trim())
                                  .filter(field => field); 
@@ -85,7 +85,7 @@ private filters: FindManyOptions = {};
                         name: In(classesArray), 
                     };
                 }
-            }*/
+            }
 
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)

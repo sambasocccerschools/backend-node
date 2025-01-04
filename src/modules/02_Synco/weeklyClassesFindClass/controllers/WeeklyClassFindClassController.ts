@@ -1,12 +1,14 @@
 import { SubscriptionPlan } from "@index/entity/SubscriptionPlan";
 import { SubscriptionPlanPrice } from "@index/entity/SubscriptionPlanPrice";
 import { Term } from "@index/entity/Term";
+import { UnitDynamicCentral } from "@index/entity/UnitDynamicCentral";
 import { Venue } from "@index/entity/Venue";
 import { WeeklyClass } from "@index/entity/WeeklyClass";
 import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
 import { FindManyOptions, RequestHandler } from "@TenshiJS/generics";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import GenericRepository from "@TenshiJS/generics/Repository/GenericRepository";
+import { FindOneOptions } from 'tenshi/generics/index';
 
 export default  class WeeklyClassFindClassController extends GenericController{
 
@@ -24,10 +26,11 @@ export default  class WeeklyClassFindClassController extends GenericController{
                 const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
                 if(entities != null && entities != undefined){
 
-                    const termRepository = await new GenericRepository(Term);
+                    
                     const weeklyClassRepository = await new GenericRepository(WeeklyClass);
                     const SubscriptionPlanRepository = await new GenericRepository(SubscriptionPlan);
                     const SubscriptionPlanPriceRepository = await new GenericRepository(SubscriptionPlanPrice);
+                    const terms = await this.getGroupedTerms();
 
                     for (const venue of entities) {
                       
@@ -152,6 +155,7 @@ export default  class WeeklyClassFindClassController extends GenericController{
                         }
 
                         venue.subscriptionPlans = transformedData;
+                        venue.terms = terms;
                     }
 
 
@@ -176,5 +180,48 @@ export default  class WeeklyClassFindClassController extends GenericController{
             }
         });
     }
+
+
+
+    async getGroupedTerms() {
+        const termRepository = await new GenericRepository(Term);
+    
+        // Fetch all terms
+        const terms = await termRepository.findByOptions(true, true, null);
+    
+        // Group and transform the terms data
+        const groupedTerms = terms.reduce((acc: any[], term: { start_date: string | number | Date; season: unknown; }) => {
+            const year = new Date(term.start_date).getFullYear();
+    
+            // Find the year group or create a new one
+            let yearGroup = acc.find((group: { year: number }) => group.year === year);
+            if (!yearGroup) {
+                yearGroup = { year, terms: [] };
+                acc.push(yearGroup);
+            }
+    
+            // Check if there is already an object with `autumn`, `spring`, and `summer` in this year group
+            let termObject = yearGroup.terms[0];
+            if (!termObject) {
+                termObject = { autumn: null, spring: null, summer: null };
+                yearGroup.terms.push(termObject);
+            }
+    
+            // Assign the term to the appropriate season
+            const season = term.season as unknown as UnitDynamicCentral;
+            if (season?.code === 'AUTUMN') {
+                termObject.autumn = term;
+            } else if (season?.code === 'SPRING') {
+                termObject.spring = term;
+            } else if (season?.code === 'SUMMER') {
+                termObject.summer = term;
+            }
+    
+            return acc; // Return the accumulated array
+        }, []);
+    
+        return groupedTerms;
+    }
+    
 
 }

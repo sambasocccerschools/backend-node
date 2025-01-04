@@ -28,12 +28,18 @@ export class SessionPlanExercise {
 
     @Column({ type: "text", nullable: true, default: null })
     description: string;
-
-    @Column({ type: "text", nullable: true, default: null })
-    banner_url: string;
-
-    @Column({ type: "text", nullable: true, default: null })
-    video_url: string;
+    
+    /*
+        [
+            {
+                "extension":"png",
+                "url":"http://",
+                "type": "IMG"
+            }
+        ]
+    */
+    @Column({ type: "json", nullable: true, default: null })
+    json_urls: any;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })
