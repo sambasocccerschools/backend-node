@@ -1167,8 +1167,8 @@ async function runSeed() {
 /****************************************
         Weekly Class Free Trials
 *****************************************/
-const freeTrialStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FREE_TRIAL_PENDING" });
-const freeTrialStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FREE_TRIAL_COMPLETED" });
+const freeTrialStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ATTENDED_FTS" });
+const freeTrialStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "PENDING_FTS" });
 
 const weeklyClassFreeTrialRepository = dataSource.getRepository(WeeklyClassFreeTrial);
 const weeklyClassFreeTrials: Partial<WeeklyClassFreeTrial>[] = [
