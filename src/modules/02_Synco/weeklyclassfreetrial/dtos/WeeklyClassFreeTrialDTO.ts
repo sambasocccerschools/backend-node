@@ -15,6 +15,7 @@ export default class WeeklyClassFreeTrialDTO implements IAdapterFromBody {
             free_trial_status: this.req.body.free_trial_status_code,
             agent: this.req.body.agent_id,
             booked_by: this.req.body.booked_by,
+            trial_date: this.req.body.trial_date,
             franchise: this.req.body.franchise_id,
             student: this.req.body.student_id,
             students: this.req.body.students,
