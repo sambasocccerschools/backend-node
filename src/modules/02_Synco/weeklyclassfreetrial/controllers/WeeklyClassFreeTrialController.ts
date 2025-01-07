@@ -80,10 +80,14 @@ export default class WeeklyClassFreeTrialController extends GenericController{
                     }
                 }
 
-
                 // Insert the entity into the database
-                const createdEntity = await this.getRepository().add(body);
-                
+                let createdEntity = null;
+                for (const student of newStudents) {
+                    body.student = student.id;
+                    // Insert the entity into the database
+                    createdEntity = await this.getRepository().add(body);
+                }
+               
                 const codeResponse : string = 
                 reqHandler.getCodeMessageResponse() != null ? 
                 reqHandler.getCodeMessageResponse() as string :
