@@ -15,7 +15,7 @@ export class TermSessionPlan {
     @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
     id: number;
 
-    @ManyToOne(() => TermSession)
+    @ManyToOne(() => TermSession, { onDelete: "CASCADE" })
     @JoinColumn({ name: "term_session", referencedColumnName: "id" })
     term_session: TermSession;
 

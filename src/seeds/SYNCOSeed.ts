@@ -35,6 +35,7 @@ import { SessionPlanExercise } from '@index/entity/SessionPlanExercise';
 import { EmergencyContact } from '@index/entity/EmergencyContact';
 import { AccountInformationComment } from '../entity/AccountInformationComment';
 import { WeeklyClassFreeTrial } from '@index/entity/WeeklyClassFreeTrial';
+import { WeeklyClassCancellation } from '@index/entity/WeeklyClassCancellation';
 
 
 
@@ -93,7 +94,8 @@ async function runSeed() {
                     WeeklyClassSale,
                     WeeklyClassWaitingList,
                     WeeklyClassLead,
-                    WeeklyClassFreeTrial], // Array of entities to be used
+                    WeeklyClassFreeTrial,
+                    WeeklyClassCancellation], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -1212,7 +1214,69 @@ const weeklyClassFreeTrials: Partial<WeeklyClassFreeTrial>[] = [
 
 await weeklyClassFreeTrialRepository.upsert(weeklyClassFreeTrials as any, ["id"]);
 
-            
+        
+
+
+
+
+
+/****************************************
+        Weekly Class Cancellations
+*****************************************/
+const cancelTypeCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "REQUEST_TO_CANCEL" });
+const cancelReasonCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "POM" });
+const cancelStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "CANCELLATION_REJECTED_MCS" });
+
+const cancelTypeCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FULL_CANCELLATION" });
+const cancelReasonCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "UFD" });
+const cancelStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "REQUEST_TO_CANCEL_MCS" });
+
+const weeklyClassCancellationRepository = dataSource.getRepository(WeeklyClassCancellation);
+const weeklyClassCancellations: Partial<WeeklyClassCancellation>[] = [
+  {
+    id: 201,
+    weekly_class_member: weeklyClassMember1 as WeeklyClassMember,
+    termination_date: new Date("2025-07-10"),
+    member_cancel_type: cancelTypeCode1 as UnitDynamicCentral,
+    membership_cancel_reason: cancelReasonCode1 as UnitDynamicCentral,
+    member_cancel_status: cancelStatusCode1 as UnitDynamicCentral,
+    additional_notes: "Member requested cancellation due to schedule conflicts.",
+    agent: user as User,
+    cancelled_by: user as User,
+    franchise: franchise as Franchise,
+    is_deleted: false,
+  },
+  {
+    id: 202,
+    weekly_class_member: weeklyClassMember2 as WeeklyClassMember,
+    termination_date: new Date("2025-02-15"),
+    member_cancel_type: cancelTypeCode2 as UnitDynamicCentral,
+    membership_cancel_reason: cancelReasonCode2 as UnitDynamicCentral,
+    member_cancel_status: cancelStatusCode2 as UnitDynamicCentral,
+    additional_notes: "Cancellation requested by franchise due to financial issues.",
+    agent: null,
+    cancelled_by: user as User,
+    franchise: franchise as Franchise,
+    is_deleted: false,
+  },
+  {
+    id: 203,
+    weekly_class_member: weeklyClassMember1 as WeeklyClassMember,
+    termination_date: new Date("2025-03-20"),
+    member_cancel_type: cancelTypeCode1 as UnitDynamicCentral,
+    membership_cancel_reason: cancelReasonCode1 as UnitDynamicCentral,
+    member_cancel_status: cancelStatusCode1 as UnitDynamicCentral,
+    additional_notes: null,
+    agent: null,
+    cancelled_by: null,
+    franchise: null,
+    is_deleted: false,
+  },
+];
+
+await weeklyClassCancellationRepository.upsert(weeklyClassCancellations as any, ["id"]);
+
+
 
   console.log("STG seed done!");
 }

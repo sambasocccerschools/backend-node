@@ -35,7 +35,7 @@ export class Guardian {
     relationship: UnitDynamicCentral | null = null;
 
     // REFERRAL SOURCES
-    @ManyToOne(() => UnitDynamicCentral, { nullable: true })
+    @ManyToOne(() => UnitDynamicCentral, { eager: true, nullable: true })
     @JoinColumn({ name: "referral_source", referencedColumnName: "code" })
     referral_source: UnitDynamicCentral | null = null;
 

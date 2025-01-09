@@ -187,29 +187,37 @@ async function runSeed() {
 
     //Membership Cancel Reasons
     const membershipCancelReasons = [
-        { title: 'Unexpected financial difficulties', code: 'UFD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'unexpected-financial-difficulties' },
-        { title: 'Membership fees becoming unaffordable', code: 'MFUA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'fees-unaffordable' },
-        { title: 'Physical injuries', code: 'PI', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'physical-injuries' },
-        { title: 'Chronic health conditions requiring rest', code: 'CHCR', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'chronic-health-conditions' },
-        { title: 'Temporary illnesses', code: 'TI', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'temporary-illnesses' },
-        { title: 'Clashes with school or other extracurricular activities', code: 'CSA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'clashes-with-school-activities' },
-        { title: 'Family commitments or changes in family schedule', code: 'FCCFS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'family-commitments' },
-        { title: 'Perceived lack of progress or development', code: 'PLPD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lack-of-progress' },
-        { title: 'Inadequate coaching quality', code: 'ICQ', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'inadequate-coaching' },
-        { title: 'Poor organisation or management', code: 'POM', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'poor-management' },
-        { title: 'Lack of communication from the soccer school', code: 'LCSS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lack-of-communication' },
-        { title: 'Bullying or conflicts with other children', code: 'BOC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'bullying-conflicts' },
-        { title: 'Child’s Disinterest', code: 'CD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'child-disinterest' },
-        { title: 'Loss of interest in soccer', code: 'LIS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lost-interest' },
-        { title: 'Preference for other sports or activities', code: 'POSA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'preference-other-activities' },
-        { title: 'Moving to a different area or city', code: 'MDAC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'moving-different-area' },
-        { title: 'Preferencing another soccer school or sports program', code: 'PASS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'other-soccer-school' },
-        { title: 'Concerns over safety or coaching methods', code: 'CSCM', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'safety-coaching-concerns' },
-        { title: 'Ethical or philosophical disagreements with the program’s policies', code: 'EPD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'ethical-disagreements' },
-        { title: 'Distance from home to the soccer school being too far', code: 'DFH', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'distance-too-far' },
-        { title: 'Difficulty in arranging transportation', code: 'DAT', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'transportation-difficulty' },
-        { title: 'Child’s misbehavior leading to disciplinary action', code: 'CMDA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'disciplinary-action' },
-        { title: 'Parental decision to enforce consequences for behavior at home or school', code: 'PDEC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'parental-decision' }
+        { title: 'Unexpected financial difficulties', code: 'UFD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'unexpected-financial-difficulties', father_code: "FINANCIAL_CONST" },
+        { title: 'Membership fees becoming unaffordable', code: 'MFUA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'fees-unaffordable', father_code: "FINANCIAL_CONST" },
+
+        { title: 'Physical injuries', code: 'PI', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'physical-injuries', father_code: "CHILD_HEALTH_ISSUES" },
+        { title: 'Chronic health conditions requiring rest', code: 'CHCR', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'chronic-health-conditions', father_code: "CHILD_HEALTH_ISSUES" },
+        { title: 'Temporary illnesses', code: 'TI', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'temporary-illnesses', father_code: "CHILD_HEALTH_ISSUES" },
+       
+        { title: 'Clashes with school or other extracurricular activities', code: 'CSA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'clashes-with-school-activities', father_code: "SCHEDULING_CONFLICTS" },
+        { title: 'Family commitments or changes in family schedule', code: 'FCCFS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'family-commitments', father_code: "SCHEDULING_CONFLICTS" },
+
+        { title: 'Perceived lack of progress or development', code: 'PLPD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lack-of-progress', father_code: "DISSATISFACTION_WITH_PROGRAM" },
+        { title: 'Inadequate coaching quality', code: 'ICQ', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'inadequate-coaching', father_code: "DISSATISFACTION_WITH_PROGRAM" },
+        { title: 'Poor organisation or management', code: 'POM', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'poor-management', father_code: "DISSATISFACTION_WITH_PROGRAM" },
+        { title: 'Lack of communication from the soccer school', code: 'LCSS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lack-of-communication', father_code: "DISSATISFACTION_WITH_PROGRAM" },
+        
+        { title: 'Bullying or conflicts with other children', code: 'BOC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'bullying-conflicts', father_code: "SOCIAL_ISSUES" },
+        { title: 'Child’s Disinterest', code: 'CD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'child-disinterest', father_code: "SOCIAL_ISSUES" },
+        { title: 'Loss of interest in soccer', code: 'LIS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'lost-interest', father_code: "SOCIAL_ISSUES" },
+        { title: 'Preference for other sports or activities', code: 'POSA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'preference-other-activities', father_code: "SOCIAL_ISSUES" },
+       
+        { title: 'Moving to a different area or city', code: 'MDAC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'moving-different-area', father_code: "RELOCATION" },
+      
+        { title: 'Preferencing another soccer school or sports program', code: 'PASS', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'other-soccer-school', father_code: "PARENTAL_PREFERENCES" },
+        { title: 'Concerns over safety or coaching methods', code: 'CSCM', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'safety-coaching-concerns', father_code: "PARENTAL_PREFERENCES" },
+        { title: 'Ethical or philosophical disagreements with the program’s policies', code: 'EPD', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'ethical-disagreements', father_code: "PARENTAL_PREFERENCES" },
+        
+        { title: 'Distance from home to the soccer school being too far', code: 'DFH', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'distance-too-far', father_code: "TRAVEL_AND_LOGISTICS" },
+        { title: 'Difficulty in arranging transportation', code: 'DAT', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'transportation-difficulty', father_code: "TRAVEL_AND_LOGISTICS" },
+        
+        { title: 'Child’s misbehavior leading to disciplinary action', code: 'CMDA', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'disciplinary-action', father_code: "BEHAVIORAL_ISSUES" },
+        { title: 'Parental decision to enforce consequences for behavior at home or school', code: 'PDEC', type: 'MEMBERSHIP_CANCEL_REASONS', slug: 'parental-decision', father_code: "BEHAVIORAL_ISSUES" }
       ];
       await udcRepository.upsert(membershipCancelReasons, ["code"]);
       

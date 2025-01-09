@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "23bc51ce-f265-40f6-833d-a830008b9372",
+		"_postman_id": "f3ea5747-4a8d-437c-b9fa-2403e1d846e0",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -3334,7 +3334,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3454,7 +3454,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"id\": 222,\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  //\"name\": \"test_name\",\n  //\"start_date\": \"2024-11-18\",\n  //\"end_date\": \"2024-11-18\",\n  //\"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3462,7 +3462,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/terms/edit_front?id=279",
+									"raw": "{{host}}/terms/edit_front?id=284",
 									"host": [
 										"{{host}}"
 									],
@@ -3473,7 +3473,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "279"
+											"value": "284"
 										}
 									]
 								}
@@ -3497,7 +3497,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/terms/get?id=279",
+									"raw": "{{host}}/terms/get?id=282",
 									"host": [
 										"{{host}}"
 									],
@@ -3508,7 +3508,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "279"
+											"value": "282"
 										}
 									]
 								}
@@ -5573,6 +5573,236 @@
 										{
 											"key": "weekly_classes_free_trial_id",
 											"value": "101,102"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Weekly Classes (Cancellations)",
+					"item": [
+						{
+							"name": "Create WeeklyClassCancellation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_member\": 1,\n  \"termination_date\": \"2025-06-08\",\n  \"member_cancel_type\": \"REQUEST_TO_CANCEL\",\n  \"membership_cancel_reason\": \"MFUA\",\n  \"member_cancel_status\": \"REQUEST_TO_CANCEL_MCS\",\n  \"additional_notes\": \"Additional Notes\"\n  //\"agent\": \"d58f505d-96c4-453f-bd58-c5663d9d818e\",\n  //\"cancelled_by\": \"d58f505d-96c4-453f-bd58-c5663d9d818e\"\n  //\"franchise\": 222\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update WeeklyClassCancellation",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"termination_date\": \"2026-06-08\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get WeeklyClassCancellation by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All WeeklyClassCancellation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete WeeklyClassCancellation",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send Email Weekly classes Cancellation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"subject\": \"Esto es una prueba desde postman\",\r\n  \"body_message\": \"El ciego imagina todo aquello que no puede ver...\"\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/email/send_email_by_weekly_cancellations?weekly_classes_cancellation_id=101",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"email",
+										"send_email_by_weekly_cancellations"
+									],
+									"query": [
+										{
+											"key": "weekly_classes_cancellation_id",
+											"value": "101"
 										}
 									]
 								}

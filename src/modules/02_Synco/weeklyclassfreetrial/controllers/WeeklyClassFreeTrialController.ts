@@ -1,4 +1,4 @@
-import { ConstHTTPRequest} from "@TenshiJS/consts/Const";
+import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson} from "@TenshiJS/consts/Const";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import RequestHandler from "@TenshiJS/generics/RequestHandler/RequestHandler";
 import GenericRepository from '../../../../../tenshi/generics/Repository/GenericRepository';
@@ -9,6 +9,9 @@ import { EmergencyContact } from "@index/entity/EmergencyContact";
 import { WeeklyClassFreeTrial } from "@index/entity/WeeklyClassFreeTrial";
 import WeeklyClassFreeTrialDTO from "../dtos/WeeklyClassFreeTrialDTO";
 import { Student } from "@index/entity/Student";
+import JWTObject from "@TenshiJS/objects/JWTObject";
+import HttpAction from "@TenshiJS/helpers/HttpAction";
+import { FindManyOptions } from "typeorm";
 
 export default class WeeklyClassFreeTrialController extends GenericController{
 
@@ -201,6 +204,53 @@ export default class WeeklyClassFreeTrialController extends GenericController{
                 // Return a database error response
                 return await httpExec.databaseError(error, jwtData!.id.toString(),
                 reqHandler.getMethod(), this.getControllerName());
+            }
+        });
+    }
+
+
+
+    async getAll(reqHandler: RequestHandler): Promise<any> {
+
+        return this.getService().getAllService(reqHandler, async (jwtData : JWTObject, httpExec: HttpAction, page: number, size: number) => {
+            try {
+                // Execute the get all action in the database
+                const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
+
+                const guardianRepository = await new GenericRepository(Guardian);
+
+                if(entities != null && entities != undefined){
+
+                    for (const freeTrial of entities) {
+                        if(freeTrial.student != null){
+                            const findManyOptions: FindManyOptions = {
+                                where: {
+                                    family: {
+                                        id: freeTrial.student.family.id,
+                                    }
+                                },
+                            };
+
+                            const guardian = await guardianRepository.findByOptions(true, false, findManyOptions);
+                            freeTrial.guardian = guardian;
+                        }else{
+                            freeTrial.guardian = null;
+                        }
+                    }
+                     
+                    // Return the success response
+                    return httpExec.successAction(
+                        reqHandler.getAdapter().entitiesToResponse(entities), 
+                        ConstHTTPRequest.GET_ALL_SUCCESS);
+
+                }else{
+                    return httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.DONT_EXISTS);
+                }
+
+            } catch (error: any) {
+                // Return the database error response
+                return await httpExec.databaseError(error, jwtData.id.toString(),
+                    reqHandler.getMethod(), this.getControllerName());
             }
         });
     }

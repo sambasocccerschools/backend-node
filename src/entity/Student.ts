@@ -25,7 +25,7 @@ export class Student {
     @Column({ type: "varchar", length: 15, nullable: true, default: null  })
     gender: string;
 
-    @ManyToOne(() => Family, { nullable: true })
+    @ManyToOne(() => Family, { eager: true, nullable: true })
     @JoinColumn({ name: "family", referencedColumnName: "id" })
     family: Family | null;
 

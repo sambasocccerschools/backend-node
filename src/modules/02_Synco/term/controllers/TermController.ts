@@ -81,19 +81,15 @@ export default  class TermController extends GenericController{
      }
 
 
-
-
-
      async updateDynamic(reqHandler: RequestHandler): Promise<any> {
 
         return this.getService().updateService(reqHandler, async (jwtData, httpExec, id) => {
 
             // Get data from the body
             const body = reqHandler.getAdapter().entityFromPutBody();
-
             const termSessionRepository = await new GenericRepository(TermSession);
             const termSessionPlanRepository = await new GenericRepository(TermSessionPlan);
-            
+
             // Update the entity in the database
             let updateTerm;
             try {
@@ -105,76 +101,49 @@ export default  class TermController extends GenericController{
             } catch (error: any) {
                 return await httpExec.databaseError(error.message, jwtData!.id.toString(), reqHandler.getMethod(), this.getControllerName());
             }
-            
+            //Delete terms sessions
             let isSuccess = true;
             let errorMessage: any = "";
-            
-            // Process the sessions
-            if (Array.isArray(body.sessions) && body.sessions.length > 0) {
-                for (const session of body.sessions) {
-                    let termSession;
-            
-                    if (session.id) {
-                        // Retrieve the existing term session
-                        try {
-                            termSession = await termSessionRepository.findById(session.id, false);
-                          
-                            if (!termSession) {
-                                isSuccess = false;
-                                errorMessage += `Term session with id ${session.id} not found. `;
-                                continue;
-                            }
-                        } catch (error: any) {
-                            isSuccess = false;
-                            errorMessage += `Failed to retrieve session with id ${session.id}: ${error.message} `;
-                            continue;
-                        }
-                    
-                        // Delete existing plans for this session
-                        try {
-                            const deleteMany: FindManyOptions = {
-                                where: {
-                                    term_session: session.id,
-                                }
-                            };
-                            await termSessionPlanRepository.removeByOptions(deleteMany);
-                        } catch (error: any) {
-                            isSuccess = false;
-                            errorMessage += `Failed to delete plans for session ${session.id}: ${error.message} `;
-                            continue;
-                        }
-
-                    } else {
-
-                        console.log("insert term session");
-                        // Insert a new term session
-                        termSession = new TermSession();
-                        termSession.term = updateTerm.id;
-                        termSession.franchise = updateTerm.franchise;
-                    
-                        try {
-                            termSession = await termSessionRepository.add(termSession);
-                        } catch (error: any) {
-                            isSuccess = false;
-                            errorMessage += `Failed to add new session: ${error.message} `;
-                            continue;
+            try {
+                const deleteMany: FindManyOptions = {
+                    where: {
+                        term: {
+                            id: id
                         }
                     }
-                    
-            
-                    // Insert the plans for this session
-                    if (Array.isArray(session.plans) && session.plans.length > 0) {
-                        for (const plan of session.plans) {
+                };
+                await termSessionRepository.removeByOptions(deleteMany);
+            } catch (error: any) {
+                isSuccess = false;
+            }
+
+            if (Array.isArray(body.sessions) && body.sessions.length > 0) {
+
+                for (const session of body.sessions) {
+                    let termSession = new TermSession();
+                    termSession.term = updateTerm;
+                    termSession.franchise = updateTerm.franchise;
+
+                    try {
+                        termSession = await termSessionRepository.add(termSession);
+                    } catch (error: any) {
+                        isSuccess = false;
+                        errorMessage += error.message;
+                    } 
+
+                    const plans = session.plans;
+                    if (Array.isArray(plans) && plans.length > 0) {
+                        for (const plan of plans) {
                             try {
                                 plan.term_session = termSession.id;
                                 plan.franchise = updateTerm.franchise;
                                 await termSessionPlanRepository.add(plan);
                             } catch (error: any) {
                                 isSuccess = false;
-                                errorMessage += `Failed to add plan for session ${termSession.id}: ${error.message} `;
+                                errorMessage += error.message;
                             }
                         }
-                    }
+                    } 
                 }
             }
             
@@ -189,8 +158,6 @@ export default  class TermController extends GenericController{
             
         });
      }
-
-
 
 
      async getById(reqHandler: RequestHandler): Promise<any> {
@@ -255,7 +222,7 @@ export default  class TermController extends GenericController{
             }
         });
     }
-    
+
 
     async getAll(reqHandler: RequestHandler): Promise<any> {
         return this.getService().getAllService(reqHandler, async (jwtData, httpExec, page: number, size: number) => {
@@ -329,7 +296,4 @@ export default  class TermController extends GenericController{
             }
         });
     }
-    
-
-  
 }

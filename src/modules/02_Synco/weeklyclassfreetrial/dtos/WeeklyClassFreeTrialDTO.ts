@@ -51,6 +51,7 @@ export default class WeeklyClassFreeTrialDTO implements IAdapterFromBody {
             weekly_class: entity.weekly_class,
             free_trial_status: entity.free_trial_status,
             student: entity.student,
+            guardian: entity.guardian,
             agent: entity.agent,
             booked_by: entity.booked_by,
             trial_date: entity.trial_date,

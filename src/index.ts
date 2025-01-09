@@ -36,6 +36,7 @@ import { WeeklyClassSale } from '@entity/WeeklyClassSale';
 import { WeeklyClassWaitingList } from '@entity/WeeklyClassWaitingList';
 import { WeeklyClassLead } from '@entity/WeeklyClassLead';
 import { WeeklyClassFreeTrial } from '@entity/WeeklyClassFreeTrial';
+import { WeeklyClassCancellation } from '@entity/WeeklyClassCancellation';
 import { TermSession } from '@entity/TermSession';
 import { TermSessionPlan } from '@entity/TermSessionPlan';
 
@@ -72,7 +73,7 @@ import WeeklyClassWaitingListRoutes from '@index/modules/02_Synco/weeklyclasswai
 import WeeklyClassLeadRoutes from '@index/modules/02_Synco/weeklyclasslead/routers/WeeklyClassLeadRoutes';
 import WeeklyClassFindClassRoutes from '@index/modules/02_Synco/weeklyClassesFindClass/routers/WeeklyClassFindClassRoutes';
 import WeeklyClassFreeTrialRoutes from '@index/modules/02_Synco/weeklyclassfreetrial/routers/WeeklyClassFreeTrialRoutes';
-
+import WeeklyClassCancellationRoutes from '@index/modules/02_Synco/weeklyclasscancellation/routers/WeeklyClassCancellationRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -158,6 +159,7 @@ export const TenshiMain = async () => {
       WeeklyClassWaitingList,
       WeeklyClassLead,
       WeeklyClassFreeTrial,
+      WeeklyClassCancellation,
     ]);
 
     //Cors handler middle ware
@@ -219,6 +221,7 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassLeadRoutes().getRouter());
     app.use(new WeeklyClassFindClassRoutes().getRouter());
     app.use(new WeeklyClassFreeTrialRoutes().getRouter());
+    app.use(new WeeklyClassCancellationRoutes().getRouter());
     app.use(new TermSessionRoutes().getRouter());
     app.use(new TermSessionPlanRoutes().getRouter());
 
