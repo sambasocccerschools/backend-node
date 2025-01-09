@@ -29,7 +29,6 @@ private filters: FindManyOptions = {};
 
             //this can join by comma
             const venue_id: string | null = getUrlParam("venue_id", req) || null;
-            const days: string | null = getUrlParam("days", req) || null;
             const class_name: string | null = getUrlParam("class_name", req) || null;
 
             if(postcode != null){
@@ -57,19 +56,6 @@ private filters: FindManyOptions = {};
                     this.filters.where = { 
                         ...this.filters.where, 
                         id: In(venueIdsArray), 
-                    };
-                }
-            }
-
-            if(days != null){
-                const daysArray = days!!.split(",")
-                                 .map(field => field.trim())
-                                 .filter(field => field); 
-
-                if (daysArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
-                        days: In(daysArray), 
                     };
                 }
             }

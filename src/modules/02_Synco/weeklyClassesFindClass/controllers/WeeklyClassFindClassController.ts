@@ -8,10 +8,11 @@ import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/
 import { FindManyOptions, RequestHandler } from "@TenshiJS/generics";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import GenericRepository from "@TenshiJS/generics/Repository/GenericRepository";
-import { FindOneOptions } from 'tenshi/generics/index';
+import { getUrlParam } from "@TenshiJS/utils/generalUtils";
+import { In } from "typeorm";
 
 export default  class WeeklyClassFindClassController extends GenericController{
-
+    private filters: FindManyOptions = {};
     constructor() {
         super(Venue);
     }
@@ -21,7 +22,7 @@ export default  class WeeklyClassFindClassController extends GenericController{
 
         return this.getService().getAllService(reqHandler, async (jwtData , httpExec, page: number, size: number) => {
             try {
-               
+                this.filters.where = { };
                 // Execute the get all action in the database
                 const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
                 if(entities != null && entities != undefined){
@@ -33,12 +34,37 @@ export default  class WeeklyClassFindClassController extends GenericController{
                     const terms = await this.getGroupedTerms();
 
                     for (const venue of entities) {
+
+                        const days: string | null = getUrlParam("days", reqHandler.getRequest()) || null;
+                        if(days != null){
+                            const daysArray = days!!.split(",")
+                                            .map(field => field.trim())
+                                            .filter(field => field); 
+
+                            if (daysArray.length > 0) {
+                                this.filters.where = { 
+                                    ...this.filters.where, 
+                                    days: In(daysArray), 
+                                };
+                            }
+                        }
+
+                        this.filters.where = { 
+                            ...this.filters.where, 
+                            venue: {
+                                id: venue.id
+                            },
+                        };
+
+                        this.filters.order = {
+                            id: 'ASC', 
+                        };
                       
                         const findManyOptions: FindManyOptions = {
                             where: {
                                 venue: {
                                     id: venue.id
-                                },
+                                }
                             },
                             order: {
                                 id: 'ASC', 
@@ -47,9 +73,9 @@ export default  class WeeklyClassFindClassController extends GenericController{
 
 
                         //******************* */
-                        //  Weekly Classes
+                        //  Weekly Classes 
                         //******************* */
-                        const weeklyClasses = await weeklyClassRepository.findByOptions(true, true, findManyOptions);
+                        const weeklyClasses = await weeklyClassRepository.findByOptions(true, true, this.filters);
 
                         const groupedClasses = weeklyClasses.reduce((acc: any[], curr: { summer_term: { start_date: string | number | Date; }; id: string; name: any; capacity: any; days: any; start_time: any; end_time: any; is_autumn_indoor: any; is_spring_indoor: any; is_summer_indoor: any; is_free_trail_dates: any; created_date: string | number | Date; updated_date: string | number | Date; }) => {
                             // Get the year from the summer_term.start_date

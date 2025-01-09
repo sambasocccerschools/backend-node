@@ -262,13 +262,17 @@ export default  class TermController extends GenericController{
                                     },
                                 },
                             };
+                          
                             session.termSessionPlans = await termSessionPlanRepository.findByOptions(
                                 false,
                                 true,
                                 termSessionPlanOptions
                             );
+
+                            //delete the property term
+                            delete session.term;
                         }
-    
+
                         // Adjuntar las termSessions al entity
                         entity.sessions = termSessions;
                     }
