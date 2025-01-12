@@ -181,7 +181,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                 this.filters.where = { 
                     ...this.filters.where, 
                     guardian: {
-                        referral_source_code: In(referralSourceArray), 
+                        referral_source: In(referralSourceArray), 
                     }
                 };
             }
@@ -195,7 +195,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
             if (leadStatusArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    lead_status_code: In(leadStatusArray), 
+                    lead_status: In(leadStatusArray), 
                 };
             }
         }
@@ -218,13 +218,15 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         if (venue != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                venue: { 
-                    name: ILike(`%${venue}%`)
+                weekly_class: { 
+                    venue:{
+                        name:ILike(`%${venue}%`)
+                    } 
                 }
             };
         }
 
-        if(student_id != null){
+        /*if(student_id != null){
             const studentIdsArray = student_id!!.split(",")
                                   .map(field => field.trim())
                                   .filter(field => field); 
@@ -246,7 +248,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                     name: ILike(`%${student}%`)
                 }
             };
-        }
+        }*/
     }
 }
 

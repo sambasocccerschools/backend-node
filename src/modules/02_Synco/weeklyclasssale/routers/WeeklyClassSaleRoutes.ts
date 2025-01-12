@@ -146,7 +146,7 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
             if (saleStatusArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    sale_status_code: In(saleStatusArray), 
+                    sale_status: In(saleStatusArray), 
                 };
             }
         }

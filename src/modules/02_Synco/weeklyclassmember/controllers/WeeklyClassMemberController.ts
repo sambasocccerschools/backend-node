@@ -339,10 +339,4 @@ export default  class WeeklyClassMemberController extends GenericController{
     
         });
     }
-    
-
-   
 }
-    
-    
-

@@ -175,7 +175,7 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
             if (waitingListStatusArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    waiting_list_status_code: In(waitingListStatusArray), 
+                    waiting_list_status: In(waitingListStatusArray), 
                 };
             }
         }
@@ -223,10 +223,11 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
 
         if (student != null) {
             this.filters.where = { 
-                ...this.filters.where, 
-                student: {
-                    name: ILike(`%${student}%`)
-                }
+                ...this.filters.where,
+                student: [
+                    { first_name: ILike(`%${student}%`) }, // Busca coincidencias en first_name
+                    { last_name: ILike(`%${student}%`) },  // Busca coincidencias en last_name
+                ],
             };
         }
     }

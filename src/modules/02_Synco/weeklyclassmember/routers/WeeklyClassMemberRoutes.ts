@@ -188,7 +188,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
             if (memberStatusArray.length > 0) {
                 this.filters.where = { 
                     ...this.filters.where, 
-                    member_status_code: In(memberStatusArray), 
+                    member_status: In(memberStatusArray), 
                 };
             }
         }

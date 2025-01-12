@@ -69,4 +69,13 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
         }
         return response;
     }
+
+    weeklyClassesCancellationAssignAgentPostBody(): any{
+        const weeklyClassesCancellations = {
+            weekly_classes_cancellation_id:this.req.body.weekly_classes_cancellation_id,
+            agent_id:this.req.body.agent_id
+        };
+    
+        return weeklyClassesCancellations;
+    }
 }

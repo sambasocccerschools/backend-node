@@ -1,16 +1,26 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
-         FindManyOptions} from "@modules/index";
-import { WeeklyClassCancellation } from "@index/entity/WeeklyClassCancellation";
+         GenericRoutes,
+         FindManyOptions,
+         getUrlParam} from "@modules/index";
 import WeeklyClassCancellationDTO from "@modules/02_Synco/weeklyclasscancellation/dtos/WeeklyClassCancellationDTO";
+import WeeklyClassCancellationController from "../controllers/WeeklyClassCancellationController";
 
 class WeeklyClassCancellationRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
+
     constructor() {
-        super(new GenericController(WeeklyClassCancellation), "/weeklyClassesCancellations");
-        this.filters.relations = ["weekly_class_member","member_cancel_type","membership_cancel_reason","member_cancel_status","agent","cancelled_by","franchise"];
+        super(new WeeklyClassCancellationController(), "/weeklyClassesCancellations");
+        this.filters.relations = [
+            "weekly_class_member",
+            "member_cancel_type",
+            "membership_cancel_reason",
+            "member_cancel_status",
+            "agent",
+            "cancelled_by",
+            "franchise"
+        ];
     }
 
     protected initializeRoutes() {
@@ -83,6 +93,41 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                                     .build();
         
             this.getController().delete(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/assignAgent`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                        new RequestHandlerBuilder(res, req)
+                        .setAdapter(new WeeklyClassCancellationDTO(req))
+                        .setMethod("assignAgentWeeklyClassCancellation")
+                        .isValidateRole("WEEKLY_CLASS_CANCELLATION")
+                        .isRequireIdFromQueryParams(false)
+                        .build();
+            
+            (this.getController() as WeeklyClassCancellationController).assignAgent(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/assignAgent`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                        new RequestHandlerBuilder(res, req)
+                        .setAdapter(new WeeklyClassCancellationDTO(req))
+                        .setMethod("assignAgentWeeklyClassCancellation")
+                        .isValidateRole("WEEKLY_CLASS_CANCELLATION")
+                        .isRequireIdFromQueryParams(false)
+                        .build();
+            
+            (this.getController() as WeeklyClassCancellationController).assignAgent(requestHandler);
+        });
+
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                        new RequestHandlerBuilder(res, req)
+                        .setAdapter(new WeeklyClassCancellationDTO(req))
+                        .setMethod("changeStatusWeeklyClassCancellation")
+                        .isValidateRole("WEEKLY_CLASS_CANCELLATION")
+                        .build();
+            
+            (this.getController() as WeeklyClassCancellationController).changeStatus(requestHandler);
         });
     }
 }
