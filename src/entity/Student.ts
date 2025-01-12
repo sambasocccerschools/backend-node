@@ -4,7 +4,7 @@ import { Family } from "./Family";
 
 @Entity("students")
 export class Student {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

@@ -11,7 +11,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("emergency_contacts")
 export class EmergencyContact {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

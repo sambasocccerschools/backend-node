@@ -5,7 +5,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("holiday_camp_dates")
 export class HolidayCampDate {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

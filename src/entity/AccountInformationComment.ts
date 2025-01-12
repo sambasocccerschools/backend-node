@@ -11,7 +11,7 @@ import { User } from "@TenshiJS/entity/User";
 
 @Entity("account_information_comments")
 export class AccountInformationComment {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 500 })

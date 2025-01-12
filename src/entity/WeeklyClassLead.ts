@@ -13,7 +13,7 @@ import { User } from "@TenshiJS/entity/User";
 
 @Entity("weekly_classes_leads")
 export class WeeklyClassLead {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     //LEAD_STATUS

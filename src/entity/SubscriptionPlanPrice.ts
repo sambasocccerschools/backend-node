@@ -6,7 +6,7 @@ import { SubscriptionPlan } from "./SubscriptionPlan";
 
 @Entity("subscription_plan_prices")
 export class SubscriptionPlanPrice {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

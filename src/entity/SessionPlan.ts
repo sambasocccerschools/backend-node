@@ -7,7 +7,7 @@ import { AbilityGroup } from "./AbilityGroup";
 
 @Entity("session_plans")
 export class SessionPlan {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

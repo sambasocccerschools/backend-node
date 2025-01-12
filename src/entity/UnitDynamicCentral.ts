@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 
 @Entity("units_dynamic_central")
 export class UnitDynamicCentral {
-  @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+  @PrimaryGeneratedColumn({ type: "int", unsigned: true })
   id: number;
 
   @Column({ type: "varchar", length: 200, unique: true })

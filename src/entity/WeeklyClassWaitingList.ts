@@ -14,7 +14,7 @@ import { User } from "@TenshiJS/entity/User";
 
 @Entity("weekly_classes_waiting_lists")
 export class WeeklyClassWaitingList {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => WeeklyClass, { eager: true })

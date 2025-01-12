@@ -5,7 +5,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("terms")
 export class Term {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "varchar", length: 255 })

@@ -12,7 +12,7 @@ import { WeeklyClassMember } from "./WeeklyClassMember";
 
 @Entity("weekly_classes_cancellations")
 export class WeeklyClassCancellation {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => WeeklyClassMember)

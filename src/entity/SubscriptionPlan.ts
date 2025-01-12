@@ -6,7 +6,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("subscription_plans")
 export class SubscriptionPlan {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     //SERVICE

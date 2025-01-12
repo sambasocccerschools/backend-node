@@ -8,7 +8,7 @@ import { WeeklyClass } from "./WeeklyClass";
 
 @Entity("weekly_classes_members")
 export class WeeklyClassMember {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => WeeklyClass, { eager: true })

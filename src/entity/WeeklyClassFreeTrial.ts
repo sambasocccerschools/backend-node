@@ -13,7 +13,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("weekly_classes_free_trials")
 export class WeeklyClassFreeTrial {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => WeeklyClass)

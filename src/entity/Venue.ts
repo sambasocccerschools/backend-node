@@ -5,7 +5,7 @@ import { Franchise } from "./Franchise";
 
 @Entity("venues")
 export class Venue {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
     
     @Column({ type: "varchar", length: 255, nullable: true, default: null })

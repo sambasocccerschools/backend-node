@@ -6,7 +6,7 @@ import { Franchise } from "./Franchise";
 @Entity("ability_group")
 export class AbilityGroup {
 
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
     
     @Column({ type: "varchar", length: 255})

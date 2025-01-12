@@ -6,7 +6,7 @@ import { Venue } from "./Venue";
 
 @Entity("weekly_classes")
 export class WeeklyClass {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => Venue, { eager: true })

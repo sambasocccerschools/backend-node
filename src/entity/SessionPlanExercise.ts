@@ -10,7 +10,7 @@ import { Franchise } from "./Franchise";
 
 @Entity("session_plan_exercises")
 export class SessionPlanExercise {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => SessionPlan)

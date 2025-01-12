@@ -4,7 +4,7 @@ import { Term } from "./Term";
 
 @Entity("term_sessions")
 export class TermSession {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => Term, { eager: true })

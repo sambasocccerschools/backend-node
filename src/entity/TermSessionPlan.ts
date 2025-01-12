@@ -12,7 +12,7 @@ import { Franchise } from "./Franchise";
 
 @Entity("term_session_plans")
 export class TermSessionPlan {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @ManyToOne(() => TermSession, { onDelete: "CASCADE" })

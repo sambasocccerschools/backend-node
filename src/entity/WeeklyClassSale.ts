@@ -15,7 +15,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 
 @Entity("weekly_classes_sales")
 export class WeeklyClassSale {
-    @PrimaryGeneratedColumn({ type: "bigint", unsigned: true })
+    @PrimaryGeneratedColumn({ type: "int", unsigned: true })
     id: number;
 
     @Column({ type: "date", nullable: true, default: null })
