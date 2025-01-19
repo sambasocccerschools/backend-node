@@ -16,8 +16,6 @@ private filters: FindManyOptions = {};
     }
 
     protected initializeRoutes() {
-    
-    
         this.router.get(`${this.getRouterName()}/find_a_class`, async (req: Request, res: Response) => {
             this.filters.where = { };
 
@@ -83,8 +81,6 @@ private filters: FindManyOptions = {};
         
             this.getController().getAll(requestHandler);
         });
-    
-    
     }
 }
 

@@ -119,7 +119,7 @@ async function runSeed() {
     const freeTrialStatus = [
         { title: "Pending", code: "PENDING_FTS", type: "FREE_TRIAL_STATUS", slug: "pending" },
         { title: "Not Attended", code: "NOT_ATTENDED_FTS", type: "FREE_TRIAL_STATUS", slug: "not-attended" },
-        { title: "Attended", code: "ATTENDED_FTS", type: "FREE_TRIAL_STATUS", slug: "attended" }
+        { title: "Rebooks", code: "ATTENDED_FTS", type: "FREE_TRIAL_STATUS", slug: "rebooks" }
     ];
     await udcRepository.upsert(freeTrialStatus, ["code"]);
 

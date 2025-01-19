@@ -97,6 +97,7 @@ import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddlewa
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
 import ValidJsonBodyMiddleware from '@TenshiJS/middlewares/ValidJsonBodyMiddleware';
+import WeeklyClassCapacitiesRoutes from './modules/02_Synco/weeklyClassesCapacities/routers/WeeklyClassCapacitiesRoutes';
 
 
 
@@ -222,6 +223,7 @@ export const TenshiMain = async () => {
     app.use(new WeeklyClassFindClassRoutes().getRouter());
     app.use(new WeeklyClassFreeTrialRoutes().getRouter());
     app.use(new WeeklyClassCancellationRoutes().getRouter());
+    app.use(new WeeklyClassCapacitiesRoutes().getRouter());
     app.use(new TermSessionRoutes().getRouter());
     app.use(new TermSessionPlanRoutes().getRouter());
 

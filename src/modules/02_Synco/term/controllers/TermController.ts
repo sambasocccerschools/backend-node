@@ -240,20 +240,17 @@ export default  class TermController extends GenericController{
                     const termSessionRepository = await new GenericRepository(TermSession);
                     const termSessionPlanRepository = await new GenericRepository(TermSessionPlan);
     
-                    // Iterar sobre las entidades para agregar sus termSessions y termSessionPlans
                     for (const entity of entities) {
-                        // Opciones para buscar termSessions relacionadas
                         const termSessionOptions: FindManyOptions = {
                             where: {
                                 term: {
-                                    id: entity.id, // Asume que entity tiene una propiedad 'id'
+                                    id: entity.id, 
                                 },
                             },
                         };
     
                         const termSessions = await termSessionRepository.findByOptions(false, true, termSessionOptions);
     
-                        // Agregar termSessionPlans a cada termSession
                         for (const session of termSessions) {
                             const termSessionPlanOptions: FindManyOptions = {
                                 where: {

@@ -1,4 +1,4 @@
-import { ConstHTTPRequest } from "@TenshiJS/consts/Const";
+import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import RequestHandler from "@TenshiJS/generics/RequestHandler/RequestHandler";
 
@@ -9,12 +9,75 @@ import { UnitDynamicCentral } from "@index/entity/UnitDynamicCentral";
 import GenericRepository from "@TenshiJS/generics/Repository/GenericRepository";
 import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { FindManyOptions } from "typeorm";
+import { Guardian } from "@index/entity/Guardian";
+import { Student } from "@index/entity/Student";
 
 export default class WeeklyClassCancellationController extends GenericController{
 
     constructor() {
         super(WeeklyClassCancellation);
     }
+
+      async getAll(reqHandler: RequestHandler): Promise<any> {
+    
+            return this.getService().getAllService(reqHandler, async (jwtData , httpExec, page: number, size: number) => {
+                try {
+                    // Execute the get all action in the database
+                    const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
+                    if(entities != null && entities != undefined){
+                        const studentRepository = await new GenericRepository(Student);
+                        const guardianRepository = await new GenericRepository(Guardian);
+                     
+                        for (const weeklyCancellation of entities) {
+                           
+                            weeklyCancellation.venue = weeklyCancellation.weekly_class_member.weekly_class.venue;
+                            delete weeklyCancellation.weekly_class_member.weekly_class;
+
+                            const familyId = weeklyCancellation.weekly_class_member.student.family.id;
+
+                            if(familyId != null){
+                                const filters: FindManyOptions = {};
+                                filters.where = { 
+                                    family: {
+                                        id: familyId
+                                    }, 
+                                    is_deleted: false
+                                };
+                                const guardian = await guardianRepository.findByOptions(true, false, filters);
+                                weeklyCancellation.guardian = guardian;
+
+                                const totalStudents = await studentRepository.getRepository().count(filters);
+                                weeklyCancellation.total_student = totalStudents;
+                            }else{
+                                weeklyCancellation.guardian = null;
+                                weeklyCancellation.total_student = null;
+                            }
+                        }
+    
+                        const codeResponse : string = 
+                        reqHandler.getCodeMessageResponse() != null ? 
+                        reqHandler.getCodeMessageResponse() as string :
+                        ConstHTTPRequest.GET_ALL_SUCCESS;
+        
+                        // Return the success response
+                        return httpExec.successAction(
+                            reqHandler.getAdapter().entitiesToResponse(entities), 
+                            codeResponse);
+    
+                    }else{
+                        return httpExec.dynamicError(ConstStatusJson.NOT_FOUND, ConstMessagesJson.DONT_EXISTS);
+                    }
+    
+                } catch (error: any) {
+                    // Return the database error response
+                    return await httpExec.databaseError(error, jwtData.id.toString(),
+                        reqHandler.getMethod(), this.getControllerName());
+                }
+            });
+        }
+    
+
+
 
     async assignAgent(reqHandler: RequestHandler) : Promise<any> {
         return this.getService().updateService(reqHandler, async (jwtData, httpExec) => {

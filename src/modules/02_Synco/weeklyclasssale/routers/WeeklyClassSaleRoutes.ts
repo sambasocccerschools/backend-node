@@ -194,11 +194,11 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
 
         if (student != null) {
             this.filters.where = { 
-                ...this.filters.where, 
-                student: {
-                    name: ILike(`%${student}%`)
-                    
-                }
+                ...this.filters.where,
+                student: [
+                    { first_name: ILike(`%${student}%`) }, 
+                    { last_name: ILike(`%${student}%`) },  
+                ],
             };
         }
     }

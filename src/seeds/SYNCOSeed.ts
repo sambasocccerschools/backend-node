@@ -1019,8 +1019,8 @@ async function runSeed() {
     /****************************************
                 Weekly Class Sale
     *****************************************/
-    const weeklyClassMember1 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 123 });
-    const weeklyClassMember2 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 125 });
+    const weeklyClassMember1 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 1 });
+    const weeklyClassMember2 = await dataSource.getRepository(WeeklyClassMember).findOneBy({ id: 2 });
     const saleStatusCode1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "ACTIVE_SS" })
     const saleStatusCode2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "INACTIVE_SS" })
 

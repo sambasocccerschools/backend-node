@@ -12,7 +12,7 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
     private getEntity(isCreating: boolean): WeeklyClassCancellation {
         const entity = new WeeklyClassCancellation();
         entity.weekly_class_member = this.req.body.weekly_class_member;
-        entity.termination_date = this.req.body.termination_date;
+        entity.termination_date = this.req.body.termination_date != null ? this.req.body.termination_date : new Date();
         entity.member_cancel_type = this.req.body.member_cancel_type;
         entity.membership_cancel_reason = this.req.body.membership_cancel_reason;
         entity.member_cancel_status = this.req.body.member_cancel_status;
@@ -42,7 +42,7 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
     }
 
     // GET
-    entityToResponse(entity: WeeklyClassCancellation): any {
+    entityToResponse(entity: any): any {
         return {
             id: entity.id,
             weekly_class_member: entity.weekly_class_member,
@@ -51,6 +51,9 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
             membership_cancel_reason: entity.membership_cancel_reason,
             member_cancel_status: entity.member_cancel_status,
             additional_notes: entity.additional_notes,
+            venue: entity.venue,
+            guardian: entity.guardian,
+            total_student: entity.total_student,
             agent: entity.agent,
             cancelled_by: entity.cancelled_by,
             franchise: entity.franchise,
@@ -60,7 +63,7 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
         };
     }
 
-    entitiesToResponse(entities: WeeklyClassCancellation[] | null): any {
+    entitiesToResponse(entities: any[] | null): any {
         const response: any[] = [];
         if (entities != null) {
             for (const entity of entities) {

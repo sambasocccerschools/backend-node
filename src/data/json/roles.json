@@ -299,6 +299,13 @@
           ]
         },
         {
+          "name": "WEEKLY_CLASS_CAPACITIES",
+          "function_list": [
+            "GET_BY_ID",
+            "GET_ALL"
+          ]
+        },
+        {
           "name": "TEST",
           "function_list": [ 
             "CREATE",

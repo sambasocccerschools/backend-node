@@ -4,6 +4,7 @@ import { Term } from "@index/entity/Term";
 import { UnitDynamicCentral } from "@index/entity/UnitDynamicCentral";
 import { Venue } from "@index/entity/Venue";
 import { WeeklyClass } from "@index/entity/WeeklyClass";
+import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
 import { FindManyOptions, RequestHandler } from "@TenshiJS/generics";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
@@ -27,8 +28,8 @@ export default  class WeeklyClassFindClassController extends GenericController{
                 const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
                 if(entities != null && entities != undefined){
 
-                    
                     const weeklyClassRepository = await new GenericRepository(WeeklyClass);
+                    const weeklyClassMemberRepository = await new GenericRepository(WeeklyClassMember);
                     const SubscriptionPlanRepository = await new GenericRepository(SubscriptionPlan);
                     const SubscriptionPlanPriceRepository = await new GenericRepository(SubscriptionPlanPrice);
                     const terms = await this.getGroupedTerms();
@@ -77,35 +78,43 @@ export default  class WeeklyClassFindClassController extends GenericController{
                         //******************* */
                         const weeklyClasses = await weeklyClassRepository.findByOptions(true, true, this.filters);
 
-                        const groupedClasses = weeklyClasses.reduce((acc: any[], curr: { summer_term: { start_date: string | number | Date; }; id: string; name: any; capacity: any; days: any; start_time: any; end_time: any; is_autumn_indoor: any; is_spring_indoor: any; is_summer_indoor: any; is_free_trail_dates: any; created_date: string | number | Date; updated_date: string | number | Date; }) => {
-                            // Get the year from the summer_term.start_date
+                        const groupedClasses: any[] = []; // Inicializar el array vacío
+
+                        for (const curr of weeklyClasses) {
+                            // Obtener el año de summer_term.start_date
                             const year = new Date(curr.summer_term.start_date).getFullYear();
                         
-                            // Find the group for the current year, or create a new one if it doesn't exist
-                            let yearGroup = acc.find((group: { year: number; }) => group.year === year);
+                            // Buscar el grupo correspondiente al año o crearlo si no existe
+                            let yearGroup = groupedClasses.find((group) => group.year === year);
                             if (!yearGroup) {
                                 yearGroup = { year, classes: [] };
-                                acc.push(yearGroup);
+                                groupedClasses.push(yearGroup);
                             }
                         
-                            // Add the transformed class to the corresponding group
+                            const countMembers = await weeklyClassMemberRepository.getRepository().count({
+                                where: {
+                                    weekly_class: { id: parseInt(curr.id, 10) },
+                                    is_deleted: false,
+                                },
+                            }) || 0;
+                        
+                            // Agregar la clase transformada al grupo correspondiente
                             yearGroup.classes.push({
-                                id: parseInt(curr.id, 10), // Ensure ID is a number
+                                id: parseInt(curr.id, 10), // Asegúrate de que el ID sea un número
                                 name: curr.name,
-                                capacity: curr.capacity,
+                                total_capacity: curr.capacity,
+                                capacity_spaces: curr.capacity - countMembers,
                                 days: curr.days,
                                 start_time: curr.start_time,
                                 end_time: curr.end_time,
-                                is_autumn_indoor: !!curr.is_autumn_indoor, // Convert to boolean
-                                is_spring_indoor: !!curr.is_spring_indoor, // Convert to boolean
-                                is_summer_indoor: !!curr.is_summer_indoor, // Convert to boolean
-                                is_free_trail_dates: !!curr.is_free_trail_dates, // Convert to boolean
-                                created_at: new Date(curr.created_date).getTime() / 1000, // Convert to timestamp in seconds
-                                deleted_at: curr.updated_date ? new Date(curr.updated_date).getTime() / 1000 : null, // Handle null if no update date
+                                is_autumn_indoor: !!curr.is_autumn_indoor, // Convertir a booleano
+                                is_spring_indoor: !!curr.is_spring_indoor, // Convertir a booleano
+                                is_summer_indoor: !!curr.is_summer_indoor, // Convertir a booleano
+                                is_free_trail_dates: !!curr.is_free_trail_dates, // Convertir a booleano
+                                created_at: new Date(curr.created_date).getTime() / 1000, // Convertir a timestamp en segundos
+                                deleted_at: curr.updated_date ? new Date(curr.updated_date).getTime() / 1000 : null, // Manejar null si no hay update_date
                             });
-                        
-                            return acc; // Return the accumulated array
-                        }, []);
+                        }
                         
                         venue.classes = groupedClasses;
 

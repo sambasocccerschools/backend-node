@@ -3334,7 +3334,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test_name\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"session_plan\": 257\n                }\n            ]   \n        },\n         {\n            \"plans\": [\n                {\n                    \"session_plan\": 256\n                },\n                {\n                    \"ability_group\": 422,\n                    \"session_plan\": 256\n                }\n            ]   \n        }\n    ]\n}",
+									"raw": "{\n  \"name\": \"MEETING 3PM\",\n  \"start_date\": \"2024-11-18\",\n  \"end_date\": \"2024-11-18\",\n  \"half_term_date\": \"2024-11-18\",\n  \"season_code\": \"SUMMER\",\n  //\"franchise_id\": 222,\n  \"sessions\":[\n        {\n            \"plans\": [\n                {\n                    \"ability_group\": 421,\n                    \"session_plan\": 257\n                },\n                {\n                    \"ability_group\": null,\n                    \"session_plan\": 257\n                }\n            ]   \n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3497,7 +3497,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/terms/get?id=282",
+									"raw": "{{host}}/terms/get?id=284",
 									"host": [
 										"{{host}}"
 									],
@@ -3508,7 +3508,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "282"
+											"value": "284"
 										}
 									]
 								}
@@ -4417,13 +4417,13 @@
 										},
 										{
 											"key": "student",
-											"value": null,
+											"value": "",
 											"description": "string name",
 											"disabled": true
 										},
 										{
 											"key": "venue",
-											"value": null,
+											"value": "",
 											"description": "string name",
 											"disabled": true
 										}
@@ -4793,23 +4793,23 @@
 										},
 										{
 											"key": "start_date",
-											"value": "2024-01-01",
+											"value": "2025-07-01",
 											"disabled": true
 										},
 										{
 											"key": "end_date",
-											"value": "2024-01-01",
+											"value": "2025-07-01",
 											"disabled": true
 										},
 										{
 											"key": "student_id",
-											"value": null,
+											"value": "",
 											"description": "separate by comma",
 											"disabled": true
 										},
 										{
 											"key": "venue",
-											"value": null,
+											"value": "",
 											"description": "string name",
 											"disabled": true
 										}
@@ -5117,25 +5117,25 @@
 									"query": [
 										{
 											"key": "venue_id",
-											"value": null,
+											"value": "1",
 											"description": "Separate by comma",
 											"disabled": true
 										},
 										{
 											"key": "venue",
-											"value": null,
+											"value": "test",
 											"description": "string name",
 											"disabled": true
 										},
 										{
 											"key": "student_id",
-											"value": null,
+											"value": "",
 											"description": "Separate by comma",
 											"disabled": true
 										},
 										{
 											"key": "student",
-											"value": null,
+											"value": "John",
 											"description": "string name",
 											"disabled": true
 										},
@@ -5495,6 +5495,48 @@
 									"path": [
 										"weeklyClassesFreeTrials",
 										"get_all"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "free_trial_status_code",
+											"value": "PENDING_FTS,ATTENDED_FTS",
+											"description": "Separate by comma, UDC Type = FREE_TRIAL_STATUS",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-07-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2025-07-01",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -5667,6 +5709,122 @@
 							"response": []
 						},
 						{
+							"name": "Update Assign Agent",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_cancellation_id\": [101,102],\n    \"agent_id\": \"0ccbe5fd-8c76-4050-8878-35388ef6a6aa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/assignAgent",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"assignAgent"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Status Cancelation reject",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/changeStatus?id=202&status=reject",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"changeStatus"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "202"
+										},
+										{
+											"key": "status",
+											"value": "reject"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Status Cancelation approve",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCancellations/changeStatus?id=202&status=approve",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCancellations",
+										"changeStatus"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "202"
+										},
+										{
+											"key": "status",
+											"value": "approve"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get WeeklyClassCancellation by ID",
 							"request": {
 								"method": "GET",
@@ -5725,6 +5883,54 @@
 									"path": [
 										"weeklyClassesCancellations",
 										"get_all"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "student_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "student",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-07-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2025-07-01",
+											"disabled": true
+										},
+										{
+											"key": "member_cancel_status_code",
+											"value": "CANCELLED_MCS",
+											"description": "Separate by comma, UDC Type = MEMBER_CANCEL_STATUS",
+											"disabled": true
+										},
+										{
+											"key": "member_cancel_type_code",
+											"value": "FULL_CANCELLATION,REQUEST_TO_CANCEL",
+											"description": "Separate by comma, UDC Type = MEMBER_CANCEL_TYPES",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -5803,6 +6009,64 @@
 										{
 											"key": "weekly_classes_cancellation_id",
 											"value": "101"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "WeeklyClasses (Capacities)",
+					"item": [
+						{
+							"name": "Get All WeeklyClass Capacities",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/weeklyClassesCapacities/get_capacities",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"weeklyClassesCapacities",
+										"get_capacities"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-07-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2025-07-01",
+											"disabled": true
 										}
 									]
 								}
