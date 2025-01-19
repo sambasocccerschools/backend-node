@@ -36,6 +36,7 @@ import { EmergencyContact } from '@index/entity/EmergencyContact';
 import { AccountInformationComment } from '../entity/AccountInformationComment';
 import { WeeklyClassFreeTrial } from '@index/entity/WeeklyClassFreeTrial';
 import { WeeklyClassCancellation } from '@index/entity/WeeklyClassCancellation';
+import { Feedback } from '@index/entity/Feedback';
 
 
 
@@ -95,7 +96,8 @@ async function runSeed() {
                     WeeklyClassWaitingList,
                     WeeklyClassLead,
                     WeeklyClassFreeTrial,
-                    WeeklyClassCancellation], // Array of entities to be used
+                    WeeklyClassCancellation,
+                    Feedback], // Array of entities to be used
         synchronize: true, // Synchronize the schema with the database
         extra: {
             connectionLimit: 150, 
@@ -773,8 +775,8 @@ async function runSeed() {
     *****************************************/
     const studentRepository = dataSource.getRepository(Student);
 
-    const familyOne = await dataSource.getRepository(Family).findOneBy({ id: 1 });
-    const familyTwo = await dataSource.getRepository(Family).findOneBy({ id: 2 });
+    const family1 = await dataSource.getRepository(Family).findOneBy({ id: 1 });
+    const family2 = await dataSource.getRepository(Family).findOneBy({ id: 2 });
     
     const students: Partial<Student>[] = [
       {
@@ -785,7 +787,7 @@ async function runSeed() {
         age: 17,
         medical_information: "No known conditions",
         gender: "Male",
-        family: familyOne as Family, 
+        family: family1 as Family, 
         franchise: franchise as Franchise, 
         is_deleted: false,
       },
@@ -797,7 +799,7 @@ async function runSeed() {
         age: 26,
         medical_information: null, 
         gender: "Female",
-        family: familyTwo as Family, 
+        family: family2 as Family, 
         franchise: null, 
         is_deleted: false,
       },
@@ -904,7 +906,7 @@ async function runSeed() {
         other_relationship: null,
         relationship: relationshipCode1 as UnitDynamicCentral,
         referral_source: referralSourceCode as UnitDynamicCentral,
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
@@ -917,7 +919,7 @@ async function runSeed() {
         other_relationship: "Uncle",
         relationship: relationshipCode2 as UnitDynamicCentral,
         referral_source: null,
-        family: familyTwo as Family,
+        family: family2 as Family,
         franchise: null,
         is_deleted: false,
       },
@@ -951,7 +953,7 @@ async function runSeed() {
         last_name: "Smith",
         phone_number: "88554422",
         relationship: relationshipCode1 as UnitDynamicCentral,
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
@@ -961,7 +963,7 @@ async function runSeed() {
         last_name: "Smith",
         phone_number: "11111111",
         relationship: relationshipCode1 as UnitDynamicCentral,
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
@@ -971,7 +973,7 @@ async function runSeed() {
         last_name: "Demetriou",
         phone_number: "56756767",
         relationship: relationshipCode1 as UnitDynamicCentral,
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         is_deleted: false,
       },
@@ -992,21 +994,21 @@ async function runSeed() {
       {
         id: 555,
         message: "Bal ",
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         user: user as User
       },
       {
         id: 556,
         message: "Rold",
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         user: user as User
       },
       {
         id: 557,
         message: "Mephis",
-        family: familyOne as Family,
+        family: family1 as Family,
         franchise: franchise as Franchise,
         user: user as User
       },
@@ -1275,6 +1277,71 @@ const weeklyClassCancellations: Partial<WeeklyClassCancellation>[] = [
 ];
 
 await weeklyClassCancellationRepository.upsert(weeklyClassCancellations as any, ["id"]);
+
+
+
+
+
+/****************************************
+                Feedback
+*****************************************/
+const feedbackType1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "POSITIVE_FT" });
+const feedbackType2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "NEGATIVE_FT" });
+
+const feedbackCategory1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "FACILITIES" });
+const feedbackCategory2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "COACHES" });
+
+const feedbackStatus1 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "PENDING_FS" });
+const feedbackStatus2 = await dataSource.getRepository(UnitDynamicCentral).findOneBy({ code: "SOLVED_FS" });
+
+const feedbackRepository = dataSource.getRepository(Feedback);
+const feedbacks: Partial<Feedback>[] = [
+  {
+    id: 301,
+    weekly_class: weeklyClass1 as WeeklyClass,
+    feedback_type: feedbackType1 as UnitDynamicCentral,
+    feedback_category: feedbackCategory1 as UnitDynamicCentral,
+    other_feedback_category: null,
+    feedback_status: feedbackStatus1 as UnitDynamicCentral,
+    agent: user as User,
+    reported_by: user as User,
+    additional_notes: "Great service, no complaints.",
+    franchise: franchise as Franchise,
+    family: family1 as Family,
+    is_deleted: false,
+  },
+  {
+    id: 302,
+    weekly_class: weeklyClass2 as WeeklyClass,
+    feedback_type: feedbackType2 as UnitDynamicCentral,
+    feedback_category: feedbackCategory2 as UnitDynamicCentral,
+    other_feedback_category: "Parking Issues",
+    feedback_status: feedbackStatus2 as UnitDynamicCentral,
+    agent: user as User,
+    reported_by: null,
+    additional_notes: "The parking facility needs improvement.",
+    franchise: null,
+    family: family2 as Family,
+    is_deleted: false,
+  },
+  {
+    id: 303,
+    weekly_class: weeklyClass2 as WeeklyClass,
+    feedback_type: feedbackType1 as UnitDynamicCentral,
+    feedback_category: feedbackCategory1 as UnitDynamicCentral,
+    other_feedback_category: null,
+    feedback_status: feedbackStatus2 as UnitDynamicCentral,
+    agent: null,
+    reported_by: null,
+    additional_notes: "The class schedule is very convenient.",
+    franchise: null,
+    family: family2 as Family,
+    is_deleted: false,
+  },
+];
+
+await feedbackRepository.upsert(feedbacks as any, ["id"]);
+
 
 
 

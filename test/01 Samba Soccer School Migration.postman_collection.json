@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f3ea5747-4a8d-437c-b9fa-2403e1d846e0",
+		"_postman_id": "5ef71dbf-0cb3-480f-84ff-232d6ac968f5",
 		"name": "01 Samba Soccer School Migration",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "619775"
@@ -6991,6 +6991,192 @@
 									],
 									"path": [
 										"accountInformationComment",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Feedback",
+					"item": [
+						{
+							"name": "Create Feedback",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_id\": 1,\n  \"feedback_type_code\": \"POSITIVE_FT\",\n  \"feedback_category_code\": \"COACHES\",\n  //\"other_feedback_category\": \"Test feedback\",\n  \"feedback_status_code\": \"SOLVED_FS\",\n  //\"agent_id\": \"05c40aba-9487-4ece-8cfd-fa7b9a3e7c7d\",\n  //\"reported_by\": \"05c40aba-9487-4ece-8cfd-fa7b9a3e7c7d\",\n  //\"additional_notes\": \"Test Notes\",\n  //\"franchise_id\": 1,\n  \"family_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/feedback/add",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Feedback",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"weekly_class_id\": 1,\n  \"feedback_type_code\": \"POSITIVE_FT\",\n  \"feedback_category_code\": \"COACHES\",\n  //\"other_feedback_category\": \"Test feedback\",\n  \"feedback_status_code\": \"SOLVED_FS\",\n  //\"agent_id\": \"05c40aba-9487-4ece-8cfd-fa7b9a3e7c7d\",\n  //\"reported_by\": \"05c40aba-9487-4ece-8cfd-fa7b9a3e7c7d\",\n  //\"additional_notes\": \"Test Notes\",\n  //\"franchise_id\": 1,\n  \"family_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/feedback/edit?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"edit"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Feedback by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/feedback/get?id=304",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "304"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Feedback",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/feedback/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"get_all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Feedback",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/feedback/delete?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
 										"delete"
 									],
 									"query": [

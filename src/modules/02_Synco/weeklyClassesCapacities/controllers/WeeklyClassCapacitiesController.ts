@@ -3,7 +3,7 @@ import { WeeklyClass } from "@index/entity/WeeklyClass";
 import { WeeklyClassFreeTrial } from "@index/entity/WeeklyClassFreeTrial";
 import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
-import { FindManyOptions, RequestHandler } from "@TenshiJS/generics";
+import { RequestHandler } from "@TenshiJS/generics";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import GenericRepository from "@TenshiJS/generics/Repository/GenericRepository";
 import { In, Not } from "typeorm";
