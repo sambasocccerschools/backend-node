@@ -77,7 +77,7 @@ import WeeklyClassFreeTrialRoutes from '@index/modules/02_Synco/weeklyclassfreet
 import WeeklyClassCancellationRoutes from '@index/modules/02_Synco/weeklyclasscancellation/routers/WeeklyClassCancellationRoutes';
 import FeedbackRoutes from '@index/modules/02_Synco/feedback/routers/FeedbackRoutes';
 import WeeklyClassCapacitiesRoutes from './modules/02_Synco/weeklyClassesCapacities/routers/WeeklyClassCapacitiesRoutes';
-import AccountInformationRoutes from './modules/02_Synco/accountInformation/routers/accountInformationRoutes';
+import AccountInformationRoutes from './modules/02_Synco/accountInformation/routers/AccountInformationRoutes';
 
 //*************************************** */
 //              IMPORTS
