@@ -5399,7 +5399,7 @@
 							"response": []
 						},
 						{
-							"name": "Update Change",
+							"name": "Update Change Status",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -7107,7 +7107,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/feedback/get?id=304",
+									"raw": "{{host}}/feedback/get?id=302",
 									"host": [
 										"{{host}}"
 									],
@@ -7118,7 +7118,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "304"
+											"value": "302"
 										}
 									]
 								}
@@ -7184,6 +7184,82 @@
 											"key": "id",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Change Status Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"feedbacks_id\": [302,303],\n    \"feedback_status_code\": \"ARCHIVED_FS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/feedback/changeStatus",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"changeStatus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Assign Agent Copy",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"feedbacks_id\": [302],\n    \"agent_id\": \"04fb4aa6-5131-44bc-8106-f8fe0b3ed0be\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/feedback/assignAgent",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"feedback",
+										"assignAgent"
 									]
 								}
 							},

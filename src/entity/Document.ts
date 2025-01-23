@@ -47,7 +47,7 @@ export class Document {
   @Column({ type: "varchar", length: 500, nullable: true, default: null })
   url: string | null;
 
-  @Column({ type: "int", unsigned: true })
+  @Column({ type: "int", unsigned: true, nullable: true, default: null})
   id_for_table: number;
 
   @Column({ type: "enum", 
@@ -65,7 +65,7 @@ export class Document {
   @Column({ type: "tinyint", default: 0 })
   is_public: boolean;
 
-  @Column({ type: "int", unsigned: true })
+  @Column({ type: "int", unsigned: true, nullable: true, default: null })
   user_id: number;
 
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })

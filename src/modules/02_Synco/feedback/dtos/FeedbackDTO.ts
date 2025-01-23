@@ -1,7 +1,6 @@
 
 import { Feedback } from "@index/entity/Feedback";
 import { Request, IAdapterFromBody } from "@modules/index";
-import { User } from "@TenshiJS/entity/User";
 
 export default class FeedbackDTO implements IAdapterFromBody {
     req: Request;
@@ -71,5 +70,24 @@ export default class FeedbackDTO implements IAdapterFromBody {
             }
         }
         return response;
+    }
+
+
+    feedbackAssignAgentPostBody(): any{
+        const feedbacks = {
+            feedbacks_id:this.req.body.feedbacks_id,
+            agent_id:this.req.body.agent_id
+        };
+        return feedbacks;
+    }
+
+
+    feedbackChangeStatusPostBody(): any{
+        const Feedbacks = {
+            feedbacks_id:this.req.body.feedbacks_id,
+            feedback_status_code:this.req.body.feedback_status_code
+        };
+    
+        return Feedbacks;
     }
 }

@@ -76,6 +76,8 @@ import WeeklyClassFindClassRoutes from '@index/modules/02_Synco/weeklyClassesFin
 import WeeklyClassFreeTrialRoutes from '@index/modules/02_Synco/weeklyclassfreetrial/routers/WeeklyClassFreeTrialRoutes';
 import WeeklyClassCancellationRoutes from '@index/modules/02_Synco/weeklyclasscancellation/routers/WeeklyClassCancellationRoutes';
 import FeedbackRoutes from '@index/modules/02_Synco/feedback/routers/FeedbackRoutes';
+import WeeklyClassCapacitiesRoutes from './modules/02_Synco/weeklyClassesCapacities/routers/WeeklyClassCapacitiesRoutes';
+import AccountInformationRoutes from './modules/02_Synco/accountInformation/routers/accountInformationRoutes';
 
 //*************************************** */
 //              IMPORTS
@@ -99,7 +101,7 @@ import RouteNotFoundMiddleware from '@TenshiJS/middlewares/RouteNotFoundMiddlewa
 import { CorsHandlerMiddleware } from '@TenshiJS/middlewares/CorsHandlerMiddleware';
 import LoggingHandlerMiddleware from '@TenshiJS/middlewares/LoggingHandlerMiddleware';
 import ValidJsonBodyMiddleware from '@TenshiJS/middlewares/ValidJsonBodyMiddleware';
-import WeeklyClassCapacitiesRoutes from './modules/02_Synco/weeklyClassesCapacities/routers/WeeklyClassCapacitiesRoutes';
+
 
 
 
@@ -231,6 +233,8 @@ export const TenshiMain = async () => {
     app.use(new TermSessionRoutes().getRouter());
     app.use(new TermSessionPlanRoutes().getRouter());
     app.use(new FeedbackRoutes().getRouter());
+    app.use(new AccountInformationRoutes().getRouter());
+
 
     //Another routers
     app.use(new FamilyRoutes().getRouter());

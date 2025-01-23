@@ -4,12 +4,13 @@ import { Request, Response,
          FindManyOptions} from "@modules/index";
 import { Feedback } from "@index/entity/Feedback";
 import FeedbackDTO from "@modules/02_Synco/feedback/dtos/FeedbackDTO";
+import FeedbackController from "../controllers/FeedbackController";
 
 class FeedbackRoutes extends GenericRoutes {
     
     private filters: FindManyOptions = {};
     constructor() {
-        super(new GenericController(Feedback), "/feedback");
+        super(new FeedbackController(), "/feedback");
         this.filters.relations = [
             "weekly_class",
             "feedback_type",
@@ -92,6 +93,34 @@ class FeedbackRoutes extends GenericRoutes {
                                     .build();
         
             this.getController().delete(requestHandler);
+        });
+
+
+
+         this.router.put(`${this.getRouterName()}/assignAgent`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                        new RequestHandlerBuilder(res, req)
+                        .setAdapter(new FeedbackDTO(req))
+                        .setMethod("assignAgentFeedback")
+                        .isValidateRole("FEEDBACK")
+                        .isRequireIdFromQueryParams(false)
+                        .build();
+            
+            (this.getController() as FeedbackController).assignAgent(requestHandler);
+        });
+
+        //TODO
+        //This works like Resolve Endpoint, just pass SOLVED_FS in the status      
+        this.router.put(`${this.getRouterName()}/changeStatus`, async (req: Request, res: Response) => {
+            const requestHandler: RequestHandler = 
+                        new RequestHandlerBuilder(res, req)
+                        .setAdapter(new FeedbackDTO(req))
+                        .setMethod("changeStatusFeedback")
+                        .isValidateRole("FEEDBACK")
+                        .isRequireIdFromQueryParams(false)
+                        .build();
+            
+            (this.getController() as FeedbackController).changeStatus(requestHandler);
         });
     }
 }

@@ -191,7 +191,7 @@ export default  class TermController extends GenericController{
                                 }
                             }
                         };
-                        session.termSessionPlans = await termSessionPlanRepository.findByOptions(false, true, termSessionPlanOptions);
+                        session.plans = await termSessionPlanRepository.findByOptions(false, true, termSessionPlanOptions);
                     }
     
                     // Attach termSessions to entity
@@ -260,7 +260,7 @@ export default  class TermController extends GenericController{
                                 },
                             };
                           
-                            session.termSessionPlans = await termSessionPlanRepository.findByOptions(
+                            session.plans = await termSessionPlanRepository.findByOptions(
                                 false,
                                 true,
                                 termSessionPlanOptions
