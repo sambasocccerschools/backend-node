@@ -130,6 +130,7 @@ export default  class SessionPlanController extends GenericController{
                             sessionPlanExercise.subtitle = exercise.subtitle;
                             sessionPlanExercise.title_duration = exercise.title_duration;
                             sessionPlanExercise.description = exercise.description;
+                            sessionPlanExercise.json_urls = exercise.json_urls;
                             
                             try {
                                 sessionPlanExercise = await sessionPlanExerciseRepository.add(sessionPlanExercise);

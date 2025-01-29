@@ -775,11 +775,11 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/J:/03 Descargas/Firma Correo AC (1).png"
+											"src": "/C:/Users/fabia/OneDrive/Escritorio/Weekly classes terms.png"
 										},
 										{
 											"key": "fields",
-											"value": "{\"title\":\"Front end SSS\",\"type\": \"IMG\", \"description\": \"Descripción del documento\", \"id_for_table\": \"309aaa56-98ce-49b5-88b5-590409515681\", \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":1}",
+											"value": "{\"title\":\"Front end SSS\",\"type\": \"IMG\", \"description\": \"Descripción del documento\", \"id_for_table\": 1, \"table\": \"USER\",  \"action_type\":  \"PROFILE_PICTURE\", \"user_id\": 5, \"is_public\":1}",
 											"type": "text"
 										}
 									]
@@ -819,7 +819,7 @@
 										{
 											"key": "file",
 											"type": "file",
-											"src": "/J:/03 Descargas/Logo.png"
+											"src": "/C:/Users/fabia/OneDrive/Escritorio/plans.png"
 										},
 										{
 											"key": "fields",
@@ -858,7 +858,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/document/get_by_code?code=FRONT_END_SSS__DOC__18112024165220",
+									"raw": "{{host}}/document/get_by_code?code=FRONT_END_SSS__IMG__2212025214238",
 									"host": [
 										"{{host}}"
 									],
@@ -869,7 +869,7 @@
 									"query": [
 										{
 											"key": "code",
-											"value": "FRONT_END_SSS__DOC__18112024165220"
+											"value": "FRONT_END_SSS__IMG__2212025214238"
 										}
 									]
 								}
@@ -2516,7 +2516,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\",\n            \"json_urls\" : \n            [\n                {\n                    \"extension\":\"png\",\n                    \"url\":\"http://\",\n                    \"type\": \"IMG\"\n                },\n                {\n                    \"extension\":\"mp4\",\n                    \"url\":\"http://\",\n                    \"type\": \"VIDEO\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n        }\n  ]\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  //\"banner\": \"\",\n  //\"video\": \"\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\",\n            \"json_urls\" : \n            [\n                {\n                    \"extension\":\"png\",\n                    \"url\":\"http://\",\n                    \"type\": \"IMG\"\n                },\n                {\n                    \"extension\":\"mp4\",\n                    \"url\":\"http://\",\n                    \"type\": \"VIDEO\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n        }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2639,6 +2639,13 @@
 									"path": [
 										"sessionPlans",
 										"get_all"
+									],
+									"query": [
+										{
+											"key": "ability_group_id",
+											"value": "421",
+											"disabled": true
+										}
 									]
 								}
 							},
@@ -2859,6 +2866,64 @@
 										{
 											"key": "id",
 											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Account Information",
+					"item": [
+						{
+							"name": "Get All Account Information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/accountInformation/get_all",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"accountInformation",
+										"get_all"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-07-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2025-07-01",
+											"disabled": true
 										}
 									]
 								}
@@ -5747,7 +5812,7 @@
 							"response": []
 						},
 						{
-							"name": "Update Status Cancelation reject",
+							"name": "Update Change Status Copy",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -5762,63 +5827,23 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{host}}/weeklyClassesCancellations/changeStatus?id=202&status=reject",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"weeklyClassesCancellations",
-										"changeStatus"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "202"
-										},
-										{
-											"key": "status",
-											"value": "reject"
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"weekly_classes_cancellation_id\": [201],\n    //\"member_cancel_status_code\": \"approve\"\n    \"member_cancel_status_code\": \"reject\"\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update Status Cancelation approve",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "authorization",
-										"value": "{{auth_jwt}}",
-										"type": "text"
-									},
-									{
-										"key": "x-api-key",
-										"value": "{{secret_api_key}}",
-										"type": "text"
 									}
-								],
+								},
 								"url": {
-									"raw": "{{host}}/weeklyClassesCancellations/changeStatus?id=202&status=approve",
+									"raw": "{{host}}/weeklyClassesCancellations/changeStatus",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"weeklyClassesCancellations",
 										"changeStatus"
-									],
-									"query": [
-										{
-											"key": "id",
-											"value": "202"
-										},
-										{
-											"key": "status",
-											"value": "approve"
-										}
 									]
 								}
 							},
