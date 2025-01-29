@@ -120,6 +120,7 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                         .setAdapter(new WeeklyClassCancellationDTO(req))
                         .setMethod("changeStatusWeeklyClassCancellation")
                         .isValidateRole("WEEKLY_CLASS_CANCELLATION")
+                        .isRequireIdFromQueryParams(false)
                         .build();
             
             (this.getController() as WeeklyClassCancellationController).changeStatus(requestHandler);

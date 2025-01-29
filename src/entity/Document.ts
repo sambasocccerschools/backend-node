@@ -28,9 +28,11 @@ export class Document {
               "PERSONAL_DOCUMENT", 
               "UNIFORM_PICTURE", 
               "SESSION_PLAN_BANNER",
-              "SESSION_PLAN_VIDEO"], 
-            default: "GENERAL_GALLERY" })
-  action_type: string; 
+              "SESSION_PLAN_VIDEO",
+              "SESSION_PLAN_EXCERCISES"], 
+              nullable: true, 
+              default: null  })
+  action_type: string | null; 
 
   @Column({ type: "enum", enum: [
                           "DOC", 
@@ -48,7 +50,7 @@ export class Document {
   url: string | null;
 
   @Column({ type: "int", unsigned: true, nullable: true, default: null})
-  id_for_table: number;
+  id_for_table: number | null;
 
   @Column({ type: "enum", 
             enum: ["USER", 
@@ -56,8 +58,9 @@ export class Document {
                   "GENERAL", 
                   "WEEKLY_CLASSES_MEMBERS",
                   "SESSION_PLAN"], 
-            default: "GENERAL" })
-  table: string;
+            nullable: true, 
+            default: null })
+  table: string | null;
 
   @Column({ type: "tinyint", default: 0 })
   is_deleted: boolean;
@@ -66,7 +69,7 @@ export class Document {
   is_public: boolean;
 
   @Column({ type: "int", unsigned: true, nullable: true, default: null })
-  user_id: number;
+  user_id: number | null;
 
   @Column({ type: "datetime", default: () => "CURRENT_TIMESTAMP" })
   created_date: Date;

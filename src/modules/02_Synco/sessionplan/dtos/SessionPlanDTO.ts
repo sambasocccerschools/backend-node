@@ -16,6 +16,8 @@ export default class SessionPlanDTO implements IAdapterFromBody {
             description : this.req.body.description,
             ability_group : this.req.body.ability_group_id,
             franchise : this.req.body.franchise_id,
+            video: this.req.body.video,
+            banner: this.req.body.banner,
             exercises : this.req.body.exercises,
         };
 
@@ -46,6 +48,8 @@ export default class SessionPlanDTO implements IAdapterFromBody {
             title: entity.title,
             description: entity.description,
             ability_group: entity.ability_group,
+            video: entity.video,
+            banner: entity.banner,
             exercises : entity.exercises,
             franchise: entity.franchise,
             created_date: entity.created_date,

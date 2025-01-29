@@ -1,10 +1,11 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
-         FindManyOptions} from "@modules/index";
-import { SessionPlan } from "@index/entity/SessionPlan";
+         GenericRoutes,
+         FindManyOptions,
+         getUrlParam} from "@modules/index";
 import SessionPlanDTO from "@modules/02_Synco/sessionplan/dtos/SessionPlanDTO";
 import SessionPlanController from "../controllers/SessionPlanController";
+import { In } from "typeorm";
 
 class SessionPlanRoutes extends GenericRoutes {
     
@@ -31,6 +32,24 @@ class SessionPlanRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            this.filters.where = { };
+            const ability_group_id: string | null = getUrlParam("ability_group_id", req) || null;
+
+            if(ability_group_id != null){
+                const abilityGroupIdsArray = ability_group_id!!.split(",")
+                                        .map(field => field.trim())
+                                        .filter(field => field); 
+
+                if (abilityGroupIdsArray.length > 0) {
+                    this.filters.where = { 
+                        ...this.filters.where, 
+                        ability_group: {
+                            id: In(abilityGroupIdsArray), 
+                        }
+                    };
+                }
+            }
+
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SessionPlanDTO(req))

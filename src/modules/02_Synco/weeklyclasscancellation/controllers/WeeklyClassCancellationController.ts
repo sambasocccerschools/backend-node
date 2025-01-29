@@ -11,6 +11,7 @@ import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import { FindManyOptions } from "typeorm";
 import { Guardian } from "@index/entity/Guardian";
 import { Student } from "@index/entity/Student";
+import { WeeklyClass } from "@index/entity/WeeklyClass";
 
 export default class WeeklyClassCancellationController extends GenericController{
 
@@ -124,7 +125,7 @@ export default class WeeklyClassCancellationController extends GenericController
     }
 
 
-    async changeStatus(reqHandler: RequestHandler) : Promise<any> {
+    /*async changeStatus(reqHandler: RequestHandler) : Promise<any> {
         return this.getService().updateService(reqHandler, async (jwtData, httpExec, id) => {
           
             const udcRepository = await new GenericRepository(UnitDynamicCentral);
@@ -213,6 +214,87 @@ export default class WeeklyClassCancellationController extends GenericController
                 reqHandler.getMethod(), this.getControllerName());
             }
 
+        });
+    }*/
+
+
+    async changeStatus(reqHandler: RequestHandler) : Promise<any> {
+        return this.getService().updateService(reqHandler, async (jwtData, httpExec) => {
+          
+            try {
+
+                let isSuccess = true;
+                let errorMessage:any = "";
+
+                const weeklyClassMemberRepository = await new GenericRepository(WeeklyClassMember);
+                const weeklyClassesCancellationBody =(reqHandler.getAdapter() as WeeklyClassCancellationDTO).weeklyClassesCancellationChangeStatusPostBody();
+                
+                for (const id of weeklyClassesCancellationBody.weekly_classes_cancellation_id) {
+
+                    const filters: FindManyOptions = {};
+                    filters.relations = [
+                        "weekly_class_member",
+                        "member_cancel_type",
+                        "membership_cancel_reason",
+                        "member_cancel_status"
+                    ];
+                    
+                    let memberCancelStatusCode = "";
+                    let memberStatusCode = "";
+                    //if the param status is approve
+                    if(weeklyClassesCancellationBody.member_cancel_status_code == "approve"){
+                          memberCancelStatusCode = "CANCELLED_MCS";
+                          memberStatusCode = "CANCELLED_MS";
+                    }else if(weeklyClassesCancellationBody.member_cancel_status_code  == "reject"){
+                          memberCancelStatusCode = "CANCELLATION_REJECTED_MCS";
+                          memberStatusCode = "ACTIVE_MS";
+                    }else{
+                        isSuccess=false;
+                        errorMessage += "The status doesn't exists";
+                        //return httpExec.dynamicError("FORBIDDEN", 'This request has already been processed. Approval or rejection is not allowed again.');
+                    }
+
+                    try{
+                        const body = {
+                            "member_cancel_status": memberCancelStatusCode,
+                        };
+                        await this.getRepository().update(id!!, body, true);
+                    }catch(error : any) {
+                        isSuccess=false;
+                        errorMessage += error.message;
+                    }
+
+                    try{
+                        let weeklyClassCancellation : WeeklyClassCancellation = await this.getRepository().findById(id!!, reqHandler.getLogicalDelete(), filters);
+                        const weeklyClassMemberId = weeklyClassCancellation.weekly_class_member.id;
+                        const body = {
+                            "member_status": memberStatusCode,
+                        };
+                        await weeklyClassMemberRepository.update(weeklyClassMemberId, body, true);
+                    }catch(error : any) {
+                        isSuccess=false;
+                        errorMessage += error.message;
+                    }
+                }
+
+                if (isSuccess) {
+                    return httpExec.successAction(
+                        reqHandler.getAdapter().entitiesToResponse(null),
+                        ConstHTTPRequest.UPDATE_ENTRIES_SUCCESS
+                    );
+                } else {
+                    return await httpExec.databaseError(
+                        errorMessage,
+                        jwtData!.id.toString(),
+                        reqHandler.getMethod(),
+                        this.getControllerName()
+                    );
+                }
+            } catch (error : any) {
+                // Return a database error response
+                return await httpExec.databaseError(error, jwtData!.id.toString(),
+                reqHandler.getMethod(), this.getControllerName());
+            }
         });
     }
 }

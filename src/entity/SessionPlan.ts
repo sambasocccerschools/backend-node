@@ -16,6 +16,12 @@ export class SessionPlan {
     @Column({ type: "varchar", length: 500, nullable: true, default: null })
     description: string;
 
+    @Column({ type: "varchar", length: 500, nullable: true, default: null })
+    video: string | null;
+
+    @Column({ type: "varchar", length: 500, nullable: true, default: null })
+    banner: string | null;
+
     @ManyToOne(() => AbilityGroup)
     @JoinColumn({ name: "ability_group", referencedColumnName: "id" })
     ability_group: AbilityGroup;

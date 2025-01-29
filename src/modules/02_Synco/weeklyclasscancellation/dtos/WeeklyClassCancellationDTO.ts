@@ -81,4 +81,14 @@ export default class WeeklyClassCancellationDTO implements IAdapterFromBody {
     
         return weeklyClassesCancellations;
     }
+
+
+    weeklyClassesCancellationChangeStatusPostBody(): any{
+        const weeklyClassesCancellations = {
+            weekly_classes_cancellation_id:this.req.body.weekly_classes_cancellation_id,
+            member_cancel_status_code:this.req.body.member_cancel_status_code
+        };
+    
+        return weeklyClassesCancellations;
+    }
 }
