@@ -11,6 +11,8 @@ import { In, Not } from "typeorm";
 interface WeeklyClassStats {
     id: number;
     member_capacity: number;
+    min_age: number;
+    max_age: number;
     free_trial_capacity: number;
     remaining_capacity: number;
     total_capacity: number;
@@ -80,6 +82,8 @@ export default  class WeeklyClassCapacitiesController extends GenericController{
                         weekly_classes.push({
                             id: weeklyClass.id,
                             name: weeklyClass.name,
+                            min_age: weeklyClass.min_age,
+                            max_age: weeklyClass.max_age,
                             member_capacity: memberCapacity,
                             free_trial_capacity: freeTrialCount,
                             remaining_capacity: remainingCapacity,

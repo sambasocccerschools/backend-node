@@ -13,6 +13,8 @@ export default class WeeklyClassDTO implements IAdapterFromBody {
         const entity = new WeeklyClass();
         entity.venue = this.req.body.venue_id;
         entity.name = this.req.body.name;
+        entity.min_age = this.req.body.min_age;
+        entity.max_age = this.req.body.max_age;
         entity.capacity = this.req.body.capacity;
         entity.days = this.req.body.days;
         entity.start_time = this.req.body.start_time;
@@ -53,6 +55,8 @@ export default class WeeklyClassDTO implements IAdapterFromBody {
             id: entity.id,
             venue: entity.venue,
             name: entity.name,
+            min_age: entity.min_age,
+            max_age: entity.max_age,
             capacity: entity.capacity,
             days: entity.days,
             start_time: entity.start_time,

@@ -112,6 +112,8 @@ export default  class WeeklyClassFindClassController extends GenericController{
                             yearGroup.classes.push({
                                 id: parseInt(weekly_currently.id, 10), // Asegúrate de que el ID sea un número
                                 name: weekly_currently.name,
+                                min_age: weekly_currently.min_age,
+                                max_age: weekly_currently.max_age,
                                 total_capacity: weekly_currently.capacity,
                                 capacity_spaces: weekly_currently.capacity - (countMembers + countMembersFreeTrial),
                                 days: weekly_currently.days,

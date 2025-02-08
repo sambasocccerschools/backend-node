@@ -2516,7 +2516,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  //\"banner\": \"\",\n  //\"video\": \"\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\",\n            \"json_urls\" : \n            [\n                {\n                    \"extension\":\"png\",\n                    \"url\":\"http://\",\n                    \"type\": \"IMG\"\n                },\n                {\n                    \"extension\":\"mp4\",\n                    \"url\":\"http://\",\n                    \"type\": \"VIDEO\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n        }\n  ]\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"banner\": \"https://soccer-samba-dev-pictures.s3.us-east-2.amazonaws.com/PublicFiles//Exercise_1_-_Image_1__IMG__2812025230154.JPG\",\n  //\"video\": \"\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\",\n            \"json_urls\" : \n            [\n                {\n                    \"extension\": \"JPG\",\n                    \"url\": \"https://soccer-samba-dev-pictures.s3.us-east-2.amazonaws.com/PublicFiles//Exercise_1_-_Image_1__IMG__2812025230154.JPG\",\n                    \"type\": \"IMG\"\n                },\n                {\n                    \"extension\": \"JPG\",\n                    \"url\": \"https://soccer-samba-dev-pictures.s3.us-east-2.amazonaws.com/PublicFiles//Exercise_1_-_Image_1__IMG__2812025230154777.JPG\",\n                    \"type\": \"IMG\"\n                }\n            ]\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n        }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2554,7 +2554,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        },\n        {\n            \"title\": \"Test Title Exercise 2\",\n            \"subtitle\": \"Test Title Subtitle 2\",\n            \"title_duration\": \"Title Duration 2\",\n            \"description\": \"Description 2\"\n            //\"banner_url\" : \"\",\n            //\"video_url\" : \"\",\n        }\n  ]\n}",
+									"raw": "{\n  \"title\": \"test_title\",\n  //\"description\": \"test_description\",\n  \"ability_group_id\": 421,\n  //\"franchise_id\": 222,\n  \"exercises\":[\n        {\n            \"title\": \"Test Title Exercise\",\n            \"subtitle\": \"Test Title Subtitle\",\n            \"title_duration\": \"Title Duration\",\n            \"description\": \"Description\",\n            \"json_urls\" : \n            [\n                {\n                    \"extension\": \"JPG\",\n                    \"url\": \"https://soccer-samba-dev-pictures.s3.us-east-2.amazonaws.com/PublicFiles//Exercise_1_-_Image_1__IMG__2812025230154.JPG\",\n                    \"type\": \"IMG\"\n                }\n            ]\n        }\n  ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2562,7 +2562,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/sessionPlans/edit?id=256",
+									"raw": "{{host}}/sessionPlans/edit?id=259",
 									"host": [
 										"{{host}}"
 									],
@@ -2573,7 +2573,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "256"
+											"value": "259"
 										}
 									]
 								}
@@ -2597,7 +2597,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{host}}/sessionPlans/get?id=267",
+									"raw": "{{host}}/sessionPlans/get?id=259",
 									"host": [
 										"{{host}}"
 									],
@@ -2608,7 +2608,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "267"
+											"value": "259"
 										}
 									]
 								}
@@ -2924,6 +2924,63 @@
 											"key": "end_date",
 											"value": "2025-07-01",
 											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Id Account Information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{auth_jwt}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{secret_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/accountInformation/get?id=1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"accountInformation",
+										"get"
+									],
+									"query": [
+										{
+											"key": "venue_id",
+											"value": "",
+											"description": "Separate by comma",
+											"disabled": true
+										},
+										{
+											"key": "venue",
+											"value": "",
+											"description": "string name",
+											"disabled": true
+										},
+										{
+											"key": "start_date",
+											"value": "2024-07-01",
+											"disabled": true
+										},
+										{
+											"key": "end_date",
+											"value": "2025-07-01",
+											"disabled": true
+										},
+										{
+											"key": "id",
+											"value": "1"
 										}
 									]
 								}

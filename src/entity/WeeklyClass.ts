@@ -19,6 +19,12 @@ export class WeeklyClass {
     @Column({ type: "int",  default: 0  })
     capacity: number;
 
+    @Column({ type: "int", unsigned: true, nullable: true, default: null })
+    min_age: number;
+
+    @Column({ type: "int", unsigned: true, nullable: true, default: null })
+    max_age: number;
+
     @Column({ type: "enum", 
               enum: [
                 "Monday", 
