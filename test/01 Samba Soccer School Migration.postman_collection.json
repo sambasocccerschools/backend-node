@@ -3724,7 +3724,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"venue_id\": 345,\n  \"name\": \"test name\",\n  \"capacity\": 100,\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\",\n  \"autumn_term_id\": 280,\n  //\"is_autumn_indoor\": true,\n  \"spring_term_id\": 279,\n  //\"is_spring_indoor\": true,\n  \"summer_term_id\": 278\n  //\"is_summer_indoor\": true,\n  //\"is_free_trail_dates\": true,\n  //\"free_trial_dates\": \"{}\",\n  //\"franchise_id\": \"franchise_id\"\n}",
+									"raw": "{\n  \"venue_id\": 345,\n  \"name\": \"test name\",\n  //\"min_age\": 20,\n  //\"max_age\": 25,\n  \"capacity\": 100,\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\",\n  \"autumn_term_id\": 280,\n  //\"is_autumn_indoor\": true,\n  \"spring_term_id\": 279,\n  //\"is_spring_indoor\": true,\n  \"summer_term_id\": 278\n  //\"is_summer_indoor\": true,\n  //\"is_free_trail_dates\": true,\n  //\"free_trial_dates\": \"{}\",\n  //\"franchise_id\": \"franchise_id\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3762,7 +3762,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"name\": \"test Name Updated\",\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\"\n}",
+									"raw": "{\n  \"name\": \"test Name Updated\",\n   //\"min_age\": 20,\n  //\"max_age\": 25,\n  \"days\": \"Monday\",\n  \"start_time\": \"08:00:00\",\n  \"end_time\": \"10:00:00\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
