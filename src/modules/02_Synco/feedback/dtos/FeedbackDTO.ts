@@ -16,11 +16,11 @@ export default class FeedbackDTO implements IAdapterFromBody {
         entity.feedback_category = this.req.body.feedback_category_code;
         entity.other_feedback_category = this.req.body.other_feedback_category;
         entity.feedback_status = this.req.body.feedback_status_code;
-        entity.agent = this.req.body.agent;
+        entity.agent = this.req.body.agent_id;
         entity.reported_by = this.req.body.reported_by;
         entity.additional_notes = this.req.body.additional_notes;
-        entity.franchise = this.req.body.franchise;
-        entity.family = this.req.body.family;
+        entity.franchise = this.req.body.franchise_id;
+        entity.family = this.req.body.family_id;
      
         if (isCreating) {
             entity.created_date = new Date();

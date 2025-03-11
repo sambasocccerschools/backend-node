@@ -5,6 +5,7 @@ import { Student } from "./Student";
 import { UnitDynamicCentral } from "./UnitDynamicCentral";
 import { SubscriptionPlanPrice } from "./SubscriptionPlanPrice";
 import { WeeklyClass } from "./WeeklyClass";
+import { Family } from "./Family";
 
 @Entity("weekly_classes_members")
 export class WeeklyClassMember {
@@ -38,6 +39,10 @@ export class WeeklyClassMember {
 
     @Column({ type: "date", nullable: true, default: null })
     start_date: Date | null;
+
+    @ManyToOne(() => Family, { eager: true, nullable: true })
+    @JoinColumn({ name: "family", referencedColumnName: "id" })
+    family: Family | null;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })

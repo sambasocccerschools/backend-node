@@ -6,6 +6,8 @@ import { Request, Response,
 import WeeklyClassLeadDTO from "@modules/02_Synco/weeklyclasslead/dtos/WeeklyClassLeadDTO";
 import { ILike, In, MoreThan } from "typeorm";
 import WeeklyClassLeadController from "../controllers/WeeklyClassLeadController";
+import { ConstGeneral } from "@TenshiJS/consts/Const";
+import { config } from "@index/index";
 
 class WeeklyClassLeadRoutes extends GenericRoutes {
     
@@ -85,6 +87,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                     .setMethod("add_frontWeeklyClassLead")
                                     .setRequiredFiles(requiredBodyList)
                                     .isValidateRole("WEEKLY_CLASS_LEAD")
+                                    
                                     .build();
         
             (this.getController() as WeeklyClassLeadController).insertDynamic(requestHandler);

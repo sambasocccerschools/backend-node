@@ -2,7 +2,8 @@ import { Request, Response,
          RequestHandler, RequestHandlerBuilder, 
          GenericRoutes,
          FindManyOptions,
-         getUrlParam} from "@modules/index";
+         getUrlParam,
+         JWTObject} from "@modules/index";
 import WeeklyClassSaleDTO from "@modules/02_Synco/weeklyclasssale/dtos/WeeklyClassSaleDTO";
 import { ILike, In, LessThan, MoreThan } from "typeorm";
 import WeeklyClassSaleController from "../controllers/WeeklyClassSaleController";
@@ -62,7 +63,16 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
                 req.body.sale_status_code,
                 req.body.student
             ];
-            
+
+            const jwtData : JWTObject = res.locals.jwtData;
+           /* if(req.body.booked_by == null){
+                req.body.booked_by = jwtData.id;
+            }*/
+
+            if(req.body.agent == null){
+                req.body.agent = jwtData.id;
+            }
+
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassSaleDTO(req))

@@ -33,10 +33,25 @@ export default  class WeeklyClassWaitingListController extends GenericController
                 const guardianRepository = await new GenericRepository(Guardian);
                 const emergencyContactRepository = await new GenericRepository(EmergencyContact);
              
-                //Insert New Family
-                let family = new Family();
-                family.franchise = body.franchise;
-                family = await familyRepository.add(family);
+                 //Insert Family
+                 let family : Family | null = null;
+
+                 if(body.family == null){ 
+                     family = new Family();
+                     family.franchise = body.franchise;
+                     family = await familyRepository.add(family);
+                 }else{
+                     family = await familyRepository.findByOptions(true, false,  
+                         {
+                             where: { 
+                                 id: body.family , 
+                                 is_deleted: false
+                             }
+                         });
+                 }
+ 
+                 body.family = family?.id;
+                 body.agent = jwtData!.id;
 
                 let isSuccess = true;
                 let errorMessage:any = "";

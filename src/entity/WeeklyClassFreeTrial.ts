@@ -10,6 +10,7 @@ import { Student } from "./Student";
 import { Franchise } from "./Franchise";
 import { User } from "@TenshiJS/entity/User";
 import { UnitDynamicCentral } from "./UnitDynamicCentral";
+import { Family } from "./Family";
 
 @Entity("weekly_classes_free_trials")
 export class WeeklyClassFreeTrial {
@@ -41,6 +42,10 @@ export class WeeklyClassFreeTrial {
 
     @Column({ type: "tinyint", unsigned: true, default: 1 })
     attempt: number;
+
+    @ManyToOne(() => Family, { eager: true, nullable: true })
+    @JoinColumn({ name: "family", referencedColumnName: "id" })
+    family: Family | null;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })

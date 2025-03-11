@@ -2,7 +2,8 @@ import { Request, Response,
          RequestHandler, RequestHandlerBuilder, 
          GenericRoutes,
          FindManyOptions,
-         getUrlParam} from "@modules/index";
+         getUrlParam,
+         JWTObject} from "@modules/index";
 import WeeklyClassCancellationDTO from "@modules/02_Synco/weeklyclasscancellation/dtos/WeeklyClassCancellationDTO";
 import WeeklyClassCancellationController from "../controllers/WeeklyClassCancellationController";
 import { ILike, In, MoreThan } from "typeorm";
@@ -66,7 +67,7 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                 req.body.member_cancel_status,
                 req.body.termination_date
             ];
-            
+
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassCancellationDTO(req))

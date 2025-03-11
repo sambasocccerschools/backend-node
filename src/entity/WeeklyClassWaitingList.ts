@@ -11,6 +11,7 @@ import { UnitDynamicCentral } from "./UnitDynamicCentral";
 import { Student } from "./Student";
 import { Franchise } from "./Franchise";
 import { User } from "@TenshiJS/entity/User";
+import { Family } from "./Family";
 
 @Entity("weekly_classes_waiting_lists")
 export class WeeklyClassWaitingList {
@@ -41,6 +42,10 @@ export class WeeklyClassWaitingList {
     @ManyToOne(() => User, { nullable: true })
     @JoinColumn({ name: "booked_by", referencedColumnName: "id" })
     booked_by: User | null;
+
+    @ManyToOne(() => Family, { eager: true, nullable: true })
+    @JoinColumn({ name: "family", referencedColumnName: "id" })
+    family: Family | null;
 
     @ManyToOne(() => Franchise, { nullable: true })
     @JoinColumn({ name: "franchise", referencedColumnName: "id" })

@@ -15,6 +15,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         super(new WeeklyClassMemberController(), "/weeklyClassesMembers");
         this.filters.relations = [
                                     "weekly_class",
+                                    "weekly_class.venue",
                                     "subscription_plan_price",
                                     "member_status",
                                     "student",
@@ -211,8 +212,10 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         if (venue != null) {
             this.filters.where = { 
                 ...this.filters.where, 
-                venue: { 
-                    name: ILike(`%${venue}%`)
+                weekly_class: {
+                    venue: { 
+                        name: ILike(`%${venue}%`)
+                    }
                 }
             };
         }
@@ -241,6 +244,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
                 ],
             };
         }
+        
     }
 }
 

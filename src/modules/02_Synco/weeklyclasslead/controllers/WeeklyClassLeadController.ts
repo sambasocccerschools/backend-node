@@ -1,4 +1,4 @@
-import { ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
+import { ConstGeneral, ConstHTTPRequest, ConstMessagesJson, ConstStatusJson } from "@TenshiJS/consts/Const";
 import GenericController from "@TenshiJS/generics/Controller/GenericController";
 import RequestHandler from "@TenshiJS/generics/RequestHandler/RequestHandler";
 import HttpAction from "@TenshiJS/helpers/HttpAction";
@@ -13,6 +13,7 @@ import { Family } from "@index/entity/Family";
 import { EmergencyContact } from "@index/entity/EmergencyContact";
 import { WeeklyClassLead } from "@index/entity/WeeklyClassLead";
 import WeeklyClassLeadDTO from "../dtos/WeeklyClassLeadDTO";
+import { config } from "@index/index";
 
 export default  class WeeklyClassLeadController extends GenericController{
 
@@ -24,6 +25,11 @@ export default  class WeeklyClassLeadController extends GenericController{
 
         return this.getService().insertService(reqHandler, async (jwtData, httpExec) => {
 
+            const xApiKey = reqHandler.getRequest().headers[ConstGeneral.HEADER_API_KEY];
+            if (xApiKey !== config.SERVER.SECRET_API_KEY) {
+                return  httpExec.unauthorizedError(ConstMessagesJson.INVALID_API_KEY);
+            } 
+
             let body = reqHandler.getAdapter().entityFromPostBody();
           
             try{
@@ -31,10 +37,25 @@ export default  class WeeklyClassLeadController extends GenericController{
                 const guardianRepository = await new GenericRepository(Guardian);
                 const emergencyContactRepository = await new GenericRepository(EmergencyContact);
              
-                //Insert New Family
-                let family = new Family();
-                family.franchise = body.franchise;
-                family = await familyRepository.add(family);
+                 //Insert Family
+                 let family : Family | null = null;
+
+                 if(body.family == null){ 
+                     family = new Family();
+                     family.franchise = body.franchise;
+                     family = await familyRepository.add(family);
+                 }else{
+                     family = await familyRepository.findByOptions(true, false,  
+                         {
+                             where: { 
+                                 id: body.family , 
+                                 is_deleted: false
+                             }
+                         });
+                 }
+ 
+                 body.family = family?.id;
+                 body.agent = jwtData!.id;
 
                 let isSuccess = true;
                 let errorMessage:any = "";

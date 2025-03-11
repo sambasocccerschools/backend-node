@@ -82,21 +82,45 @@ export default  class AccountInformationController extends GenericController{
     }
 
     private async populateFamilyRelations(family: any): Promise<void> {
-        const filters: FindManyOptions = {
+
+        const guardians = await this.guardianRepository.findByOptions(true, true,  
+        {
+            where: { 
+                family: { id: family.id }, 
+                is_deleted: false
+            },
+            relations: ["relationship", "referral_source"]
+        });
+
+        const students = await this.studentRepository.findByOptions(true, true, {
             where: { 
                 family: { id: family.id }, 
                 is_deleted: false
             }
-        };
+        });
 
-        const guardians = await this.guardianRepository.findByOptions(true, true, filters);
-        const students = await this.studentRepository.findByOptions(true, true, filters);
-        const emergencyContacts = await this.emergencyContactRepository.findByOptions(true, true, filters);
+        const feedbacks = await this.feedbackRepository.findByOptions(true, true,  
+        {
+            where: { 
+                family: { id: family.id }, 
+                is_deleted: false
+            },
+            relations: ["weekly_class","feedback_type", "feedback_category", "feedback_status", "agent", "reported_by"]
+        });
+
+        const emergencyContacts = await this.emergencyContactRepository.findByOptions(true, true, 
+        {
+            where: { 
+                family: { id: family.id }, 
+                is_deleted: false
+            },
+            relations: ["relationship"]
+        });
+
         const comments = await this.commentRepository.findByOptions(false, true, {
             where: { family: { id: family.id } }
         });
-        const feedbacks = await this.feedbackRepository.findByOptions(true, true, filters);
-
+        
         const service_history = await this.weeklyClassMemberRepository.findByOptions(true, true, {
             where: { student: { id: students[0] == null ? 0 : students[0].id } },
             relations: ["member_status", "agent", "franchise", "booked_by"]
