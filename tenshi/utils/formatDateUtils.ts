@@ -11,3 +11,6 @@ export function formatDate(date: Date): string {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
   
+ export function isValidDate(date: string | null): boolean {
+    return date === null || /^\d{4}-\d{2}-\d{2}$/.test(date);
+}

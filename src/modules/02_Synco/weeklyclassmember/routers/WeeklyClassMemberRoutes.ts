@@ -136,21 +136,21 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         /* ****************************
                     REPORTING
         *******************************/
-        this.router.get(`${this.getRouterName()}/reporting`, 
+        this.router.get(`${this.getRouterName()}/member_report`, 
                         async (req: Request, res: Response) => {
             
             this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassMemberDTO(req))
-                                    .setMethod("getWeeklyClassMembers")
+                                    .setMethod("memberReport")
                                     .isValidateRole("WEEKLY_CLASS_MEMBER")
                                     .isLogicalDelete()
                                     .setFilters(this.filters)
                                     .build();
         
             (this.getController() as WeeklyClassMemberController)
-                            .generateWeeklyReport(requestHandler);
+                            .getMemberReport(requestHandler);
         });
     }
 

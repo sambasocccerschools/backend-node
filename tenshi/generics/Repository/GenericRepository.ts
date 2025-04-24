@@ -343,7 +343,7 @@ export default  class GenericRepository implements IGenericRepository{
     }
    
     //Execute query scripting and stored procedures.
-    /*async executeQueryExample(user: User): Promise<void>{
+   /* async executeQueryExample(user: User): Promise<void>{
        await executeQuery(async (conn) => {
             await conn.query(
                 'CALL createUser(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -354,4 +354,6 @@ export default  class GenericRepository implements IGenericRepository{
         });
     }*/
 }
+
+
 
