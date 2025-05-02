@@ -56,6 +56,7 @@ export class ConstMessagesJson {
     public static readonly EMAIL_SENT_SUCCESS: string = "EMAIL_SENT_SUCCESS";
     public static readonly ERROR_BODY_JSON: string = "ERROR_BODY_JSON";
     public static readonly REGISTER_CONFIRMATION_SUCCESSFUL: string = "REGISTER_CONFIRMATION_SUCCESSFUL";
+    public static readonly INVALID_BODY_REQUEST: string = "INVALID_BODY_REQUEST";
 }
 
 
