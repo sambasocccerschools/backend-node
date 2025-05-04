@@ -11,13 +11,11 @@ import { getMessage } from '@TenshiJS/utils/jsonUtils';
 
 export default  class GenericService extends GenericValidation implements IGenericService {
    
-
     private controllerName : string = "";
 
     constructor(){  
         super();
     }
-
 
     setRepositoryServiceValidation(repository: IGenericRepository){
         this.setRepository(repository);
@@ -32,7 +30,6 @@ export default  class GenericService extends GenericValidation implements IGener
         this.controllerName = controllerName;
     }
   
-    
     /**
      * Returns the name of the controller associated with this service.
      * This value is set by the constructor of the controller.
@@ -42,7 +39,6 @@ export default  class GenericService extends GenericValidation implements IGener
     protected getControllerName():string{ 
         return this.controllerName;
     }
-
 
     /**
      * This function is used to insert a new entity into the database.
@@ -282,17 +278,17 @@ export default  class GenericService extends GenericValidation implements IGener
      * @return {Promise<any>} A promise that resolves to the success response if the operation is successful.
      */
     async getAllService(reqHandler: RequestHandler, executeGetAllFunction: (jwtData : JWTObject, httpExec: HttpAction, page: number, size: number) => void): Promise<any> {
-        const config = ConfigManager.getInstance().getConfig();
-        // Get the HTTP action object from the response
-        const httpExec: HttpAction = reqHandler.getResponse().locals.httpExec;
+      const config = ConfigManager.getInstance().getConfig();
+      // Get the HTTP action object from the response
+      const httpExec: HttpAction = reqHandler.getResponse().locals.httpExec;
 
-        try {
+      try {
             const jwtData: JWTObject = reqHandler.getResponse().locals.jwtData;
 
             if(jwtData != null){
                 // Validate the role of the user
                 if (await this.validateRole(reqHandler, jwtData.role, ConstFunctions.GET_ALL, httpExec) !== true) { return; }
-                if(await this.validateDynamicRoleAccess(reqHandler, httpExec, jwtData) !== true){ return; }
+                reqHandler.getFilters()!!.where = await this.validateDynamicRoleAccessGetByFiltering(reqHandler, jwtData);
             }
 
              // Get the page and size from the URL query parameters
@@ -311,7 +307,7 @@ export default  class GenericService extends GenericValidation implements IGener
             // Return the general error response
             return await httpExec.generalError(error, reqHandler.getMethod(), this.controllerName);
         }
-   }
+    }
 
 
    /**************************************************** */
@@ -397,7 +393,7 @@ export default  class GenericService extends GenericValidation implements IGener
     
             return httpExec.successAction(
                 { success: successList, errors: errorList },
-                ConstHTTPRequest.INSERT_SUCCESS
+                ConstHTTPRequest.INSERT_ENTRIES_SUCCESS
             );
         } catch (error: any) {
             return await httpExec.generalError(error, reqHandler.getMethod(), this.controllerName);
@@ -485,7 +481,7 @@ export default  class GenericService extends GenericValidation implements IGener
         }
       
         // 10) Return combined result
-        return httpExec.successAction( { success: successList, errors: errorList }, ConstHTTPRequest.UPDATE_SUCCESS);
+        return httpExec.successAction( { success: successList, errors: errorList }, ConstHTTPRequest.UPDATE_ENTRIES_SUCCESS);
       }
 
 
@@ -572,7 +568,7 @@ async updateMultipleByIdsService(
       // 4) Return combined success/errors
       return httpExec.successAction(
         { success: successList, errors: errorList },
-        ConstHTTPRequest.UPDATE_SUCCESS
+        ConstHTTPRequest.UPDATE_ENTRIES_SUCCESS
       );
     } catch (err: any) {
       return await httpExec.generalError(err, reqHandler.getMethod(), this.getControllerName());
@@ -616,6 +612,12 @@ async updateMultipleByIdsService(
             if (id == null) {
                 throw new Error('Invalid or missing id');
             }
+
+            if ( jwtData != null &&!this.validateDynamicRoleAccess(reqHandler, httpExec, jwtData, id)) {
+              errors.push({ index: i, error: 'Unauthorized' });
+              continue;
+            }
+            
             // actual delete (logical vs hard based on handler)
             const result = await executeDeleteFunction(jwtData, httpExec, id);
             success.push({ id, result });
@@ -627,7 +629,7 @@ async updateMultipleByIdsService(
         // 4) respond 200 with per-item outcome
         return httpExec.successAction(
             { success, errors },
-            ConstHTTPRequest.DELETE_SUCCESS
+            ConstHTTPRequest.DELETE_ENTRIES_SUCCESS
         );
 
         } catch (err: any) {
