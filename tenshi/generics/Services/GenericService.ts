@@ -290,7 +290,30 @@ export default  class GenericService extends GenericValidation implements IGener
             if(jwtData != null){
                 // Validate the role of the user
                 if (await this.validateRole(reqHandler, jwtData.role, ConstFunctions.GET_ALL, httpExec) !== true) { return; }
-                reqHandler.getFilters()!!.where = await this.validateDynamicRoleAccessGetByFiltering(reqHandler, jwtData);
+
+                const dynamicWhere = await this.validateDynamicRoleAccessGetByFiltering(reqHandler, jwtData);
+
+
+                let baseFilters = reqHandler.getFilters();
+                let filters = baseFilters ? structuredClone(baseFilters) : {};
+
+                filters.where = {
+                  ...(filters.where ?? {}),
+                  ...dynamicWhere
+                };
+                
+                reqHandler.setFilters(filters);
+                /*let filters = reqHandler.getFilters();
+                if (filters === null || filters === undefined) {
+                  filters = {};
+                }
+
+                filters.where = {
+                  ...(filters.where ?? {}),
+                  ...dynamicWhere
+                };*/
+
+                console.log(JSON.stringify(reqHandler.getFilters()?.where, null, 2));
             }
 
              // Get the page and size from the URL query parameters
@@ -306,6 +329,7 @@ export default  class GenericService extends GenericValidation implements IGener
              executeGetAllFunction(jwtData, httpExec, page, size);
            
         } catch (error: any) {
+          console.log("error", error);
             // Return the general error response
             return await httpExec.generalError(error, reqHandler.getMethod(), this.controllerName);
         }
@@ -381,7 +405,6 @@ export default  class GenericService extends GenericValidation implements IGener
                     // Add user_id if not present
                     let newItem = this.setUserId(item, jwtData?.id);
                     newItem = await this.validateDynamicRoleAccessInsert(reqHandler, jwtData, newItem);
-                    console.log(newItem);
                     // Try to execute the actual insert
                     const inserted = await executeInsertFunction(jwtData, httpExec, newItem);
                     successList.push(inserted);
