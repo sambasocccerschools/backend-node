@@ -4,522 +4,95 @@
       "id": 1,
       "code": "SUPER_ADMIN",
       "name": "Super Admin",
+      "is_public": false,
       "description": "Super Administrator role with full access to all functionalities.",
       "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "USER",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "UNIT_DYNAMIC_CENTRAL",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "LOG",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "SEND_MAIL",
-          "function_list": [
-            "CREATE"
-          ]
-        },
-        {
-          "name": "ROLE",
-          "function_list": [
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "UNIFORM",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "VENUE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "ABILITY_GROUP",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "FRANCHISE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "SUBSCRIPTION_PLAN",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        }, 
-        {
-          "name": "SUBSCRIPTION_PLAN_PRICE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "SESSION_PLAN",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "HOLIDAY_CAMP_DATE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        }, 
-        {
-          "name": "TERM",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "TERM_SESSION",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "TERM_SESSION_PLAN",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "FAMILY",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "STUDENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "GUARDIAN",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_MEMBER",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_SALE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_WAITING_LIST",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_LEAD",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "SESSION_PLAN_EXERCISE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "EMERGENCY_CONTACT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "ACCOUNT_INFORMATION_COMMENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_FREE_TRIAL",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_CANCELLATION",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_CAPACITIES",
-          "function_list": [
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "FEEDBACK",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "ACCOUNT_INFORMATION",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "TEST",
-          "function_list": [ 
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        }
+        { "name": "ABILITY_GROUP", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "ACCOUNT_INFORMATION", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "ACCOUNT_INFORMATION_COMMENT", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "DOCUMENT", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "EMERGENCY_CONTACT", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "FAMILY", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "FEEDBACK", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "FRANCHISE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "GUARDIAN", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "HOLIDAY_CAMP_DATE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "LOG", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "ROLE", "function_list": ["GET_ALL"] },
+        { "name": "SEND_MAIL", "function_list": ["CREATE"] },
+        { "name": "SESSION_PLAN", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "SESSION_PLAN_EXERCISE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "STUDENT", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "SUBSCRIPTION_PLAN", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "SUBSCRIPTION_PLAN_PRICE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "TERM", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "TERM_SESSION", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "TERM_SESSION_PLAN", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "UNIFORM", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "UNIT_DYNAMIC_CENTRAL", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "USER", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "VENUE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_CAPACITIES", "function_list": ["GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_CANCELLATION", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_FREE_TRIAL", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_LEAD", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_MEMBER", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_SALE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_WAITING_LIST", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] }
       ],
       "screens": []
     },
-
-
-
-
-
-
-
-    
-
-
     {
       "id": 2,
       "code": "ADMIN",
       "name": "Administrator",
+      "is_public": false,
       "description": "Administrator role with full access.",
       "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "GET_BY_ID"
-          ]
-        }
+        { "name": "DOCUMENT", "function_list": ["GET_BY_ID"] }
       ],
       "screens": []
     },
-
-
-
-
-
-
-
-
-
-
     {
       "id": 3,
       "code": "USER",
       "name": "User",
+      "is_public": false,
       "description": "A normal User for repositories",
       "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "USER",
-          "function_list": [
-            "UPDATE",
-            "GET_BY_ID"
-          ]
-        },
-        {
-          "name": "UNIT_DYNAMIC_CENTRAL",
-          "function_list": [
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "LOG",
-          "function_list": [
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_MEMBER",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_SALE",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_WAITING_LIST",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "WEEKLY_CLASS_LEAD",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        },
-        {
-          "name": "TERM_SESSION",
-          "function_list": [
-            "CREATE",
-            "UPDATE",
-            "DELETE",
-            "GET_BY_ID",
-            "GET_ALL"
-          ]
-        }
+        { "name": "DOCUMENT", "function_list": ["CREATE","UPDATE","GET_BY_ID","GET_ALL"] },
+        { "name": "LOG", "function_list": ["GET_BY_ID","GET_ALL"] },
+        { "name": "TERM_SESSION", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "UNIT_DYNAMIC_CENTRAL", "function_list": ["GET_BY_ID","GET_ALL"] },
+        { "name": "USER", "function_list": ["UPDATE","GET_BY_ID"] },
+        { "name": "WEEKLY_CLASS", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_LEAD", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_MEMBER", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_SALE", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] },
+        { "name": "WEEKLY_CLASS_WAITING_LIST", "function_list": ["CREATE","UPDATE","DELETE","GET_BY_ID","GET_ALL"] }
       ],
       "screens": []
     },
-
-
-
-
-
-
-
-
-
-
-
     {
       "id": 4,
       "code": "GUARDIAN",
       "name": "Guardian",
+      "is_public": false,
       "description": "A guardians of the users of the app",
       "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "GET_BY_ID"
-          ]
-        }
+        { "name": "DOCUMENT", "function_list": ["GET_BY_ID"] }
       ],
       "screens": []
     },
-
-
-
-
-
-
-
-
-
-
     {
       "id": 5,
       "code": "COACH",
       "name": "Coach",
+      "is_public": false,
       "description": "The coach of the app",
       "modules": [
-        {
-          "name": "DOCUMENT",
-          "function_list": [
-            "GET_BY_ID"
-          ]
-        }
+        { "name": "DOCUMENT", "function_list": ["GET_BY_ID"] }
       ],
       "screens": []
     }

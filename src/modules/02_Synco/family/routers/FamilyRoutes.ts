@@ -7,22 +7,28 @@ import FamilyDTO from "@modules/02_Synco/family/dtos/FamilyDTO";
 
 class FamilyRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(Family), "/family");
-        this.filters.relations = ["franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new FamilyDTO(req))
                                     .setMethod("getFamilyById")
                                     .isValidateRole("FAMILY")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -30,13 +36,14 @@ class FamilyRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new FamilyDTO(req))
                                     .setMethod("getFamilys")
                                     .isValidateRole("FAMILY")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

@@ -9,22 +9,29 @@ import { In } from "typeorm";
 
 class SessionPlanRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "ability_group",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new SessionPlanController(), "/sessionPlans");
-        this.filters.relations = ["ability_group","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SessionPlanDTO(req))
                                     .setMethod("getSessionPlanById")
                                     .isValidateRole("SESSION_PLAN")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -32,7 +39,7 @@ class SessionPlanRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
-            this.filters.where = { };
+            const filters = this.buildBaseFilters();
             const ability_group_id: string | null = getUrlParam("ability_group_id", req) || null;
 
             if(ability_group_id != null){
@@ -41,8 +48,8 @@ class SessionPlanRoutes extends GenericRoutes {
                                         .filter(field => field); 
 
                 if (abilityGroupIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         ability_group: {
                             id: In(abilityGroupIdsArray), 
                         }
@@ -56,7 +63,7 @@ class SessionPlanRoutes extends GenericRoutes {
                                     .setMethod("getSessionPlans")
                                     .isValidateRole("SESSION_PLAN")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

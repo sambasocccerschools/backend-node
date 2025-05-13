@@ -10,30 +10,34 @@ import WeeklyClassSaleController from "../controllers/WeeklyClassSaleController"
 
 class WeeklyClassSaleRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [ "weekly_class_member",
+                        "weekly_class",
+                        "subscription_plan_price",
+                        "sale_status",
+                        "student",
+                        "agent",
+                        "booked_by",
+                        "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new WeeklyClassSaleController(), "/weeklyClassesSales");
-        this.filters.relations = [
-            "weekly_class_member",
-            "weekly_class",
-            "subscription_plan_price",
-            "sale_status",
-            "student",
-            "agent",
-            "booked_by",
-            "franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassSaleDTO(req))
                                     .setMethod("getWeeklyClassSaleById")
                                     .isValidateRole("WEEKLY_CLASS_SALE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -41,14 +45,13 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
-            this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassSaleDTO(req))
                                     .setMethod("getWeeklyClassSales")
                                     .isValidateRole("WEEKLY_CLASS_SALE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -122,7 +125,7 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
 
 
     private getAllFilters(req: Request){
-        this.filters.where = { };
+        const filters = this.buildBaseFilters();
 
         const start_date: string | null = getUrlParam("start_date", req) || null;
         const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -135,15 +138,15 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
         const student: string | null = getUrlParam("student", req) || null;
 
         if (start_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 start_date: MoreThan(start_date) 
             };
         }
 
         if (end_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 end_date: LessThan(end_date) 
             };
         }
@@ -154,8 +157,8 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (saleStatusArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     sale_status: In(saleStatusArray), 
                 };
             }
@@ -167,8 +170,8 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (venueIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class: {
                         venue: In(venueIdsArray), 
                     }
@@ -177,8 +180,8 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
         }
 
         if (venue != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: {
                     venue: {
                         name: ILike(`%${venue}%`)
@@ -193,8 +196,8 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (studentIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     student: {
                         id: In(studentIdsArray), 
                     }
@@ -203,14 +206,16 @@ class WeeklyClassSaleRoutes extends GenericRoutes {
         }
 
         if (student != null) {
-            this.filters.where = { 
-                ...this.filters.where,
+            filters.where = { 
+                ...filters.where,
                 student: [
                     { first_name: ILike(`%${student}%`) }, 
                     { last_name: ILike(`%${student}%`) },  
                 ],
             };
         }
+
+        return filters;
     }
 }
 

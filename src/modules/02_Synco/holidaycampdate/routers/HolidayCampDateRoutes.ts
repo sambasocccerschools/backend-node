@@ -7,22 +7,29 @@ import HolidayCampDateDTO from "@modules/02_Synco/holidaycampdate/dtos/HolidayCa
 
 class HolidayCampDateRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "camp_type",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(HolidayCampDate), "/holidayCampDates");
-        this.filters.relations = ["camp_type","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new HolidayCampDateDTO(req))
                                     .setMethod("getHolidayCampDateById")
                                     .isValidateRole("HOLIDAY_CAMP_DATE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -30,13 +37,14 @@ class HolidayCampDateRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new HolidayCampDateDTO(req))
                                     .setMethod("getHolidayCampDates")
                                     .isValidateRole("HOLIDAY_CAMP_DATE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

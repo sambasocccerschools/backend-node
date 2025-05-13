@@ -7,22 +7,29 @@ import StudentDTO from "@modules/02_Synco/student/dtos/StudentDTO";
 
 class StudentRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "family",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(Student), "/student");
-        this.filters.relations = ["family","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new StudentDTO(req))
                                     .setMethod("getStudentById")
                                     .isValidateRole("STUDENT")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -30,13 +37,14 @@ class StudentRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new StudentDTO(req))
                                     .setMethod("getStudents")
                                     .isValidateRole("STUDENT")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

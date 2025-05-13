@@ -1,37 +1,41 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions} from "@modules/index";
-import { Feedback } from "@index/entity/Feedback";
 import FeedbackDTO from "@modules/02_Synco/feedback/dtos/FeedbackDTO";
 import FeedbackController from "../controllers/FeedbackController";
 
 class FeedbackRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "weekly_class",
+                "feedback_type",
+                "feedback_category",
+                "feedback_status",
+                "agent",
+                "reported_by",
+                "franchise",
+                "family"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new FeedbackController(), "/feedback");
-        this.filters.relations = [
-            "weekly_class",
-            "feedback_type",
-            "feedback_category",
-            "feedback_status",
-            "agent",
-            "reported_by",
-            "franchise",
-            "family"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new FeedbackDTO(req))
                                     .setMethod("getFeedbackById")
                                     .isValidateRole("FEEDBACK")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -39,13 +43,14 @@ class FeedbackRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new FeedbackDTO(req))
                                     .setMethod("getFeedbacks")
                                     .isValidateRole("FEEDBACK")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

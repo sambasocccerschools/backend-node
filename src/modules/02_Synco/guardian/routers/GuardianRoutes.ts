@@ -7,26 +7,31 @@ import GuardianDTO from "@modules/02_Synco/guardian/dtos/GuardianDTO";
 
 class GuardianRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "relationship",
+                "referral_source",
+                "family",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(Guardian), "/guardian");
-        this.filters.relations = [
-            "relationship",
-            "referral_source",
-            "family",
-            "franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new GuardianDTO(req))
                                     .setMethod("getGuardianById")
                                     .isValidateRole("GUARDIAN")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -34,13 +39,14 @@ class GuardianRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new GuardianDTO(req))
                                     .setMethod("getGuardians")
                                     .isValidateRole("GUARDIAN")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

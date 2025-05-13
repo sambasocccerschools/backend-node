@@ -9,31 +9,34 @@ import WeeklyClassWaitingListController from "../controllers/WeeklyClassWaitingL
 
 class WeeklyClassWaitingListRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [ "weekly_class",
+                        "subscription_plan_price",
+                        "waiting_list_status",
+                        "student",
+                        "agent",
+                        "booked_by",
+                        "franchise",
+                        "student.family"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new WeeklyClassWaitingListController(), "/weeklyClassesWaitingLists");
-        this.filters.relations = [
-            "weekly_class",
-            "subscription_plan_price",
-            "waiting_list_status",
-            "student",
-            "agent",
-            "booked_by",
-            "franchise",
-            "student.family"
-        ];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassWaitingListDTO(req))
                                     .setMethod("getWeeklyClassWaitingListById")
                                     .isValidateRole("WEEKLY_CLASS_WAITING_LIST")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -41,14 +44,13 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
-            this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassWaitingListDTO(req))
                                     .setMethod("getWeeklyClassWaitingLists")
                                     .isValidateRole("WEEKLY_CLASS_WAITING_LIST")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -141,7 +143,7 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
     }
 
     private getAllFilters(req: Request){
-        this.filters.where = { };
+        const filters = this.buildBaseFilters();
 
         const start_date: string | null = getUrlParam("start_date", req) || null;
         const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -154,15 +156,15 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         const student: string | null = getUrlParam("student", req) || null;
 
         if (start_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 start_date: MoreThan(start_date) 
             };
         }
 
         if (end_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 end_date: LessThan(end_date) 
             };
         }
@@ -173,8 +175,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (waitingListStatusArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     waiting_list_status: In(waitingListStatusArray), 
                 };
             }
@@ -186,8 +188,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (venueIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class: {
                         venue: In(venueIdsArray), 
                     }
@@ -196,8 +198,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         }
 
         if (venue != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: {
                     venue: {
                         name: ILike(`%${venue}%`)
@@ -212,8 +214,8 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (studentIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     student: {
                         id: In(studentIdsArray), 
                     }
@@ -222,14 +224,16 @@ class WeeklyClassWaitingListRoutes extends GenericRoutes {
         }
 
         if (student != null) {
-            this.filters.where = { 
-                ...this.filters.where,
+            filters.where = { 
+                ...filters.where,
                 student: [
                     { first_name: ILike(`%${student}%`) }, // Busca coincidencias en first_name
                     { last_name: ILike(`%${student}%`) },  // Busca coincidencias en last_name
                 ],
             };
         }
+
+        return filters;
     }
 }
 

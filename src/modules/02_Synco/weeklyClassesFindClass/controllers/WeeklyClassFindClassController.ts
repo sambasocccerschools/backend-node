@@ -14,7 +14,7 @@ import { getUrlParam } from "@TenshiJS/utils/generalUtils";
 import { In } from "typeorm";
 
 export default  class WeeklyClassFindClassController extends GenericController{
-    private filters: FindManyOptions = {};
+    
     constructor() {
         super(Venue);
     }
@@ -23,7 +23,7 @@ export default  class WeeklyClassFindClassController extends GenericController{
 
         return this.getService().getAllService(reqHandler, async (jwtData , httpExec, page: number, size: number) => {
             try {
-                this.filters.where = { };
+                const filters: FindManyOptions = {};
                 // Execute the get all action in the database
                 const entities = await this.getRepository().findAll(reqHandler.getLogicalDelete(), reqHandler.getFilters(), page, size);
                 if(entities != null && entities != undefined){
@@ -44,21 +44,21 @@ export default  class WeeklyClassFindClassController extends GenericController{
                                             .filter(field => field); 
 
                             if (daysArray.length > 0) {
-                                this.filters.where = { 
-                                    ...this.filters.where, 
+                                filters.where = { 
+                                    ...filters.where, 
                                     days: In(daysArray), 
                                 };
                             }
                         }
 
-                        this.filters.where = { 
-                            ...this.filters.where, 
+                        filters.where = { 
+                            ...filters.where, 
                             venue: {
                                 id: venue.id
                             },
                         };
 
-                        this.filters.order = {
+                        filters.order = {
                             id: 'ASC', 
                         };
                       
@@ -77,7 +77,7 @@ export default  class WeeklyClassFindClassController extends GenericController{
                         //******************* */
                         //  Weekly Classes 
                         //******************* */
-                        const weeklyClasses = await weeklyClassRepository.findByOptions(true, true, this.filters);
+                        const weeklyClasses = await weeklyClassRepository.findByOptions(true, true, filters);
 
                         const groupedClasses: any[] = []; // Inicializar el array vacío
 

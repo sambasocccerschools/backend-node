@@ -9,15 +9,20 @@ import WeeklyClassCapacitiesDTO from "../dtos/WeeklyClassCapacitiesDTO";
 
 class WeeklyClassCapacitiesRoutes extends GenericRoutes {
 
-private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
-    super(new WeeklyClassCapacitiesController(), "/weeklyClassesCapacities");
-    this.filters.relations = ["franchise", ];
+        super(new WeeklyClassCapacitiesController(), "/weeklyClassesCapacities");
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get_capacities`, async (req: Request, res: Response) => {
-            this.filters.where = { };
+            const filters = this.buildBaseFilters();
 
             const start_date: string | null = getUrlParam("start_date", req) || null;
             const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -38,8 +43,8 @@ private filters: FindManyOptions = {};
                                       .filter(field => field); 
 
                 if (venueIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         id: In(venueIdsArray), 
                     };
                 }
@@ -68,7 +73,7 @@ private filters: FindManyOptions = {};
                                     .setAdapter(new WeeklyClassCapacitiesDTO(req))
                                     .setMethod("getWeeklyClassesCapcities")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .isValidateRole("WEEKLY_CLASS_CAPACITIES")
                                     .build();
         

@@ -7,21 +7,30 @@ import AccountInformationCommentDTO from "@modules/02_Synco/accountinformationco
 
 class AccountInformationCommentRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "user",
+                "family",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(AccountInformationComment), "/accountInformationComment");
-        this.filters.relations = ["user","family","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
+
+            const filters = this.buildBaseFilters();
 
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new AccountInformationCommentDTO(req))
                                     .setMethod("getAccountInformationCommentById")
                                     .isValidateRole("ACCOUNT_INFORMATION_COMMENT")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -29,12 +38,14 @@ class AccountInformationCommentRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
+
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new AccountInformationCommentDTO(req))
                                     .setMethod("getAccountInformationComments")
                                     .isValidateRole("ACCOUNT_INFORMATION_COMMENT")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

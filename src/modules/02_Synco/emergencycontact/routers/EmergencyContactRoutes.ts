@@ -7,22 +7,30 @@ import EmergencyContactDTO from "@modules/02_Synco/emergencycontact/dtos/Emergen
 
 class EmergencyContactRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "relationship",
+                "family",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(EmergencyContact), "/emergencycontact");
-        this.filters.relations = ["relationship","family","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new EmergencyContactDTO(req))
                                     .setMethod("getEmergencyContactById")
                                     .isValidateRole("EMERGENCY_CONTACT")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -30,13 +38,14 @@ class EmergencyContactRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new EmergencyContactDTO(req))
                                     .setMethod("getEmergencyContacts")
                                     .isValidateRole("EMERGENCY_CONTACT")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

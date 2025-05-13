@@ -10,49 +10,52 @@ import { ILike, In, MoreThan } from "typeorm";
 
 class WeeklyClassCancellationRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "weekly_class_member",
+                "weekly_class_member.weekly_class",
+                "weekly_class_member.weekly_class.venue",
+                "weekly_class_member.student",
+                "member_cancel_type",
+                "membership_cancel_reason",
+                "member_cancel_status",
+                "agent",
+                "cancelled_by",
+                "franchise"],
+            where: {} 
+        };
+    }
 
     constructor() {
         super(new WeeklyClassCancellationController(), "/weeklyClassesCancellations");
-        this.filters.relations = [
-            "weekly_class_member",
-            "weekly_class_member.weekly_class",
-            "weekly_class_member.weekly_class.venue",
-            "weekly_class_member.student",
-            "member_cancel_type",
-            "membership_cancel_reason",
-            "member_cancel_status",
-            "agent",
-            "cancelled_by",
-            "franchise"
-        ];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassCancellationDTO(req))
                                     .setMethod("getWeeklyClassCancellationById")
                                     .isValidateRole("WEEKLY_CLASS_CANCELLATION")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
         });
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
-            this.getAllFilters(req);
-
+            
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassCancellationDTO(req))
                                     .setMethod("getWeeklyClassCancellations")
                                     .isValidateRole("WEEKLY_CLASS_CANCELLATION")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -129,7 +132,7 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
     }
 
     private getAllFilters(req: Request){
-        this.filters.where = { };
+        const filters = this.buildBaseFilters();
 
         const start_date: string | null = getUrlParam("start_date", req) || null;
         const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -144,15 +147,15 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
         const member_cancel_status_code: string | null = getUrlParam("member_cancel_status_code", req) || null;
 
         if (start_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                     termination_date: MoreThan(start_date) 
             };
         }
 
         if (end_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                     termination_date: MoreThan(end_date) 
             };
         }
@@ -163,8 +166,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                                     .filter(field => field); 
 
             if (memberCancelTypeArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     member_cancel_type: {
                         code: In(memberCancelTypeArray), 
                     }
@@ -178,8 +181,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                                     .filter(field => field); 
 
             if (memberCancelStatusArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     member_cancel_status: {
                         code: In(memberCancelStatusArray), 
                     }
@@ -193,8 +196,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                                       .filter(field => field); 
     
                 if (venueIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         weekly_class_member:{
                             weekly_class: { 
                                 venue: In(venueIdsArray), 
@@ -205,8 +208,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
             }
     
             if (venue != null) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class_member:{
                         weekly_class: { 
                             venue:{
@@ -223,8 +226,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                                       .filter(field => field); 
     
                 if (studentIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         weekly_class_member:{
                             student: {
                                 id: In(studentIdsArray), 
@@ -235,8 +238,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
             }
     
             if (student != null) {
-                this.filters.where = { 
-                    ...this.filters.where,
+                filters.where = { 
+                    ...filters.where,
                     weekly_class_member:{
                         student: [
                             { first_name: ILike(`%${student}%`) }, 
@@ -245,6 +248,8 @@ class WeeklyClassCancellationRoutes extends GenericRoutes {
                     }
                 };
             }
+
+            return filters;
     }
 }
 

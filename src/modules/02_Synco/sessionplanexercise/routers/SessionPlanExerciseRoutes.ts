@@ -7,22 +7,29 @@ import SessionPlanExerciseDTO from "@modules/02_Synco/sessionplanexercise/dtos/S
 
 class SessionPlanExerciseRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "session_plan",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(SessionPlanExercise), "/sessionPlanExercises");
-        this.filters.relations = ["session_plan","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SessionPlanExerciseDTO(req))
                                     .setMethod("getSessionPlanExerciseById")
                                     .isValidateRole("SESSION_PLAN_EXERCISE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -30,13 +37,14 @@ class SessionPlanExerciseRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SessionPlanExerciseDTO(req))
                                     .setMethod("getSessionPlanExercises")
                                     .isValidateRole("SESSION_PLAN_EXERCISE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

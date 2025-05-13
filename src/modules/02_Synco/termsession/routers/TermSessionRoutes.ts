@@ -7,21 +7,28 @@ import TermSessionDTO from "@modules/02_Synco/termsession/dtos/TermSessionDTO";
 
 class TermSessionRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "term",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(TermSession), "/termSessions");
-        this.filters.relations = ["term","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermSessionDTO(req))
                                     .setMethod("getTermSessionById")
                                     .isValidateRole("TERM_SESSION")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -29,12 +36,13 @@ class TermSessionRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermSessionDTO(req))
                                     .setMethod("getTermSessions")
                                     .isValidateRole("TERM_SESSION")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

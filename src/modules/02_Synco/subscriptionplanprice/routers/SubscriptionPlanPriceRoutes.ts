@@ -7,25 +7,31 @@ import SubscriptionPlanPriceDTO from "@modules/02_Synco/subscriptionplanprice/dt
 
 class SubscriptionPlanPriceRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "subscription_plan",
+                "payment_type",
+                "student_coverage",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(SubscriptionPlanPrice), "/subscriptionPlanPrices");
-        this.filters.relations = ["subscription_plan",
-                                    "payment_type",
-                                    "student_coverage",
-                                    "franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanPriceDTO(req))
                                     .setMethod("getSubscriptionPlanPriceById")
                                     .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -33,13 +39,14 @@ class SubscriptionPlanPriceRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanPriceDTO(req))
                                     .setMethod("getSubscriptionPlanPrices")
                                     .isValidateRole("SUBSCRIPTION_PLAN_PRICE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

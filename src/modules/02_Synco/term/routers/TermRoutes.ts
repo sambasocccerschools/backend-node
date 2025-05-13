@@ -7,25 +7,30 @@ import TermController from "../controllers/TermController";
 
 class TermRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "season",
+                "franchise"],
+            where: {} 
+        };
+    }
 
     constructor() {
         super(new TermController(), "/terms");
-        this.filters.relations = [
-            "season",
-            "franchise",];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermDTO(req))
                                     .setMethod("getTermById")
                                     .isValidateRole("TERM")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -33,13 +38,14 @@ class TermRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermDTO(req))
                                     .setMethod("getTerms")
                                     .isValidateRole("TERM")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

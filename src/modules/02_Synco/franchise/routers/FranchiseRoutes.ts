@@ -8,22 +8,29 @@ import FranchiseDTO from "@modules/02_Synco/franchise/dtos/FranchiseDTO";
 
 class FranchiseRoutes extends GenericRoutes{
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "referral_source",
+                "added_by"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(Franchise), "/franchise");
-        this.filters.relations = ["referral_source", "added_by"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
                                     .setAdapter(new FranchiseDTO(req))
                                     .setMethod("getFranchiseById")
                                     .isValidateRole("FRANCHISE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -31,13 +38,14 @@ class FranchiseRoutes extends GenericRoutes{
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler : RequestHandler = 
                                     new RequestHandlerBuilder(res,req)
                                     .setAdapter(new FranchiseDTO(req))
                                     .setMethod("getFranchises")
                                     .isValidateRole("FRANCHISE")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

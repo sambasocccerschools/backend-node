@@ -8,36 +8,44 @@ import AccountInformationController from "../controllers/AccountInformationContr
 
 class AccountInformationRoutes extends GenericRoutes {
 
-private filters: FindManyOptions = {};
-constructor() {
-   super(new AccountInformationController(), "/accountInformation");
-   this.filters.relations = ["franchise"];
-}
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "franchise"],
+            where: {} 
+        };
+    }
+    constructor() {
+    super(new AccountInformationController(), "/accountInformation");
+    }
 
 protected initializeRoutes() {
    this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
-       const requestHandler: RequestHandler = 
+        const filters = this.buildBaseFilters();
+
+        const requestHandler: RequestHandler = 
                                new RequestHandlerBuilder(res, req)
                                .setAdapter(new AccountInformationDTO(req))
                                .setMethod("getAccountInformationById")
                                .isValidateRole("ACCOUNT_INFORMATION")
                                .isLogicalDelete()
-                               .setFilters(this.filters)
+                               .setFilters(filters)
                                .build();
    
-       this.getController().getById(requestHandler);
+        this.getController().getById(requestHandler);
    });
    
    this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
    
-       const requestHandler: RequestHandler = 
+        const filters = this.buildBaseFilters();    
+        const requestHandler: RequestHandler = 
                                new RequestHandlerBuilder(res, req)
                                .setAdapter(new AccountInformationDTO(req))
                                .setMethod("getAccountInformations")
                                .isValidateRole("ACCOUNT_INFORMATION")
                                .isLogicalDelete()
-                               .setFilters(this.filters)
+                               .setFilters(filters)
                                .build();
    
        this.getController().getAll(requestHandler);

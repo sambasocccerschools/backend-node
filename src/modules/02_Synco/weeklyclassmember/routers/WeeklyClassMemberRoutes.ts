@@ -1,40 +1,43 @@
 import { Request, Response, 
          RequestHandler, RequestHandlerBuilder, 
-         GenericController, GenericRoutes,
+         GenericRoutes,
          FindManyOptions,
          getUrlParam} from "@modules/index";
-import { WeeklyClassMember } from "@index/entity/WeeklyClassMember";
 import WeeklyClassMemberDTO from "@modules/02_Synco/weeklyclassmember/dtos/WeeklyClassMemberDTO";
 import { ILike, In, LessThan, MoreThan } from "typeorm";
 import WeeklyClassMemberController from "../controllers/WeeklyClassMemberController";
 
 class WeeklyClassMemberRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: ["weekly_class",
+                        "weekly_class.venue",
+                        "subscription_plan_price",
+                        "member_status",
+                        "student",
+                        "agent",
+                        "booked_by",
+                        "franchise",
+                        "student.family"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new WeeklyClassMemberController(), "/weeklyClassesMembers");
-        this.filters.relations = [
-                                    "weekly_class",
-                                    "weekly_class.venue",
-                                    "subscription_plan_price",
-                                    "member_status",
-                                    "student",
-                                    "agent",
-                                    "booked_by",
-                                    "franchise",
-                                    "student.family"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassMemberDTO(req))
                                     .setMethod("getWeeklyClassMemberById")
                                     .isValidateRole("WEEKLY_CLASS_MEMBER")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -42,14 +45,13 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
             
-            this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassMemberDTO(req))
                                     .setMethod("getWeeklyClassMembers")
                                     .isValidateRole("WEEKLY_CLASS_MEMBER")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -139,14 +141,13 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         this.router.get(`${this.getRouterName()}/member_report`, 
                         async (req: Request, res: Response) => {
             
-            this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassMemberDTO(req))
                                     .setMethod("memberReport")
                                     .isValidateRole("WEEKLY_CLASS_MEMBER")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             (this.getController() as WeeklyClassMemberController)
@@ -155,7 +156,7 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
     }
 
     private getAllFilters(req: Request){
-        this.filters.where = { };
+        const filters = this.buildBaseFilters();
 
         const start_date: string | null = getUrlParam("start_date", req) || null;
         const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -168,16 +169,16 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         const student: string | null = getUrlParam("student", req) || null;
 
         if (start_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 start_date: MoreThan(start_date) 
             };
         }
 
         if (end_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
-                end_date: LessThan(end_date) 
+            filters.where = { 
+                ...filters.where, 
+                start_date: LessThan(end_date) 
             };
         }
 
@@ -187,8 +188,8 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (memberStatusArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     member_status: In(memberStatusArray), 
                 };
             }
@@ -200,8 +201,8 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (venueIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class: {
                         venue: In(venueIdsArray), 
                     }
@@ -210,8 +211,8 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         }
 
         if (venue != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: {
                     venue: { 
                         name: ILike(`%${venue}%`)
@@ -226,8 +227,8 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (studentIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     student: {
                         id: In(studentIdsArray), 
                     }
@@ -236,14 +237,17 @@ class WeeklyClassMemberRoutes extends GenericRoutes {
         }
 
         if (student != null) {
-            this.filters.where = { 
-                ...this.filters.where,
+            filters.where = { 
+                ...filters.where,
                 student: [
                     { first_name: ILike(`%${student}%`) }, 
                     { last_name: ILike(`%${student}%`) },  
                 ],
             };
         }
+
+
+        return filters;
         
     }
 }

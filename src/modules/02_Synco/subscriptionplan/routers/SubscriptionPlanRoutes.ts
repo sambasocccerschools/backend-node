@@ -7,21 +7,29 @@ import SubscriptionPlanDTO from "@modules/02_Synco/subscriptionplan/dtos/Subscri
 
 class SubscriptionPlanRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "service",
+                "venue",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(SubscriptionPlan), "/subscriptionPlans");
-        this.filters.relations = ["service","venue","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("getSubscriptionPlanById")
                                     .isValidateRole("SUBSCRIPTION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .isLogicalDelete()
                                     .build();
         
@@ -30,12 +38,13 @@ class SubscriptionPlanRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new SubscriptionPlanDTO(req))
                                     .setMethod("getSubscriptionPlans")
                                     .isValidateRole("SUBSCRIPTION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .isLogicalDelete()
                                     .build();
         

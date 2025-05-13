@@ -7,26 +7,30 @@ import TermSessionPlanDTO from "@modules/02_Synco/termsessionplan/dtos/TermSessi
 
 class TermSessionPlanRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "term_session",
+                "ability_group",
+                "session_plan",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(TermSessionPlan), "/termSessionPlan");
-        this.filters.relations = [
-            "term_session",
-            "ability_group",
-            "session_plan",
-            "franchise"
-        ];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermSessionPlanDTO(req))
                                     .setMethod("getTermSessionPlanById")
                                     .isValidateRole("TERM_SESSION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -34,12 +38,13 @@ class TermSessionPlanRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new TermSessionPlanDTO(req))
                                     .setMethod("getTermSessionPlans")
                                     .isValidateRole("TERM_SESSION_PLAN")
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

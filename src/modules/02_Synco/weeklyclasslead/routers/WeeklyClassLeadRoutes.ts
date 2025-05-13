@@ -6,34 +6,35 @@ import { Request, Response,
 import WeeklyClassLeadDTO from "@modules/02_Synco/weeklyclasslead/dtos/WeeklyClassLeadDTO";
 import { ILike, In, MoreThan } from "typeorm";
 import WeeklyClassLeadController from "../controllers/WeeklyClassLeadController";
-import { ConstGeneral } from "@TenshiJS/consts/Const";
-import { config } from "@index/index";
 
 class WeeklyClassLeadRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: ["lead_status",
+                        "weekly_class",
+                        "guardian",
+                        "agent",
+                        "booked_by",
+                        "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new WeeklyClassLeadController(), "/weeklyClassesLeads");
-        this.filters.relations = [
-            "lead_status",
-            "weekly_class",
-            "guardian",
-            "agent",
-            "booked_by",
-            "franchise"
-        ];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassLeadDTO(req))
                                     .setMethod("getWeeklyClassLeadById")
                                     .isValidateRole("WEEKLY_CLASS_LEAD")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
@@ -41,14 +42,13 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
         
-            this.getAllFilters(req);
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassLeadDTO(req))
                                     .setMethod("getWeeklyClassLeads")
                                     .isValidateRole("WEEKLY_CLASS_LEAD")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -143,7 +143,7 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
 
 
     private getAllFilters(req: Request){
-        this.filters.where = { };
+        const filters = this.buildBaseFilters();
 
         const start_date: string | null = getUrlParam("start_date", req) || null;
         const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -158,8 +158,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         const lead_status_code: string | null = getUrlParam("lead_status_code", req) || null;
 
         if (start_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: {
                     start_date: MoreThan(start_date) 
                 }
@@ -167,8 +167,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         }
 
         if (end_date != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: {
                     end_date: MoreThan(end_date) 
                 } 
@@ -181,8 +181,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (referralSourceArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     guardian: {
                         referral_source: In(referralSourceArray), 
                     }
@@ -196,8 +196,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (leadStatusArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     lead_status: In(leadStatusArray), 
                 };
             }
@@ -209,8 +209,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (venueIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class: {
                         venue: In(venueIdsArray), 
                     }
@@ -219,8 +219,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         }
 
         if (venue != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 weekly_class: { 
                     venue:{
                         name:ILike(`%${venue}%`)
@@ -235,8 +235,8 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
                                   .filter(field => field); 
 
             if (studentIdsArray.length > 0) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     student: {
                         id: In(studentIdsArray), 
                     }
@@ -245,13 +245,15 @@ class WeeklyClassLeadRoutes extends GenericRoutes {
         }
 
         if (student != null) {
-            this.filters.where = { 
-                ...this.filters.where, 
+            filters.where = { 
+                ...filters.where, 
                 student: { 
                     name: ILike(`%${student}%`)
                 }
             };
         }*/
+
+            return filters;
     }
 }
 

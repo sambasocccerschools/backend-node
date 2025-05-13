@@ -9,29 +9,39 @@ import { ILike, In } from "typeorm";
 
 class WeeklyClassRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: [
+                "venue",
+                "autumn_term",
+                "spring_term",
+                "summer_term",
+                "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new GenericController(WeeklyClass), "/weeklyClasses");
-        this.filters.relations = ["venue","autumn_term","spring_term","summer_term","franchise"];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassDTO(req))
                                     .setMethod("getWeeklyClassById")
                                     .isValidateRole("WEEKLY_CLASS")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
         });
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
-            this.filters.where = { };
+            const filters = this.buildBaseFilters();
             
             const venue: string | null = getUrlParam("venue", req) || null;
             const postcode: string | null = getUrlParam("postcode", req) || null;
@@ -42,8 +52,8 @@ class WeeklyClassRoutes extends GenericRoutes {
             const class_name: string | null = getUrlParam("class_name", req) || null;
 
             if(postcode != null){
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     franchise: {
                         postal_code: postcode, 
                     }
@@ -56,8 +66,8 @@ class WeeklyClassRoutes extends GenericRoutes {
                                       .filter(field => field); 
 
                 if (venueIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         venue: {
                             id: In(venueIdsArray), 
                         }
@@ -66,8 +76,8 @@ class WeeklyClassRoutes extends GenericRoutes {
             }
 
             if (venue != null) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     venue: { 
                         name: ILike(`%${venue}%`)
                     }
@@ -80,8 +90,8 @@ class WeeklyClassRoutes extends GenericRoutes {
                                  .filter(field => field); 
 
                 if (daysArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         days: In(daysArray), 
                     };
                 }
@@ -93,8 +103,8 @@ class WeeklyClassRoutes extends GenericRoutes {
                                  .filter(field => field); 
 
                 if (classesArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         name: In(classesArray), 
                     };
                 }
@@ -106,7 +116,7 @@ class WeeklyClassRoutes extends GenericRoutes {
                                     .setMethod("getWeeklyClasss")
                                     .isValidateRole("WEEKLY_CLASS")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getAll(requestHandler);

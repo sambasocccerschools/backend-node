@@ -9,7 +9,7 @@ if (!entityName) {
 }
 
 const entityPath = path.join(__dirname, '../src', 'entity', `${entityName}.ts`);
-const modulePath = path.join(__dirname, '../src', 'modules', entityName.toLowerCase());
+const modulePath = path.join(__dirname, '../src', 'modules/02_Synco', entityName.toLowerCase());
 const dtoPath = path.join(modulePath, 'dtos');
 const routerPath = path.join(modulePath, 'routers');
 
@@ -127,7 +127,7 @@ const getfields = extractAllFields(entityPath);
 
 const { fields: routeFields, relations } = extractEntityFieldsAndRelations(entityPath);
 
-// Generate DTO
+
 const dtoContent = `
 import { ${entityName} } from "@index/entity/${entityName}";
 import { Request, IAdapterFromBody } from "@modules/index";
@@ -141,6 +141,8 @@ export default class ${entityName}DTO implements IAdapterFromBody {
 
     private buildEntity(source: any, isCreating: boolean): ${entityName} {
         const entity = new ${entityName}();
+          ${fields.map(field => `        entity.${field.name} = this.req.body.${field.name};`).join('\n')}
+          
         if (isCreating) {
             entity.created_date = new Date();
         } else {
@@ -179,6 +181,8 @@ export default class ${entityName}DTO implements IAdapterFromBody {
 }
 `;
 
+
+
 // Generate DTO if not exists
 const dtoFilePath = path.join(dtoPath, `${entityName}DTO.ts`);
 if (!fs.existsSync(dtoFilePath)) {
@@ -198,11 +202,17 @@ import ${entityName}DTO from "@modules/02_Synco/${entityName.toLowerCase()}/dtos
 
 class ${entityName}Routes extends GenericRoutes {
 
-private filters: FindManyOptions = {};
-constructor() {
-super(new GenericController(${entityName}), "/${entityName.toLowerCase()}");
-${relations.length > 0 ? `this.filters.relations = ${JSON.stringify(relations)};` : ''}
+private buildBaseFilters(): FindManyOptions {
+  return {
+    ${relations.length > 0 ? `relations: ${JSON.stringify(relations)},` : ""}
+    where: {}
+  };
 }
+
+constructor() {
+  super(new GenericController(${entityName}), "/${entityName.toLowerCase()}");
+}
+
 
 protected initializeRoutes() {
 // —————————————————————————————————————————————————————————————————————
@@ -215,7 +225,7 @@ this.router.get(\`\${this.getRouterName()}/get\`, async (req: Request, res: Resp
            .setMethod("get${entityName}ById")
            .isValidateRole("${entityName.toUpperCase()}")
            .isLogicalDelete()
-           .setFilters(this.filters)
+           .setFilters(this.buildBaseFilters())
            .build();
 
    this.getController().getById(requestHandler);
@@ -228,7 +238,7 @@ this.router.get(\`\${this.getRouterName()}/get_all\`, async (req: Request, res: 
            .setMethod("get${entityName}s")
            .isValidateRole("${entityName.toUpperCase()}")
            .isLogicalDelete()
-           .setFilters(this.filters)
+           .setFilters(this.buildBaseFilters())
            .build();
 
    this.getController().getAll(requestHandler);

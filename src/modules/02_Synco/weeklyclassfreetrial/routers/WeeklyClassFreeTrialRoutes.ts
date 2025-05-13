@@ -9,36 +9,38 @@ import { ILike, In, MoreThan } from "typeorm";
 
 class WeeklyClassFreeTrialRoutes extends GenericRoutes {
     
-    private filters: FindManyOptions = {};
+    private buildBaseFilters(): FindManyOptions {
+        return {
+            relations: ["weekly_class",
+                        "free_trial_status",
+                        "student",
+                        "agent",
+                        "booked_by",
+                        "franchise"],
+            where: {} 
+        };
+    }
     constructor() {
         super(new WeeklyClassFreeTrialController(), "/weeklyClassesFreeTrials");
-        this.filters.relations = [
-            "weekly_class",
-            "free_trial_status",
-            "student",
-            "agent",
-            "booked_by",
-            "franchise"
-        ];
     }
 
     protected initializeRoutes() {
         this.router.get(`${this.getRouterName()}/get`, async (req: Request, res: Response) => {
 
+            const filters = this.buildBaseFilters();
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
                                     .setAdapter(new WeeklyClassFreeTrialDTO(req))
                                     .setMethod("getWeeklyClassFreeTrialById")
                                     .isValidateRole("WEEKLY_CLASS_FREE_TRIAL")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(filters)
                                     .build();
         
             this.getController().getById(requestHandler);
         });
         
         this.router.get(`${this.getRouterName()}/get_all`, async (req: Request, res: Response) => {
-            this.getAllFilters(req);
 
             const requestHandler: RequestHandler = 
                                     new RequestHandlerBuilder(res, req)
@@ -46,7 +48,7 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
                                     .setMethod("getWeeklyClassFreeTrials")
                                     .isValidateRole("WEEKLY_CLASS_FREE_TRIAL")
                                     .isLogicalDelete()
-                                    .setFilters(this.filters)
+                                    .setFilters(this.getAllFilters(req))
                                     .build();
         
             this.getController().getAll(requestHandler);
@@ -141,7 +143,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
 
 
        private getAllFilters(req: Request){
-            this.filters.where = { };
+
+            const filters = this.buildBaseFilters();
     
             const start_date: string | null = getUrlParam("start_date", req) || null;
             const end_date: string | null = getUrlParam("end_date", req) || null;
@@ -155,8 +158,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
             const free_trial_status_code: string | null = getUrlParam("free_trial_status_code", req) || null;
     
             if (start_date != null) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     //weekly_class: {
                         trial_date: MoreThan(start_date) 
                     //}
@@ -164,8 +167,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
             }
     
             if (end_date != null) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     //weekly_class: {
                         trial_date: MoreThan(end_date) 
                     //} 
@@ -178,8 +181,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
                                       .filter(field => field); 
     
                 if (freeTrialArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         free_trial_status: {
                             code: In(freeTrialArray), 
                         }
@@ -193,8 +196,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
                                       .filter(field => field); 
     
                 if (venueIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         weekly_class: {
                             venue: In(venueIdsArray), 
                         }
@@ -203,8 +206,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
             }
     
             if (venue != null) {
-                this.filters.where = { 
-                    ...this.filters.where, 
+                filters.where = { 
+                    ...filters.where, 
                     weekly_class: { 
                         venue:{
                             name:ILike(`%${venue}%`)
@@ -219,8 +222,8 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
                                       .filter(field => field); 
     
                 if (studentIdsArray.length > 0) {
-                    this.filters.where = { 
-                        ...this.filters.where, 
+                    filters.where = { 
+                        ...filters.where, 
                         student: {
                             id: In(studentIdsArray), 
                         }
@@ -229,14 +232,16 @@ class WeeklyClassFreeTrialRoutes extends GenericRoutes {
             }
     
             if (student != null) {
-                this.filters.where = { 
-                    ...this.filters.where,
+                filters.where = { 
+                    ...filters.where,
                     student: [
                         { first_name: ILike(`%${student}%`) }, 
                         { last_name: ILike(`%${student}%`) },  
                     ],
                 };
             }
+
+            return filters;
         }
 }
 
